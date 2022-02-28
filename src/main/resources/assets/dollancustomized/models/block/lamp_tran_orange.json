@@ -1,0 +1,9 @@
+{
+  "parent": "dollancustomized:custom/lamp_tran",
+  "textures": {
+    "all": "dollancustomized:blocks/orange_modern_lamp_on",
+    "particle": "dollancustomized:blocks/orange_modern_lamp_on",
+    "0": "dollancustomized:blocks/transparency_light_orange",
+    "1": "dollancustomized:blocks/orange_modern_lamp_on"
+  }
+}

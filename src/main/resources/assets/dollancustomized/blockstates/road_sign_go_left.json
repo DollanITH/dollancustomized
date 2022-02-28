@@ -1,0 +1,122 @@
+{
+    "forge_marker": 1,
+    "defaults" : {
+        "textures": {
+            "front": "dollancustomized:blocks/roads/sl/go_left",
+            "back": "dollancustomized:blocks/road_sign_back_round"
+        }
+    },
+    "variants": {
+        "facing": {
+            "north": {
+                "model": "dollancustomized:road_sign",
+                "uvlock": false
+            },
+            "east": {
+                "model": "dollancustomized:road_sign",
+                "y": 90,
+                "uvlock": false
+            },
+            "south": {
+                "model": "dollancustomized:road_sign",
+                "y": 180,
+                "uvlock": false
+            },
+            "west": {
+                "model": "dollancustomized:road_sign",
+                "y": 270,
+                "uvlock": false
+            }
+        },
+        "down": {
+            "true": {
+                "submodel": {
+                    "post_down": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "up": {
+            "true": {
+                "submodel": {
+                    "post_up": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 180,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "north": {
+            "true": {
+                "submodel": {
+                    "post_north": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "south": {
+            "true": {
+                "submodel": {
+                    "post_south": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "y": 180,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "east": {
+            "true": {
+                "submodel": {
+                    "post_east": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "y": 90,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "west": {
+            "true": {
+                "submodel": {
+                    "post_west": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "y": 270,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "inventory": [
+            {        
+                "transform": "forge:default-block",
+                "submodel": {
+                    "post_north": {
+                        "model": "dollancustomized:road_sign",
+                        "uvlock": true
+                    },
+                    "post_south": {
+                        "model": "dollancustomized:road_sign",
+                        "y": 180,
+                        "uvlock": true
+                    }
+                }
+            }
+        ]
+    }
+}

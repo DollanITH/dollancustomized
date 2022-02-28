@@ -1,0 +1,6 @@
+{
+    "parent": "block/rail_raised_ne",
+    "textures": {
+        "rail": "dollancustomized:blocks/track_flex_0"
+    }
+}

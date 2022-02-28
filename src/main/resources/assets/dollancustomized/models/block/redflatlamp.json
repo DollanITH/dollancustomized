@@ -1,0 +1,10 @@
+{
+  "parent": "dollancustomized:custom/red_flat_lamp",
+  "textures": {
+    "all": "dollancustomized:blocks/red_modern_lamp_on",
+    "particle": "dollancustomized:blocks/red_modern_lamp_on",
+    "0": "dollancustomized:blocks/transparency_light_red",
+    "1": "dollancustomized:blocks/flat_lamp_base",
+    "2": "dollancustomized:blocks/concrete_red"
+  }
+}

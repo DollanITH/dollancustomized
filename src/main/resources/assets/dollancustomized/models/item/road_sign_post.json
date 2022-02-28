@@ -1,0 +1,21 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "1": "dollancustomized:blocks/metal"
+    },
+    "elements": [
+        {
+            "name": "post",
+            "from": [ 7.0, 0.0, 2.0 ], 
+            "to": [ 9.0, 15.0, 4.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 1.0, 1.0, 3.0, 16.0 ] },
+                "east": { "texture": "#1", "uv": [ 1.0, 1.0, 3.0, 16.0 ] },
+                "south": { "texture": "#1", "uv": [ 1.0, 1.0, 3.0, 16.0 ] },
+                "west": { "texture": "#1", "uv": [ 1.0, 1.0, 3.0, 16.0 ] },
+                "up": { "texture": "#1", "uv": [ 1.0, 1.0, 3.0, 3.0 ] },
+                "down": { "texture": "#1", "uv": [ 1.0, 1.0, 3.0, 3.0 ] }
+            }
+        }
+    ]
+}

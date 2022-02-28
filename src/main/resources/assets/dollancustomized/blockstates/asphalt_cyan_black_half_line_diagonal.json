@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "dollancustomized:asphalt_cyan_black_half_line_diagonal"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "facing": {
+      "west": {"model": "dollancustomized:asphalt_cyan_black_half_line_diagonal",
+        "y": 90},
+      "north": {"model": "dollancustomized:asphalt_cyan_black_half_line_diagonal",
+        "y": 180},
+      "south": {"model": "dollancustomized:asphalt_cyan_black_half_line_diagonal"},
+      "east": {"model": "dollancustomized:asphalt_cyan_black_half_line_diagonal",
+        "y": 270}
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+"forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "variant": {
+      "cyan": {"model": "dollancustomized:cyan_asphalt"},
+      "black": {"model": "dollancustomized:black_asphalt"},
+      "red": {"model": "dollancustomized:red_asphalt"},
+      "yellow": {"model": "dollancustomized:yellow_asphalt"},
+      "white": {"model": "dollancustomized:white_asphalt"}
+    }
+  }
+}

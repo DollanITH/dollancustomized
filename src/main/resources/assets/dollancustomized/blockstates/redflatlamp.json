@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:redflatlamp"
+    },
+    "facing=north": {
+      "model": "dollancustomized:redflatlamp",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "dollancustomized:redflatlamp",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "dollancustomized:redflatlamp"
+    },
+    "facing=west": {
+      "model": "dollancustomized:redflatlamp",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "dollancustomized:redflatlamp",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "dollancustomized:redflatlamp",
+      "x": 270
+    }
+  }
+}

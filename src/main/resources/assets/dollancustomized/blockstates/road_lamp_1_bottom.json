@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east":  { "model": "dollancustomized:road_lamp_1_bottom", "y": 270  },
+        "facing=west":  { "model": "dollancustomized:road_lamp_1_bottom", "y": 90 },
+        "facing=south": { "model": "dollancustomized:road_lamp_1_bottom"},
+        "facing=north": { "model": "dollancustomized:road_lamp_1_bottom", "y": 180 }
+    }
+}

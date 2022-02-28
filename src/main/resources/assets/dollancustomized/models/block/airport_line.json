@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "dollancustomized:blocks/airport_line",
+    "particle": "dollancustomized:blocks/airport_line"
+  }
+}

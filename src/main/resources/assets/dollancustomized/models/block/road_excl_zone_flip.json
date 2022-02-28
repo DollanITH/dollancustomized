@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "dollancustomized:blocks/roads/road_block_dark",
+    "up": "dollancustomized:blocks/roads/many_lines_flip",
+    "north": "dollancustomized:blocks/roads/many_lines_flip",
+    "east": "dollancustomized:blocks/roads/many_lines_flip",
+    "south": "dollancustomized:blocks/roads/many_lines_flip",
+    "west": "dollancustomized:blocks/roads/many_lines_flip",
+    "particle": "dollancustomized:blocks/roads/road_block_dark"
+  }
+}

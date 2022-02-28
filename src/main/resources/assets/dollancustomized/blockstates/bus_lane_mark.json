@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:bus_lane_mark"
+    },
+    "facing=north": {
+      "model": "dollancustomized:bus_lane_mark",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "dollancustomized:bus_lane_mark",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "dollancustomized:bus_lane_mark"
+    },
+    "facing=west": {
+      "model": "dollancustomized:bus_lane_mark",
+      "y": 90
+    }
+  }
+}

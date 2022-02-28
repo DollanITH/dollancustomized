@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:white_punctiform_lamp"
+    },
+    "facing=north": {
+      "model": "dollancustomized:white_punctiform_lamp",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "dollancustomized:white_punctiform_lamp",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "dollancustomized:white_punctiform_lamp"
+    },
+    "facing=west": {
+      "model": "dollancustomized:white_punctiform_lamp",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "dollancustomized:white_punctiform_lamp",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "dollancustomized:white_punctiform_lamp",
+      "x": 270
+    }
+  }
+}

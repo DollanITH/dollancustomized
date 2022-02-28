@@ -1,0 +1,30 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "dollancustomized:block/greenflatlamp",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, -45, 0],
+			"translation": [0, -1, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, -45, 0],
+			"translation": [0, -1, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"translation": [6.5, -2, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [6.5, -2, 0]
+		},
+		"gui": {
+			"rotation": [0, -30, 0],
+			"translation": [-3.25, -0.25, 0]
+		},
+		"fixed": {
+			"rotation": [-180, 0, 0],
+			"translation": [0, 0, -8]
+		}
+	}
+}

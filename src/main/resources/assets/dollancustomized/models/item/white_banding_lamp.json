@@ -1,0 +1,40 @@
+{
+	"parent": "dollancustomized:blocks/white_banding_lamp",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-75, 45, 0],
+			"translation": [-6.25, -2, 0]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-75, 45, 0],
+			"translation": [-6.25, -2, 0]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -180, 0],
+			"translation": [0, 2.25, 7],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -180, 0],
+			"translation": [0, 2.25, 7],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"gui": {
+			"rotation": [15, -135, 0],
+			"translation": [4.5, -1.5, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"head": {
+			"rotation": [-90, -180, 90],
+			"translation": [0, 13.75, 0]
+		},
+		"fixed": {
+			"translation": [0, 0, -5.75],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}

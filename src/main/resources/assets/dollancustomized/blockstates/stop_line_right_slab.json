@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "dollancustomized:stop_line_right_slab"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "facing": {
+      "west": {"model": "dollancustomized:stop_line_right_slab",
+        "y": 90},
+      "north": {"model": "dollancustomized:stop_line_right_slab",
+        "y": 180},
+      "south": {"model": "dollancustomized:stop_line_right_slab"},
+      "east": {"model": "dollancustomized:stop_line_right_slab",
+        "y": 270}
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:white_banding_lamp"
+  },
+  "variants": {
+    "inventory": [{
+      "model": "dollancustomized:white_banding_lamp_mid",
+      "transform": {
+      "thirdperson_righthand": {
+        "rotation": [75, 135, 0],
+        "translation": [-0.22, 0, -0.17]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [75, 135, 0],
+        "translation": [-0.22, 0, -0.17]
+      },
+      "firstperson_righthand": {
+        "rotation": [15, 135, 0],
+        "translation": [0.32, 0, 0.2]
+      },
+      "firstperson_lefthand": {
+        "rotation": [15, 135, 0],
+        "translation": [0.32, 0, 0.2]
+      },
+      "ground": {
+        "translation": [0, 0.5, 0],
+        "scale": [0.75, 0.75, 0.75]
+      },
+      "gui": {
+        "rotation": [12.5, 155, 0],
+        "translation": [-0.09, 0, 0.25],
+        "scale": [1.15, 1.15, 1.15]
+      },
+      "head": {
+        "rotation": [-90, -180, 90],
+        "translation": [0, 1.75, 0]
+      },
+      "fixed": {
+        "translation": [-0.01, 0, -0.5],
+        "scale": [1, 1, 1]
+      }
+      }
+    }],
+    "vertical": {
+      "down": {  },
+      "mid": { "model": "dollancustomized:white_banding_lamp_mid" },
+      "up": { "model": "dollancustomized:white_banding_lamp_up"}
+    },
+    "facing": {
+      "north": {
+      },
+      "east": {
+        "y": 90
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      }
+    }
+  }
+}

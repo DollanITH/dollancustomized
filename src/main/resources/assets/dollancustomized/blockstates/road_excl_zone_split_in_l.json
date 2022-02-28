@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "dollancustomized:road_excl_zone_split_in_l"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "facing": {
+      "west": {"model": "dollancustomized:road_excl_zone_split_in_l_flip",
+        "y": 90},
+      "north": {"model": "dollancustomized:road_excl_zone_split_in_l",
+        "y": 180},
+      "south": {"model": "dollancustomized:road_excl_zone_split_in_l"},
+      "east": {"model": "dollancustomized:road_excl_zone_split_in_l_flip",
+        "y": 270}
+    }
+  }
+}

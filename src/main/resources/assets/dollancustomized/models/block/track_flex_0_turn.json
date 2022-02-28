@@ -1,0 +1,6 @@
+{
+    "parent": "block/rail_curved",
+    "textures": {
+        "rail": "dollancustomized:blocks/track_flex_0_turn"
+    }
+}

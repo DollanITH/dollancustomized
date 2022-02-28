@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:single_white_90_1_slab",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "facing": {
+      "west": {"model": "dollancustomized:single_white_90_1_slab",
+        "y": 90},
+      "north": {"model": "dollancustomized:single_white_90_1_slab",
+        "y": 180},
+      "south": {"model": "dollancustomized:single_white_90_1_slab"},
+      "east": {"model": "dollancustomized:single_white_90_1_slab",
+        "y": 270}
+    }
+  }
+}

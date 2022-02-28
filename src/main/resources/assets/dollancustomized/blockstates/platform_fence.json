@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:platform_fence"
+    },
+    "facing=north": {
+      "model": "dollancustomized:platform_fence",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "dollancustomized:platform_fence",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "dollancustomized:platform_fence"
+    },
+    "facing=west": {
+      "model": "dollancustomized:platform_fence",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "dollancustomized:platform_fence",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "dollancustomized:platform_fence",
+      "x": 270
+    }
+  }
+}

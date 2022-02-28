@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block"
+  },
+  "variants": {
+      "inventory": [{"transform": "forge:default-block"}],
+      "color": {
+        "white": {"model": "dollancustomized:lamp_tran_0"},
+        "black": {"model": "dollancustomized:lamp_tran_1"},
+        "yellow": {"model": "dollancustomized:lamp_tran_2"},
+        "red": {"model": "dollancustomized:lamp_tran_3"},
+        "green": {"model": "dollancustomized:lamp_tran_4"},
+        "blue": {"model": "dollancustomized:lamp_tran_blue"},
+        "cyan": {"model": "dollancustomized:lamp_tran_cyan"},
+        "gray": {"model": "dollancustomized:lamp_tran_gray"},
+        "brown": {"model": "dollancustomized:lamp_tran_brown"},
+        "light_blue": {"model": "dollancustomized:lamp_tran_light_blue"},
+        "lime": {"model": "dollancustomized:lamp_tran_lime"},
+        "silver": {"model": "dollancustomized:lamp_tran_silver"},
+        "magenta": {"model": "dollancustomized:lamp_tran_magenta"},
+        "purple": {"model": "dollancustomized:lamp_tran_purple"},
+        "orange": {"model": "dollancustomized:lamp_tran_orange"},
+        "pink": {"model": "dollancustomized:lamp_tran_pink"}
+      }
+    }
+  }

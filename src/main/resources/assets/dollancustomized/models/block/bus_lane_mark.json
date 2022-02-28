@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "dollancustomized:blocks/bus_lane_mark",
+		"particle": "dollancustomized:blocks/bus_lane_mark"
+	},
+	"elements": [
+		{
+			"from": [-16, 0, -16],
+			"to": [32, 0.05, 32],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 0.05], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 0.05], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 0.05], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 0.05], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

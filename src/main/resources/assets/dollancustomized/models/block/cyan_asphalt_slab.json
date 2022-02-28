@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "dollancustomized:blocks/roads/road_block_cyan",
+        "top": "dollancustomized:blocks/roads/road_block_cyan",
+        "side": "dollancustomized:blocks/roads/road_block_cyan"
+    }
+}

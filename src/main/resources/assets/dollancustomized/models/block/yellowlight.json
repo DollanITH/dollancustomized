@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "dollancustomized:blocks/4",
+    "up": "dollancustomized:blocks/4",
+    "north": "dollancustomized:blocks/4",
+    "east": "dollancustomized:blocks/4",
+    "south": "dollancustomized:blocks/4",
+    "west": "dollancustomized:blocks/4",
+    "particle": "dollancustomized:blocks/4"
+  }
+}

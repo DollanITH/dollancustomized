@@ -1,0 +1,147 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": {
+            "thirdperson_righthand": {
+                "rotation": [75, 0, 0],
+                "translation": [-0.1, 0, -0.17],
+                "scale": [0.75, 0.75, 0.75]
+            },
+            "thirdperson_lefthand": {
+                "rotation": [75, 0, 0],
+                "translation": [-0.1, 0, -0.17],
+                "scale": [0.75, 0.75, 0.75]
+            },
+            "firstperson_righthand": {
+                "rotation": [15, -45, 0],
+                "translation": [0.0, 0.15, 0.2],
+                "scale": [0.75, 0.75, 0.75]
+            },
+            "firstperson_lefthand": {
+                "rotation": [15, -45, 0],
+                "translation": [0.0, 0.15, 0.2],
+                "scale": [0.75, 0.75, 0.75]
+            },
+            "ground": {
+                "translation": [0, 0.5, 0],
+                "scale": [0.25, 0.25, 0.25]
+            },
+            "gui": {
+                "rotation": [12.5, -35, 0],
+                "translation": [0.0, 0, 0.25],
+                "scale": [0.875, 0.875, 0.875]
+            },
+            "head": {
+                "rotation": [-90, -180, 90],
+                "translation": [0, 1.75, 0]
+            },
+            "fixed": {
+                "rotation": [0, 180, 0],
+                "translation": [-0.01, 0, 0.0],
+                "scale": [1, 1, 1]
+            }
+        }
+    },
+    "variants": {
+        "facing": {
+            "south": {
+                "model": "dollancustomized:road_traffic_light_1",
+                "uvlock": false
+            },
+            "west": {
+                "model": "dollancustomized:road_traffic_light_2",
+                "y": 90,
+                "uvlock": false
+            },
+            "north": {
+                "model": "dollancustomized:road_traffic_light_1",
+                "y": 180,
+                "uvlock": false
+            },
+            "east": {
+                "model": "dollancustomized:road_traffic_light_2",
+                "y": 270,
+                "uvlock": false
+            }
+        },
+        "down": {
+            "true": {
+                "submodel": {
+                    "post_down": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "up": {
+            "true": {
+                "submodel": {
+                    "post_up": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 180,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "south": {
+            "true": {
+                "submodel": {
+                    "post_north": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "north": {
+            "true": {
+                "submodel": {
+                    "post_south": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "y": 180,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "west": {
+            "true": {
+                "submodel": {
+                    "post_east": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "y": 90,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "east": {
+            "true": {
+                "submodel": {
+                    "post_west": {
+                        "model": "dollancustomized:road_sign_connector",
+                        "x": 90,
+                        "y": 270,
+                        "uvlock": true
+                    }
+                }
+            },
+            "false": { }
+        },
+        "inventory": [
+            {                "model": "dollancustomized:road_traffic_light_1",
+                "uvlock": false
+            }
+        ]
+    }
+}

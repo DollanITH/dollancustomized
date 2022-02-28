@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "dollancustomized:blocks/gray_modern_lamp_on",
+    "up": "dollancustomized:blocks/gray_modern_lamp_on",
+    "north": "dollancustomized:blocks/gray_modern_lamp_on",
+    "east": "dollancustomized:blocks/gray_modern_lamp_on",
+    "south": "dollancustomized:blocks/gray_modern_lamp_on",
+    "west": "dollancustomized:blocks/gray_modern_lamp_on",
+    "particle": "dollancustomized:blocks/gray_modern_lamp_on"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "dollancustomized:custom/lamp_tran",
+  "textures": {
+    "all": "dollancustomized:blocks/gray_modern_lamp_on",
+    "particle": "dollancustomized:blocks/gray_modern_lamp_on",
+    "0": "dollancustomized:blocks/transparency_light_gray",
+    "1": "dollancustomized:blocks/gray_modern_lamp_on"
+  },
+    "display": {
+      "thirdperson_righthand": {
+        "rotation": [75, 45, 0],
+        "translation": [0, 2.5, 0],
+        "scale": [0.375, 0.375, 0.375]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [-75, 45, 0],
+        "translation": [0, 2.5, 0],
+        "scale": [0.375, 0.375, 0.375]
+      },
+      "firstperson_righthand": {
+        "rotation": [0, 24, 0],
+        "translation": [0, 0, -2],
+        "scale": [0.5, 0.5, 0.5]
+      },
+      "firstperson_lefthand": {
+        "rotation": [0, 24, 0],
+        "scale": [0.5, 0.5, 0.5]
+      },
+      "ground": {
+        "scale": [0.7, 0.7, 0.7]
+      },
+      "gui": {
+        "rotation": [-150, 135, 180],
+        "scale": [0.62, 0.62, 0.63]
+      }
+    }
+  }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "dollancustomized:blocks/roads/road_block_cyan"
+  }
+}

@@ -1,6 +1,5 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
-import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;

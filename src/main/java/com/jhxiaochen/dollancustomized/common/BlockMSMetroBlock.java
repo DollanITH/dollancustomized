@@ -12,10 +12,8 @@ public class BlockMSMetroBlock extends Block {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(DollanCustomized.MS_METRO_TAB);
-        this.setHardness(1.2F);
-        this.setResistance(10F);
-        this.setLightLevel(0F);
-        this.setLightOpacity(255);
+        this.setHardness(3F);
+        this.setResistance(20F);
     }
     @Override
     public boolean isOpaqueCube(IBlockState state) {

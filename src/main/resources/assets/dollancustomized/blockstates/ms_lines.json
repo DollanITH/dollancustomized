@@ -1,0 +1,70 @@
+{
+  "variants": {
+    "facing=north,variant=mergewhite": {
+      "model": "dollancustomized:merge_line",
+      "y": 180
+    },
+    "facing=east,variant=mergewhite": {
+      "model": "dollancustomized:merge_line",
+      "y": 270
+    },
+    "facing=south,variant=mergewhite": {
+      "model": "dollancustomized:merge_line"
+    },
+    "facing=west,variant=mergewhite": {
+      "model": "dollancustomized:merge_line",
+      "y": 90
+    },
+
+
+    "facing=north,variant=mergeyellow": {
+      "model": "dollancustomized:merge_line_yellow",
+      "y": 180
+    },
+    "facing=east,variant=mergeyellow": {
+      "model": "dollancustomized:merge_line_yellow",
+      "y": 270
+    },
+    "facing=south,variant=mergeyellow": {
+      "model": "dollancustomized:merge_line_yellow"
+    },
+    "facing=west,variant=mergeyellow": {
+      "model": "dollancustomized:merge_line_yellow",
+      "y": 90
+    },
+
+
+    "facing=north,variant=separatewhite": {
+      "model": "dollancustomized:separate_line",
+      "y": 180
+    },
+    "facing=east,variant=separatewhite": {
+      "model": "dollancustomized:separate_line",
+      "y": 270
+    },
+    "facing=south,variant=separatewhite": {
+      "model": "dollancustomized:separate_line"
+    },
+    "facing=west,variant=separatewhite": {
+      "model": "dollancustomized:separate_line",
+      "y": 90
+    },
+
+
+    "facing=north,variant=separateyellow": {
+      "model": "dollancustomized:separate_line_yellow",
+      "y": 180
+    },
+    "facing=east,variant=separateyellow": {
+      "model": "dollancustomized:separate_line_yellow",
+      "y": 270
+    },
+    "facing=south,variant=separateyellow": {
+      "model": "dollancustomized:separate_line_yellow"
+    },
+    "facing=west,variant=separateyellow": {
+      "model": "dollancustomized:separate_line_yellow",
+      "y": 90
+    }
+  }
+}

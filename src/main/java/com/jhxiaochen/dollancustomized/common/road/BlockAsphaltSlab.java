@@ -4,21 +4,20 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.block.properties.PropertyEnum;
 
 public class BlockAsphaltSlab extends Block {
     public static final PropertyEnum<BlockAsphaltSlab.AsphaltType> VARIANT = PropertyEnum.<BlockAsphaltSlab.AsphaltType>create("variant", BlockAsphaltSlab.AsphaltType.class);
@@ -95,7 +94,6 @@ public class BlockAsphaltSlab extends Block {
     {
         return AABB_BOTTOM_HALF;
     }
-
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;

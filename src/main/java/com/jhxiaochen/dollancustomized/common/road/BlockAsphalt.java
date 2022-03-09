@@ -2,8 +2,6 @@ package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -79,7 +77,6 @@ public class BlockAsphalt extends Block {
         this.setHardness(1.0F);
         this.setResistance(10F);
         this.setLightLevel(0F);
-        this.setLightOpacity(255);
     }
 
     @Override

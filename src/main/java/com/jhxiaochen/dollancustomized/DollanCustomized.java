@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = "3.1")
+@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = "3.2")
 public class DollanCustomized {
 
     @Instance(Reference.MOD_ID)
@@ -20,7 +20,7 @@ public class DollanCustomized {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
     public static final String MODID = "dollancustomized";
-    public static final String VERSION = "3.1";
+    public static final String VERSION = "3.2";
     public static final String Accept_Minecraft_version = "1.12.2";
     public static com.jhxiaochen.dollancustomized.DollanCustomized getInstance() {
         return instance;
@@ -36,7 +36,7 @@ public class DollanCustomized {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        System.out.println("Pre Init");
+        System.out.println("Pre Init , thank you fucking mother");
         MinecraftForge.EVENT_BUS.register(proxy);
         proxy.preInit();
 
@@ -45,13 +45,13 @@ public class DollanCustomized {
     @EventHandler
     public void init(FMLInitializationEvent event) {
 
-        System.out.println("Init");
+        System.out.println("Init, thank you fucking mother");
         proxy.init();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        System.out.println("Post Init");
+        System.out.println("Post Init, thank you fucking mother");
         proxy.postInit();
     }
 }

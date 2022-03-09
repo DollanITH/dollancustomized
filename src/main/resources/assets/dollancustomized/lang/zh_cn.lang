@@ -87,8 +87,14 @@ tile.single_white_line_thick.name=粗白线
 tile.single_white_line_thick_slab.name=粗白线(台阶)
 tile.single_yellow_line_thick.name=粗黄线
 tile.single_yellow_line_thick_slab.name=粗黄线(台阶)
+tile.single_white_line_45.single_line.name=白斜线
+
 tile.single_white_line_45.name=白斜线
+tile.single_white_line_45.crosswalk.name=斑马线斜线
+tile.single_white_line_45.ts_line.name=粗白斜线
 tile.single_white_line_slab_45.name=白斜线(台阶)
+
+
 tile.single_yellow_line_45.name=黄斜线
 tile.single_yellow_line_slab_45.name=黄斜线(台阶)
 tile.road_excl_zone_line.name=导流线(直线)
@@ -213,6 +219,10 @@ tile.road_lamp_1_bottom.name=路灯底部
 tile.road_lamp_1_up.name=路灯顶部
 
 tile.metro_fence.name=地铁护栏
+tile.metro_fence.metro.name=地铁护栏
+tile.metro_fence.road_center.name=道路中心护栏
+tile.metro_fence.road.name=道路护栏
+tile.metro_fence.metro2.name=市郊地铁护栏
 tile.platform_fence.name=站台护栏
 
 tile.dollan_s1.name=§2§l东安轨道交通§r S1号线
@@ -247,3 +257,18 @@ tile.road_excl_zone_corner_in.name=导流拐角
 tile.road_excl_zone_corner_in_slab.name=导流拐角(台阶)
 tile.road_excl_zone_corner_out.name=导流拐角1
 tile.road_excl_zone_corner_out_slab.name=导流拐角1(台阶)
+
+tile.thick_white_line_45.name=粗白斜线
+tile.thick_white_line_slab_45.name=粗白斜线(台阶)
+tile.thick_yellow_line_45.name=粗黄斜线
+tile.thick_yellow_line_slab_45.name=粗黄斜线(台阶)
+
+tile.ms_lines.mergewhite.name=双白合并线
+tile.ms_lines.mergeyellow.name=双黄合并线
+tile.ms_lines.separatewhite.name=双白分离线
+tile.ms_lines.separateyellow.name=双白分离线
+
+tile.ms_lines_slab.mergewhite.name=双白合并线(台阶)
+tile.ms_lines_slab.mergeyellow.name=双黄合并线(台阶)
+tile.ms_lines_slab.separatewhite.name=双白分离线(台阶)
+tile.ms_lines_slab.separateyellow.name=双白分离线(台阶)

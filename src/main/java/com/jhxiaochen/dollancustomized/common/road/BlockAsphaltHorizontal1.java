@@ -1,6 +1,5 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
-import com.google.common.base.Predicate;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -17,8 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-
 public class BlockAsphaltHorizontal1 extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public BlockAsphaltHorizontal1(String name) {
@@ -27,21 +24,14 @@ public class BlockAsphaltHorizontal1 extends Block {
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
         this.setHardness(1.0F);
+        this.setResistance(5.0F);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
-    }
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.MODEL;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
-    public boolean isFullCube(IBlockState state){
-        return false;
     }
 
     public boolean isOpaqueCube(IBlockState state)

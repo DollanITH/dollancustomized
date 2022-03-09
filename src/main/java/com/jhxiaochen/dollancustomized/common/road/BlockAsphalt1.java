@@ -40,8 +40,4 @@ public class BlockAsphalt1 extends Block {
         return true;
     }
 
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.MODEL;
-    }
 }

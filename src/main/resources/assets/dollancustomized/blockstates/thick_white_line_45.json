@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:thick_white_line_45",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "facing": {
+      "west": {"model": "dollancustomized:thick_white_line_45",
+        "y": 90},
+      "north": {"model": "dollancustomized:thick_white_line_45",
+        "y": 180},
+      "south": {"model": "dollancustomized:thick_white_line_45"},
+      "east": {"model": "dollancustomized:thick_white_line_45",
+        "y": 270}
+    }
+  }
+}

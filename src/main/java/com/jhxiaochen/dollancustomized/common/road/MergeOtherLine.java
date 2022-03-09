@@ -72,13 +72,14 @@ public class MergeOtherLine extends Block {
     }
 
 public MergeOtherLine(String name){
-    super(Material.ROCK);
+    super(Material.GOURD);
+    this.setTickRandomly(true);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     this.setRegistryName(name);
     this.setUnlocalizedName(name);
     this.setCreativeTab(DollanCustomized.ROAD_TAB);
     this.setHardness(1.2F);
-    this.setResistance(10F);
+    this.setResistance(450F);
     this.setLightOpacity(1);
     }
 

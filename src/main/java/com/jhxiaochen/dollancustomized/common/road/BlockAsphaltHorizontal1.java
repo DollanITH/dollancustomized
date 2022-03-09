@@ -19,12 +19,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockAsphaltHorizontal1 extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public BlockAsphaltHorizontal1(String name) {
-        super(Material.ROCK);
+        super(Material.GOURD);
+        this.setTickRandomly(true);
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
         this.setHardness(1.0F);
-        this.setResistance(5.0F);
+        this.setResistance(450F);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
     }
 

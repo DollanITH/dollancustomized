@@ -74,12 +74,12 @@ public class BlockAsphaltSlab extends Block {
     }
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
     public BlockAsphaltSlab(String name) {
-        super(Material.ROCK);
+        super(Material.GOURD);
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.2F);
-        this.setResistance(10F);
+        this.setResistance(450F);
         this.setLightOpacity(1);
     }
 

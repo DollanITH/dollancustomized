@@ -25,7 +25,8 @@ public class BlockAsphaltSlabHorizontal extends Block {
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
     public BlockAsphaltSlabHorizontal(String name) {
-        super(Material.ROCK);
+        super(Material.GOURD);
+        this.setTickRandomly(true);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setRegistryName(name);
         this.setUnlocalizedName(name);

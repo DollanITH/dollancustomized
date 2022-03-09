@@ -75,9 +75,10 @@ public class BlockAsphalt extends Block {
         this.setUnlocalizedName(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.0F);
-        this.setResistance(10F);
+        this.setResistance(320F);
         this.setLightLevel(0F);
     }
+
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {

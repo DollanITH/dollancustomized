@@ -19,19 +19,20 @@ public class BlockAsphaltHorizontal extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockAsphaltHorizontal(String name) {
-        super(Material.ROCK);
+        super(Material.GOURD);
+        this.setTickRandomly(true);
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
         this.setHardness(1.0F);
-        this.setResistance(5.0F);
+        this.setResistance(450F);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     public boolean isOpaqueCube(IBlockState state)

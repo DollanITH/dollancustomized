@@ -1,17 +1,47 @@
 {
-    "multipart": [
-        {   "apply": { "model": "dollancustomized:metro_fence_post" }},
-        {   "when": { "north": "true" },
-            "apply": { "model": "dollancustomized:metro_fence_side", "uvlock": true }
-        },
-        {   "when": { "east": "true" },
-            "apply": { "model": "dollancustomized:metro_fence_side", "y": 90, "uvlock": true }
-        },
-        {   "when": { "south": "true" },
-            "apply": { "model": "dollancustomized:metro_fence_side", "y": 180, "uvlock": true }
-        },
-        {   "when": { "west": "true" },
-            "apply": { "model": "dollancustomized:metro_fence_side", "y": 270, "uvlock": true }
-        }
-    ]
+  "multipart": [
+    {   "when":{"type": "metro|road"},"apply": { "model": "dollancustomized:metro_fence_post" }},
+
+    {   "when":{"type": "roadcenter"},"apply": { "model": "dollancustomized:road_center_fence_post" }},
+
+    {   "when": { "type":"metro","north": "true" },
+      "apply": { "model": "dollancustomized:metro_fence_side", "uvlock": true }
+    },
+    {   "when": { "type":"metro","east": "true" },
+      "apply": { "model": "dollancustomized:metro_fence_side", "y": 90, "uvlock": true }
+    },
+    {   "when": { "type":"metro","south": "true" },
+      "apply": { "model": "dollancustomized:metro_fence_side", "y": 180, "uvlock": true }
+    },
+    {   "when": { "type":"metro","west": "true" },
+      "apply": { "model": "dollancustomized:metro_fence_side", "y": 270, "uvlock": true }
+    },
+
+    {   "when": { "type":"road","north": "true" },
+      "apply": { "model": "dollancustomized:road_fence_side", "uvlock": true }
+    },
+    {   "when": { "type":"road","east": "true" },
+      "apply": { "model": "dollancustomized:road_fence_side", "y": 90, "uvlock": true }
+    },
+    {   "when": { "type":"road","south": "true" },
+      "apply": { "model": "dollancustomized:road_fence_side", "y": 180, "uvlock": true }
+    },
+    {   "when": { "type":"road","west": "true" },
+      "apply": { "model": "dollancustomized:road_fence_side", "y": 270, "uvlock": true }
+    },
+
+    {   "when": { "type":"roadcenter","north": "true" },
+      "apply": { "model": "dollancustomized:road_center_fence_side", "uvlock": true }
+    },
+    {   "when": { "type":"roadcenter","east": "true" },
+      "apply": { "model": "dollancustomized:road_center_fence_side", "y": 90, "uvlock": true }
+    },
+    {   "when": { "type":"roadcenter","south": "true" },
+      "apply": { "model": "dollancustomized:road_center_fence_side", "y": 180, "uvlock": true }
+    },
+    {   "when": { "type":"roadcenter","west": "true" },
+      "apply": { "model": "dollancustomized:road_center_fence_side", "y": 270, "uvlock": true }
+    }
+
+  ]
 }

@@ -1,30 +1,20 @@
 package com.jhxiaochen.dollancustomized.init;
 
-import com.google.common.base.Function;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.registries.GameData;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.lang.String;
 
 public class DollanBlocks {
 
@@ -200,25 +190,22 @@ public class DollanBlocks {
                     mingsha_S4,
                     mingsha_S5,
                     mingsha_S6,
-            cola_line1,
-            cola_line2,
-            cola_line3,
-            cola_line4,
-            cola_line5,
             lamp_tran,
-            whitelight,
-    light,
-            blacklight,
-            greenlight,
-            yellowlight,
+            light,
             redlight,
             white_punctiform_lamp,
             road_lamp_1_up,
             road_lamp_1_bottom,
-            track_flex_0,
+    thick_white_line_45,
+                    thick_yellow_line_45,thick_yellow_line_slab_45,
+                    thick_white_line_slab_45,
+    ms_lines,
+    ms_lines_slab,
             white_banding_lamp;
 
     public static void init() {
+        ms_lines = new MergeOtherLine("ms_lines");
+        ms_lines_slab = new MergeOtherLineSlab("ms_lines_slab");
         road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
         road_sign_dont_stop_1 = new BlockRoadSign("road_sign_dont_stop_1");
         road_sign_highway_start = new BlockRoadSign("road_sign_highway_start");
@@ -388,24 +375,29 @@ public class DollanBlocks {
         road_sign_sl_100 = new BlockRoadSign("road_sign_sl_100");
         road_sign_sl_110 = new BlockRoadSign("road_sign_sl_110");
         road_sign_sl_120 = new BlockRoadSign("road_sign_sl_120");
-        metro_fence = new BlockMetroFence();
+        metro_fence = new BlockMetroFence("metro_fence");
         road_pedestrian_traffic_light = new BlockRoadSign("road_pedestrian_traffic_light");
         road_traffic_light = new BlockRoadSign("road_traffic_light");
         road_traffic_light_red = new BlockRoadSign("road_traffic_light_red");
         road_traffic_light_green = new BlockRoadSign("road_traffic_light_green");
         road_traffic_light_yellow = new BlockRoadSign("road_traffic_light_yellow");
+
+        thick_white_line_45 = new BlockAsphaltHorizontal("thick_white_line_45");
+        thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
+        thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
+        thick_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_yellow_line_slab_45");
     }
     public static void register() {
         registerBlock(white_flat_lamp);
         registerBlock(white_punctiform_lamp);
         registerBlock(white_banding_lamp);
-        registerBlock(lamp_tran, new ItemMultiTexture(lamp_tran, lamp_tran, new ItemMultiTexture.Mapper() {
+        registerBlock(lamp_tran, new ItemMultiTexture(DollanBlocks.lamp_tran, DollanBlocks.lamp_tran, new ItemMultiTexture.Mapper() {
                     public String apply(ItemStack p_apply_1_) {
                         return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
                     }
                 })
         );
-        registerBlock(light, new ItemMultiTexture(light, light, new ItemMultiTexture.Mapper() {
+        registerBlock(light, new ItemMultiTexture(DollanBlocks.light, DollanBlocks.light, new ItemMultiTexture.Mapper() {
                     public String apply(ItemStack p_apply_1_) {
                         return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
                     }
@@ -415,7 +407,12 @@ public class DollanBlocks {
         registerBlock(road_lamp_1_up);
 
         registerBlock(platform_fence);
-        registerBlock(metro_fence);
+        registerBlock(metro_fence, new ItemMultiTexture(metro_fence,metro_fence, new ItemMultiTexture.Mapper() {
+                    public String apply(ItemStack p_apply_1_) {
+                        return BlockMetroFence.FenceType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                    }
+                })
+        );
 
         registerBlock(arrow_diaotou);
         registerBlock(arrow_left_diaotou);
@@ -456,7 +453,8 @@ public class DollanBlocks {
         registerBlock(single_yellow_line_slab);
         registerBlock(single_white_line);
         registerBlock(single_white_line_slab);
-        registerBlock(single_white_line_45);
+        registerBlock(single_white_line_45
+        );
         registerBlock(single_white_line_slab_45);
         registerBlock(single_yellow_line_45);
         registerBlock(single_yellow_line_slab_45);
@@ -604,6 +602,27 @@ public class DollanBlocks {
         registerBlock(single_yellow_90_slab);
         registerBlock(single_yellow_90_1_slab);
         registerBlock(single_yellow_all_line_slab);
+
+        registerBlock(thick_white_line_45
+        );
+        registerBlock(thick_white_line_slab_45);
+        registerBlock(thick_yellow_line_45);
+        registerBlock(thick_yellow_line_slab_45);
+
+        registerBlock(ms_lines, new ItemMultiTexture(ms_lines,ms_lines, new ItemMultiTexture.Mapper() {
+                    public String apply(ItemStack p_apply_1_) {
+                        return MergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                    }
+                })
+        );
+
+        registerBlock(ms_lines_slab, new ItemMultiTexture(ms_lines_slab,ms_lines_slab, new ItemMultiTexture.Mapper() {
+                    public String apply(ItemStack p_apply_1_) {
+                        return MergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                    }
+                })
+        );
+
     }
 
     private static void registerBlock(Block block) {
@@ -671,7 +690,9 @@ public class DollanBlocks {
         registerModel(road_traffic_light_green);
         registerModel(road_traffic_light_yellow);
         registerModel(road_pedestrian_traffic_light);
-        registerModel(metro_fence);
+        registerModel(metro_fence,BlockMetroFence.FenceType.METRO.getMetadata(), "dollancustomized:metro_fence");
+        registerModel(metro_fence,BlockMetroFence.FenceType.ROAD_CENTER.getMetadata(), "dollancustomized:road_center_fence");
+        registerModel(metro_fence,BlockMetroFence.FenceType.ROAD.getMetadata(), "dollancustomized:road_fence");
         registerModel(road_sign_post);
         registerModel(double_yellow_line_diagonal);
         registerModel(double_yellow_line_diagonal_slab);
@@ -690,6 +711,10 @@ public class DollanBlocks {
         registerModel(single_white_line_slab_45);
         registerModel(single_yellow_line_45);
         registerModel(single_yellow_line_slab_45);
+        registerModel(thick_white_line_45);
+        registerModel(thick_white_line_slab_45);
+        registerModel(thick_yellow_line_45);
+        registerModel(thick_yellow_line_slab_45);
         registerModel(crosswalk);
         registerModel(crosswalk_slab);
         registerModel(stop_line_slab);
@@ -826,12 +851,23 @@ public class DollanBlocks {
         registerModel(road_sign_can_left);
         registerModel(road_sign_can_right);
         registerModel(road_sign_can_diaotou);
+
+        registerModel(ms_lines,MergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line");
+        registerModel(ms_lines,MergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow");
+        registerModel(ms_lines,MergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line");
+        registerModel(ms_lines,MergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow");
+
+        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line_slab");
+        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow_slab");
+        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line_slab");
+        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow_slab");
+
     }
 
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Block block,int subtype, String name) {
+    private static void registerModel(Block block,int metadata, String name) {
         ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), subtype, model);
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
     }
 
     @SideOnly(Side.CLIENT)

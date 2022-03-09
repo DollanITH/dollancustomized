@@ -1,12 +1,12 @@
 package com.jhxiaochen.dollancustomized.common;
 
-import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,10 +17,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemLead;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -58,17 +55,70 @@ public class BlockMetroFence extends Block {
     public static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.0D, 0.625D, 1.0D, 0.375D);
     public static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.7D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
 
-    public BlockMetroFence() {
+
+    public static final PropertyEnum<BlockMetroFence.FenceType> TYPE = PropertyEnum.<BlockMetroFence.FenceType>create("type", BlockMetroFence.FenceType.class);
+    public static enum FenceType implements IStringSerializable {
+        METRO(0, "metro","metro"),
+        ROAD_CENTER(1, "roadcenter","road_center"),
+        ROAD(2,"road","road");
+
+        private static final BlockMetroFence.FenceType[] METADATA_LOOKUP = new BlockMetroFence.FenceType[values().length];
+        private final int metadata;
+        private final String name;
+        private final String unlocalizedName;
+
+        private FenceType(int metadataIn, String nameIn) {
+            this(metadataIn, nameIn, nameIn);
+        }
+
+        private FenceType(int metadataIn, String nameIn, String unlocalizedNameIn) {
+            this.metadata = metadataIn;
+            this.name = nameIn;
+            this.unlocalizedName = unlocalizedNameIn;
+        }
+
+        public int getMetadata() {
+            return this.metadata;
+        }
+
+        public String getUnlocalizedName() {
+            return this.unlocalizedName;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        public static BlockMetroFence.FenceType byMetadata(int metadata) {
+            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
+                metadata = 0;
+            }
+
+            return METADATA_LOOKUP[metadata];
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        static {
+            for (BlockMetroFence.FenceType BlockMetroFence$FenceType : values()) {
+                METADATA_LOOKUP[BlockMetroFence$FenceType.getMetadata()] = BlockMetroFence$FenceType;
+            }
+        }
+    }
+    public BlockMetroFence(String name) {
         super(Material.IRON);
-        this.setRegistryName("metro_fence");
-        this.setUnlocalizedName("metro_fence");
-        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, false)
-                .withProperty(SOUTH, false)
-                .withProperty(EAST, false)
-                .withProperty(WEST,false));
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
         this.setHardness(3.0F);
         this.setSoundType(SoundType.STONE);
+    }
+
+    public String getUnlocalizedName(ItemStack stack)
+    {
+        return super.getUnlocalizedName() + "." + FenceType.byMetadata(stack.getMetadata()).getUnlocalizedName();
     }
 
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
@@ -105,6 +155,20 @@ public class BlockMetroFence extends Block {
     {
         state = this.getActualState(state, source, pos);
         return BOUNDING_BOXES[getBoundingBoxIdx(state)];
+    }
+
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+    {
+        {
+            items.add(new ItemStack(this, 1, FenceType.METRO.getMetadata()));
+            items.add(new ItemStack(this, 1, FenceType.ROAD_CENTER.getMetadata()));
+            items.add(new ItemStack(this, 1, FenceType.ROAD.getMetadata()));
+        }
+    }
+
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+    {
+        return new ItemStack(this, 1, ((FenceType)state.getValue(TYPE)).getMetadata());
     }
 
     private static int getBoundingBoxIdx(IBlockState state)
@@ -182,17 +246,77 @@ public class BlockMetroFence extends Block {
         }
     }
 
-    public int getMetaFromState(IBlockState state)
+    public IBlockState getStateFromMeta(int meta)
     {
-        return 0;
+        IBlockState iblockstate = this.getDefaultState();
+
+        switch (meta)
+        {
+            case 1:
+                iblockstate = iblockstate.withProperty(TYPE, FenceType.ROAD_CENTER);
+                break;
+            case 2:
+                iblockstate = iblockstate.withProperty(TYPE, FenceType.ROAD);
+                break;
+            case 0:
+            default:
+                iblockstate = iblockstate.withProperty(TYPE, FenceType.METRO);
+        }
+
+        return iblockstate;
     }
 
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public int getMetaFromState(IBlockState state)
     {
-        return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST,  canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST,  canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
+        int i = 0;
+
+        switch ((FenceType)state.getValue(TYPE))
+        {
+            case METRO:
+                i = i | 0;
+                break;
+            case ROAD_CENTER:
+                i = i | 1;
+                break;
+            case ROAD:
+                i = i | 2;
+                break;
+            default:
+                i = i | 0;
+        }
+
+        return i;
+    }
+
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        int meta = state.getValue(TYPE).getMetadata();
+        switch (meta) {
+            case 0:
+               return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
+                    .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
+                    .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
+                    .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
+            case 1:
+               return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
+                        .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
+                        .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
+                        .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
+            case 2:
+                state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
+                        .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
+                        .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
+                        .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
+            case 3:
+                state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
+                        .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
+                        .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
+                        .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
+            default:
+            return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
+                    .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
+                    .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
+                    .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
+        }
     }
 
     public IBlockState withRotation(IBlockState state, Rotation rot)
@@ -225,7 +349,7 @@ public class BlockMetroFence extends Block {
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, WEST, SOUTH});
+        return new BlockStateContainer(this, new IProperty[] {TYPE, NORTH, EAST, WEST, SOUTH});
     }
 
     /* ======================================== FORGE START ======================================== */

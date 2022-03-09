@@ -10,7 +10,6 @@
 			"from": [-11, 0, -9],
 			"to": [21, 0.01, 23],
 			"faces": {
-
 				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
 				"down": {"uv": [16, 0, 0, 16], "texture": "#0", "cullface": "down"}
 			}

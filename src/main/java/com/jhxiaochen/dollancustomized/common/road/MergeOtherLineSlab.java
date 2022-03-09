@@ -83,6 +83,7 @@ public MergeOtherLineSlab(String name){
     this.setCreativeTab(DollanCustomized.ROAD_TAB);
     this.setHardness(1.2F);
     this.setResistance(10F);
+    this.setTickRandomly(true);
     this.setLightOpacity(1);
     }
 

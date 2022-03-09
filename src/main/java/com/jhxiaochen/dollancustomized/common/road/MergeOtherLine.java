@@ -80,6 +80,7 @@ public MergeOtherLine(String name){
     this.setHardness(1.2F);
     this.setResistance(10F);
     this.setLightOpacity(1);
+    this.setTickRandomly(true);
     }
 
     public BlockRenderLayer getBlockLayer() {

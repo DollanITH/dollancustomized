@@ -31,6 +31,7 @@ public class BlockAsphaltSlabHorizontal2 extends Block {
         this.setUnlocalizedName(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.2F);
+        this.setTickRandomly(true);
         this.setResistance(10F);
         this.setLightOpacity(1);
 

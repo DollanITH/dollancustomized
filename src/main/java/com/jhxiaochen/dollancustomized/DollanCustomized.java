@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized;
 
+import com.jhxiaochen.dollancustomized.command.Command114514;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = "3.2")
 public class DollanCustomized {
@@ -40,6 +42,7 @@ public class DollanCustomized {
         MinecraftForge.EVENT_BUS.register(proxy);
         proxy.preInit();
 
+
     }
 
     @EventHandler
@@ -53,5 +56,10 @@ public class DollanCustomized {
     public void postInit(FMLPostInitializationEvent event) {
         System.out.println("Post Init, thank you fucking mother");
         proxy.postInit();
+    }
+
+    @Mod.EventHandler
+    public void onServerStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new Command114514());
     }
 }

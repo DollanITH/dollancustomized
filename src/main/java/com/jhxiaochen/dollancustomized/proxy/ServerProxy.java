@@ -1,7 +1,5 @@
 package com.jhxiaochen.dollancustomized.proxy;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class ServerProxy implements CommonProxy {
     @Override
     public void preInit() {
@@ -17,4 +15,5 @@ public class ServerProxy implements CommonProxy {
     public void postInit() {
 
     }
+
 }

@@ -19,6 +19,8 @@ import java.util.List;
 public class DollanBlocks {
 
     public static Block
+            crosswalk_diagonal,
+            crosswalk_diagonal_slab,
             road_sign_highway_start,
             road_sign_highway_end,
             road_sign_dont_stop,
@@ -204,6 +206,8 @@ public class DollanBlocks {
             white_banding_lamp;
 
     public static void init() {
+        crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
+        crosswalk_diagonal_slab = new BlockAsphaltHorizontal("crosswalk_diagonal_slab");
         ms_lines = new MergeOtherLine("ms_lines");
         ms_lines_slab = new MergeOtherLineSlab("ms_lines_slab");
         road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
@@ -622,6 +626,8 @@ public class DollanBlocks {
                     }
                 })
         );
+        registerBlock(crosswalk_diagonal);
+        registerBlock(crosswalk_diagonal_slab);
 
     }
 
@@ -636,6 +642,8 @@ public class DollanBlocks {
     }
 
     public static void registerModels() {
+        registerModel(crosswalk_diagonal);
+        registerModel(crosswalk_diagonal_slab);
         registerModel(dollan_airport_line);
         registerModel(dollan_s1);
         registerModel(dollan_s2);

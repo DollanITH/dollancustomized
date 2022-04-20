@@ -46,7 +46,7 @@ public class Arrow extends Block {
 
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
@@ -97,14 +97,7 @@ public class Arrow extends Block {
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
-        if (side == EnumFacing.UP)
-        {
             return true;
-        }
-        else
-        {
-            return blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? true : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-        }
     }
 
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)

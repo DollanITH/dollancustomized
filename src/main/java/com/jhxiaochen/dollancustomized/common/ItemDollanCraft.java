@@ -43,7 +43,7 @@ public class ItemDollanCraft extends ItemFood
         else
         {
             player.addPotionEffect(new PotionEffect(MobEffects.POISON, 3, 1));
-            player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 200, 1));
+            player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 200, 114));
         }
     }
 

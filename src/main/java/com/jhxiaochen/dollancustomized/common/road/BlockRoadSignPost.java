@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -121,7 +120,7 @@ public class BlockRoadSignPost extends Block {
     }
 
     /**
-     * Get the actual Block state of this Block at the given position. This
+     * Get the actual DollanBlock state of this DollanBlock at the given position. This
      * applies properties not visible in the metadata, such as fence
      * connections.
      */

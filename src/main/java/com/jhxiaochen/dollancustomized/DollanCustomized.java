@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = "3.2")
+@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = "3.4")
 public class DollanCustomized {
 
     @Instance(Reference.MOD_ID)
@@ -22,7 +22,7 @@ public class DollanCustomized {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
     public static final String MODID = "dollancustomized";
-    public static final String VERSION = "3.2";
+    public static final String VERSION = "3.4";
     public static final String Accept_Minecraft_version = "1.12.2";
     public static com.jhxiaochen.dollancustomized.DollanCustomized getInstance() {
         return instance;
@@ -34,6 +34,7 @@ public class DollanCustomized {
     public static final CreativeTabs MS_METRO_TAB = new TabMSMetro();
     public static final CreativeTabs ROAD_TAB = new TabRoad();
     public static final CreativeTabs ROAD_Signs = new TabRoadSigns();
+    public static final CreativeTabs Blocks = new TabBlocks();
 
 
     @EventHandler

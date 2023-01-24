@@ -17,10 +17,10 @@ public class DollanItems{
         public static Item dollancraft;
 
         public static void init() {
-        leungcraft = new ItemLeungCraft(1,1.0F,false)
+        leungcraft = new ItemLeungCraft(3,1.2F,false)
                 .setAlwaysEdible()
                 .setUnlocalizedName("leungcraft").setRegistryName("leungcraft");
-        dollancraft = new ItemDollanCraft(1,1.0F,false)
+        dollancraft = new ItemDollanCraft(3,1.2F,false)
                     .setAlwaysEdible()
                     .setUnlocalizedName("dollancraft").setRegistryName("dollancraft");
         }

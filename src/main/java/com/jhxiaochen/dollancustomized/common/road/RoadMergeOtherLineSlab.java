@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class MergeOtherLineSlab extends Block {
+public class RoadMergeOtherLineSlab extends Block {
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
     public static final PropertyEnum<EnumVariant> VARIANT = PropertyEnum.<EnumVariant>create("variant", EnumVariant.class);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -69,13 +69,13 @@ public class MergeOtherLineSlab extends Block {
         }
 
         static {
-            for (MergeOtherLineSlab.EnumVariant enumvariant : values()) {
+            for (RoadMergeOtherLineSlab.EnumVariant enumvariant : values()) {
                 METADATA_LOOKUP[enumvariant.getMetadata()] = enumvariant;
             }
         }
     }
 
-public MergeOtherLineSlab(String name){
+public RoadMergeOtherLineSlab(String name){
     super(Material.ROCK);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     this.setRegistryName(name);

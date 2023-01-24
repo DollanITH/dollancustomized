@@ -23,7 +23,7 @@ public class Command114514 extends CommandBase
 
     public int getRequiredPermissionLevel()
     {
-        return 0;
+        return 3;
     }
 
     public String getUsage(ICommandSender sender)

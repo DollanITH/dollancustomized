@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.common;
 
+import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.SoundType;
@@ -111,7 +112,7 @@ public class BlockMetroFence extends Block {
         super(Material.IRON);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
+        this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(3.0F);
         this.setSoundType(SoundType.STONE);
     }

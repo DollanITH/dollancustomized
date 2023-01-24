@@ -3,7 +3,6 @@ package com.jhxiaochen.dollancustomized.init;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.road.*;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.*;
 import net.minecraftforge.client.model.ModelLoader;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class DollanBlocks {
 
-    public static Block
+    public static net.minecraft.block.Block
             crosswalk_diagonal,
             crosswalk_diagonal_slab,
             road_sign_highway_start,
@@ -84,11 +83,15 @@ public class DollanBlocks {
             yellowflatlamp,
             redflatlamp,
             double_yellow_line,
+            double_yellow_line_half,
             double_white_line,
+            double_white_line_half,
             double_yellow_line_slab,
+            double_yellow_line_half_slab,
     double_yellow_line_diagonal_slab,
             double_yellow_line_diagonal,
             double_white_line_slab,
+            double_white_line_half_slab,
             double_white_line_diagonal_slab,
             double_white_line_diagonal,
     single_yellow_line,
@@ -127,10 +130,13 @@ public class DollanBlocks {
             stop_line_left,
             stop_line_left_slab,
             stop_line_right,
+            stop_line_right_1,
             stop_line_right_slab,
+            stop_line_right_1_slab,
             single_white_line,
             single_white_line_slab,
             single_white_line_45,
+            arrow_staright_diaotou,
             single_white_line_slab_45,
             single_yellow_line_45,
             single_yellow_line_slab_45,
@@ -203,13 +209,15 @@ public class DollanBlocks {
                     thick_white_line_slab_45,
     ms_lines,
     ms_lines_slab,
+    platform_wall,
+    marble_block,
             white_banding_lamp;
 
     public static void init() {
         crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
         crosswalk_diagonal_slab = new BlockAsphaltHorizontal("crosswalk_diagonal_slab");
-        ms_lines = new MergeOtherLine("ms_lines");
-        ms_lines_slab = new MergeOtherLineSlab("ms_lines_slab");
+        ms_lines = new RoadMergeOtherLine("ms_lines");
+        ms_lines_slab = new RoadMergeOtherLineSlab("ms_lines_slab");
         road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
         road_sign_dont_stop_1 = new BlockRoadSign("road_sign_dont_stop_1");
         road_sign_highway_start = new BlockRoadSign("road_sign_highway_start");
@@ -290,7 +298,11 @@ public class DollanBlocks {
         double_white_line = new BlockAsphaltHorizontal1("double_white_line");
         double_yellow_line = new BlockAsphaltHorizontal1("double_yellow_line");
         double_white_line_slab = new BlockAsphaltSlabHorizontal2("double_white_line_slab");
-        double_yellow_line_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_slab");
+        double_yellow_line_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_slab"); 
+        double_white_line_half = new BlockAsphaltHorizontal1("double_white_line_half");
+        double_yellow_line_half = new BlockAsphaltHorizontal1("double_yellow_line_half");
+        double_white_line_half_slab = new BlockAsphaltSlabHorizontal2("double_white_line_half_slab");
+        double_yellow_line_half_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_half_slab");
         single_yellow_line = new BlockAsphaltHorizontal1("single_yellow_line");
         single_yellow_line_slab = new BlockAsphaltSlabHorizontal2("single_yellow_line_slab");
         single_white_line = new BlockAsphaltHorizontal1("single_white_line");
@@ -331,7 +343,9 @@ public class DollanBlocks {
         stop_line_left = new BlockAsphaltHorizontal("stop_line_left");
         stop_line_left_slab = new BlockAsphaltSlabHorizontal("stop_line_left_slab");
         stop_line_right = new BlockAsphaltHorizontal("stop_line_right");
+        stop_line_right_1 = new BlockAsphaltHorizontal("stop_line_right_1");
         stop_line_right_slab = new BlockAsphaltSlabHorizontal("stop_line_right_slab");
+        stop_line_right_1_slab = new BlockAsphaltSlabHorizontal("stop_line_right_1_slab");
         road_lamp_1_up = new RoadLamp1U();
         road_lamp_1_bottom = new RoadLamp1B();
         arrow_diaotou = new Arrow("arrow_diaotou");
@@ -343,6 +357,7 @@ public class DollanBlocks {
         arrow_left = new Arrow("arrow_left");
         arrow_right = new Arrow("arrow_right");
         arrow_staright = new Arrow("arrow_staright");
+        arrow_staright_diaotou = new Arrow("arrow_staright_diaotou");
         asphalt_cyan_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_slab");
         asphalt_cyan_black_half_line = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line");
         asphalt_cyan_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_slab");
@@ -390,6 +405,8 @@ public class DollanBlocks {
         thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
         thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
         thick_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_yellow_line_slab_45");
+        platform_wall = new DollanBlock("platform_wall");
+        marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
     }
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -470,7 +487,12 @@ public class DollanBlocks {
         registerBlock(double_white_line);
         registerBlock(double_white_line_slab);
         registerBlock(double_yellow_line);
-        registerBlock(double_yellow_line_slab);
+        registerBlock(double_yellow_line_slab);  
+        
+        registerBlock(double_white_line_half);
+        registerBlock(double_white_line_half_slab);
+        registerBlock(double_yellow_line_half);
+        registerBlock(double_yellow_line_half_slab);
 
         registerBlock(crosswalk_slab);
         registerBlock(crosswalk);
@@ -479,7 +501,9 @@ public class DollanBlocks {
         registerBlock(stop_line_left_slab);
         registerBlock(stop_line_left);
         registerBlock(stop_line_right_slab);
+        registerBlock(stop_line_right_1_slab);
         registerBlock(stop_line_right);
+        registerBlock(stop_line_right_1);
 
         registerBlock(asphalt_cyan_black_half_line);
         registerBlock(asphalt_cyan_black_half_line_slab);
@@ -615,33 +639,41 @@ public class DollanBlocks {
 
         registerBlock(ms_lines, new ItemMultiTexture(ms_lines,ms_lines, new ItemMultiTexture.Mapper() {
                     public String apply(ItemStack p_apply_1_) {
-                        return MergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                        return RoadMergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
                     }
                 })
         );
 
         registerBlock(ms_lines_slab, new ItemMultiTexture(ms_lines_slab,ms_lines_slab, new ItemMultiTexture.Mapper() {
                     public String apply(ItemStack p_apply_1_) {
-                        return MergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                        return RoadMergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
                     }
                 })
         );
         registerBlock(crosswalk_diagonal);
         registerBlock(crosswalk_diagonal_slab);
 
+        registerBlock(arrow_staright_diaotou);
+        registerBlock(platform_wall);
+        registerBlock(marble_block);
+
     }
 
-    private static void registerBlock(Block block) {
+    private static void registerBlock(net.minecraft.block.Block block) {
         registerBlock(block, new ItemBlock(block));
     }
 
-    private static void registerBlock(Block block, ItemBlock item) {
+    private static void registerBlock(net.minecraft.block.Block block, ItemBlock item) {
         RegistrationHandler.BLOCKS.add(block);
         item.setRegistryName(block.getRegistryName());
         DollanItems.RegistrationHandler.ITEMS.add(item);
     }
 
     public static void registerModels() {
+        registerModel(double_white_line_half);
+        registerModel(double_white_line_half_slab);
+        registerModel(double_yellow_line_half);
+        registerModel(double_yellow_line_half_slab);
         registerModel(crosswalk_diagonal);
         registerModel(crosswalk_diagonal_slab);
         registerModel(dollan_airport_line);
@@ -732,7 +764,9 @@ public class DollanBlocks {
         registerModel(stop_line_left_slab);
         registerModel(stop_line_left);
         registerModel(stop_line_right_slab);
+        registerModel(stop_line_right_1_slab);
         registerModel(stop_line_right);
+        registerModel(stop_line_right_1);
         registerModel(single_white_line_thick);
         registerModel(single_white_line_thick_slab);
         registerModel(single_yellow_line_thick);
@@ -860,36 +894,39 @@ public class DollanBlocks {
         registerModel(road_sign_can_right);
         registerModel(road_sign_can_diaotou);
 
-        registerModel(ms_lines,MergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line");
-        registerModel(ms_lines,MergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow");
-        registerModel(ms_lines,MergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line");
-        registerModel(ms_lines,MergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow");
 
-        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line_slab");
-        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow_slab");
-        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line_slab");
-        registerModel(ms_lines_slab,MergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow_slab");
 
+        registerModel(arrow_staright_diaotou);
+        registerModel(platform_wall);
+        registerModel(marble_block);
     }
 
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Block block,int metadata, String name) {
+    private static void registerModel(net.minecraft.block.Block block, int metadata, String name) {
         ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
     }
 
     @SideOnly(Side.CLIENT)
-    private static void registerModel(Block block) {
+    private static void registerModel(net.minecraft.block.Block block) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 
     }
 
     @Mod.EventBusSubscriber()
     public static class RegistrationHandler {
-        public static final List<Block> BLOCKS = new LinkedList<>();
+        public static final List<net.minecraft.block.Block> BLOCKS = new LinkedList<>();
 
         @SubscribeEvent
-        public static void registerItems(final RegistryEvent.Register<Block> event) {
+        public static void registerItems(final RegistryEvent.Register<net.minecraft.block.Block> event) {
             DollanBlocks.init();
             DollanBlocks.register();
             BLOCKS.stream().forEach(block -> event.getRegistry().register(block));

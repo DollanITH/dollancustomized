@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
+import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -9,7 +10,6 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -31,7 +31,7 @@ public class BlockPlatFormFence extends Block {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
+        this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(3.0F);
         this.setSoundType(SoundType.METAL);
     }

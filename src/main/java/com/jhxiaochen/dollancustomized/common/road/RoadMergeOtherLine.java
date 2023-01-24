@@ -16,7 +16,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class MergeOtherLine extends Block {
+public class RoadMergeOtherLine extends Block {
     public static final PropertyEnum<EnumVariant> VARIANT = PropertyEnum.<EnumVariant>create("variant", EnumVariant.class);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public enum EnumVariant implements IStringSerializable{
@@ -65,13 +65,13 @@ public class MergeOtherLine extends Block {
         }
 
         static {
-            for (MergeOtherLine.EnumVariant enumvariant : values()) {
+            for (RoadMergeOtherLine.EnumVariant enumvariant : values()) {
                 METADATA_LOOKUP[enumvariant.getMetadata()] = enumvariant;
             }
         }
     }
 
-public MergeOtherLine(String name){
+public RoadMergeOtherLine(String name){
     super(Material.ROCK);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     this.setRegistryName(name);

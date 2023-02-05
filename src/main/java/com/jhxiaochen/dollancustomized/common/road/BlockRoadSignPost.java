@@ -107,7 +107,7 @@ public class BlockRoadSignPost extends Block {
     private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-        return block != Blocks.AIR ;
+        return block != Blocks.AIR && block != Blocks.WALL_SIGN;
 
     }
 

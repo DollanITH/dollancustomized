@@ -67,14 +67,25 @@ public class DollanBlocks {
             road_sign_sl_120,
             road_sign_post,
             arrow_diaotou,
-    arrow_left_diaotou,
-    arrow_left_right,
-    arrow_left_right_staright,
-    arrow_left_staright,
-    arrow_right_staright,
-    arrow_staright,
-    arrow_left,
-    arrow_right,
+            arrow_left_diaotou,
+            arrow_left_right,
+            arrow_left_right_staright,
+            arrow_left_staright,
+            arrow_right_staright,
+            arrow_staright,
+            arrow_left,
+            arrow_right,
+            arrow_staright_diaotou,            
+            arrow_diaotou_sl,
+            arrow_left_diaotou_sl,
+            arrow_left_right_sl,
+            arrow_left_right_staright_sl,
+            arrow_left_staright_sl,
+            arrow_right_staright_sl,
+            arrow_staright_sl,
+            arrow_left_sl,
+            arrow_right_sl,
+            arrow_staright_diaotou_sl,
             blackflatlamp,
             asphalt,
             asphalt_slab,
@@ -102,7 +113,10 @@ public class DollanBlocks {
             single_yellow_line_thick_slab,
     asphalt_cyan_black_half_slab,
             asphalt_cyan_black_half,
-
+    arrow_confluence_left,
+    arrow_confluence_left_sl,
+    arrow_confluence_right,
+    arrow_confluence_right_sl,
             asphalt_cyan_black_half_45,
             asphalt_cyan_black_half_45_slab,
             asphalt_red_black_half_45,
@@ -136,7 +150,7 @@ public class DollanBlocks {
             single_white_line,
             single_white_line_slab,
             single_white_line_45,
-            arrow_staright_diaotou,
+
             single_white_line_slab_45,
             single_yellow_line_45,
             single_yellow_line_slab_45,
@@ -215,7 +229,7 @@ public class DollanBlocks {
 
     public static void init() {
         crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
-        crosswalk_diagonal_slab = new BlockAsphaltHorizontal("crosswalk_diagonal_slab");
+        crosswalk_diagonal_slab = new BlockAsphaltSlabHorizontal("crosswalk_diagonal_slab");
         ms_lines = new RoadMergeOtherLine("ms_lines");
         ms_lines_slab = new RoadMergeOtherLineSlab("ms_lines_slab");
         road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
@@ -299,10 +313,10 @@ public class DollanBlocks {
         double_yellow_line = new BlockAsphaltHorizontal1("double_yellow_line");
         double_white_line_slab = new BlockAsphaltSlabHorizontal2("double_white_line_slab");
         double_yellow_line_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_slab"); 
-        double_white_line_half = new BlockAsphaltHorizontal1("double_white_line_half");
-        double_yellow_line_half = new BlockAsphaltHorizontal1("double_yellow_line_half");
-        double_white_line_half_slab = new BlockAsphaltSlabHorizontal2("double_white_line_half_slab");
-        double_yellow_line_half_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_half_slab");
+        double_white_line_half = new BlockAsphaltHorizontal("double_white_line_half");
+        double_yellow_line_half = new BlockAsphaltHorizontal("double_yellow_line_half");
+        double_white_line_half_slab = new BlockAsphaltSlabHorizontal("double_white_line_half_slab");
+        double_yellow_line_half_slab = new BlockAsphaltSlabHorizontal("double_yellow_line_half_slab");
         single_yellow_line = new BlockAsphaltHorizontal1("single_yellow_line");
         single_yellow_line_slab = new BlockAsphaltSlabHorizontal2("single_yellow_line_slab");
         single_white_line = new BlockAsphaltHorizontal1("single_white_line");
@@ -358,6 +372,20 @@ public class DollanBlocks {
         arrow_right = new Arrow("arrow_right");
         arrow_staright = new Arrow("arrow_staright");
         arrow_staright_diaotou = new Arrow("arrow_staright_diaotou");
+        arrow_diaotou_sl = new ArrowSl("arrow_diaotou_sl");
+        arrow_left_diaotou_sl = new ArrowSl("arrow_left_diaotou_sl");
+        arrow_left_right_sl = new ArrowSl("arrow_left_right_sl");
+        arrow_left_right_staright_sl = new ArrowSl("arrow_left_right_staright_sl");
+        arrow_left_staright_sl = new ArrowSl("arrow_left_staright_sl");
+        arrow_right_staright_sl = new ArrowSl("arrow_right_staright_sl");
+        arrow_left_sl = new ArrowSl("arrow_left_sl");
+        arrow_right_sl = new ArrowSl("arrow_right_sl");
+        arrow_staright_sl = new ArrowSl("arrow_staright_sl");
+        arrow_staright_diaotou_sl = new ArrowSl("arrow_staright_diaotou_sl");
+        arrow_confluence_left_sl = new ArrowSl("arrow_confluence_left_sl");
+        arrow_confluence_right_sl = new ArrowSl("arrow_confluence_right_sl");
+        arrow_confluence_left = new Arrow("arrow_confluence_left");
+        arrow_confluence_right = new Arrow("arrow_confluence_right");
         asphalt_cyan_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_slab");
         asphalt_cyan_black_half_line = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line");
         asphalt_cyan_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_slab");
@@ -657,6 +685,21 @@ public class DollanBlocks {
         registerBlock(platform_wall);
         registerBlock(marble_block);
 
+        registerBlock(arrow_confluence_left);
+        registerBlock(arrow_confluence_right);
+        registerBlock(arrow_diaotou_sl);
+        registerBlock(arrow_left_diaotou_sl);
+        registerBlock(arrow_left_right_sl);
+        registerBlock(arrow_left_right_staright_sl);
+        registerBlock(arrow_left_staright_sl);
+        registerBlock(arrow_right_staright_sl);
+        registerBlock(arrow_left_sl);
+        registerBlock(arrow_right_sl);
+        registerBlock(arrow_staright_sl);
+        registerBlock(arrow_staright_diaotou_sl);
+        registerBlock(arrow_confluence_left_sl);
+        registerBlock(arrow_confluence_right_sl);
+
     }
 
     private static void registerBlock(net.minecraft.block.Block block) {
@@ -670,6 +713,11 @@ public class DollanBlocks {
     }
 
     public static void registerModels() {
+        registerModel(arrow_confluence_left);
+        registerModel(arrow_confluence_right);
+        registerModel(arrow_confluence_left_sl);
+        registerModel(arrow_confluence_right_sl);
+
         registerModel(double_white_line_half);
         registerModel(double_white_line_half_slab);
         registerModel(double_yellow_line_half);
@@ -907,6 +955,17 @@ public class DollanBlocks {
         registerModel(arrow_staright_diaotou);
         registerModel(platform_wall);
         registerModel(marble_block);
+
+        registerModel(arrow_diaotou_sl);
+        registerModel(arrow_left_diaotou_sl);
+        registerModel(arrow_left_right_sl);
+        registerModel(arrow_left_right_staright_sl);
+        registerModel(arrow_left_staright_sl);
+        registerModel(arrow_right_staright_sl);
+        registerModel(arrow_left_sl);
+        registerModel(arrow_right_sl);
+        registerModel(arrow_staright_sl);
+        registerModel(arrow_staright_diaotou_sl);
     }
 
     @SideOnly(Side.CLIENT)

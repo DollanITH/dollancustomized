@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "dollancustomized:arrow_left_right_staright_sl"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block",
+      "model": "dollancustomized:arrow_left_right_staright"
+    }],
+    "facing": {
+      "west": {"model": "dollancustomized:arrow_left_right_staright_sl",
+        "y": 90},
+      "north": {"model": "dollancustomized:arrow_left_right_staright_sl",
+        "y": 180},
+      "south": {"model": "dollancustomized:arrow_left_right_staright_sl"},
+      "east": {"model": "dollancustomized:arrow_left_right_staright_sl",
+        "y": 270}
+    }
+  }
+}

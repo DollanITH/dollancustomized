@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "dollancustomized:blocks/roads/arrow_right_staright",
+		"particle": "dollancustomized:blocks/roads/arrow_right_staright"
+	},
+	"elements": [
+		{
+			"from": [-8, -8, -9],
+			"to": [24, -7.99, 23],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

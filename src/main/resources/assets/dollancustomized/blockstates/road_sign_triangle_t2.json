@@ -2,7 +2,7 @@
     "forge_marker": 1,
     "defaults" : {
         "textures": {
-            "front": "dollancustomized:blocks/roads/sl/triangle_t2",
+            "front": "dollancustomized:blocks/roads/sl/road_sign_crossing_t1",
             "back": "dollancustomized:blocks/road_sign_back_triangle"
         }
     },

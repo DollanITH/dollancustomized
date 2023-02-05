@@ -45,7 +45,7 @@ public class Command114514 extends CommandBase
             EntityPlayer entityplayer = getCommandSenderAsPlayer(sender);
             entityplayer.onKillCommand();
             Entity entity = getEntity(server, sender, args[0]);
-            notifyCommandListener(sender, this, "commands.114514.fail", new Object[] {entity.getDisplayName()});
+            notifyCommandListener(entity, this, "commands.114514.fail", new Object[] {entity.getDisplayName()});
         }
     }
 

@@ -33,6 +33,9 @@ public class DollanBlocks {
             road_sign_triangle_t1,
             road_sign_triangle_t2,
             road_sign_triangle_warn,
+            road_sign_left_warn,
+            road_sign_left_right_warn,
+            road_sign_right_warn,
             road_sign_triangle_y,
             bus_lane_mark,
             road_sign_do_not_enter,
@@ -46,6 +49,7 @@ public class DollanBlocks {
             road_sign_can_left,
             road_sign_can_right,
             road_sign_do_not_diaotou,
+            road_sign_one_way_straight,
             metro_fence,
     platform_fence,
     road_pedestrian_traffic_light,
@@ -233,6 +237,10 @@ public class DollanBlocks {
         ms_lines = new RoadMergeOtherLine("ms_lines");
         ms_lines_slab = new RoadMergeOtherLineSlab("ms_lines_slab");
         road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
+        road_sign_left_warn = new BlockRoadSign("road_sign_left_warn");
+        road_sign_left_right_warn = new BlockRoadSign("road_sign_left_right_warn");
+        road_sign_right_warn = new BlockRoadSign("road_sign_right_warn");
+        road_sign_one_way_straight = new BlockRoadSign("road_sign_one_way_straight");
         road_sign_dont_stop_1 = new BlockRoadSign("road_sign_dont_stop_1");
         road_sign_highway_start = new BlockRoadSign("road_sign_highway_start");
         road_sign_highway_end = new BlockRoadSign("road_sign_highway_end");
@@ -640,6 +648,7 @@ public class DollanBlocks {
         registerBlock(road_sign_park);
         registerBlock(road_sign_park_1);
 
+
         //2.1
         registerBlock(asphalt_red_black_half_45);
         registerBlock(asphalt_red_black_half_45_slab);
@@ -684,6 +693,11 @@ public class DollanBlocks {
         registerBlock(arrow_staright_diaotou);
         registerBlock(platform_wall);
         registerBlock(marble_block);
+        
+        registerBlock(road_sign_one_way_straight);
+        registerBlock(road_sign_left_warn);
+        registerBlock(road_sign_right_warn);
+        registerBlock(road_sign_left_right_warn);
 
         registerBlock(arrow_confluence_left);
         registerBlock(arrow_confluence_right);
@@ -717,6 +731,12 @@ public class DollanBlocks {
         registerModel(arrow_confluence_right);
         registerModel(arrow_confluence_left_sl);
         registerModel(arrow_confluence_right_sl);
+
+        registerModel(road_sign_left_warn);
+        registerModel(road_sign_right_warn);
+        registerModel(road_sign_left_right_warn);
+
+        registerModel(road_sign_one_way_straight);
 
         registerModel(double_white_line_half);
         registerModel(double_white_line_half_slab);

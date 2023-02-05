@@ -168,6 +168,9 @@ tile.road_sign_do_not_diaotou.name=禁止调头标志
 tile.road_sign_can_left.name=左转标志
 tile.road_sign_can_right.name=右转标志
 tile.road_sign_can_diaotou.name=调头标志
+tile.road_sign_left_warn.name=道路向左收窄标志
+tile.road_sign_right_warn.name=道路向右收窄标志
+tile.road_sign_left_right_warn.name=道路向左和向右收窄标志
 
 tile.bike_words.name=自行车道标志
 tile.bus_lane_mark.name=公交专用标志

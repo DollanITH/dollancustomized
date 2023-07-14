@@ -230,7 +230,11 @@ public class DollanBlocks {
             white_banding_lamp,
     //block 01
             platform_wall,
-            marble_block;
+            marble_block,
+    //02
+            beautiful_marble,
+            calcite,
+            cherry_planks;
 
     public static void init() {
         crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
@@ -444,6 +448,10 @@ public class DollanBlocks {
         thick_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_yellow_line_slab_45");
         platform_wall = new DollanBlock("platform_wall");
         marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
+        //
+        beautiful_marble = new BlockMarble("beautiful_marble");
+        calcite = new DollanBlock("calcite").setHardness(1.5F).setResistance(10.0F);
+        cherry_planks = new DollanPlanks("cherry_planks");
     }
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -715,6 +723,13 @@ public class DollanBlocks {
         registerBlock(arrow_confluence_left_sl);
         registerBlock(arrow_confluence_right_sl);
 
+        registerBlock(beautiful_marble, new ItemMultiTexture(beautiful_marble,beautiful_marble, new ItemMultiTexture.Mapper() {
+                    public String apply(ItemStack p_apply_1_) {
+                        return BlockMarble.MarbleType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                    }
+                })
+        );
+        registerBlock(calcite);
     }
 
     private static void registerBlock(net.minecraft.block.Block block) {
@@ -987,6 +1002,13 @@ public class DollanBlocks {
         registerModel(arrow_right_sl);
         registerModel(arrow_staright_sl);
         registerModel(arrow_staright_diaotou_sl);
+
+        registerModel(beautiful_marble,0,"dollancustomized:beautiful_marble_1");
+        registerModel(beautiful_marble,1,"dollancustomized:beautiful_marble_2");
+        registerModel(beautiful_marble,2,"dollancustomized:beautiful_marble_3");
+        registerModel(beautiful_marble,3,"dollancustomized:beautiful_marble_4");
+        registerModel(beautiful_marble,4,"dollancustomized:beautiful_marble_5");
+        registerModel(calcite);
     }
 
     @SideOnly(Side.CLIENT)

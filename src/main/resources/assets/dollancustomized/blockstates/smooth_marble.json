@@ -3,8 +3,8 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "dollancustomized:blocks/jzmr_block",
-      "particle": "dollancustomized:blocks/jzmr_block"
+      "all": "dollancustomized:blocks/beautiful_marble_5",
+      "particle": "dollancustomized:blocks/beautiful_marble_5"
     }
   },
   "variants": {

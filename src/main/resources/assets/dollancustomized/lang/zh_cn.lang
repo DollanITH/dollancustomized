@@ -1,29 +1,12 @@
-tile.line_3.name=§2§l东安轨道交通§r 3号线
-tile.line_9.name=§2§l东安轨道交通§r 9号线
-tile.yellowflatlamp.name=黄色扁平灯具
-tile.line_12.name=§2§l东安轨道交通§r 12号线
-tile.line_10.name=§2§l东安轨道交通§r 10号线
-tile.line_13.name=§2§l东安轨道交通§r 13号线
-tile.line_14.name=§2§l东安轨道交通§r 14号线
-tile.greenlight.name=原谅绿现代灯
-
 itemGroup.tabLight=东安自定义 | 灯具
 itemGroup.tabdollanMetro=东安自定义 | 东安轨道交通
 itemGroup.tabdollanTran=东安自定义 | 东安市域轨道交通
 itemGroup.tabMSMetro=东安自定义 | 鸣沙轨道交通
 itemGroup.tabRoad=东安自定义 | 道路
 itemGroup.tabRoadSigns=东安自定义 | 道路标志
+itemGroup.tabBlocks=东安自定义 | 方块
 
-tile.line_6.name=§2§l东安轨道交通§r 6号线
-tile.line_7.name=§2§l东安轨道交通§r 7号线
-tile.line_2.name=§2§l东安轨道交通§r 2号线
 tile.white_flat_lamp.name=扁平灯具
-tile.line_5.name=§2§l东安轨道交通§r 5号线
-tile.line_1.name=§2§l东安轨道交通§r 1号线
-tile.line_8.name=§2§l东安轨道交通§r 8号线
-tile.line_4.name=§2§l东安轨道交通§r 4号线
-itemGroup.tabmetro=东安自定义 | 方块
-tile.line_11.name=§2§l东安轨道交通§r 11号线
 
 tile.lamp_tran.white.name=白色透明现代灯
 tile.lamp_tran.black.name=黑色透明现代灯
@@ -251,9 +234,9 @@ tile.platform_fence.name=站台护栏
 tile.platform_wall.name=站台墙方块
 tile.marble_block.name=磨制大理石
 
-tile.dollan_s1.name=§2§l东安轨道交通§r S1号线
-tile.dollan_s2.name=§2§l东安轨道交通§r S2号线
-tile.dollan_airport_line.name=§2§l东安轨道交通§r 东安机场线
+tile.dollan_s1.name=§3§l东安轨道交通§r S1号线
+tile.dollan_s2.name=§3§l东安轨道交通§r S2号线
+tile.dollan_airport_line.name=§3§l东安轨道交通§r 东安机场线
 
 tile.dollan_line_1.name=§2§l东安轨道交通§r 1号线
 tile.dollan_line_2.name=§2§l东安轨道交通§r 2号线
@@ -304,6 +287,38 @@ death.dollancraft.vallid=%1$s 因吃了来源不明的食物而BBQ了
 item.leungcraft.name=可口的湖水
 item.dollancraft.name=可口的东安
 
+
+tile.dollancustomized.beautiful_marble.normal.name=精美大理石
+tile.dollancustomized.beautiful_marble.bricks.name=精美大理石砖
+tile.dollancustomized.beautiful_marble.cut.name=精美切割大理石
+tile.dollancustomized.beautiful_marble.litcut.name=精美切割小块大理石
+tile.dollancustomized.beautiful_marble.smooth.name=精美平滑大理石
+tile.calcite.name=粗糙新大理石
+tile.cherry_planks.name=樱花木板
+tile.cracked_deepslate.bricks.name=裂纹深板岩石砖
+tile.cracked_deepslate.tiles.name=裂纹深板岩瓦
+tile.dollancustomized.deepslate.normal.name=深板岩
+tile.dollancustomized.deepslate.bricks.name=深板岩石砖
+tile.dollancustomized.deepslate.tiles.name=深板岩瓦
+tile.dollancustomized.elder_prismarine.normal.name=古老海晶石
+tile.dollancustomized.elder_prismarine.bricks.name=古老海晶石砖
+tile.dollancustomized.elder_prismarine.smooth.name=平滑古老海晶石
+tile.dollancustomized.floorblock.name=平滑地板块
+tile.dollancustomized.gray_porcelain_tile.name=灰色瓷砖
+tile.dollancustomized.gray_wall.name=灰色墙块
+tile.dollancustomized.graymud.name=灰色泥块
+tile.dollancustomized.graystoneblock.name=灰色石头块
+tile.dollancustomized.limestone.normal.name=石灰石
+tile.dollancustomized.limestone.bricks.name=石灰石砖
+tile.dollancustomized.limestone.pavement.name=石灰石格子砖
+tile.mangrove_planks.name=红木板
+tile.dollancustomized.metal.name=平滑铁块
+tile.dollancustomized.mud_bricks.name=泥砖
+tile.dollancustomized.myalite.normal.name=硫铝石
+tile.dollancustomized.myalite.crystal.name=水晶硫铝石
+tile.dollancustomized.myalite.pavement.name=硫铝石格子砖
+tile.dollancustomized.packed_mud.name=紧致泥块
+
 commands.114514.usage=/114514 --- 用法:用于恶臭自己
-commands.114514.successful=恭喜您,您已经恶臭成功了!
-commands.114514.fail=Boom！不知道是谁在使用这指令，还把自己臭死了！
+commands.114514.successful=经过114514次的尝试,恭喜您,您已经恶臭成功了!
+commands.114514.fail=Boom！不知道是谁在使用这指令,用了1919810次,没恶臭到别人,自己还顺带趋势了！

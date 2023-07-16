@@ -1,9 +1,13 @@
 package com.jhxiaochen.dollancustomized.init;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.road.*;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.*;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -232,9 +236,24 @@ public class DollanBlocks {
             platform_wall,
             marble_block,
     //02
+            floorblock,
+
             beautiful_marble,
             calcite,
-            cherry_planks;
+            cherry_planks,
+            cracked_deepslate,
+            deepslate,
+            gray_porcelain_tile,
+            gray_wall,
+            graymud,
+            graystoneblock,
+            limestone,
+            mangrove_planks,
+            metal,
+            mud_bricks,
+            myalite,
+            packed_mud,
+            elder_prismarine;
 
     public static void init() {
         crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
@@ -452,6 +471,20 @@ public class DollanBlocks {
         beautiful_marble = new BlockMarble("beautiful_marble");
         calcite = new DollanBlock("calcite").setHardness(1.5F).setResistance(10.0F);
         cherry_planks = new DollanPlanks("cherry_planks");
+        cracked_deepslate = new BlockCrackedDeepSlate("cracked_deepslate");
+        deepslate = new BlockDeepSlate("deepslate");
+        elder_prismarine = new BlockElderPrismarine("elder_prismarine");
+        floorblock = new DollanBlock3("floorblock").setHardness(1.0F);
+        gray_porcelain_tile = new DollanBlock2("gray_porcelain_tile");
+        gray_wall = new DollanBlock2("gray_wall");
+        graymud = new DollanBlock2("graymud");
+        graystoneblock = new DollanBlock2("graystoneblock");
+        limestone = new BlockLimeStone();
+        mangrove_planks = new DollanPlanks("mangrove_planks");
+        metal = new DollanBlock4("metal");
+        mud_bricks = new DollanBlock2("mud_bricks");
+        myalite = new BlockMyalite("myalite");
+        packed_mud = new DollanBlock2("packed_mud");
     }
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -723,13 +756,26 @@ public class DollanBlocks {
         registerBlock(arrow_confluence_left_sl);
         registerBlock(arrow_confluence_right_sl);
 
-        registerBlock(beautiful_marble, new ItemMultiTexture(beautiful_marble,beautiful_marble, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return BlockMarble.MarbleType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
+
+
+        registerBlock(beautiful_marble); //部分代码移步DollanItems
+        registerBlock(cherry_planks);
         registerBlock(calcite);
+        registerBlock(cracked_deepslate);
+        registerBlock(deepslate);
+        registerBlock(elder_prismarine);
+        registerBlock(floorblock);
+        
+        registerBlock(gray_porcelain_tile);
+        registerBlock(gray_wall);
+        registerBlock(graymud);
+        registerBlock(graystoneblock);
+        registerBlock(limestone);
+        registerBlock(mangrove_planks);
+        registerBlock(metal);
+        registerBlock(mud_bricks);
+        registerBlock(myalite);
+        registerBlock(packed_mud);
     }
 
     private static void registerBlock(net.minecraft.block.Block block) {
@@ -739,8 +785,9 @@ public class DollanBlocks {
     private static void registerBlock(net.minecraft.block.Block block, ItemBlock item) {
         RegistrationHandler.BLOCKS.add(block);
         item.setRegistryName(block.getRegistryName());
-        DollanItems.RegistrationHandler.ITEMS.add(item);
+//       DollanItems.RegistrationHandler.ITEMS.add(item);
     }
+
 
     public static void registerModels() {
         registerModel(arrow_confluence_left);
@@ -814,9 +861,9 @@ public class DollanBlocks {
         registerModel(road_traffic_light_green);
         registerModel(road_traffic_light_yellow);
         registerModel(road_pedestrian_traffic_light);
-        registerModel(metro_fence,BlockMetroFence.FenceType.METRO.getMetadata(), "dollancustomized:metro_fence");
-        registerModel(metro_fence,BlockMetroFence.FenceType.ROAD_CENTER.getMetadata(), "dollancustomized:road_center_fence");
-        registerModel(metro_fence,BlockMetroFence.FenceType.ROAD.getMetadata(), "dollancustomized:road_fence");
+        registerModel(metro_fence,BlockMetroFence.FenceType.METRO.getMetadata(), "metro_fence");
+        registerModel(metro_fence,BlockMetroFence.FenceType.ROAD_CENTER.getMetadata(), "road_center_fence");
+        registerModel(metro_fence,BlockMetroFence.FenceType.ROAD.getMetadata(), "road_fence");
         registerModel(road_sign_post);
         registerModel(double_yellow_line_diagonal);
         registerModel(double_yellow_line_diagonal_slab);
@@ -876,14 +923,14 @@ public class DollanBlocks {
         registerModel(white_flat_lamp);
         registerModel(white_punctiform_lamp);
         registerModel(white_banding_lamp);
-        registerModel(asphalt,BlockAsphalt.AsphaltType.BLACK.getMetadata(), "dollancustomized:black_asphalt");
-        registerModel(asphalt,BlockAsphalt.AsphaltType.CYAN.getMetadata(), "dollancustomized:cyan_asphalt");
-        registerModel(asphalt,BlockAsphalt.AsphaltType.RED.getMetadata(), "dollancustomized:red_asphalt");
-        registerModel(asphalt,BlockAsphalt.AsphaltType.WHITE.getMetadata(), "dollancustomized:white_asphalt");
-        registerModel(asphalt,BlockAsphalt.AsphaltType.YELLOW.getMetadata(), "dollancustomized:yellow_asphalt");
-        registerModel(asphalt_slab,BlockAsphalt.AsphaltType.BLACK.getMetadata(), "dollancustomized:black_asphalt_slab");
-        registerModel(asphalt_slab,BlockAsphalt.AsphaltType.CYAN.getMetadata(), "dollancustomized:cyan_asphalt_slab");
-        registerModel(asphalt_slab,BlockAsphalt.AsphaltType.RED.getMetadata(), "dollancustomized:red_asphalt_slab");
+        registerModel(asphalt,BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt");
+        registerModel(asphalt,BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt");
+        registerModel(asphalt,BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt");
+        registerModel(asphalt,BlockAsphalt.AsphaltType.WHITE.getMetadata(), "white_asphalt");
+        registerModel(asphalt,BlockAsphalt.AsphaltType.YELLOW.getMetadata(), "yellow_asphalt");
+        registerModel(asphalt_slab,BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt_slab");
+        registerModel(asphalt_slab,BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt_slab");
+        registerModel(asphalt_slab,BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt_slab");
         registerModel(dollan_line_1);
         registerModel(dollan_line_2);
         registerModel(dollan_line_3);
@@ -900,38 +947,38 @@ public class DollanBlocks {
         registerModel(dollan_line_14);
         registerModel(dollan_line_15);
         registerModel(dollan_line_16);
-        registerModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(),"dollancustomized:lamp_tran_0");
-        registerModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(),"dollancustomized:lamp_tran_1");
-        registerModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(),"dollancustomized:lamp_tran_2");
-        registerModel(lamp_tran, EnumDyeColor.RED.getMetadata(),"dollancustomized:lamp_tran_3");
-        registerModel(lamp_tran, EnumDyeColor.GREEN.getMetadata(),"dollancustomized:lamp_tran_4");
-        registerModel(lamp_tran, EnumDyeColor.BLUE.getMetadata(),"dollancustomized:lamp_tran_blue");
-        registerModel(lamp_tran, EnumDyeColor.BROWN.getMetadata(),"dollancustomized:lamp_tran_brown");
-        registerModel(lamp_tran, EnumDyeColor.GRAY.getMetadata(),"dollancustomized:lamp_tran_gray");
-        registerModel(lamp_tran, EnumDyeColor.LIGHT_BLUE.getMetadata(),"dollancustomized:lamp_tran_light_blue");
-        registerModel(lamp_tran, EnumDyeColor.LIME.getMetadata(),"dollancustomized:lamp_tran_lime");
-        registerModel(lamp_tran, EnumDyeColor.SILVER.getMetadata(),"dollancustomized:lamp_tran_silver");
-        registerModel(lamp_tran, EnumDyeColor.MAGENTA.getMetadata(),"dollancustomized:lamp_tran_magenta");
-        registerModel(lamp_tran, EnumDyeColor.PURPLE.getMetadata(),"dollancustomized:lamp_tran_purple");
-        registerModel(lamp_tran, EnumDyeColor.ORANGE.getMetadata(),"dollancustomized:lamp_tran_orange");
-        registerModel(lamp_tran, EnumDyeColor.PINK.getMetadata(),"dollancustomized:lamp_tran_pink");
-        registerModel(lamp_tran, EnumDyeColor.CYAN.getMetadata(),"dollancustomized:lamp_tran_cyan");
-        registerModel(light, EnumDyeColor.WHITE.getMetadata(),"dollancustomized:lamp_white");
-        registerModel(light, EnumDyeColor.BLACK.getMetadata(),"dollancustomized:lamp_black");
-        registerModel(light, EnumDyeColor.YELLOW.getMetadata(),"dollancustomized:lamp_yellow");
-        registerModel(light, EnumDyeColor.RED.getMetadata(),"dollancustomized:lamp_red");
-        registerModel(light, EnumDyeColor.GREEN.getMetadata(),"dollancustomized:lamp_green");
-        registerModel(light, EnumDyeColor.BLUE.getMetadata(),"dollancustomized:lamp_blue");
-        registerModel(light, EnumDyeColor.BROWN.getMetadata(),"dollancustomized:lamp_brown");
-        registerModel(light, EnumDyeColor.GRAY.getMetadata(),"dollancustomized:lamp_gray");
-        registerModel(light, EnumDyeColor.LIGHT_BLUE.getMetadata(),"dollancustomized:lamp_light_blue");
-        registerModel(light, EnumDyeColor.LIME.getMetadata(),"dollancustomized:lamp_lime");
-        registerModel(light, EnumDyeColor.SILVER.getMetadata(),"dollancustomized:lamp_silver");
-        registerModel(light, EnumDyeColor.MAGENTA.getMetadata(),"dollancustomized:lamp_magenta");
-        registerModel(light, EnumDyeColor.PURPLE.getMetadata(),"dollancustomized:lamp_purple");
-        registerModel(light, EnumDyeColor.ORANGE.getMetadata(),"dollancustomized:lamp_orange");
-        registerModel(light, EnumDyeColor.PINK.getMetadata(),"dollancustomized:lamp_pink");
-        registerModel(light, EnumDyeColor.CYAN.getMetadata(),"dollancustomized:lamp_cyan");
+        registerModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(),"lamp_tran_0");
+        registerModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(),"lamp_tran_1");
+        registerModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(),"lamp_tran_2");
+        registerModel(lamp_tran, EnumDyeColor.RED.getMetadata(),"lamp_tran_3");
+        registerModel(lamp_tran, EnumDyeColor.GREEN.getMetadata(),"lamp_tran_4");
+        registerModel(lamp_tran, EnumDyeColor.BLUE.getMetadata(),"lamp_tran_blue");
+        registerModel(lamp_tran, EnumDyeColor.BROWN.getMetadata(),"lamp_tran_brown");
+        registerModel(lamp_tran, EnumDyeColor.GRAY.getMetadata(),"lamp_tran_gray");
+        registerModel(lamp_tran, EnumDyeColor.LIGHT_BLUE.getMetadata(),"lamp_tran_light_blue");
+        registerModel(lamp_tran, EnumDyeColor.LIME.getMetadata(),"lamp_tran_lime");
+        registerModel(lamp_tran, EnumDyeColor.SILVER.getMetadata(),"lamp_tran_silver");
+        registerModel(lamp_tran, EnumDyeColor.MAGENTA.getMetadata(),"lamp_tran_magenta");
+        registerModel(lamp_tran, EnumDyeColor.PURPLE.getMetadata(),"lamp_tran_purple");
+        registerModel(lamp_tran, EnumDyeColor.ORANGE.getMetadata(),"lamp_tran_orange");
+        registerModel(lamp_tran, EnumDyeColor.PINK.getMetadata(),"lamp_tran_pink");
+        registerModel(lamp_tran, EnumDyeColor.CYAN.getMetadata(),"lamp_tran_cyan");
+        registerModel(light, EnumDyeColor.WHITE.getMetadata(),"lamp_white");
+        registerModel(light, EnumDyeColor.BLACK.getMetadata(),"lamp_black");
+        registerModel(light, EnumDyeColor.YELLOW.getMetadata(),"lamp_yellow");
+        registerModel(light, EnumDyeColor.RED.getMetadata(),"lamp_red");
+        registerModel(light, EnumDyeColor.GREEN.getMetadata(),"lamp_green");
+        registerModel(light, EnumDyeColor.BLUE.getMetadata(),"lamp_blue");
+        registerModel(light, EnumDyeColor.BROWN.getMetadata(),"lamp_brown");
+        registerModel(light, EnumDyeColor.GRAY.getMetadata(),"lamp_gray");
+        registerModel(light, EnumDyeColor.LIGHT_BLUE.getMetadata(),"lamp_light_blue");
+        registerModel(light, EnumDyeColor.LIME.getMetadata(),"lamp_lime");
+        registerModel(light, EnumDyeColor.SILVER.getMetadata(),"lamp_silver");
+        registerModel(light, EnumDyeColor.MAGENTA.getMetadata(),"lamp_magenta");
+        registerModel(light, EnumDyeColor.PURPLE.getMetadata(),"lamp_purple");
+        registerModel(light, EnumDyeColor.ORANGE.getMetadata(),"lamp_orange");
+        registerModel(light, EnumDyeColor.PINK.getMetadata(),"lamp_pink");
+        registerModel(light, EnumDyeColor.CYAN.getMetadata(),"lamp_cyan");
         registerModel(asphalt_cyan_black_half_line);
         registerModel(asphalt_cyan_black_half_line_slab);
         registerModel(asphalt_cyan_black_half);
@@ -978,15 +1025,15 @@ public class DollanBlocks {
         registerModel(road_sign_can_right);
         registerModel(road_sign_can_diaotou);
 
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line");
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow");
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line");
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(),"merge_line");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(),"merge_line_yellow");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(),"separate_line");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(),"separate_line_yellow");
 
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(),"dollancustomized:merge_line_slab");
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(),"dollancustomized:merge_line_yellow_slab");
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(),"dollancustomized:separate_line_slab");
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(),"dollancustomized:separate_line_yellow_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(),"merge_line_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(),"merge_line_yellow_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(),"separate_line_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(),"separate_line_yellow_slab");
 
         registerModel(arrow_staright_diaotou);
         registerModel(platform_wall);
@@ -1002,18 +1049,57 @@ public class DollanBlocks {
         registerModel(arrow_right_sl);
         registerModel(arrow_staright_sl);
         registerModel(arrow_staright_diaotou_sl);
+        registerStateMapper(DollanBlocks.beautiful_marble,
+                new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
+        registerStateMapper(DollanBlocks.cracked_deepslate,
+                new StateMap.Builder().withSuffix("_cracked_deepslate").withName(BlockCrackedDeepSlate.VARIANT).build());
+        registerStateMapper(DollanBlocks.deepslate,
+                new StateMap.Builder().withName(BlockDeepSlate.VARIANT).build());
+        registerStateMapper(DollanBlocks.elder_prismarine,
+                new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
+        registerStateMapper(DollanBlocks.limestone,
+                new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
+        registerStateMapper(DollanBlocks.myalite,
+                new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
 
-        registerModel(beautiful_marble,0,"dollancustomized:beautiful_marble_1");
-        registerModel(beautiful_marble,1,"dollancustomized:beautiful_marble_2");
-        registerModel(beautiful_marble,2,"dollancustomized:beautiful_marble_3");
-        registerModel(beautiful_marble,3,"dollancustomized:beautiful_marble_4");
-        registerModel(beautiful_marble,4,"dollancustomized:beautiful_marble_5");
+        registerModel(cherry_planks);
+        registerModel(cracked_deepslate);
+        registerModel(cracked_deepslate,0,"bricks_cracked_deepslate");
+        registerModel(cracked_deepslate,1,"tiles_cracked_deepslate");
         registerModel(calcite);
+        registerModel(deepslate);
+        registerModel(deepslate,1,"deepslate_bricks");
+        registerModel(deepslate,2,"deepslate_tiles");
+        registerModel(elder_prismarine,0,BlockElderPrismarine.PrismarineType.NORMAL.getName());
+        registerModel(elder_prismarine,1,BlockElderPrismarine.PrismarineType.BRICKS.getName());
+        registerModel(elder_prismarine,2,BlockElderPrismarine.PrismarineType.SMOOTH.getName());
+        registerModel(floorblock);
+
+        registerModel(gray_porcelain_tile);
+        registerModel(gray_wall);
+        registerModel(graymud);
+        registerModel(graystoneblock);
+        registerModel(limestone,0,BlockLimeStone.LimeStoneType.NORMAL.getName());
+        registerModel(limestone,1,BlockLimeStone.LimeStoneType.BRICKS.getName());
+        registerModel(limestone,2,BlockLimeStone.LimeStoneType.PAVEMENT.getName());
+        registerModel(mangrove_planks);
+        registerModel(metal);
+        registerModel(mud_bricks);
+        registerModel(myalite,0,BlockMyalite.MyaliteType.NORMAL.getName());
+        registerModel(myalite,1,BlockMyalite.MyaliteType.CRYSTAL.getName());
+        registerModel(myalite,2,BlockMyalite.MyaliteType.PAVEMENT.getName());
+        registerModel(packed_mud);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void registerStateMapper(Block block, IStateMapper mapper)
+    {
+        ModelLoader.setCustomStateMapper(block, mapper);
     }
 
     @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block, int metadata, String name) {
-        ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
+        ModelResourceLocation model = new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory");
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
     }
 
@@ -1028,7 +1114,7 @@ public class DollanBlocks {
         public static final List<net.minecraft.block.Block> BLOCKS = new LinkedList<>();
 
         @SubscribeEvent
-        public static void registerItems(final RegistryEvent.Register<net.minecraft.block.Block> event) {
+        public static void registerBlock(final RegistryEvent.Register<net.minecraft.block.Block> event) {
             DollanBlocks.init();
             DollanBlocks.register();
             BLOCKS.stream().forEach(block -> event.getRegistry().register(block));

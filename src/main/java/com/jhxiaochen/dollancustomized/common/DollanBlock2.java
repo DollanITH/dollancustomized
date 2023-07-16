@@ -1,20 +1,21 @@
-package com.jhxiaochen.dollancustomized.common.road;
+package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 
 /*
 powered by Minecraft Forge 1.12.2 MDK
  */
-public class DollanPlanks extends net.minecraft.block.Block {
-        public DollanPlanks(String name) {
-        super(Material.WOOD);
+public class DollanBlock2 extends net.minecraft.block.Block {
+        public DollanBlock2(String name) {
+        super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName(Reference.MOD_ID + "." + name);
         this.setCreativeTab(DollanCustomized.Blocks);
-        this.setHardness(1F);
-        this.setResistance(3F);
+        this.setHardness(1.7F);
+        this.setResistance(20F);
         this.setLightLevel(0F);
     }
 

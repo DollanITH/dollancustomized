@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.common.road;
+package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.material.Material;

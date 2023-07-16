@@ -18,7 +18,6 @@ public class ClientProxy implements CommonProxy {
 
     @Override
     public void init() {
-        System.out.println("special renderer bound!");
 
     }
 
@@ -27,14 +26,16 @@ public class ClientProxy implements CommonProxy {
 
     }
 
+
+
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Side.CLIENT)
-    public static class RegistrationHandler
-    {
+    public static class RegistrationHandler {
         @SubscribeEvent
-        public static void registerModels(ModelRegistryEvent event)
-        {
+        public static void registerModels(ModelRegistryEvent event) {
             DollanBlocks.registerModels();
             DollanItems.registerModels();
         }
+
+
     }
 }

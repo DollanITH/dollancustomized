@@ -147,7 +147,6 @@ tile.road_sign_go_left.name=靠左行驶标志
 tile.road_sign_go_right.name=靠右行驶标志
 tile.road_sign_go_both.name=两侧行驶标志
 tile.road_sign_post.name=道路标杆
-tile.road_sign_do_not_enter.name=禁止驶入标志
 tile.road_sign_sl_15.name=限速15标志
 tile.road_sign_sl_20.name=限速20标志
 tile.road_sign_sl_30.name=限速30标志

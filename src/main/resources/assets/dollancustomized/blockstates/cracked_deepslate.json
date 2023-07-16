@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "dollancustomized:blocks/cracked_deepslate_bricks",
+      "particle": "dollancustomized:blocks/cracked_deepslate_bricks"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{"transform": "forge:default-block"}],
+    "variant": {
+      "bricks": {
+        "model": "cube_all",
+        "textures": {
+          "all": "dollancustomized:blocks/cracked_deepslate_bricks",
+          "particle": "dollancustomized:blocks/cracked_deepslate_bricks"}
+      },
+      "tiles": {
+        "model": "cube_all",
+        "textures": {
+          "all": "dollancustomized:blocks/cracked_deepslate_tiles",
+          "particle": "dollancustomized:blocks/cracked_deepslate_tiles"}
+      }
+    }
+    }
+  }

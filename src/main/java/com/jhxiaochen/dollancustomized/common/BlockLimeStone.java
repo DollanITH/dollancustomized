@@ -1,6 +1,7 @@
-package com.jhxiaochen.dollancustomized.common.road;
+package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -15,26 +16,25 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("Duplicates")
-public class BlockMarble extends Block {
-    public static final PropertyEnum<BlockMarble.MarbleType> VARIANT = PropertyEnum.<BlockMarble.MarbleType>create("variant", BlockMarble.MarbleType.class);
-    public static enum MarbleType implements IStringSerializable {
-        NORMAL(0, "normal"),
-        BRICKS(1, "bricks"),
-        CUT(2, "cut"),
-        LITCUT(3, "litcut"),
-        SMOOTH(4, "smooth");
+public class BlockLimeStone extends Block {
+    public static final PropertyEnum<BlockLimeStone.LimeStoneType> VARIANT = PropertyEnum.<BlockLimeStone.LimeStoneType>create("variant", BlockLimeStone.LimeStoneType.class);
+
+    public static enum LimeStoneType implements IStringSerializable {
+        NORMAL(0, "limestone","normal"),
+        BRICKS(1, "limestone_bricks","bricks"),
+        PAVEMENT(2, "limestone_pavement","pavement");
 
 
-        private static final BlockMarble.MarbleType[] METADATA_LOOKUP = new BlockMarble.MarbleType[values().length];
+        private static final BlockLimeStone.LimeStoneType[] METADATA_LOOKUP = new BlockLimeStone.LimeStoneType[values().length];
         private final int metadata;
         private final String name;
         private final String unlocalizedName;
 
-        private MarbleType(int metadataIn, String nameIn) {
+        private LimeStoneType(int metadataIn, String nameIn) {
             this(metadataIn, nameIn, nameIn);
         }
 
-        private MarbleType(int metadataIn, String nameIn, String unlocalizedNameIn) {
+        private LimeStoneType(int metadataIn, String nameIn, String unlocalizedNameIn) {
             this.metadata = metadataIn;
             this.name = nameIn;
             this.unlocalizedName = unlocalizedNameIn;
@@ -52,7 +52,7 @@ public class BlockMarble extends Block {
             return this.name;
         }
 
-        public static BlockMarble.MarbleType byMetadata(int metadata) {
+        public static BlockLimeStone.LimeStoneType byMetadata(int metadata) {
             if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
                 metadata = 0;
             }
@@ -65,18 +65,18 @@ public class BlockMarble extends Block {
         }
 
         static {
-            for (BlockMarble.MarbleType blockasphalt$MarbleType : values()) {
-                METADATA_LOOKUP[blockasphalt$MarbleType.getMetadata()] = blockasphalt$MarbleType;
+            for (BlockLimeStone.LimeStoneType blockasphalt$LimeStoneType : values()) {
+                METADATA_LOOKUP[blockasphalt$LimeStoneType.getMetadata()] = blockasphalt$LimeStoneType;
             }
         }
     }
-        public BlockMarble(String name) {
+        public BlockLimeStone() {
         super(Material.ROCK);
-        this.setRegistryName(name);
-        this.setUnlocalizedName(name);
-        this.setCreativeTab(DollanCustomized.ROAD_TAB);
-        this.setHardness(1.0F);
-        this.setResistance(10F);
+        this.setRegistryName("limestone");
+        this.setUnlocalizedName(Reference.MOD_ID + ".limestone");
+        this.setCreativeTab(DollanCustomized.Blocks);
+        this.setHardness(2.0F);
+        this.setResistance(15F);
         this.setLightLevel(0F);
     }
 
@@ -90,26 +90,24 @@ public class BlockMarble extends Block {
 
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
     {
-        items.add(new ItemStack(this, 1, MarbleType.NORMAL.getMetadata()));
-        items.add(new ItemStack(this, 1, MarbleType.BRICKS.getMetadata()));
-        items.add(new ItemStack(this, 1, MarbleType.CUT.getMetadata()));
-        items.add(new ItemStack(this,1, MarbleType.LITCUT.getMetadata()));
-        items.add(new ItemStack(this,1, MarbleType.SMOOTH.getMetadata()));
+        items.add(new ItemStack(this, 1, LimeStoneType.NORMAL.getMetadata()));
+        items.add(new ItemStack(this, 1, LimeStoneType.BRICKS.getMetadata()));
+        items.add(new ItemStack(this,1, LimeStoneType.PAVEMENT.getMetadata()));
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(this, 1, ((BlockMarble.MarbleType)state.getValue(VARIANT)).getMetadata());
+        return new ItemStack(this, 1, ((BlockLimeStone.LimeStoneType)state.getValue(VARIANT)).getMetadata());
     }
 
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(VARIANT, BlockMarble.MarbleType.byMetadata(meta));
+        return this.getDefaultState().withProperty(VARIANT, BlockLimeStone.LimeStoneType.byMetadata(meta));
     }
 
     public int getMetaFromState(IBlockState state)
     {
-        return ((BlockMarble.MarbleType)state.getValue(VARIANT)).getMetadata();
+        return ((BlockLimeStone.LimeStoneType)state.getValue(VARIANT)).getMetadata();
     }
 
     protected BlockStateContainer createBlockState()

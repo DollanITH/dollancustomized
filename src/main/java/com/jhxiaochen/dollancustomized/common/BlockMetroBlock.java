@@ -12,11 +12,15 @@ public class BlockMetroBlock extends Block {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(DollanCustomized.DOLLAN_METRO_TAB);
-        this.setHardness(3F);
-        this.setResistance(20F);
+        this.setHardness(1.5F);
+        this.setResistance(10F);
     }
     @Override
     public boolean isOpaqueCube(IBlockState state) {
+        return true;
+    }
+    @Override
+    public boolean isFullCube(IBlockState state) {
         return true;
     }
 }

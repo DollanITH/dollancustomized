@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "dollancustomized:blocks/beautiful_marble_3",
+      "particle": "dollancustomized:blocks/beautiful_marble_3"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{"transform": "forge:default-block"}]
+    }
+  }

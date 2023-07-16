@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 public class TabBlocks extends CreativeTabs {
 
     public TabBlocks() {
-        super("tabRoad");
+        super("tabBlocks");
 
     }
 

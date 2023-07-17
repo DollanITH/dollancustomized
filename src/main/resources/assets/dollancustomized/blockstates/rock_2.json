@@ -3,8 +3,8 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "dollancustomized:blocks/sandy_bricks",
-      "particle": "dollancustomized:blocks/sandy_bricks"
+      "all": "dollancustomized:blocks/rock_2",
+      "particle": "dollancustomized:blocks/rock_2"
     }
   },
   "variants": {

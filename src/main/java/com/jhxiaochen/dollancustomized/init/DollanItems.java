@@ -393,6 +393,13 @@ public class DollanItems{
                         }
                     })
             );
+            registerItemBlock(DollanBlocks.marble_tile,
+                    new ItemMultiTexture(DollanBlocks.marble_tile,DollanBlocks.marble_tile, new ItemMultiTexture.Mapper() {
+                        public String apply(ItemStack p_apply_1_) {
+                            return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                        }
+                    })
+            );
         }
 
         public static void registerItem(Item item)

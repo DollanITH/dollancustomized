@@ -336,6 +336,23 @@ tile.dollancustomized.froglight.purple.name=紫色青蛙灯
 tile.dollancustomized.froglight.orange.name=橙色青蛙灯
 tile.dollancustomized.froglight.green.name=绿色青蛙灯
 
+tile.dollancustomized.marble_tile.white.name=白色现代大理石
+tile.dollancustomized.marble_tile.black.name=黑色现代大理石
+tile.dollancustomized.marble_tile.yellow.name=黄色现代大理石
+tile.dollancustomized.marble_tile.red.name=红色现代大理石
+tile.dollancustomized.marble_tile.green.name=绿色现代大理石
+tile.dollancustomized.marble_tile.lightBlue.name=淡蓝色现代大理石
+tile.dollancustomized.marble_tile.lime.name=黄绿色现代大理石
+tile.dollancustomized.marble_tile.silver.name=银色现代大理石
+tile.dollancustomized.marble_tile.gray.name=灰色现代大理石
+tile.dollancustomized.marble_tile.magenta.name=品红色现代大理石
+tile.dollancustomized.marble_tile.pink.name=粉色现代大理石
+tile.dollancustomized.marble_tile.orange.name=橙色现代大理石
+tile.dollancustomized.marble_tile.brown.name=棕色现代大理石
+tile.dollancustomized.marble_tile.blue.name=蓝色现代大理石
+tile.dollancustomized.marble_tile.cyan.name=青色现代大理石
+tile.dollancustomized.marble_tile.purple.name=紫色现代大理石
+
 commands.114514.usage=/114514 --- 用法:用于恶臭自己
 commands.114514.successful=经过114514次的尝试,恭喜您,您已经恶臭成功了!
 commands.114514.fail=Boom！不知道是谁在使用这指令,用了1919810次,没恶臭到别人,自己还顺带趋势了！

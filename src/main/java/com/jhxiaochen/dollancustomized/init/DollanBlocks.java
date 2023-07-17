@@ -5,6 +5,7 @@ import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -267,6 +268,7 @@ public class DollanBlocks {
             white_color_purple_block,
             elder_prismarine,
             froglight,
+            marble_tile,
             elder_sea_lantern;
 
     public static void init() {
@@ -513,6 +515,7 @@ public class DollanBlocks {
         elder_sea_lantern = new DollanBlock5("elder_sea_lantern").setLightLevel(1.0F);
         modern_stone_tile = new DollanBlock2("modern_stone_tile");
         froglight = new BlockFrogLight();
+        marble_tile = new BlockMarbleTile();
     }
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -819,6 +822,7 @@ public class DollanBlocks {
         registerBlock(white_color_purple_block);
         registerBlock(elder_sea_lantern);
         registerBlock(froglight);
+        registerBlock(marble_tile);
     }
 
     private static void registerBlock(net.minecraft.block.Block block) {
@@ -1108,6 +1112,8 @@ public class DollanBlocks {
                 new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
         registerStateMapper(DollanBlocks.froglight,
                 new StateMap.Builder().withName(BlockFrogLight.COLOR).withSuffix("_froglight").build());
+        registerStateMapper(DollanBlocks.marble_tile,
+                new StateMap.Builder().withName(BlockColored.COLOR).withSuffix("_marble_tile").build());
 
         registerModel(cherry_planks);
         registerModel(cracked_deepslate);
@@ -1153,6 +1159,23 @@ public class DollanBlocks {
         registerModel(froglight,0,BlockFrogLight.FrogLightType.PURPLE.getName() + "_froglight");
         registerModel(froglight,1,BlockFrogLight.FrogLightType.ORANGE.getName() + "_froglight");
         registerModel(froglight,2,BlockFrogLight.FrogLightType.GREEN.getName() + "_froglight");
+        registerModel(marble_tile, EnumDyeColor.WHITE.getMetadata(),"white_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.BLACK.getMetadata(),"black_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.YELLOW.getMetadata(),"yellow_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.RED.getMetadata(),"red_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.GREEN.getMetadata(),"green_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.BLUE.getMetadata(),"blue_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.BROWN.getMetadata(),"brown_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.GRAY.getMetadata(),"gray_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.LIGHT_BLUE.getMetadata(),"light_blue_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.LIME.getMetadata(),"lime_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.SILVER.getMetadata(),"silver_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.MAGENTA.getMetadata(),"magenta_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.PURPLE.getMetadata(),"purple_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.ORANGE.getMetadata(),"orange_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.PINK.getMetadata(),"pink_marble_tile");
+        registerModel(marble_tile, EnumDyeColor.CYAN.getMetadata(),"cyan_marble_tile");
+
     }
 
     @SideOnly(Side.CLIENT)

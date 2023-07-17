@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "dollancustomized:blocks/marble_tile_orange",
+      "particle": "dollancustomized:blocks/marble_tile_orange"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{"transform": "forge:default-block"}]
+    }
+  }

@@ -22,7 +22,7 @@ public class DollanCustomized {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
     public static final String MODID = "dollancustomized";
-    public static final String VERSION = "3.5";
+    public static final String VERSION = "3.6";
     public static final String Accept_Minecraft_version = "1.12.2";
     public static com.jhxiaochen.dollancustomized.DollanCustomized getInstance() {
         return instance;

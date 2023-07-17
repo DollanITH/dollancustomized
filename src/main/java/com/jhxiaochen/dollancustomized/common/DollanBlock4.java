@@ -13,7 +13,7 @@ public class DollanBlock4 extends net.minecraft.block.Block {
         public DollanBlock4(String name) {
         super(Material.IRON);
         this.setRegistryName(name);
-        this.setUnlocalizedName(Reference.MOD_ID + ":" + name);
+        this.setUnlocalizedName(Reference.MOD_ID + "." + name);
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.7F);
         this.setResistance(20F);

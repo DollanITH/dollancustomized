@@ -367,7 +367,32 @@ public class DollanItems{
                         }
                     })
             );
-
+            registerItemBlock(DollanBlocks.polished_blackstone,
+                    new ItemMultiTexture(DollanBlocks.polished_blackstone,DollanBlocks.polished_blackstone, new ItemMultiTexture.Mapper() {
+                        public String apply(ItemStack p_apply_1_) {
+                            return BlockPolishedBlackStone.BlackStoneType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                        }
+                    })
+            );
+            registerItemBlock(DollanBlocks.polished_limestone);
+            registerItemBlock(DollanBlocks.polished_marble);
+            registerItemBlock(DollanBlocks.polished_deepslate);
+            registerItemBlock(DollanBlocks.polished_myalite);
+            registerItemBlock(DollanBlocks.quartz_bricks);
+            registerItemBlock(DollanBlocks.rock_1);
+            registerItemBlock(DollanBlocks.rock_2);
+            registerItemBlock(DollanBlocks.sandy_bricks);
+            registerItemBlock(DollanBlocks.teacherblock);
+            registerItemBlock(DollanBlocks.white_color_purple_block);
+            registerItemBlock(DollanBlocks.elder_sea_lantern);
+            registerItemBlock(DollanBlocks.modern_stone_tile);
+            registerItemBlock(DollanBlocks.froglight,
+                    new ItemMultiTexture(DollanBlocks.froglight,DollanBlocks.froglight, new ItemMultiTexture.Mapper() {
+                        public String apply(ItemStack p_apply_1_) {
+                            return BlockFrogLight.FrogLightType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                        }
+                    })
+            );
         }
 
         public static void registerItem(Item item)

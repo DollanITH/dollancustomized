@@ -252,8 +252,22 @@ public class DollanBlocks {
             metal,
             mud_bricks,
             myalite,
+            modern_stone_tile,
             packed_mud,
-            elder_prismarine;
+            polished_blackstone,
+            polished_limestone,
+            polished_deepslate,
+            polished_marble,
+            polished_myalite,
+            quartz_bricks,
+            rock_1,
+            rock_2,
+            sandy_bricks,
+            teacherblock,
+            white_color_purple_block,
+            elder_prismarine,
+            froglight,
+            elder_sea_lantern;
 
     public static void init() {
         crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
@@ -485,6 +499,20 @@ public class DollanBlocks {
         mud_bricks = new DollanBlock2("mud_bricks");
         myalite = new BlockMyalite("myalite");
         packed_mud = new DollanBlock2("packed_mud");
+        polished_blackstone = new BlockPolishedBlackStone();
+        polished_deepslate = new DollanPolished("polished_deepslate");
+        polished_limestone = new DollanPolished("polished_limestone");
+        polished_marble = new DollanPolished("polished_marble");
+        polished_myalite = new DollanPolished("polished_myalite");
+        quartz_bricks = new DollanBlock2("quartz_bricks");
+        rock_1 = new DollanBlock2("rock_1");
+        rock_2 = new DollanBlock2("rock_2");
+        sandy_bricks = new DollanBlock2("sandy_bricks");
+        teacherblock = new DollanBlock3("teacherblock");
+        white_color_purple_block = new DollanBlock2("white_color_purple_block");
+        elder_sea_lantern = new DollanBlock5("elder_sea_lantern").setLightLevel(1.0F);
+        modern_stone_tile = new DollanBlock2("modern_stone_tile");
+        froglight = new BlockFrogLight();
     }
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -773,9 +801,24 @@ public class DollanBlocks {
         registerBlock(limestone);
         registerBlock(mangrove_planks);
         registerBlock(metal);
+        registerBlock(modern_stone_tile);
         registerBlock(mud_bricks);
         registerBlock(myalite);
         registerBlock(packed_mud);
+
+        registerBlock(polished_blackstone);
+        registerBlock(polished_limestone);
+        registerBlock(polished_deepslate);
+        registerBlock(polished_marble);
+        registerBlock(polished_myalite);
+        registerBlock(quartz_bricks);
+        registerBlock(rock_1);
+        registerBlock(rock_2);
+        registerBlock(sandy_bricks);
+        registerBlock(teacherblock);
+        registerBlock(white_color_purple_block);
+        registerBlock(elder_sea_lantern);
+        registerBlock(froglight);
     }
 
     private static void registerBlock(net.minecraft.block.Block block) {
@@ -1061,6 +1104,10 @@ public class DollanBlocks {
                 new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
         registerStateMapper(DollanBlocks.myalite,
                 new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
+        registerStateMapper(DollanBlocks.polished_blackstone,
+                new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
+        registerStateMapper(DollanBlocks.froglight,
+                new StateMap.Builder().withName(BlockFrogLight.COLOR).withSuffix("_froglight").build());
 
         registerModel(cherry_planks);
         registerModel(cracked_deepslate);
@@ -1089,6 +1136,23 @@ public class DollanBlocks {
         registerModel(myalite,1,BlockMyalite.MyaliteType.CRYSTAL.getName());
         registerModel(myalite,2,BlockMyalite.MyaliteType.PAVEMENT.getName());
         registerModel(packed_mud);
+        registerModel(polished_blackstone,0,BlockPolishedBlackStone.BlackStoneType.NORMAL.getName());
+        registerModel(polished_blackstone,1,BlockPolishedBlackStone.BlackStoneType.BRICKS.getName());
+        registerModel(polished_limestone);
+        registerModel(polished_deepslate);
+        registerModel(polished_marble);
+        registerModel(polished_myalite);
+        registerModel(quartz_bricks);
+        registerModel(rock_1);
+        registerModel(rock_2);
+        registerModel(sandy_bricks);
+        registerModel(teacherblock);
+        registerModel(white_color_purple_block);
+        registerModel(elder_sea_lantern);
+        registerModel(modern_stone_tile);
+        registerModel(froglight,0,BlockFrogLight.FrogLightType.PURPLE.getName() + "_froglight");
+        registerModel(froglight,1,BlockFrogLight.FrogLightType.ORANGE.getName() + "_froglight");
+        registerModel(froglight,2,BlockFrogLight.FrogLightType.GREEN.getName() + "_froglight");
     }
 
     @SideOnly(Side.CLIENT)

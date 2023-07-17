@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_column",
+    "textures": {
+        "end": "dollancustomized:blocks/froglight/purple_froglight_top",
+        "side": "dollancustomized:blocks/froglight/purple_froglight_side"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{"transform": "forge:default-block"}]
+    }
+  }

@@ -4,7 +4,7 @@
     "model": "cube_all",
     "textures": {
       "all": "dollancustomized:blocks/myalite_crystal",
-      "particle": "dollancustomized:blocks/myalite_crystal"
+      "particle": "dollancustomized:blocks/myalite"
     }
   },
   "variants": {

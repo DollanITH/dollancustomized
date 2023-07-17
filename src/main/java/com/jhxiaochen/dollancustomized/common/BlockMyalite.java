@@ -10,16 +10,21 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @SuppressWarnings("Duplicates")
 public class BlockMyalite extends Block {
     public static final PropertyEnum<BlockMyalite.MyaliteType> VARIANT = PropertyEnum.<BlockMyalite.MyaliteType>create("variant", BlockMyalite.MyaliteType.class);
 
-    public static enum MyaliteType implements IStringSerializable {
+    public enum MyaliteType implements IStringSerializable {
         NORMAL(0, "myalite","normal"),
         CRYSTAL(1, "myalite_crystal","crystal"),
         PAVEMENT(2, "myalite_pavement","pavement");
@@ -78,14 +83,28 @@ public class BlockMyalite extends Block {
         this.setHardness(1.0F);
         this.setResistance(10F);
         this.setLightLevel(0F);
+        this.setLightOpacity(20);
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
+        BlockMyalite.MyaliteType variant = state.getValue(VARIANT);
+        switch (variant){
+            case NORMAL:
+            case PAVEMENT: return true;
+            case CRYSTAL: return false;
+        }
         return true;
     }
     public boolean isFullCube(IBlockState state){
         return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    @Nonnull
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)

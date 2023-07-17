@@ -3,8 +3,8 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "dollancustomized:blocks/metal",
-      "particle": "dollancustomized:blocks/metal"
+      "all": "dollancustomized:blocks/metal2",
+      "particle": "dollancustomized:blocks/metal2"
     }
   },
   "variants": {

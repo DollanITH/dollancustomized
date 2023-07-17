@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '3.5'
+version = '3.6'
 group = 'com.jhxiaochen.dollancustomized' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'dollancraftcustomized'
 
@@ -36,6 +36,9 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+
+            args "--username=jhxiaochen"
+            args "-Xms7G -Xmx7G"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'

@@ -10,9 +10,11 @@ import net.minecraft.util.text.translation.I18n;
 public class DollanCraftDamageSource extends DamageSource {
 
     public static final DollanCraftDamageSource VALLID = new DollanCraftDamageSource("vallid");
+    public static final DollanCraftDamageSource HENG = new DollanCraftDamageSource("heng");
 
     static {
         VALLID.setDamageBypassesArmor();
+        HENG.setDamageAllowedInCreativeMode();
     }
 
     public DollanCraftDamageSource(String damageTypeIn)

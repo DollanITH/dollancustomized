@@ -22,7 +22,8 @@ import java.util.List;
 
 public class DollanBlocks {
 
-    public static net.minecraft.block.Block
+    public static Block
+            dollan_loop_line,
             crosswalk_diagonal,
             crosswalk_diagonal_slab,
             road_sign_highway_start,
@@ -212,6 +213,10 @@ public class DollanBlocks {
             dollan_line_14,
             dollan_line_15,
             dollan_line_16,
+            dollan_line_17,
+            dollan_line_18,
+            dollan_line_19,
+            dollan_line_20,
             dollan_s1,
             dollan_s2,
             dollan_airport_line,
@@ -330,6 +335,7 @@ public class DollanBlocks {
         dollan_s2 = new BlockMetroBlock("dollan_s2").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
         dollan_s1 = new BlockMetroBlock("dollan_s1").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
         dollan_airport_line = new BlockMetroBlock("dollan_airport_line").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
+        dollan_loop_line = new BlockMetroBlock("dollan_loop_line").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
         dollan_line_1 = new BlockMetroBlock("dollan_line_1");
         dollan_line_2 = new BlockMetroBlock("dollan_line_2");
         dollan_line_3 = new BlockMetroBlock("dollan_line_3");
@@ -346,6 +352,10 @@ public class DollanBlocks {
         dollan_line_14 = new BlockMetroBlock("dollan_line_14");
         dollan_line_15 = new BlockMetroBlock("dollan_line_15");
         dollan_line_16 = new BlockMetroBlock("dollan_line_16");
+        dollan_line_17 = new BlockMetroBlock("dollan_line_17");
+        dollan_line_18 = new BlockMetroBlock("dollan_line_18");
+        dollan_line_19 = new BlockMetroBlock("dollan_line_19");
+        dollan_line_20 = new BlockMetroBlock("dollan_line_20");
         mingsha_S1 = new BlockMSMetroBlock("mingsha_S1");
         mingsha_S2 = new BlockMSMetroBlock("mingsha_S2");
         mingsha_S3 = new BlockMSMetroBlock("mingsha_S3");
@@ -786,9 +796,14 @@ public class DollanBlocks {
         registerBlock(arrow_staright_diaotou_sl);
         registerBlock(arrow_confluence_left_sl);
         registerBlock(arrow_confluence_right_sl);
+//2nd Phase Line
+        registerBlock(dollan_line_17);
+        registerBlock(dollan_line_18);
+        registerBlock(dollan_line_19);
+        registerBlock(dollan_line_20);
 
-
-
+        registerBlock(dollan_loop_line);
+//other
         registerBlock(beautiful_marble); //部分代码移步DollanItems
         registerBlock(cherry_planks);
         registerBlock(calcite);
@@ -994,6 +1009,10 @@ public class DollanBlocks {
         registerModel(dollan_line_14);
         registerModel(dollan_line_15);
         registerModel(dollan_line_16);
+        registerModel(dollan_line_17);
+        registerModel(dollan_line_18);
+        registerModel(dollan_line_19);
+        registerModel(dollan_line_20);
         registerModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(),"lamp_tran_0");
         registerModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(),"lamp_tran_1");
         registerModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(),"lamp_tran_2");
@@ -1175,7 +1194,7 @@ public class DollanBlocks {
         registerModel(marble_tile, EnumDyeColor.ORANGE.getMetadata(),"orange_marble_tile");
         registerModel(marble_tile, EnumDyeColor.PINK.getMetadata(),"pink_marble_tile");
         registerModel(marble_tile, EnumDyeColor.CYAN.getMetadata(),"cyan_marble_tile");
-
+        registerModel(dollan_loop_line);
     }
 
     @SideOnly(Side.CLIENT)

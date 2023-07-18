@@ -400,6 +400,11 @@ public class DollanItems{
                         }
                     })
             );
+            registerItemBlock(DollanBlocks.dollan_loop_line);
+            registerItemBlock(DollanBlocks.dollan_line_17);
+            registerItemBlock(DollanBlocks.dollan_line_18);
+            registerItemBlock(DollanBlocks.dollan_line_19);
+            registerItemBlock(DollanBlocks.dollan_line_20);
         }
 
         public static void registerItem(Item item)

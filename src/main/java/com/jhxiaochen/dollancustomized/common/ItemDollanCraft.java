@@ -36,7 +36,7 @@ public class ItemDollanCraft extends ItemFood
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!worldIn.isRemote) {
             if (stack.getMetadata() > 0) {
-                player.attackEntityFrom(DollanCraftDamageSource.VALLID, 20.5F);
+                player.attackEntityFrom(DollanCraftDamageSource.VALLID, 28.5F);
                 player.addPotionEffect(new PotionEffect(MobEffects.UNLUCK, 114514, 1));
             }
         }

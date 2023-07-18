@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "dollancustomized:blocks/loop_line",
+      "particle": "dollancustomized:blocks/loop_line"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{"transform": "forge:default-block"}]
+  }
+}

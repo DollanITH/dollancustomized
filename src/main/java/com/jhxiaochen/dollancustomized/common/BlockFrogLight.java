@@ -76,7 +76,7 @@ public class BlockFrogLight extends Block {
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.2F);
         this.setResistance(12F);
-        this.setLightLevel(15F);
+        this.setLightLevel(1.0F);
     }
 
     @Override

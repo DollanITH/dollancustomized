@@ -83,7 +83,7 @@ public class BlockMyalite extends Block {
         this.setHardness(1.0F);
         this.setResistance(10F);
         this.setLightLevel(0F);
-        this.setLightOpacity(20);
+        this.setLightOpacity(2);
     }
 
     @Override

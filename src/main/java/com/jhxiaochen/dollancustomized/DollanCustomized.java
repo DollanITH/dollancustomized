@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = "3.4")
+@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = Reference.VERSION)
 public class DollanCustomized {
 
     @Instance(Reference.MOD_ID)
@@ -62,5 +62,6 @@ public class DollanCustomized {
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Command114514());
+        System.out.println("Hey guys, you're welcome.");
     }
 }

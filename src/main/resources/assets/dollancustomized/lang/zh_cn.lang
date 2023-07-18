@@ -237,6 +237,7 @@ tile.marble_block.name=磨制夸克大理石
 tile.dollan_s1.name=§3§l东安轨道交通§r S1号线
 tile.dollan_s2.name=§3§l东安轨道交通§r S2号线
 tile.dollan_airport_line.name=§3§l东安轨道交通§r 东安机场线
+tile.dollan_loop_line.name=§2§l东安轨道交通§r 东安城市环线
 
 tile.dollan_line_1.name=§2§l东安轨道交通§r 1号线
 tile.dollan_line_2.name=§2§l东安轨道交通§r 2号线
@@ -254,6 +255,10 @@ tile.dollan_line_13.name=§2§l东安轨道交通§r 13号线
 tile.dollan_line_14.name=§2§l东安轨道交通§r 14号线
 tile.dollan_line_15.name=§2§l东安轨道交通§r 15号线
 tile.dollan_line_16.name=§2§l东安轨道交通§r 16号线
+tile.dollan_line_17.name=§2§l东安轨道交通§r 17号线
+tile.dollan_line_18.name=§2§l东安轨道交通§r 18号线
+tile.dollan_line_19.name=§2§l东安轨道交通§r 19号线
+tile.dollan_line_20.name=§2§l东安轨道交通§r 20号线
 
 tile.mingsha_S1.name=§4§l鸣沙轨道交通§r S1号线
 tile.mingsha_S2.name=§4§l鸣沙轨道交通§r S2号线
@@ -283,7 +288,8 @@ tile.ms_lines_slab.separatewhite.name=双白分离线(台阶)
 tile.ms_lines_slab.separateyellow.name=双白分离线(台阶)
 tile.crosswalk_diagonal.name=人行横道斜线
 tile.crosswalk_diagonal_slab.name=人行横道斜线(台阶)
-death.dollancraft.vallid=%1$s 因吃了来源不明的食物而BBQ了
+death.dollancraft.vallid=[新闻] 某位因吃了来源不明的食物而BBQ了
+death.dollancraft.heng=[新闻] 有人因为试图恶臭别人，把自己弄死了
 item.leungcraft.name=可口的湖水
 item.dollancraft.name=可口的东安
 

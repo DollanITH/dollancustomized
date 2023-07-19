@@ -48,7 +48,9 @@ minecraft {
         }
 
         server {
+            workingDirectory project.file('server')
 
+            args "-Xms7G -Xmx7G"
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 

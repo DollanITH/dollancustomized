@@ -11,6 +11,7 @@
   "credits": "Mods Created By jhxiaochen & HChanJ1689, BlockStates writing by HChanJ1689 & jhxiaochen",
   "logoFile": "logo.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["after:sakura", "after:opticzcraft", "after:railcraft"],
+  "dependants": []
 }
 ]

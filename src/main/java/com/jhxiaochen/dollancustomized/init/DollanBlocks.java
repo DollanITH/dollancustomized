@@ -3,13 +3,16 @@ package com.jhxiaochen.dollancustomized.init;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
+import com.jhxiaochen.dollancustomized.common.metro.BlockMetroBlock2;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,537 +25,265 @@ import java.util.List;
 
 public class DollanBlocks {
 
-    public static Block
-            dollan_loop_line,
-            crosswalk_diagonal,
-            crosswalk_diagonal_slab,
-            road_sign_highway_start,
-            road_sign_highway_end,
-            road_sign_dont_stop,
-            road_sign_dont_stop_1,
-            road_sign_park,
-            road_sign_park_1,
-            road_sign_triangle_rang,
-            road_sign_triangle_slow,
-            road_sign_triangle_shizi,
-            road_sign_triangle_t,
-            road_sign_triangle_t1,
-            road_sign_triangle_t2,
-            road_sign_triangle_warn,
-            road_sign_left_warn,
-            road_sign_left_right_warn,
-            road_sign_right_warn,
-            road_sign_triangle_y,
-            bus_lane_mark,
-            road_sign_do_not_enter,
-            road_sign_do_not_enter_1,
-            road_sign_do_not_left,
-            road_sign_do_not_right,
-            road_sign_go_left,
-            road_sign_go_right,
-    road_sign_go_both,
-            road_sign_can_diaotou,
-            road_sign_can_left,
-            road_sign_can_right,
-            road_sign_do_not_diaotou,
-            road_sign_one_way_straight,
-            metro_fence,
-    platform_fence,
-    road_pedestrian_traffic_light,
-    road_traffic_light,
-            road_traffic_light_green,
-            road_traffic_light_yellow,
-            road_traffic_light_red,
-            road_sign_sl_15,
-            road_sign_sl_20,
-            road_sign_sl_30,
-    road_sign_sl_40,
-            road_sign_sl_50,
-            road_sign_sl_60,
-            road_sign_sl_70,
-            road_sign_sl_80,
-            road_sign_sl_90,
-            road_sign_sl_100,
-            road_sign_sl_110,
-            road_sign_sl_120,
-            road_sign_post,
-            arrow_diaotou,
-            arrow_left_diaotou,
-            arrow_left_right,
-            arrow_left_right_staright,
-            arrow_left_staright,
-            arrow_right_staright,
-            arrow_staright,
-            arrow_left,
-            arrow_right,
-            arrow_staright_diaotou,            
-            arrow_diaotou_sl,
-            arrow_left_diaotou_sl,
-            arrow_left_right_sl,
-            arrow_left_right_staright_sl,
-            arrow_left_staright_sl,
-            arrow_right_staright_sl,
-            arrow_staright_sl,
-            arrow_left_sl,
-            arrow_right_sl,
-            arrow_staright_diaotou_sl,
-            blackflatlamp,
-            asphalt,
-            asphalt_slab,
-            greenflatlamp,
-            white_flat_lamp,
-            yellowflatlamp,
-            redflatlamp,
-            double_yellow_line,
-            double_yellow_line_half,
-            double_white_line,
-            double_white_line_half,
-            double_yellow_line_slab,
-            double_yellow_line_half_slab,
-    double_yellow_line_diagonal_slab,
-            double_yellow_line_diagonal,
-            double_white_line_slab,
-            double_white_line_half_slab,
-            double_white_line_diagonal_slab,
-            double_white_line_diagonal,
-    single_yellow_line,
-    single_yellow_line_slab,
-    single_white_line_thick,
-    single_white_line_thick_slab,
-            single_yellow_line_thick,
-            single_yellow_line_thick_slab,
-    asphalt_cyan_black_half_slab,
-            asphalt_cyan_black_half,
-    arrow_confluence_left,
-    arrow_confluence_left_sl,
-    arrow_confluence_right,
-    arrow_confluence_right_sl,
-            asphalt_cyan_black_half_45,
-            asphalt_cyan_black_half_45_slab,
-            asphalt_red_black_half_45,
-            asphalt_red_black_half_45_slab,
+public static Block crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
+public static Block crosswalk_diagonal_slab = new BlockAsphaltSlabHorizontal("crosswalk_diagonal_slab");
+public static Block ms_lines = new RoadMergeOtherLine("ms_lines");
+public static Block ms_lines_slab = new RoadMergeOtherLineSlab("ms_lines_slab");
+public static Block road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
+public static Block road_sign_left_warn = new BlockRoadSign("road_sign_left_warn");
+public static Block road_sign_left_right_warn = new BlockRoadSign("road_sign_left_right_warn");
+public static Block road_sign_right_warn = new BlockRoadSign("road_sign_right_warn");
+public static Block road_sign_one_way_straight = new BlockRoadSign("road_sign_one_way_straight");
+public static Block road_sign_dont_stop_1 = new BlockRoadSign("road_sign_dont_stop_1");
+public static Block road_sign_highway_start = new BlockRoadSign("road_sign_highway_start");
+public static Block road_sign_highway_end = new BlockRoadSign("road_sign_highway_end");
+public static Block road_sign_park = new BlockRoadSign("road_sign_park");
+public static Block road_sign_park_1 = new BlockRoadSign("road_sign_park_1");
+public static Block single_white_90 = new BlockAsphaltHorizontal("single_white_90");
+public static Block single_white_90_1 = new BlockAsphaltHorizontal("single_white_90_1");
+public static Block single_yellow_90 = new BlockAsphaltHorizontal("single_yellow_90");
+public static Block single_yellow_90_1 = new BlockAsphaltHorizontal("single_yellow_90_1");
+public static Block single_white_90_slab = new BlockAsphaltSlabHorizontal("single_white_90_slab");
+public static Block single_white_90_1_slab = new BlockAsphaltSlabHorizontal("single_white_90_1_slab");
+public static Block single_yellow_90_slab = new BlockAsphaltSlabHorizontal("single_yellow_90_slab");
+public static Block single_yellow_90_1_slab = new BlockAsphaltSlabHorizontal("single_yellow_90_1_slab");
+public static Block single_white_all_line = new BlockAsphalt1("single_white_all_line");
+public static Block single_yellow_all_line = new BlockAsphalt1("single_yellow_all_line");
+public static Block single_white_all_line_slab = new BlockAsphaltSlab1("single_white_all_line_slab");
+public static Block single_yellow_all_line_slab = new BlockAsphaltSlab1("single_yellow_all_line_slab");
+public static Block road_sign_triangle_rang = new BlockRoadSign("road_sign_triangle_rang");
+public static Block road_sign_triangle_slow = new BlockRoadSign("road_sign_triangle_slow");
+public static Block road_sign_triangle_t1 = new BlockRoadSign("road_sign_triangle_t1");
+public static Block road_sign_triangle_t = new BlockRoadSign("road_sign_triangle_t");
+public static Block road_sign_triangle_t2 = new BlockRoadSign("road_sign_triangle_t2");
+public static Block road_sign_triangle_y = new BlockRoadSign("road_sign_triangle_y");
+public static Block road_sign_triangle_warn = new BlockRoadSign("road_sign_triangle_warn");
+public static Block road_sign_triangle_shizi = new BlockRoadSign("road_sign_triangle_shizi");
+public static Block bus_lane_mark = new IronHorizontal("bus_lane_mark");
+public static Block road_sign_do_not_enter = new BlockRoadSign("road_sign_do_not_enter");
+public static Block road_sign_do_not_enter_1 = new BlockRoadSign("road_sign_do_not_enter_1");
+public static Block road_sign_do_not_left = new BlockRoadSign("road_sign_do_not_left");
+public static Block road_sign_do_not_right = new BlockRoadSign("road_sign_do_not_right");
+public static Block road_sign_go_left = new BlockRoadSign("road_sign_go_left");
+public static Block road_sign_go_right = new BlockRoadSign("road_sign_go_right");
+public static Block road_sign_go_both = new BlockRoadSign("road_sign_go_both");
+public static Block road_sign_do_not_diaotou = new BlockRoadSign("road_sign_do_not_diaotou");
+public static Block road_sign_can_left = new BlockRoadSign("road_sign_can_left");
+public static Block road_sign_can_right = new BlockRoadSign("road_sign_can_right");
+public static Block road_sign_can_diaotou = new BlockRoadSign("road_sign_can_diaotou");
+public static Block road_sign_post = new BlockRoadSignPost();
+public static Block white_flat_lamp = new LightLamp("white_flat_lamp");
+public static Block white_punctiform_lamp = new PunLamp("white_punctiform_lamp");
+public static Block white_banding_lamp = new BandLamp("white_banding_lamp");
+public static Block dollan_s2 = new BlockMetroBlock("dollan_s2").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
+public static Block dollan_s1 = new BlockMetroBlock("dollan_s1").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
+public static Block dollan_airport_line = new BlockMetroBlock("dollan_airport_line").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
+public static Block dollan_line_1 = new BlockMetroBlock("dollan_line_1");
+public static Block dollan_line_2 = new BlockMetroBlock("dollan_line_2");
+public static Block dollan_line_3 = new BlockMetroBlock("dollan_line_3");
+public static Block dollan_line_4 = new BlockMetroBlock("dollan_line_4");
+public static Block dollan_line_5 = new BlockMetroBlock("dollan_line_5");
+public static Block dollan_line_6 = new BlockMetroBlock("dollan_line_6");
+public static Block dollan_line_7 = new BlockMetroBlock("dollan_line_7");
+public static Block dollan_line_8 = new BlockMetroBlock("dollan_line_8");
+public static Block dollan_line_9 = new BlockMetroBlock("dollan_line_9");
+public static Block dollan_line_10 = new BlockMetroBlock("dollan_line_10");
+public static Block dollan_line_11 = new BlockMetroBlock("dollan_line_11");
+public static Block dollan_line_12 = new BlockMetroBlock("dollan_line_12");
+public static Block dollan_line_13 = new BlockMetroBlock("dollan_line_13");
+public static Block dollan_line_14 = new BlockMetroBlock("dollan_line_14");
+public static Block dollan_line_15 = new BlockMetroBlock("dollan_line_15");
+public static Block dollan_line_16 = new BlockMetroBlock("dollan_line_16");
+public static Block dollan_line_21 = new BlockMetroBlock("dollan_line_21");
+public static Block dollan_line_22 = new BlockMetroBlock("dollan_line_22");
+public static Block dollan_loop_line = new BlockMetroBlock("dollan_loop_line").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
+public static Block mingsha_S1 = new BlockMSMetroBlock("mingsha_S1");
+public static Block mingsha_S2 = new BlockMSMetroBlock("mingsha_S2");
+public static Block mingsha_S3 = new BlockMSMetroBlock("mingsha_S3");
+public static Block mingsha_S4 = new BlockMSMetroBlock("mingsha_S4");
+public static Block mingsha_S5 = new BlockMSMetroBlock("mingsha_S5");
+public static Block mingsha_S6 = new BlockMSMetroBlock("mingsha_S6");
+public static Block lamp_tran = new BlockTranLight("lamp_tran").setRegistryName("lamp_tran");
+public static Block light = new BlockLight("light");
+public static Block asphalt_slab = new BlockAsphaltSlab("asphalt_slab");
+public static Block asphalt = new BlockAsphalt("asphalt");
+public static Block bike_words = new IronHorizontal("bike_words");
+public static Block double_white_line = new BlockAsphaltHorizontal1("double_white_line");
+public static Block double_yellow_line = new BlockAsphaltHorizontal1("double_yellow_line");
+public static Block double_white_line_slab = new BlockAsphaltSlabHorizontal2("double_white_line_slab");
+public static Block double_yellow_line_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_slab");
+public static Block double_white_line_half = new BlockAsphaltHorizontal("double_white_line_half");
+public static Block double_yellow_line_half = new BlockAsphaltHorizontal("double_yellow_line_half");
+public static Block double_white_line_half_slab = new BlockAsphaltSlabHorizontal("double_white_line_half_slab");
+public static Block double_yellow_line_half_slab = new BlockAsphaltSlabHorizontal("double_yellow_line_half_slab");
+public static Block single_yellow_line = new BlockAsphaltHorizontal1("single_yellow_line");
+public static Block single_yellow_line_slab = new BlockAsphaltSlabHorizontal2("single_yellow_line_slab");
+public static Block single_white_line = new BlockAsphaltHorizontal1("single_white_line");
+public static Block single_white_line_slab = new BlockAsphaltSlabHorizontal2("single_white_line_slab");
+public static Block single_white_line_45 = new BlockAsphaltHorizontal("single_white_line_45");
+public static Block single_white_line_slab_45 = new BlockAsphaltSlabHorizontal("single_white_line_slab_45");
+public static Block single_yellow_line_45 = new BlockAsphaltHorizontal("single_yellow_line_45");
+public static Block single_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("single_yellow_line_slab_45");
+public static Block single_white_line_thick = new BlockAsphaltHorizontal1("single_white_line_thick");
+public static Block single_white_line_thick_slab = new BlockAsphaltSlabHorizontal2("single_white_line_thick_slab");
+public static Block single_yellow_line_thick = new BlockAsphaltHorizontal1("single_yellow_line_thick");
+public static Block single_yellow_line_thick_slab = new BlockAsphaltSlabHorizontal2("single_yellow_line_thick_slab");
+public static Block road_excl_zone_corner_in = new BlockAsphaltHorizontal("road_excl_zone_corner_in");
+public static Block road_excl_zone_corner_in_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_corner_in_slab");
+public static Block road_excl_zone_corner_out = new BlockAsphaltHorizontal("road_excl_zone_corner_out");
+public static Block road_excl_zone_corner_out_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_corner_out_slab");
+public static Block road_excl_zone_diagonal_in = new BlockAsphaltHorizontal("road_excl_zone_diagonal_in");
+public static Block road_excl_zone_diagonal_in_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_diagonal_in_slab");
+public static Block road_excl_zone_diagonal_out = new BlockAsphaltHorizontal("road_excl_zone_diagonal_out");
+public static Block road_excl_zone_diagonal_out_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_diagonal_out_slab");
+public static Block road_excl_zone_line = new BlockAsphaltHorizontal("road_excl_zone_line");
+public static Block road_excl_zone_line_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_line_slab");
+public static Block road_excl_zone = new BlockAsphaltHorizontal("road_excl_zone");
+public static Block road_excl_zone_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_slab");
+public static Block road_excl_zone_split_our_l = new BlockAsphaltHorizontal("road_excl_zone_split_our_l");
+public static Block road_excl_zone_split_our_r_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_our_r_slab");
+public static Block road_excl_zone_split_our_r = new BlockAsphaltHorizontal("road_excl_zone_split_our_r");
+public static Block road_excl_zone_split_our_l_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_our_l_slab");
+public static Block road_excl_zone_split_in_l = new BlockAsphaltHorizontal("road_excl_zone_split_in_l");
+public static Block road_excl_zone_split_in_r_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_in_r_slab");
+public static Block road_excl_zone_split_in_r = new BlockAsphaltHorizontal("road_excl_zone_split_in_r");
+public static Block road_excl_zone_split_in_l_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_in_l_slab");
+public static Block platform_fence = new BlockPlatFormFence("platform_fence");
+public static Block crosswalk = new BlockAsphaltHorizontal1("crosswalk");
+public static Block crosswalk_slab = new BlockAsphaltSlabHorizontal2("crosswalk_slab");
+public static Block stop_line = new BlockAsphaltHorizontal("stop_line");
+public static Block stop_line_slab = new BlockAsphaltSlabHorizontal("stop_line_slab");
+public static Block stop_line_left = new BlockAsphaltHorizontal("stop_line_left");
+public static Block stop_line_left_slab = new BlockAsphaltSlabHorizontal("stop_line_left_slab");
+public static Block stop_line_right = new BlockAsphaltHorizontal("stop_line_right");
+public static Block stop_line_right_1 = new BlockAsphaltHorizontal("stop_line_right_1");
+public static Block stop_line_right_slab = new BlockAsphaltSlabHorizontal("stop_line_right_slab");
+public static Block stop_line_right_1_slab = new BlockAsphaltSlabHorizontal("stop_line_right_1_slab");
+public static Block road_lamp_1_up = new RoadLamp1U();
+public static Block road_lamp_1_bottom = new RoadLamp1B();
+public static Block arrow_diaotou = new Arrow("arrow_diaotou");
+public static Block arrow_left_diaotou = new Arrow("arrow_left_diaotou");
+public static Block arrow_left_right = new Arrow("arrow_left_right");
+public static Block arrow_left_right_staright = new Arrow("arrow_left_right_staright");
+public static Block arrow_left_staright = new Arrow("arrow_left_staright");
+public static Block arrow_right_staright = new Arrow("arrow_right_staright");
+public static Block arrow_left = new Arrow("arrow_left");
+public static Block arrow_right = new Arrow("arrow_right");
+public static Block arrow_staright = new Arrow("arrow_staright");
+public static Block arrow_staright_diaotou = new Arrow("arrow_staright_diaotou");
+public static Block arrow_diaotou_sl = new ArrowSl("arrow_diaotou_sl");
+public static Block arrow_left_diaotou_sl = new ArrowSl("arrow_left_diaotou_sl");
+public static Block arrow_left_right_sl = new ArrowSl("arrow_left_right_sl");
+public static Block arrow_left_right_staright_sl = new ArrowSl("arrow_left_right_staright_sl");
+public static Block arrow_left_staright_sl = new ArrowSl("arrow_left_staright_sl");
+public static Block arrow_right_staright_sl = new ArrowSl("arrow_right_staright_sl");
+public static Block arrow_left_sl = new ArrowSl("arrow_left_sl");
+public static Block arrow_right_sl = new ArrowSl("arrow_right_sl");
+public static Block arrow_staright_sl = new ArrowSl("arrow_staright_sl");
+public static Block arrow_staright_diaotou_sl = new ArrowSl("arrow_staright_diaotou_sl");
+public static Block arrow_confluence_left_sl = new ArrowSl("arrow_confluence_left_sl");
+public static Block arrow_confluence_right_sl = new ArrowSl("arrow_confluence_right_sl");
+public static Block arrow_confluence_left = new Arrow("arrow_confluence_left");
+public static Block arrow_confluence_right = new Arrow("arrow_confluence_right");
+public static Block asphalt_cyan_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_slab");
+public static Block asphalt_cyan_black_half_line = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line");
+public static Block asphalt_cyan_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_slab");
+public static Block asphalt_cyan_black_half_45_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_45_slab");
+public static Block asphalt_cyan_black_half = new BlockAsphaltHorizontal("asphalt_cyan_black_half");
+public static Block asphalt_cyan_black_half_45 = new BlockAsphaltHorizontal("asphalt_cyan_black_half_45");
+public static Block double_yellow_line_diagonal_slab = new BlockAsphaltSlabHorizontal("double_yellow_line_diagonal_slab");
+public static Block double_yellow_line_diagonal = new BlockAsphaltHorizontal("double_yellow_line_diagonal");
+public static Block double_white_line_diagonal_slab = new BlockAsphaltSlabHorizontal("double_white_line_diagonal_slab");
+public static Block double_white_line_diagonal = new BlockAsphaltHorizontal("double_white_line_diagonal");
+public static Block asphalt_red_black_half = new BlockAsphaltHorizontal("asphalt_red_black_half");
+public static Block asphalt_red_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_slab");
+public static Block asphalt_red_black_half_45 = new BlockAsphaltHorizontal("asphalt_red_black_half_45");
+public static Block asphalt_red_black_half_45_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_45_slab");
+public static Block asphalt_red_black_half_line = new BlockAsphaltHorizontal("asphalt_red_black_half_line");
+public static Block asphalt_red_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_line_slab");
+public static Block asphalt_cyan_black_half_line_diagonal_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_diagonal_slab");
+public static Block asphalt_cyan_black_half_line_diagonal = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line_diagonal");
+public static Block asphalt_red_black_half_line_diagonal = new BlockAsphaltHorizontal("asphalt_red_black_half_line_diagonal");
+public static Block asphalt_red_black_half_line_diagonal_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_line_diagonal_slab");
+public static Block asphalt_cyan_black_half_line_diagonal_1 = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line_diagonal_1");
+public static Block asphalt_red_black_half_line_diagonal_1 = new BlockAsphaltHorizontal("asphalt_red_black_half_line_diagonal_1");
+public static Block asphalt_red_black_half_line_diagonal_1_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_line_diagonal_1_slab");
+public static Block asphalt_cyan_black_half_line_diagonal_1_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_diagonal_1_slab");
+public static Block road_sign_sl_15 = new BlockRoadSign("road_sign_sl_15");
+public static Block road_sign_sl_20 = new BlockRoadSign("road_sign_sl_20");
+public static Block road_sign_sl_30 = new BlockRoadSign("road_sign_sl_30");
+public static Block road_sign_sl_40 = new BlockRoadSign("road_sign_sl_40");
+public static Block road_sign_sl_50 = new BlockRoadSign("road_sign_sl_50");
+public static Block road_sign_sl_60 = new BlockRoadSign("road_sign_sl_60");
+public static Block road_sign_sl_70 = new BlockRoadSign("road_sign_sl_70");
+public static Block road_sign_sl_80 = new BlockRoadSign("road_sign_sl_80");
+public static Block road_sign_sl_90 = new BlockRoadSign("road_sign_sl_90");
+public static Block road_sign_sl_100 = new BlockRoadSign("road_sign_sl_100");
+public static Block road_sign_sl_110 = new BlockRoadSign("road_sign_sl_110");
+public static Block road_sign_sl_120 = new BlockRoadSign("road_sign_sl_120");
+public static Block metro_fence = new BlockMetroFence("metro_fence");
+public static Block road_pedestrian_traffic_light = new BlockRoadSign("road_pedestrian_traffic_light");
+public static Block road_traffic_light = new BlockRoadSign("road_traffic_light");
+public static Block road_traffic_light_red = new BlockRoadSign("road_traffic_light_red");
+public static Block road_traffic_light_green = new BlockRoadSign("road_traffic_light_green");
+public static Block road_traffic_light_yellow = new BlockRoadSign("road_traffic_light_yellow");
 
-            asphalt_cyan_black_half_line_slab,
-            asphalt_cyan_black_half_line,
-            asphalt_cyan_black_half_line_diagonal,
-            asphalt_cyan_black_half_line_diagonal_slab,
-            asphalt_red_black_half_line_diagonal,
-            asphalt_red_black_half_line_diagonal_slab,
-    asphalt_red_black_half_line_diagonal_1,
-    asphalt_red_black_half_line_diagonal_1_slab,
-    asphalt_cyan_black_half_line_diagonal_1_slab,
-    asphalt_cyan_black_half_line_diagonal_1,
-    asphalt_red_black_half_line,
-    asphalt_red_black_half_line_slab,
-            asphalt_red_black_half,
-            asphalt_red_black_half_slab,
-    bike_words,
-    crosswalk,
-    crosswalk_slab,
-    stop_line,
-    stop_line_slab,
-            stop_line_left,
-            stop_line_left_slab,
-            stop_line_right,
-            stop_line_right_1,
-            stop_line_right_slab,
-            stop_line_right_1_slab,
-            single_white_line,
-            single_white_line_slab,
-            single_white_line_45,
+public static Block thick_white_line_45 = new BlockAsphaltHorizontal("thick_white_line_45");
+public static Block thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
+public static Block thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
+public static Block thick_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_yellow_line_slab_45");
+public static Block platform_wall = new DollanBlock("platform_wall");
+public static Block marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
+            //
 
-            single_white_line_slab_45,
-            single_yellow_line_45,
-            single_yellow_line_slab_45,
+public static Block beautiful_marble = new BlockMarble("beautiful_marble");
+public static Block dollan_line_20 = new BlockMetroBlock("dollan_line_20");
+public static Block calcite = new DollanBlock("calcite").setHardness(1.5F).setResistance(10.0F);
+public static Block cherry_planks = new DollanPlanks("cherry_planks");
+public static Block cracked_deepslate = new BlockCrackedDeepSlate("cracked_deepslate");
+public static Block deepslate = new BlockDeepSlate("deepslate");
+public static Block elder_prismarine = new BlockElderPrismarine("elder_prismarine");
+public static Block floorblock = new DollanBlock3("floorblock").setHardness(1.0F);
+public static Block gray_porcelain_tile = new DollanBlock2("gray_porcelain_tile");
+public static Block gray_wall = new DollanBlock2("gray_wall");
+public static Block graymud = new DollanBlock2("graymud");
+public static Block graystoneblock = new DollanBlock2("graystoneblock");
+public static Block limestone = new BlockLimeStone();
+public static Block mangrove_planks = new DollanPlanks("mangrove_planks");
+public static Block metal = new DollanBlock4("metal");
+public static Block mud_bricks = new DollanBlock2("mud_bricks");
+public static Block myalite = new BlockMyalite("myalite");
+public static Block packed_mud = new DollanBlock2("packed_mud");
+public static Block polished_blackstone = new BlockPolishedBlackStone();
+public static Block polished_deepslate = new DollanPolished("polished_deepslate");
+public static Block polished_limestone = new DollanPolished("polished_limestone");
+public static Block polished_marble = new DollanPolished("polished_marble");
+public static Block polished_myalite = new DollanPolished("polished_myalite");
+public static Block quartz_bricks = new DollanBlock2("quartz_bricks");
+public static Block rock_1 = new DollanBlock2("rock_1");
+public static Block rock_2 = new DollanBlock2("rock_2");
+public static Block sandy_bricks = new DollanBlock2("sandy_bricks");
+public static Block teacherblock = new DollanBlock3("teacherblock");
+public static Block white_color_purple_block = new DollanBlock2("white_color_purple_block");
+public static Block elder_sea_lantern = new DollanBlock5("elder_sea_lantern").setLightLevel(1.0F);
+public static Block modern_stone_tile = new DollanBlock2("modern_stone_tile");
+public static Block froglight = new BlockFrogLight();
+public static Block marble_tile = new BlockMarbleTile();
+public static Block dollan_line_17 = new BlockMetroBlock2("dollan_line_17");
+public static Block dollan_line_18 = new BlockMetroBlock2("dollan_line_18");
+public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
 
-            single_white_all_line,//sb
-    single_white_all_line_slab,
-            single_white_90,
-            single_white_90_slab,
-            single_white_90_1,
-            single_white_90_1_slab,
-            single_yellow_all_line,
-            single_yellow_all_line_slab,
-            single_yellow_90,
-            single_yellow_90_slab,
-            single_yellow_90_1,
-            single_yellow_90_1_slab,
-            road_excl_zone,
-            road_excl_zone_slab,
-    road_excl_zone_diagonal_out,
-    road_excl_zone_diagonal_out_slab,
-            road_excl_zone_diagonal_in,
-            road_excl_zone_diagonal_in_slab,
-                    road_excl_zone_corner_out,
-                    road_excl_zone_corner_out_slab,
-                    road_excl_zone_corner_in,
-                    road_excl_zone_corner_in_slab,
-    road_excl_zone_line,
-    road_excl_zone_line_slab,
-    road_excl_zone_split_our_l,
-            road_excl_zone_split_our_r,
-            road_excl_zone_split_our_r_slab,
-            road_excl_zone_split_our_l_slab,
-            road_excl_zone_split_in_l,
-            road_excl_zone_split_in_r,
-            road_excl_zone_split_in_r_slab,
-            road_excl_zone_split_in_l_slab,
-            dollan_line_1,
-            dollan_line_2,
-            dollan_line_3,
-            dollan_line_4,
-            dollan_line_5,
-            dollan_line_6,
-            dollan_line_7,
-            dollan_line_8,
-            dollan_line_9,
-            dollan_line_10,
-            dollan_line_11,
-            dollan_line_12,
-            dollan_line_13,
-            dollan_line_14,
-            dollan_line_15,
-            dollan_line_16,
-            dollan_line_17,
-            dollan_line_18,
-            dollan_line_19,
-            dollan_line_20,
-            dollan_s1,
-            dollan_s2,
-            dollan_airport_line,
-            mingsha_S1,
-            mingsha_S2,
-            mingsha_S3,
-            mingsha_S4,
-            mingsha_S5,
-            mingsha_S6,
-            lamp_tran,
-            light,
-            redlight,
-            white_punctiform_lamp,
-            road_lamp_1_up,
-            road_lamp_1_bottom,
-            thick_white_line_45,
-            thick_yellow_line_45,thick_yellow_line_slab_45,
-            thick_white_line_slab_45,
-            ms_lines,
-            ms_lines_slab,
-            white_banding_lamp,
-    //block 01
-            platform_wall,
-            marble_block,
-    //02
-            floorblock,
-
-            beautiful_marble,
-            calcite,
-            cherry_planks,
-            cracked_deepslate,
-            deepslate,
-            gray_porcelain_tile,
-            gray_wall,
-            graymud,
-            graystoneblock,
-            limestone,
-            mangrove_planks,
-            metal,
-            mud_bricks,
-            myalite,
-            modern_stone_tile,
-            packed_mud,
-            polished_blackstone,
-            polished_limestone,
-            polished_deepslate,
-            polished_marble,
-            polished_myalite,
-            quartz_bricks,
-            rock_1,
-            rock_2,
-            sandy_bricks,
-            teacherblock,
-            white_color_purple_block,
-            elder_prismarine,
-            froglight,
-            marble_tile,
-            elder_sea_lantern;
-
-    public static void init() {
-        crosswalk_diagonal = new BlockAsphaltHorizontal("crosswalk_diagonal");
-        crosswalk_diagonal_slab = new BlockAsphaltSlabHorizontal("crosswalk_diagonal_slab");
-        ms_lines = new RoadMergeOtherLine("ms_lines");
-        ms_lines_slab = new RoadMergeOtherLineSlab("ms_lines_slab");
-        road_sign_dont_stop = new BlockRoadSign("road_sign_dont_stop");
-        road_sign_left_warn = new BlockRoadSign("road_sign_left_warn");
-        road_sign_left_right_warn = new BlockRoadSign("road_sign_left_right_warn");
-        road_sign_right_warn = new BlockRoadSign("road_sign_right_warn");
-        road_sign_one_way_straight = new BlockRoadSign("road_sign_one_way_straight");
-        road_sign_dont_stop_1 = new BlockRoadSign("road_sign_dont_stop_1");
-        road_sign_highway_start = new BlockRoadSign("road_sign_highway_start");
-        road_sign_highway_end = new BlockRoadSign("road_sign_highway_end");
-        road_sign_park = new BlockRoadSign("road_sign_park");
-        road_sign_park_1 = new BlockRoadSign("road_sign_park_1");
-        single_white_90 = new BlockAsphaltHorizontal("single_white_90");
-        single_white_90_1 = new BlockAsphaltHorizontal("single_white_90_1");
-        single_yellow_90 = new BlockAsphaltHorizontal("single_yellow_90");
-        single_yellow_90_1 = new BlockAsphaltHorizontal("single_yellow_90_1");
-        single_white_90_slab = new BlockAsphaltSlabHorizontal("single_white_90_slab");
-        single_white_90_1_slab = new BlockAsphaltSlabHorizontal("single_white_90_1_slab");
-        single_yellow_90_slab = new BlockAsphaltSlabHorizontal("single_yellow_90_slab");
-        single_yellow_90_1_slab = new BlockAsphaltSlabHorizontal("single_yellow_90_1_slab");
-        single_white_all_line = new BlockAsphalt1("single_white_all_line");
-        single_yellow_all_line = new BlockAsphalt1("single_yellow_all_line");
-        single_white_all_line_slab = new BlockAsphaltSlab1("single_white_all_line_slab");
-        single_yellow_all_line_slab = new BlockAsphaltSlab1("single_yellow_all_line_slab");
-        road_sign_triangle_rang = new BlockRoadSign("road_sign_triangle_rang");
-        road_sign_triangle_slow = new BlockRoadSign("road_sign_triangle_slow");
-        road_sign_triangle_t1 = new BlockRoadSign("road_sign_triangle_t1");
-        road_sign_triangle_t = new BlockRoadSign("road_sign_triangle_t");
-        road_sign_triangle_t2 = new BlockRoadSign("road_sign_triangle_t2");
-        road_sign_triangle_y = new BlockRoadSign("road_sign_triangle_y");
-        road_sign_triangle_warn = new BlockRoadSign("road_sign_triangle_warn");
-        road_sign_triangle_shizi = new BlockRoadSign("road_sign_triangle_shizi");
-        bus_lane_mark = new IronHorizontal("bus_lane_mark");
-        road_sign_do_not_enter = new BlockRoadSign("road_sign_do_not_enter");
-        road_sign_do_not_enter_1 = new BlockRoadSign("road_sign_do_not_enter_1");
-        road_sign_do_not_left = new BlockRoadSign("road_sign_do_not_left");
-        road_sign_do_not_right = new BlockRoadSign("road_sign_do_not_right");
-        road_sign_go_left = new BlockRoadSign("road_sign_go_left");
-        road_sign_go_right = new BlockRoadSign("road_sign_go_right");
-        road_sign_go_both = new BlockRoadSign("road_sign_go_both");
-        road_sign_do_not_diaotou = new BlockRoadSign("road_sign_do_not_diaotou");
-        road_sign_can_left = new BlockRoadSign("road_sign_can_left");
-        road_sign_can_right = new BlockRoadSign("road_sign_can_right");
-        road_sign_can_diaotou = new BlockRoadSign("road_sign_can_diaotou");
-        road_sign_post = new BlockRoadSignPost();
-        blackflatlamp = new LightLamp("blackflatlamp");
-        greenflatlamp = new LightLamp("greenflatlamp");
-        redflatlamp = new LightLamp("redflatlamp");
-        white_flat_lamp = new LightLamp("white_flat_lamp");
-        yellowflatlamp = new LightLamp("yellowflatlamp");
-        white_punctiform_lamp = new PunLamp("white_punctiform_lamp");
-        white_banding_lamp = new BandLamp("white_banding_lamp");
-        redlight = new BlockLight("redlight");
-        dollan_s2 = new BlockMetroBlock("dollan_s2").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
-        dollan_s1 = new BlockMetroBlock("dollan_s1").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
-        dollan_airport_line = new BlockMetroBlock("dollan_airport_line").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
-        dollan_loop_line = new BlockMetroBlock("dollan_loop_line").setCreativeTab(DollanCustomized.DOLLAN_TRAN_TAB);
-        dollan_line_1 = new BlockMetroBlock("dollan_line_1");
-        dollan_line_2 = new BlockMetroBlock("dollan_line_2");
-        dollan_line_3 = new BlockMetroBlock("dollan_line_3");
-        dollan_line_4 = new BlockMetroBlock("dollan_line_4");
-        dollan_line_5 = new BlockMetroBlock("dollan_line_5");
-        dollan_line_6 = new BlockMetroBlock("dollan_line_6");
-        dollan_line_7 = new BlockMetroBlock("dollan_line_7");
-        dollan_line_8 = new BlockMetroBlock("dollan_line_8");
-        dollan_line_9 = new BlockMetroBlock("dollan_line_9");
-        dollan_line_10 = new BlockMetroBlock("dollan_line_10");
-        dollan_line_11 = new BlockMetroBlock("dollan_line_11");
-        dollan_line_12 = new BlockMetroBlock("dollan_line_12");
-        dollan_line_13 = new BlockMetroBlock("dollan_line_13");
-        dollan_line_14 = new BlockMetroBlock("dollan_line_14");
-        dollan_line_15 = new BlockMetroBlock("dollan_line_15");
-        dollan_line_16 = new BlockMetroBlock("dollan_line_16");
-        dollan_line_17 = new BlockMetroBlock("dollan_line_17");
-        dollan_line_18 = new BlockMetroBlock("dollan_line_18");
-        dollan_line_19 = new BlockMetroBlock("dollan_line_19");
-        dollan_line_20 = new BlockMetroBlock("dollan_line_20");
-        mingsha_S1 = new BlockMSMetroBlock("mingsha_S1");
-        mingsha_S2 = new BlockMSMetroBlock("mingsha_S2");
-        mingsha_S3 = new BlockMSMetroBlock("mingsha_S3");
-        mingsha_S4 = new BlockMSMetroBlock("mingsha_S4");
-        mingsha_S5 = new BlockMSMetroBlock("mingsha_S5");
-        mingsha_S6 = new BlockMSMetroBlock("mingsha_S6");
-        lamp_tran = new BlockTranLight("lamp_tran").setRegistryName("lamp_tran");
-        light = new BlockLight("light");
-        asphalt_slab = new BlockAsphaltSlab("asphalt_slab");
-        asphalt = new BlockAsphalt("asphalt");
-        bike_words = new IronHorizontal("bike_words");
-        double_white_line = new BlockAsphaltHorizontal1("double_white_line");
-        double_yellow_line = new BlockAsphaltHorizontal1("double_yellow_line");
-        double_white_line_slab = new BlockAsphaltSlabHorizontal2("double_white_line_slab");
-        double_yellow_line_slab = new BlockAsphaltSlabHorizontal2("double_yellow_line_slab"); 
-        double_white_line_half = new BlockAsphaltHorizontal("double_white_line_half");
-        double_yellow_line_half = new BlockAsphaltHorizontal("double_yellow_line_half");
-        double_white_line_half_slab = new BlockAsphaltSlabHorizontal("double_white_line_half_slab");
-        double_yellow_line_half_slab = new BlockAsphaltSlabHorizontal("double_yellow_line_half_slab");
-        single_yellow_line = new BlockAsphaltHorizontal1("single_yellow_line");
-        single_yellow_line_slab = new BlockAsphaltSlabHorizontal2("single_yellow_line_slab");
-        single_white_line = new BlockAsphaltHorizontal1("single_white_line");
-        single_white_line_slab = new BlockAsphaltSlabHorizontal2("single_white_line_slab");
-        single_white_line_45 = new BlockAsphaltHorizontal("single_white_line_45");
-        single_white_line_slab_45 = new BlockAsphaltSlabHorizontal("single_white_line_slab_45");
-        single_yellow_line_45 = new BlockAsphaltHorizontal("single_yellow_line_45");
-        single_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("single_yellow_line_slab_45");
-        single_white_line_thick = new BlockAsphaltHorizontal1("single_white_line_thick");
-        single_white_line_thick_slab = new BlockAsphaltSlabHorizontal2("single_white_line_thick_slab");
-        single_yellow_line_thick = new BlockAsphaltHorizontal1("single_yellow_line_thick");
-        single_yellow_line_thick_slab = new BlockAsphaltSlabHorizontal2("single_yellow_line_thick_slab");
-        road_excl_zone_corner_in = new BlockAsphaltHorizontal("road_excl_zone_corner_in");
-        road_excl_zone_corner_in_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_corner_in_slab");
-        road_excl_zone_corner_out = new BlockAsphaltHorizontal("road_excl_zone_corner_out");
-        road_excl_zone_corner_out_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_corner_out_slab");
-        road_excl_zone_diagonal_in = new BlockAsphaltHorizontal("road_excl_zone_diagonal_in");
-        road_excl_zone_diagonal_in_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_diagonal_in_slab");
-        road_excl_zone_diagonal_out = new BlockAsphaltHorizontal("road_excl_zone_diagonal_out");
-        road_excl_zone_diagonal_out_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_diagonal_out_slab");
-        road_excl_zone_line = new BlockAsphaltHorizontal("road_excl_zone_line");
-        road_excl_zone_line_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_line_slab");
-        road_excl_zone = new BlockAsphaltHorizontal("road_excl_zone");
-        road_excl_zone_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_slab");
-        road_excl_zone_split_our_l = new BlockAsphaltHorizontal("road_excl_zone_split_our_l");
-        road_excl_zone_split_our_r_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_our_r_slab");
-        road_excl_zone_split_our_r = new BlockAsphaltHorizontal("road_excl_zone_split_our_r");
-        road_excl_zone_split_our_l_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_our_l_slab");
-        road_excl_zone_split_in_l = new BlockAsphaltHorizontal("road_excl_zone_split_in_l");
-        road_excl_zone_split_in_r_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_in_r_slab");
-        road_excl_zone_split_in_r = new BlockAsphaltHorizontal("road_excl_zone_split_in_r");
-        road_excl_zone_split_in_l_slab = new BlockAsphaltSlabHorizontal("road_excl_zone_split_in_l_slab");
-        platform_fence = new BlockPlatFormFence("platform_fence");
-        crosswalk = new BlockAsphaltHorizontal1("crosswalk");
-        crosswalk_slab = new BlockAsphaltSlabHorizontal2("crosswalk_slab");
-        stop_line = new BlockAsphaltHorizontal("stop_line");
-        stop_line_slab = new BlockAsphaltSlabHorizontal("stop_line_slab");
-        stop_line_left = new BlockAsphaltHorizontal("stop_line_left");
-        stop_line_left_slab = new BlockAsphaltSlabHorizontal("stop_line_left_slab");
-        stop_line_right = new BlockAsphaltHorizontal("stop_line_right");
-        stop_line_right_1 = new BlockAsphaltHorizontal("stop_line_right_1");
-        stop_line_right_slab = new BlockAsphaltSlabHorizontal("stop_line_right_slab");
-        stop_line_right_1_slab = new BlockAsphaltSlabHorizontal("stop_line_right_1_slab");
-        road_lamp_1_up = new RoadLamp1U();
-        road_lamp_1_bottom = new RoadLamp1B();
-        arrow_diaotou = new Arrow("arrow_diaotou");
-        arrow_left_diaotou = new Arrow("arrow_left_diaotou");
-        arrow_left_right = new Arrow("arrow_left_right");
-        arrow_left_right_staright = new Arrow("arrow_left_right_staright");
-        arrow_left_staright = new Arrow("arrow_left_staright");
-        arrow_right_staright = new Arrow("arrow_right_staright");
-        arrow_left = new Arrow("arrow_left");
-        arrow_right = new Arrow("arrow_right");
-        arrow_staright = new Arrow("arrow_staright");
-        arrow_staright_diaotou = new Arrow("arrow_staright_diaotou");
-        arrow_diaotou_sl = new ArrowSl("arrow_diaotou_sl");
-        arrow_left_diaotou_sl = new ArrowSl("arrow_left_diaotou_sl");
-        arrow_left_right_sl = new ArrowSl("arrow_left_right_sl");
-        arrow_left_right_staright_sl = new ArrowSl("arrow_left_right_staright_sl");
-        arrow_left_staright_sl = new ArrowSl("arrow_left_staright_sl");
-        arrow_right_staright_sl = new ArrowSl("arrow_right_staright_sl");
-        arrow_left_sl = new ArrowSl("arrow_left_sl");
-        arrow_right_sl = new ArrowSl("arrow_right_sl");
-        arrow_staright_sl = new ArrowSl("arrow_staright_sl");
-        arrow_staright_diaotou_sl = new ArrowSl("arrow_staright_diaotou_sl");
-        arrow_confluence_left_sl = new ArrowSl("arrow_confluence_left_sl");
-        arrow_confluence_right_sl = new ArrowSl("arrow_confluence_right_sl");
-        arrow_confluence_left = new Arrow("arrow_confluence_left");
-        arrow_confluence_right = new Arrow("arrow_confluence_right");
-        asphalt_cyan_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_slab");
-        asphalt_cyan_black_half_line = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line");
-        asphalt_cyan_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_slab");
-        asphalt_cyan_black_half_45_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_45_slab");
-        asphalt_cyan_black_half = new BlockAsphaltHorizontal("asphalt_cyan_black_half");
-        asphalt_cyan_black_half_45 = new BlockAsphaltHorizontal("asphalt_cyan_black_half_45");
-        double_yellow_line_diagonal_slab = new BlockAsphaltSlabHorizontal("double_yellow_line_diagonal_slab");
-        double_yellow_line_diagonal = new BlockAsphaltHorizontal("double_yellow_line_diagonal");
-        double_white_line_diagonal_slab = new BlockAsphaltSlabHorizontal("double_white_line_diagonal_slab");
-        double_white_line_diagonal = new BlockAsphaltHorizontal("double_white_line_diagonal");
-        asphalt_red_black_half = new BlockAsphaltHorizontal("asphalt_red_black_half");
-        asphalt_red_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_slab");
-        asphalt_red_black_half_45 = new BlockAsphaltHorizontal("asphalt_red_black_half_45");
-        asphalt_red_black_half_45_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_45_slab");
-        asphalt_red_black_half_line = new BlockAsphaltHorizontal("asphalt_red_black_half_line");
-        asphalt_red_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_line_slab");
-        asphalt_cyan_black_half_line_diagonal_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_diagonal_slab");
-        asphalt_cyan_black_half_line_diagonal = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line_diagonal");
-        asphalt_red_black_half_line_diagonal = new BlockAsphaltHorizontal("asphalt_red_black_half_line_diagonal");
-        asphalt_red_black_half_line_diagonal_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_line_diagonal_slab");
-    asphalt_cyan_black_half_line_diagonal_1 = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line_diagonal_1");
-        asphalt_red_black_half_line_diagonal_1 = new BlockAsphaltHorizontal("asphalt_red_black_half_line_diagonal_1");
-        asphalt_red_black_half_line_diagonal_1_slab = new BlockAsphaltSlabHorizontal("asphalt_red_black_half_line_diagonal_1_slab");
-        asphalt_cyan_black_half_line_diagonal_1_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_diagonal_1_slab");
-        road_sign_sl_15 = new BlockRoadSign("road_sign_sl_15");
-        road_sign_sl_20 = new BlockRoadSign("road_sign_sl_20");
-        road_sign_sl_30 = new BlockRoadSign("road_sign_sl_30");
-        road_sign_sl_40 = new BlockRoadSign("road_sign_sl_40");
-        road_sign_sl_50 = new BlockRoadSign("road_sign_sl_50");
-        road_sign_sl_60 = new BlockRoadSign("road_sign_sl_60");
-        road_sign_sl_70 = new BlockRoadSign("road_sign_sl_70");
-        road_sign_sl_80 = new BlockRoadSign("road_sign_sl_80");
-        road_sign_sl_90 = new BlockRoadSign("road_sign_sl_90");
-        road_sign_sl_100 = new BlockRoadSign("road_sign_sl_100");
-        road_sign_sl_110 = new BlockRoadSign("road_sign_sl_110");
-        road_sign_sl_120 = new BlockRoadSign("road_sign_sl_120");
-        metro_fence = new BlockMetroFence("metro_fence");
-        road_pedestrian_traffic_light = new BlockRoadSign("road_pedestrian_traffic_light");
-        road_traffic_light = new BlockRoadSign("road_traffic_light");
-        road_traffic_light_red = new BlockRoadSign("road_traffic_light_red");
-        road_traffic_light_green = new BlockRoadSign("road_traffic_light_green");
-        road_traffic_light_yellow = new BlockRoadSign("road_traffic_light_yellow");
-
-        thick_white_line_45 = new BlockAsphaltHorizontal("thick_white_line_45");
-        thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
-        thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
-        thick_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_yellow_line_slab_45");
-        platform_wall = new DollanBlock("platform_wall");
-        marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
-        //
-        beautiful_marble = new BlockMarble("beautiful_marble");
-        calcite = new DollanBlock("calcite").setHardness(1.5F).setResistance(10.0F);
-        cherry_planks = new DollanPlanks("cherry_planks");
-        cracked_deepslate = new BlockCrackedDeepSlate("cracked_deepslate");
-        deepslate = new BlockDeepSlate("deepslate");
-        elder_prismarine = new BlockElderPrismarine("elder_prismarine");
-        floorblock = new DollanBlock3("floorblock").setHardness(1.0F);
-        gray_porcelain_tile = new DollanBlock2("gray_porcelain_tile");
-        gray_wall = new DollanBlock2("gray_wall");
-        graymud = new DollanBlock2("graymud");
-        graystoneblock = new DollanBlock2("graystoneblock");
-        limestone = new BlockLimeStone();
-        mangrove_planks = new DollanPlanks("mangrove_planks");
-        metal = new DollanBlock4("metal");
-        mud_bricks = new DollanBlock2("mud_bricks");
-        myalite = new BlockMyalite("myalite");
-        packed_mud = new DollanBlock2("packed_mud");
-        polished_blackstone = new BlockPolishedBlackStone();
-        polished_deepslate = new DollanPolished("polished_deepslate");
-        polished_limestone = new DollanPolished("polished_limestone");
-        polished_marble = new DollanPolished("polished_marble");
-        polished_myalite = new DollanPolished("polished_myalite");
-        quartz_bricks = new DollanBlock2("quartz_bricks");
-        rock_1 = new DollanBlock2("rock_1");
-        rock_2 = new DollanBlock2("rock_2");
-        sandy_bricks = new DollanBlock2("sandy_bricks");
-        teacherblock = new DollanBlock3("teacherblock");
-        white_color_purple_block = new DollanBlock2("white_color_purple_block");
-        elder_sea_lantern = new DollanBlock5("elder_sea_lantern").setLightLevel(1.0F);
-        modern_stone_tile = new DollanBlock2("modern_stone_tile");
-        froglight = new BlockFrogLight();
-        marble_tile = new BlockMarbleTile();
-    }
     public static void register() {
         registerBlock(white_flat_lamp);
         registerBlock(white_punctiform_lamp);
         registerBlock(white_banding_lamp);
-        registerBlock(lamp_tran, new ItemMultiTexture(DollanBlocks.lamp_tran, DollanBlocks.lamp_tran, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
-        registerBlock(light, new ItemMultiTexture(DollanBlocks.light, DollanBlocks.light, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
+        registerBlock(lamp_tran);
+        registerBlock(light);
         registerBlock(road_lamp_1_bottom);
         registerBlock(road_lamp_1_up);
 
         registerBlock(platform_fence);
-        registerBlock(metro_fence, new ItemMultiTexture(metro_fence,metro_fence, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return BlockMetroFence.FenceType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
+        registerBlock(metro_fence);
 
         registerBlock(arrow_diaotou);
         registerBlock(arrow_left_diaotou);
@@ -576,18 +307,8 @@ public class DollanBlocks {
         registerBlock(double_yellow_line_diagonal);
         registerBlock(double_white_line_diagonal_slab);
         registerBlock(double_white_line_diagonal);
-        registerBlock(asphalt, new ItemMultiTexture(asphalt,asphalt, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return BlockAsphalt.AsphaltType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
-        registerBlock(asphalt_slab, new ItemMultiTexture(asphalt_slab,asphalt_slab, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return BlockAsphaltSlab.AsphaltType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
+        registerBlock(asphalt);
+        registerBlock(asphalt_slab);
 
         registerBlock(single_yellow_line);
         registerBlock(single_yellow_line_slab);
@@ -606,8 +327,8 @@ public class DollanBlocks {
         registerBlock(double_white_line);
         registerBlock(double_white_line_slab);
         registerBlock(double_yellow_line);
-        registerBlock(double_yellow_line_slab);  
-        
+        registerBlock(double_yellow_line_slab);
+
         registerBlock(double_white_line_half);
         registerBlock(double_white_line_half_slab);
         registerBlock(double_yellow_line_half);
@@ -684,6 +405,8 @@ public class DollanBlocks {
         registerBlock(dollan_line_15);
         registerBlock(dollan_line_16);
 
+
+
         registerBlock(mingsha_S1);
         registerBlock(mingsha_S2);
         registerBlock(mingsha_S3);
@@ -751,32 +474,20 @@ public class DollanBlocks {
         registerBlock(single_yellow_90_1_slab);
         registerBlock(single_yellow_all_line_slab);
 
-        registerBlock(thick_white_line_45
-        );
+        registerBlock(thick_white_line_45);
         registerBlock(thick_white_line_slab_45);
         registerBlock(thick_yellow_line_45);
         registerBlock(thick_yellow_line_slab_45);
 
-        registerBlock(ms_lines, new ItemMultiTexture(ms_lines,ms_lines, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return RoadMergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
-
-        registerBlock(ms_lines_slab, new ItemMultiTexture(ms_lines_slab,ms_lines_slab, new ItemMultiTexture.Mapper() {
-                    public String apply(ItemStack p_apply_1_) {
-                        return RoadMergeOtherLine.EnumVariant.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
-                    }
-                })
-        );
+        registerBlock(ms_lines);
+        registerBlock(ms_lines_slab);
         registerBlock(crosswalk_diagonal);
         registerBlock(crosswalk_diagonal_slab);
 
         registerBlock(arrow_staright_diaotou);
         registerBlock(platform_wall);
         registerBlock(marble_block);
-        
+
         registerBlock(road_sign_one_way_straight);
         registerBlock(road_sign_left_warn);
         registerBlock(road_sign_right_warn);
@@ -796,13 +507,6 @@ public class DollanBlocks {
         registerBlock(arrow_staright_diaotou_sl);
         registerBlock(arrow_confluence_left_sl);
         registerBlock(arrow_confluence_right_sl);
-//2nd Phase Line
-        registerBlock(dollan_line_17);
-        registerBlock(dollan_line_18);
-        registerBlock(dollan_line_19);
-        registerBlock(dollan_line_20);
-
-        registerBlock(dollan_loop_line);
 //other
         registerBlock(beautiful_marble); //部分代码移步DollanItems
         registerBlock(cherry_planks);
@@ -811,7 +515,15 @@ public class DollanBlocks {
         registerBlock(deepslate);
         registerBlock(elder_prismarine);
         registerBlock(floorblock);
-        
+
+        registerBlock(dollan_line_17);
+        registerBlock(dollan_line_18);
+        registerBlock(dollan_line_19);
+        registerBlock(dollan_line_20);
+        registerBlock(dollan_line_21);
+        registerBlock(dollan_line_22);
+
+
         registerBlock(gray_porcelain_tile);
         registerBlock(gray_wall);
         registerBlock(graymud);
@@ -838,19 +550,11 @@ public class DollanBlocks {
         registerBlock(elder_sea_lantern);
         registerBlock(froglight);
         registerBlock(marble_tile);
+        registerBlock(dollan_loop_line);
+
     }
 
-    private static void registerBlock(net.minecraft.block.Block block) {
-        registerBlock(block, new ItemBlock(block));
-    }
-
-    private static void registerBlock(net.minecraft.block.Block block, ItemBlock item) {
-        RegistrationHandler.BLOCKS.add(block);
-        item.setRegistryName(block.getRegistryName());
-//       DollanItems.RegistrationHandler.ITEMS.add(item);
-    }
-
-
+    @SideOnly(Side.CLIENT)
     public static void registerModels() {
         registerModel(arrow_confluence_left);
         registerModel(arrow_confluence_right);
@@ -1009,10 +713,9 @@ public class DollanBlocks {
         registerModel(dollan_line_14);
         registerModel(dollan_line_15);
         registerModel(dollan_line_16);
-        registerModel(dollan_line_17);
-        registerModel(dollan_line_18);
-        registerModel(dollan_line_19);
-        registerModel(dollan_line_20);
+        registerModel(dollan_line_21);
+        registerModel(dollan_line_22);
+
         registerModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(),"lamp_tran_0");
         registerModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(),"lamp_tran_1");
         registerModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(),"lamp_tran_2");
@@ -1115,25 +818,20 @@ public class DollanBlocks {
         registerModel(arrow_right_sl);
         registerModel(arrow_staright_sl);
         registerModel(arrow_staright_diaotou_sl);
-        registerStateMapper(DollanBlocks.beautiful_marble,
-                new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
-        registerStateMapper(DollanBlocks.cracked_deepslate,
-                new StateMap.Builder().withSuffix("_cracked_deepslate").withName(BlockCrackedDeepSlate.VARIANT).build());
-        registerStateMapper(DollanBlocks.deepslate,
-                new StateMap.Builder().withName(BlockDeepSlate.VARIANT).build());
-        registerStateMapper(DollanBlocks.elder_prismarine,
-                new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
-        registerStateMapper(DollanBlocks.limestone,
-                new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
-        registerStateMapper(DollanBlocks.myalite,
-                new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
-        registerStateMapper(DollanBlocks.polished_blackstone,
-                new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
-        registerStateMapper(DollanBlocks.froglight,
-                new StateMap.Builder().withName(BlockFrogLight.COLOR).withSuffix("_froglight").build());
-        registerStateMapper(DollanBlocks.marble_tile,
-                new StateMap.Builder().withName(BlockColored.COLOR).withSuffix("_marble_tile").build());
 
+        registerModel(dollan_line_17);
+        registerModel(dollan_line_19);
+        registerModel(dollan_line_18);
+        registerModel(dollan_line_20);
+
+        registerModel(dollan_loop_line);
+
+
+        registerModel(beautiful_marble,0,"normal_marble");
+        registerModel(beautiful_marble,1,"bricks_marble");
+        registerModel(beautiful_marble,2,"cut_marble");
+        registerModel(beautiful_marble,3,"litcut_marble");
+        registerModel(beautiful_marble,4,"smooth_marble");
         registerModel(cherry_planks);
         registerModel(cracked_deepslate);
         registerModel(cracked_deepslate,0,"bricks_cracked_deepslate");
@@ -1194,7 +892,35 @@ public class DollanBlocks {
         registerModel(marble_tile, EnumDyeColor.ORANGE.getMetadata(),"orange_marble_tile");
         registerModel(marble_tile, EnumDyeColor.PINK.getMetadata(),"pink_marble_tile");
         registerModel(marble_tile, EnumDyeColor.CYAN.getMetadata(),"cyan_marble_tile");
-        registerModel(dollan_loop_line);
+
+        registerStateMapper(DollanBlocks.beautiful_marble,
+                new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
+        registerStateMapper(DollanBlocks.cracked_deepslate,
+                new StateMap.Builder().withSuffix("_cracked_deepslate").withName(BlockCrackedDeepSlate.VARIANT).build());
+        registerStateMapper(DollanBlocks.deepslate,
+                new StateMap.Builder().withName(BlockDeepSlate.VARIANT).build());
+        registerStateMapper(DollanBlocks.elder_prismarine,
+                new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
+        registerStateMapper(DollanBlocks.limestone,
+                new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
+        registerStateMapper(DollanBlocks.myalite,
+                new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
+        registerStateMapper(DollanBlocks.polished_blackstone,
+                new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
+        registerStateMapper(DollanBlocks.froglight,
+                new StateMap.Builder().withName(BlockFrogLight.COLOR).withSuffix("_froglight").build());
+        registerStateMapper(DollanBlocks.marble_tile,
+                new StateMap.Builder().withName(BlockColored.COLOR).withSuffix("_marble_tile").build());
+
+    }
+
+    private static void registerBlock(net.minecraft.block.Block block) {
+        registerBlock(block, new ItemBlock(block));
+    }
+
+    private static void registerBlock(Block block, ItemBlock item) {
+        RegistrationHandler.BLOCKS.add(block);
+        item.setRegistryName(block.getRegistryName());
     }
 
     @SideOnly(Side.CLIENT)
@@ -1202,6 +928,7 @@ public class DollanBlocks {
     {
         ModelLoader.setCustomStateMapper(block, mapper);
     }
+
 
     @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block, int metadata, String name) {
@@ -1212,7 +939,6 @@ public class DollanBlocks {
     @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
-
     }
 
     @Mod.EventBusSubscriber()
@@ -1221,7 +947,6 @@ public class DollanBlocks {
 
         @SubscribeEvent
         public static void registerBlock(final RegistryEvent.Register<net.minecraft.block.Block> event) {
-            DollanBlocks.init();
             DollanBlocks.register();
             BLOCKS.stream().forEach(block -> event.getRegistry().register(block));
         }

@@ -34,9 +34,7 @@ public class DollanItems{
 
         public static void register()
         {
-            registerItemBlock(DollanBlocks.dollan_line_17);
             registerItemBlock(DollanBlocks.dollan_line_18);
-            registerItemBlock(DollanBlocks.dollan_line_19);
             registerItem(leungcraft);
             registerItem(dollancraft);
             registerItemBlock(DollanBlocks.white_flat_lamp);
@@ -307,11 +305,10 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.arrow_staright_diaotou_sl);
             registerItemBlock(DollanBlocks.arrow_confluence_left_sl);
             registerItemBlock(DollanBlocks.arrow_confluence_right_sl);
-
-
             registerItemBlock(DollanBlocks.dollan_loop_line);
-
-
+            registerItemBlock(DollanBlocks.dollan_line_17);
+            registerItemBlock(DollanBlocks.dollan_line_19);
+            registerItemBlock(DollanBlocks.dollan_line_22);
             registerItemBlock(DollanBlocks.beautiful_marble,new
                     ItemMultiTexture(DollanBlocks.beautiful_marble, DollanBlocks.beautiful_marble,
                             new ItemMultiTexture.Mapper()
@@ -320,8 +317,8 @@ public class DollanItems{
                                     return BlockMarble.MarbleType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
                                 }
                             }));
-
             registerItemBlock(DollanBlocks.cherry_planks);
+            registerItemBlock(DollanBlocks.dollan_line_21);
             registerItemBlock(DollanBlocks.calcite);
             registerItemBlock(DollanBlocks.cracked_deepslate, new ItemMultiTexture(DollanBlocks.cracked_deepslate,DollanBlocks.cracked_deepslate, new ItemMultiTexture.Mapper() {
                         public String apply(ItemStack p_apply_1_) {
@@ -395,9 +392,10 @@ public class DollanItems{
                         }
                     })
             );
+
+
+
             registerItemBlock(DollanBlocks.dollan_line_20);
-            registerItemBlock(DollanBlocks.dollan_line_21);
-            registerItemBlock(DollanBlocks.dollan_line_22);
 
 
 

@@ -507,27 +507,21 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
         registerBlock(arrow_staright_diaotou_sl);
         registerBlock(arrow_confluence_left_sl);
         registerBlock(arrow_confluence_right_sl);
-//other
-        registerBlock(beautiful_marble); //部分代码移步DollanItems
+        //other
+        registerBlock(beautiful_marble);
         registerBlock(cherry_planks);
         registerBlock(calcite);
+        registerBlock(dollan_line_18);
         registerBlock(cracked_deepslate);
         registerBlock(deepslate);
         registerBlock(elder_prismarine);
         registerBlock(floorblock);
-
-        registerBlock(dollan_line_17);
-        registerBlock(dollan_line_18);
-        registerBlock(dollan_line_19);
-        registerBlock(dollan_line_20);
-        registerBlock(dollan_line_21);
-        registerBlock(dollan_line_22);
-
-
         registerBlock(gray_porcelain_tile);
         registerBlock(gray_wall);
         registerBlock(graymud);
         registerBlock(graystoneblock);
+        registerBlock(dollan_line_17);
+        registerBlock(dollan_line_19);
         registerBlock(limestone);
         registerBlock(mangrove_planks);
         registerBlock(metal);
@@ -535,7 +529,6 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
         registerBlock(mud_bricks);
         registerBlock(myalite);
         registerBlock(packed_mud);
-
         registerBlock(polished_blackstone);
         registerBlock(polished_limestone);
         registerBlock(polished_deepslate);
@@ -544,13 +537,16 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
         registerBlock(quartz_bricks);
         registerBlock(rock_1);
         registerBlock(rock_2);
+        registerBlock(dollan_line_22);
         registerBlock(sandy_bricks);
         registerBlock(teacherblock);
         registerBlock(white_color_purple_block);
         registerBlock(elder_sea_lantern);
         registerBlock(froglight);
         registerBlock(marble_tile);
+        registerBlock(dollan_line_21);
         registerBlock(dollan_loop_line);
+        registerBlock(dollan_line_20);
 
     }
 

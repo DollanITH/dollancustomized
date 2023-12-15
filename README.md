@@ -1,9 +1,4 @@
-# Fabric Example Mod
+# DollanCustomized
 
-## Setup
-
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## 警告
+此仓库仅存放代码、模型文件、材质文件、方块状态文件，不负责储存其它部分。

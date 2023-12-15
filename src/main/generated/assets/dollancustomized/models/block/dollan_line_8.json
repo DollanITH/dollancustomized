@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dollancustomized:block/dollan_line_8"
+  }
+}

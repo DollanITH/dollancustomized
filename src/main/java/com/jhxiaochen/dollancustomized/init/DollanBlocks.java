@@ -4,6 +4,8 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.metro.BlockMetroBlock2;
+import com.jhxiaochen.dollancustomized.common.metro.OverheadLines;
+import com.jhxiaochen.dollancustomized.common.metro.OverheadLinesSupport;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -272,6 +274,10 @@ public static Block marble_tile = new BlockMarbleTile();
 public static Block dollan_line_17 = new BlockMetroBlock2("dollan_line_17");
 public static Block dollan_line_18 = new BlockMetroBlock2("dollan_line_18");
 public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
+
+public static Block overhead_lines = new OverheadLines("overhead_lines");
+public static Block overhead_lines_straighter = new OverheadLines("overhead_lines_straighter");
+public static Block overhead_lines_support = new OverheadLinesSupport("overhead_lines_support");
 
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -548,6 +554,9 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
         registerBlock(dollan_loop_line);
         registerBlock(dollan_line_20);
 
+        registerBlock(overhead_lines);
+        registerBlock(overhead_lines_straighter);
+        registerBlock(overhead_lines_support);
     }
 
     @SideOnly(Side.CLIENT)
@@ -888,7 +897,9 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
         registerModel(marble_tile, EnumDyeColor.ORANGE.getMetadata(),"orange_marble_tile");
         registerModel(marble_tile, EnumDyeColor.PINK.getMetadata(),"pink_marble_tile");
         registerModel(marble_tile, EnumDyeColor.CYAN.getMetadata(),"cyan_marble_tile");
-
+        registerModel(overhead_lines);
+        registerModel(overhead_lines_straighter);
+        registerModel(overhead_lines_support);
         registerStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
         registerStateMapper(DollanBlocks.cracked_deepslate,

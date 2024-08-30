@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:overhead_lines_straighter"
+    },
+    "shape=x": {
+      "model": "dollancustomized:overhead_lines_straighter"
+    },
+    "shape=z": {
+      "model": "dollancustomized:overhead_lines_straighter",
+      "y": 90
+    }
+  }
+}

@@ -24,8 +24,8 @@ import javax.annotation.Nonnull;
 
 public class OverheadLines extends BlockRotatedPillar
 {
-    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.4D, 0.0D, 0.0D, 0.6D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.4D, 1.0D, 1.0D, 0.6D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 1.0D, 1.0D);
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 1.0D, 0.55D);
 
     public static final PropertyEnum<OverheadLines.EnumAxis> SHAPE = PropertyEnum.<OverheadLines.EnumAxis>create("shape", OverheadLines.EnumAxis.class);
 

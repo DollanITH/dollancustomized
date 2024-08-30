@@ -5,6 +5,11 @@ itemGroup.tabMSMetro=东安自定义 | 鸣沙轨道交通
 itemGroup.tabRoad=东安自定义 | 道路
 itemGroup.tabRoadSigns=东安自定义 | 道路标志
 itemGroup.tabDollanBlocks=东安自定义 | 方块
+itemGroup.tabMetroBlocks=东安自定义 | 铁路
+
+tile.overhead_lines.name=柔性接触网线
+tile.overhead_lines_straighter.name=柔性接触网线吊弦
+tile.overhead_lines_support.name=柔性接触网线支架
 
 tile.white_flat_lamp.name=扁平灯具
 

@@ -21,9 +21,6 @@ public class DollanCustomized {
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
-    public static final String MODID = "dollancustomized";
-    public static final String VERSION = "3.6";
-    public static final String Accept_Minecraft_version = "1.12.2";
     public static com.jhxiaochen.dollancustomized.DollanCustomized getInstance() {
         return instance;
     }
@@ -31,6 +28,7 @@ public class DollanCustomized {
     public static final CreativeTabs LIGHT_TAB = new TabLight();
     public static final CreativeTabs DOLLAN_TRAN_TAB = new TabdollanTran();
     public static final CreativeTabs DOLLAN_METRO_TAB = new TabdollanMetro();
+    public static final CreativeTabs METRO_TAB = new TabMetroBlocks();
     public static final CreativeTabs MS_METRO_TAB = new TabMSMetro();
     public static final CreativeTabs ROAD_TAB = new TabRoad();
     public static final CreativeTabs ROAD_Signs = new TabRoadSigns();

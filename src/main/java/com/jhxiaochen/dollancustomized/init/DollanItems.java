@@ -396,7 +396,9 @@ public class DollanItems{
 
 
             registerItemBlock(DollanBlocks.dollan_line_20);
-
+            registerItemBlock(DollanBlocks.overhead_lines);
+            registerItemBlock(DollanBlocks.overhead_lines_straighter);
+            registerItemBlock(DollanBlocks.overhead_lines_support);
 
 
         }

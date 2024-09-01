@@ -11,6 +11,14 @@ tile.overhead_lines.name=柔性接触网线
 tile.overhead_lines_straighter.name=柔性接触网线吊弦
 tile.overhead_lines_support.name=柔性接触网线支架
 
+tile.signal_none_one_light.name=单灯信号灯(灭灯)
+tile.signal_green_one_light.name=单灯信号灯(绿灯)
+tile.signal_yellow_one_light.name=单灯信号灯(黄灯)
+tile.signal_red_one_light.name=单灯信号灯(红灯)
+tile.signal_blue_one_light.name=单灯信号灯(蓝灯)
+
+tile.signal_none_two_lights.name=双灯信号灯(灭灯)
+
 tile.white_flat_lamp.name=扁平灯具
 
 tile.lamp_tran.white.name=白色透明现代灯

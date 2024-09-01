@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:signal_blue_one_light"
+    },
+    "facing=east": {
+      "model": "dollancustomized:signal_blue_one_light",
+      "y" : 270
+    },
+    "facing=west": {
+      "model": "dollancustomized:signal_blue_one_light",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "dollancustomized:signal_blue_one_light"
+    },
+    "facing=north": {
+      "model": "dollancustomized:signal_blue_one_light",
+      "y": 180
+    }
+  }
+}

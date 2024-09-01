@@ -13,6 +13,20 @@ itemGroup.tabdollanTran=东安自定义 | 东安市域轨道交通
 itemGroup.tabMSMetro=东安自定义 | 鸣沙轨道交通
 itemGroup.tabRoad=东安自定义 | 道路
 itemGroup.tabRoadSigns=东安自定义 | 道路标志
+itemGroup.tabDollanBlocks=东安自定义 | 方块
+itemGroup.tabMetroBlocks=东安自定义 | 铁路
+
+tile.overhead_lines.name=柔性接触网线
+tile.overhead_lines_straighter.name=柔性接触网线吊弦
+tile.overhead_lines_support.name=柔性接触网线支架
+
+tile.signal_none_one_light.name=单灯信号灯(灭灯)
+tile.signal_green_one_light.name=单灯信号灯(绿灯)
+tile.signal_yellow_one_light.name=单灯信号灯(黄灯)
+tile.signal_red_one_light.name=单灯信号灯(红灯)
+tile.signal_blue_one_light.name=单灯信号灯(蓝灯)
+
+tile.signal_none_two_lights.name=双灯信号灯(灭灯)
 
 tile.line_6.name=§2§l东安轨道交通§r 6号线
 tile.line_7.name=§2§l东安轨道交通§r 7号线

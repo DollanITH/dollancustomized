@@ -6,6 +6,7 @@ import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.metro.BlockMetroBlock2;
 import com.jhxiaochen.dollancustomized.common.metro.OverheadLines;
 import com.jhxiaochen.dollancustomized.common.metro.OverheadLinesSupport;
+import com.jhxiaochen.dollancustomized.common.metro.SignalLight;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -279,6 +280,12 @@ public static Block overhead_lines = new OverheadLines("overhead_lines");
 public static Block overhead_lines_straighter = new OverheadLines("overhead_lines_straighter");
 public static Block overhead_lines_support = new OverheadLinesSupport("overhead_lines_support");
 
+public static Block signal_none_one_light = new SignalLight("signal_none_one_light");
+public static Block signal_blue_one_light = new SignalLight("signal_blue_one_light");
+public static Block signal_red_one_light = new SignalLight("signal_red_one_light");
+public static Block signal_yellow_one_light = new SignalLight("signal_yellow_one_light");
+public static Block signal_green_one_light = new SignalLight("signal_green_one_light");
+public static Block signal_none_two_lights = new SignalLight("signal_none_two_lights");
     public static void register() {
         registerBlock(white_flat_lamp);
         registerBlock(white_punctiform_lamp);
@@ -557,6 +564,15 @@ public static Block overhead_lines_support = new OverheadLinesSupport("overhead_
         registerBlock(overhead_lines);
         registerBlock(overhead_lines_straighter);
         registerBlock(overhead_lines_support);
+        
+        registerBlock(signal_none_one_light);        
+        registerBlock(signal_red_one_light);
+        registerBlock(signal_yellow_one_light);
+        registerBlock(signal_blue_one_light);  
+        registerBlock(signal_green_one_light);
+        
+        registerBlock(signal_none_two_lights);
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -900,6 +916,14 @@ public static Block overhead_lines_support = new OverheadLinesSupport("overhead_
         registerModel(overhead_lines);
         registerModel(overhead_lines_straighter);
         registerModel(overhead_lines_support);
+
+        registerModel(signal_none_one_light);
+        registerModel(signal_red_one_light);
+        registerModel(signal_yellow_one_light);
+        registerModel(signal_blue_one_light);
+        registerModel(signal_green_one_light);
+
+        registerModel(signal_none_two_lights);
         registerStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
         registerStateMapper(DollanBlocks.cracked_deepslate,

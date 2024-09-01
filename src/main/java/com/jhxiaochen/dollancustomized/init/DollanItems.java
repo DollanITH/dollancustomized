@@ -400,6 +400,14 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.overhead_lines_straighter);
             registerItemBlock(DollanBlocks.overhead_lines_support);
 
+            registerItemBlock(DollanBlocks.signal_none_one_light);
+            registerItemBlock(DollanBlocks.signal_red_one_light);
+            registerItemBlock(DollanBlocks.signal_yellow_one_light);
+            registerItemBlock(DollanBlocks.signal_blue_one_light);
+            registerItemBlock(DollanBlocks.signal_green_one_light);
+
+
+            registerItemBlock(DollanBlocks.signal_none_two_lights);
 
         }
 

@@ -2,6 +2,7 @@
 	"parent": "dollancustomized:custom/signal_none_three_lights",
 	"textures": {
 		"up": "dollancustomized:blocks/signal_none",
+		"middle": "dollancustomized:blocks/signal_none",
 		"down": "dollancustomized:blocks/signal_none",
 		"post": "dollancustomized:blocks/black_post"
 	},

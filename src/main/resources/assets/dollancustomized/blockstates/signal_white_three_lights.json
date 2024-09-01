@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dollancustomized:signal_white_three_lights",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dollancustomized:signal_white_three_lights",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "dollancustomized:signal_white_three_lights"
+    },
+    "normal": {
+      "model": "dollancustomized:signal_white_three_lights"
+    },
+    "facing=west": {
+      "model": "dollancustomized:signal_white_three_lights",
+      "y": 90
+    }
+  }
+}

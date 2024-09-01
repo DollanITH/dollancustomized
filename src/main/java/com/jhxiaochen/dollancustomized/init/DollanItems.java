@@ -402,12 +402,28 @@ public class DollanItems{
 
             registerItemBlock(DollanBlocks.signal_none_one_light);
             registerItemBlock(DollanBlocks.signal_red_one_light);
-            registerItemBlock(DollanBlocks.signal_yellow_one_light);
             registerItemBlock(DollanBlocks.signal_blue_one_light);
             registerItemBlock(DollanBlocks.signal_green_one_light);
-
+            registerItemBlock(DollanBlocks.signal_white_one_light);
 
             registerItemBlock(DollanBlocks.signal_none_two_lights);
+            registerItemBlock(DollanBlocks.signal_red_two_lights);
+            registerItemBlock(DollanBlocks.signal_blue_two_lights);
+            registerItemBlock(DollanBlocks.signal_green_two_lights);
+            registerItemBlock(DollanBlocks.signal_white_two_lights);
+            registerItemBlock(DollanBlocks.signal_yellow_two_lights);
+
+            registerItemBlock(DollanBlocks.signal_none_three_lights);
+            registerItemBlock(DollanBlocks.signal_red_three_lights);
+            registerItemBlock(DollanBlocks.signal_blue_three_lights);
+            registerItemBlock(DollanBlocks.signal_green_three_lights);
+            registerItemBlock(DollanBlocks.signal_white_three_lights);
+            registerItemBlock(DollanBlocks.signal_yellow_three_lights);
+
+            registerItemBlock(DollanBlocks.signal_red_four_lights);
+            registerItemBlock(DollanBlocks.signal_blue_four_lights);
+            registerItemBlock(DollanBlocks.signal_green_four_lights);
+            registerItemBlock(DollanBlocks.signal_yellow_four_lights);
 
         }
 

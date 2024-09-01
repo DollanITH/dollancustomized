@@ -3,10 +3,7 @@ package com.jhxiaochen.dollancustomized.init;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
-import com.jhxiaochen.dollancustomized.common.metro.BlockMetroBlock2;
-import com.jhxiaochen.dollancustomized.common.metro.OverheadLines;
-import com.jhxiaochen.dollancustomized.common.metro.OverheadLinesSupport;
-import com.jhxiaochen.dollancustomized.common.metro.SignalLight;
+import com.jhxiaochen.dollancustomized.common.metro.*;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -283,9 +280,29 @@ public static Block overhead_lines_support = new OverheadLinesSupport("overhead_
 public static Block signal_none_one_light = new SignalLight("signal_none_one_light");
 public static Block signal_blue_one_light = new SignalLight("signal_blue_one_light");
 public static Block signal_red_one_light = new SignalLight("signal_red_one_light");
-public static Block signal_yellow_one_light = new SignalLight("signal_yellow_one_light");
 public static Block signal_green_one_light = new SignalLight("signal_green_one_light");
+public static Block signal_white_one_light = new SignalLight("signal_white_one_light");
+
 public static Block signal_none_two_lights = new SignalLight("signal_none_two_lights");
+public static Block signal_blue_two_lights = new SignalLight("signal_blue_two_lights");
+public static Block signal_yellow_two_lights = new SignalLight("signal_yellow_two_lights");
+public static Block signal_red_two_lights = new SignalLight("signal_red_two_lights");
+public static Block signal_green_two_lights = new SignalLight("signal_green_two_lights");
+public static Block signal_white_two_lights = new SignalLight("signal_white_two_lights");
+
+public static Block signal_none_three_lights = new SignalLightHigher("signal_none_three_lights");
+public static Block signal_blue_three_lights = new SignalLightHigher("signal_blue_three_lights");
+public static Block signal_yellow_three_lights = new SignalLightHigher("signal_yellow_three_lights");
+public static Block signal_red_three_lights = new SignalLightHigher("signal_red_three_lights");
+public static Block signal_green_three_lights = new SignalLightHigher("signal_green_three_lights");
+public static Block signal_white_three_lights = new SignalLightHigher("signal_white_three_lights");
+
+public static Block signal_blue_four_lights = new SignalLightHigher("signal_blue_four_lights");
+public static Block signal_yellow_four_lights = new SignalLightHigher("signal_yellow_four_lights");
+public static Block signal_red_four_lights = new SignalLightHigher("signal_red_four_lights");
+public static Block signal_green_four_lights = new SignalLightHigher("signal_green_four_lights");
+
+
     public static void register() {
         registerBlock(white_flat_lamp);
         registerBlock(white_punctiform_lamp);
@@ -567,11 +584,28 @@ public static Block signal_none_two_lights = new SignalLight("signal_none_two_li
         
         registerBlock(signal_none_one_light);        
         registerBlock(signal_red_one_light);
-        registerBlock(signal_yellow_one_light);
         registerBlock(signal_blue_one_light);  
         registerBlock(signal_green_one_light);
+        registerBlock(signal_white_one_light);
         
         registerBlock(signal_none_two_lights);
+        registerBlock(signal_red_two_lights);
+        registerBlock(signal_blue_two_lights);
+        registerBlock(signal_green_two_lights);
+        registerBlock(signal_white_two_lights);
+        registerBlock(signal_yellow_two_lights);
+        
+        registerBlock(signal_none_three_lights);
+        registerBlock(signal_red_three_lights);
+        registerBlock(signal_blue_three_lights);
+        registerBlock(signal_green_three_lights);
+        registerBlock(signal_white_three_lights);
+        registerBlock(signal_yellow_three_lights);
+        
+        registerBlock(signal_red_four_lights);
+        registerBlock(signal_blue_four_lights);
+        registerBlock(signal_green_four_lights);
+        registerBlock(signal_yellow_four_lights);
 
     }
 
@@ -916,14 +950,32 @@ public static Block signal_none_two_lights = new SignalLight("signal_none_two_li
         registerModel(overhead_lines);
         registerModel(overhead_lines_straighter);
         registerModel(overhead_lines_support);
-
+        
         registerModel(signal_none_one_light);
         registerModel(signal_red_one_light);
-        registerModel(signal_yellow_one_light);
         registerModel(signal_blue_one_light);
         registerModel(signal_green_one_light);
+        registerModel(signal_white_one_light);
 
         registerModel(signal_none_two_lights);
+        registerModel(signal_red_two_lights);
+        registerModel(signal_blue_two_lights);
+        registerModel(signal_green_two_lights);
+        registerModel(signal_white_two_lights);
+        registerModel(signal_yellow_two_lights);
+
+        registerModel(signal_none_three_lights);
+        registerModel(signal_red_three_lights);
+        registerModel(signal_blue_three_lights);
+        registerModel(signal_green_three_lights);
+        registerModel(signal_white_three_lights);
+        registerModel(signal_yellow_three_lights);
+
+        registerModel(signal_red_four_lights);
+        registerModel(signal_blue_four_lights);
+        registerModel(signal_green_four_lights);
+        registerModel(signal_yellow_four_lights);
+        
         registerStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
         registerStateMapper(DollanBlocks.cracked_deepslate,

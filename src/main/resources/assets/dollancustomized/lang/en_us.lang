@@ -25,8 +25,27 @@ tile.signal_green_one_light.name=单灯信号灯(绿灯)
 tile.signal_yellow_one_light.name=单灯信号灯(黄灯)
 tile.signal_red_one_light.name=单灯信号灯(红灯)
 tile.signal_blue_one_light.name=单灯信号灯(蓝灯)
+tile.signal_white_one_light.name=单灯信号灯(白灯)
 
 tile.signal_none_two_lights.name=双灯信号灯(灭灯)
+tile.signal_green_two_lights.name=双灯信号灯(绿灯)
+tile.signal_yellow_two_lights.name=双灯信号灯(黄灯)
+tile.signal_red_two_lights.name=双灯信号灯(红灯)
+tile.signal_blue_two_lights.name=双灯信号灯(蓝灯)
+tile.signal_white_two_lights.name=双灯信号灯(白灯)
+
+tile.signal_none_three_lights.name=三灯信号灯(灭灯)
+tile.signal_green_three_lights.name=三灯信号灯(绿灯)
+tile.signal_white_three_lights.name=三灯信号灯(白灯)
+tile.signal_yellow_three_lights.name=三灯信号灯(黄灯)
+tile.signal_red_three_lights.name=三灯信号灯(红灯)
+tile.signal_blue_three_lights.name=三灯信号灯(蓝灯)
+
+tile.signal_none_four_lights.name=四灯信号灯(灭灯)
+tile.signal_green_four_lights.name=四灯信号灯(绿灯)
+tile.signal_yellow_four_lights.name=四灯信号灯(黄灯)
+tile.signal_red_four_lights.name=四灯信号灯(红灯)
+tile.signal_blue_four_lights.name=四灯信号灯(蓝灯)
 
 tile.line_6.name=§2§l东安轨道交通§r 6号线
 tile.line_7.name=§2§l东安轨道交通§r 7号线

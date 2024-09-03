@@ -275,7 +275,9 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
 
 public static Block overhead_lines = new OverheadLines("overhead_lines");
 public static Block overhead_lines_straighter = new OverheadLines("overhead_lines_straighter");
+public static Block overhead_lines_diagonal = new OverheadLinesHorzional("overhead_lines_diagonal");
 public static Block overhead_lines_support = new OverheadLinesSupport("overhead_lines_support");
+public static Block overhead_lines_slope = new OverheadLinesSlope("overhead_lines_slope");
 
 public static Block signal_none_one_light = new SignalLight("signal_none_one_light");
 public static Block signal_blue_one_light = new SignalLight("signal_blue_one_light");
@@ -579,6 +581,8 @@ public static Block signal_green_four_lights = new SignalLightHigher("signal_gre
         registerBlock(dollan_line_20);
 
         registerBlock(overhead_lines);
+        registerBlock(overhead_lines_slope);
+        registerBlock(overhead_lines_diagonal);
         registerBlock(overhead_lines_straighter);
         registerBlock(overhead_lines_support);
         
@@ -948,6 +952,8 @@ public static Block signal_green_four_lights = new SignalLightHigher("signal_gre
         registerModel(marble_tile, EnumDyeColor.PINK.getMetadata(),"pink_marble_tile");
         registerModel(marble_tile, EnumDyeColor.CYAN.getMetadata(),"cyan_marble_tile");
         registerModel(overhead_lines);
+        registerModel(overhead_lines_slope);
+        registerModel(overhead_lines_diagonal);
         registerModel(overhead_lines_straighter);
         registerModel(overhead_lines_support);
         

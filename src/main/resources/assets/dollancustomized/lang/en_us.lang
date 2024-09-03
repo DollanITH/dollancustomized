@@ -18,6 +18,8 @@ itemGroup.tabMetroBlocks=东安自定义 | 铁路
 
 tile.overhead_lines.name=柔性接触网线
 tile.overhead_lines_straighter.name=柔性接触网线吊弦
+tile.overhead_lines_slope.name=柔性接触网线(斜坡)
+tile.overhead_lines_diagonal.name=柔性接触网斜线
 tile.overhead_lines_support.name=柔性接触网线支架
 
 tile.signal_none_one_light.name=单灯信号灯(灭灯)

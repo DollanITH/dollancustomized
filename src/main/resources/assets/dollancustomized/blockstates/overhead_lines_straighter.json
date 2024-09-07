@@ -3,10 +3,10 @@
     "normal": {
       "model": "dollancustomized:overhead_lines_straighter"
     },
-    "shape=x": {
+    "shape=north_south": {
       "model": "dollancustomized:overhead_lines_straighter"
     },
-    "shape=z": {
+    "shape=east_west": {
       "model": "dollancustomized:overhead_lines_straighter",
       "y": 90
     }

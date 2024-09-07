@@ -22,6 +22,11 @@ tile.overhead_lines_slope.name=柔性接触网线(斜坡)
 tile.overhead_lines_diagonal.name=柔性接触网斜线
 tile.overhead_lines_support.name=柔性接触网线支架
 
+tile.overhead_steel.name=刚性接触网
+tile.overhead_steel_slope.name=刚性接触网(斜坡)
+tile.overhead_steel_diagonal.name=斜刚性接触网
+tile.overhead_steel_support.name=刚性接触网线支架
+
 tile.signal_none_one_light.name=单灯信号灯(灭灯)
 tile.signal_green_one_light.name=单灯信号灯(绿灯)
 tile.signal_yellow_one_light.name=单灯信号灯(黄灯)

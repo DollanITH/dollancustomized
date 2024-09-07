@@ -401,6 +401,10 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.overhead_lines_diagonal);
             registerItemBlock(DollanBlocks.overhead_lines_straighter);
             registerItemBlock(DollanBlocks.overhead_lines_support);
+            registerItemBlock(DollanBlocks.overhead_steel);
+            registerItemBlock(DollanBlocks.overhead_steel_slope);
+            registerItemBlock(DollanBlocks.overhead_steel_diagonal);
+            registerItemBlock(DollanBlocks.overhead_steel_support);
 
             registerItemBlock(DollanBlocks.signal_none_one_light);
             registerItemBlock(DollanBlocks.signal_red_one_light);

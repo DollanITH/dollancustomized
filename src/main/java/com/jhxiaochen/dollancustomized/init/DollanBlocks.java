@@ -275,9 +275,14 @@ public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
 
 public static Block overhead_lines = new OverheadLines("overhead_lines");
 public static Block overhead_lines_straighter = new OverheadLines("overhead_lines_straighter");
-public static Block overhead_lines_diagonal = new OverheadLinesHorzional("overhead_lines_diagonal");
+public static Block overhead_lines_diagonal = new OverheadLinesDiagonal("overhead_lines_diagonal");
 public static Block overhead_lines_support = new OverheadLinesSupport("overhead_lines_support");
 public static Block overhead_lines_slope = new OverheadLinesSlope("overhead_lines_slope");
+
+public static Block overhead_steel = new OverheadSteel("overhead_steel");
+public static Block overhead_steel_diagonal = new OverheadSteelDiagonal("overhead_steel_diagonal");
+public static Block overhead_steel_support = new OverheadSteel("overhead_steel_support");
+public static Block overhead_steel_slope = new OverheadSteelSlope("overhead_steel_slope");
 
 public static Block signal_none_one_light = new SignalLight("signal_none_one_light");
 public static Block signal_blue_one_light = new SignalLight("signal_blue_one_light");
@@ -585,6 +590,11 @@ public static Block signal_green_four_lights = new SignalLightHigher("signal_gre
         registerBlock(overhead_lines_diagonal);
         registerBlock(overhead_lines_straighter);
         registerBlock(overhead_lines_support);
+        
+        registerBlock(overhead_steel);
+        registerBlock(overhead_steel_slope);
+        registerBlock(overhead_steel_diagonal);
+        registerBlock(overhead_steel_support);
         
         registerBlock(signal_none_one_light);        
         registerBlock(signal_red_one_light);
@@ -956,6 +966,11 @@ public static Block signal_green_four_lights = new SignalLightHigher("signal_gre
         registerModel(overhead_lines_diagonal);
         registerModel(overhead_lines_straighter);
         registerModel(overhead_lines_support);
+        
+        registerModel(overhead_steel);
+        registerModel(overhead_steel_slope);
+        registerModel(overhead_steel_diagonal);
+        registerModel(overhead_steel_support);
         
         registerModel(signal_none_one_light);
         registerModel(signal_red_one_light);

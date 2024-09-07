@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class OverheadLinesHorzional extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-
     public OverheadLinesHorzional(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
@@ -30,6 +29,7 @@ public class OverheadLinesHorzional extends Block {
         this.setResistance(5.0F);
         this.setSoundType(SoundType.CLOTH);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
+        this.setLightOpacity(1);
     }
 
     protected OverheadLinesHorzional() {
@@ -45,6 +45,7 @@ public class OverheadLinesHorzional extends Block {
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return NULL_AABB;
     }
+
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;

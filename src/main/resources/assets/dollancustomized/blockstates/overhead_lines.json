@@ -4,11 +4,11 @@
       "model": "dollancustomized:overhead_lines"
     },
     "shape=north_south": {
-      "model": "dollancustomized:overhead_lines"
-    },
-    "shape=east_west": {
       "model": "dollancustomized:overhead_lines",
       "y": 90
+    },
+    "shape=east_west": {
+      "model": "dollancustomized:overhead_lines"
     }
   }
 }

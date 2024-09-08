@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:overhead_steel_double_diagonal"
+    },
+    "facing=east": {
+      "model": "dollancustomized:overhead_steel_double_diagonal"
+    },
+    "facing=west": {
+      "model": "dollancustomized:overhead_steel_double_diagonal",
+      "y" : 180
+    },
+    "facing=south": {
+      "model": "dollancustomized:overhead_steel_double_diagonal",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dollancustomized:overhead_steel_double_diagonal",
+      "y": 90
+    }
+  }
+}

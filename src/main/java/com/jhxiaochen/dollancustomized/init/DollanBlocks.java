@@ -278,11 +278,19 @@ public static Block overhead_lines_straighter = new OverheadLines("overhead_line
 public static Block overhead_lines_diagonal = new OverheadLinesDiagonal("overhead_lines_diagonal");
 public static Block overhead_lines_support = new OverheadLinesSupport("overhead_lines_support");
 public static Block overhead_lines_slope = new OverheadLinesSlope("overhead_lines_slope");
+public static Block overhead_lines_double_diagonal = new OverheadLinesHorzional("overhead_lines_double_diagonal");
+public static Block overhead_lines_double_diagonal_1 = new OverheadLinesHorzional("overhead_lines_double_diagonal_1");
+public static Block overhead_lines_double_wye = new OverheadLinesHorzional("overhead_lines_double_wye");
 
 public static Block overhead_steel = new OverheadSteel("overhead_steel");
 public static Block overhead_steel_diagonal = new OverheadSteelDiagonal("overhead_steel_diagonal");
-public static Block overhead_steel_support = new OverheadSteel("overhead_steel_support");
+public static Block overhead_steel_support = new OverheadSteelSupport("overhead_steel_support");
+//public static Block overhead_steel_diagonal_support = new OverheadSteelHorzional("overhead_steel_diagonal_support");
 public static Block overhead_steel_slope = new OverheadSteelSlope("overhead_steel_slope");
+public static Block overhead_steel_double_diagonal = new OverheadSteelHorzional("overhead_steel_double_diagonal");
+public static Block overhead_steel_double_diagonal_1 = new OverheadSteelHorzional("overhead_steel_double_diagonal_1");
+public static Block overhead_steel_double_wye = new OverheadSteelHorzional("overhead_steel_double_wye");
+public static Block overhead_steel_double_wye_1 = new OverheadSteelHorzional("overhead_steel_double_wye_1");
 
 public static Block signal_none_one_light = new SignalLight("signal_none_one_light");
 public static Block signal_blue_one_light = new SignalLight("signal_blue_one_light");
@@ -309,6 +317,10 @@ public static Block signal_yellow_four_lights = new SignalLightHigher("signal_ye
 public static Block signal_red_four_lights = new SignalLightHigher("signal_red_four_lights");
 public static Block signal_green_four_lights = new SignalLightHigher("signal_green_four_lights");
 
+public static Block metro_tran0 = new OverheadLineTran0();
+public static Block metro_tran1 = new OverheadLineTran1();
+public static Block metro_tran2 = new OverheadLineTran2();
+public static Block metro_tran3 = new OverheadLineTran3();
 
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -590,12 +602,25 @@ public static Block signal_green_four_lights = new SignalLightHigher("signal_gre
         registerBlock(overhead_lines_diagonal);
         registerBlock(overhead_lines_straighter);
         registerBlock(overhead_lines_support);
-        
+        registerBlock(overhead_lines_double_diagonal);
+        registerBlock(overhead_lines_double_diagonal_1);
+        registerBlock(overhead_lines_double_wye);
+
+        registerBlock(metro_tran0);
+        registerBlock(metro_tran1);
+        registerBlock(metro_tran2);
+        registerBlock(metro_tran3);
+
         registerBlock(overhead_steel);
         registerBlock(overhead_steel_slope);
         registerBlock(overhead_steel_diagonal);
         registerBlock(overhead_steel_support);
-        
+        registerBlock(overhead_steel_double_diagonal);
+        registerBlock(overhead_steel_double_diagonal_1);
+        registerBlock(overhead_steel_double_wye);
+        registerBlock(overhead_steel_double_wye_1);
+
+
         registerBlock(signal_none_one_light);        
         registerBlock(signal_red_one_light);
         registerBlock(signal_blue_one_light);  
@@ -966,12 +991,24 @@ public static Block signal_green_four_lights = new SignalLightHigher("signal_gre
         registerModel(overhead_lines_diagonal);
         registerModel(overhead_lines_straighter);
         registerModel(overhead_lines_support);
-        
+        registerModel(overhead_lines_double_diagonal);
+        registerModel(overhead_lines_double_diagonal_1);
+        registerModel(overhead_lines_double_wye);
+
+        registerModel(metro_tran0);
+        registerModel(metro_tran1);
+        registerModel(metro_tran2);
+        registerModel(metro_tran3);
+
         registerModel(overhead_steel);
         registerModel(overhead_steel_slope);
         registerModel(overhead_steel_diagonal);
         registerModel(overhead_steel_support);
-        
+        registerModel(overhead_steel_double_diagonal);
+        registerModel(overhead_steel_double_diagonal_1);
+        registerModel(overhead_steel_double_wye);
+        registerModel(overhead_steel_double_wye_1);
+
         registerModel(signal_none_one_light);
         registerModel(signal_red_one_light);
         registerModel(signal_blue_one_light);

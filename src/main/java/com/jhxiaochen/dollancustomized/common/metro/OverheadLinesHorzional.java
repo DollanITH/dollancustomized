@@ -25,15 +25,16 @@ public class OverheadLinesHorzional extends Block {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
-        this.setHardness(0.7F);
+        this.setHardness(1.5F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.CLOTH);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
-        this.setLightOpacity(1);
+        this.setLightOpacity(0);
     }
 
     protected OverheadLinesHorzional() {
         super(Material.ROCK);
+        this.setLightOpacity(0);
     }
 
     @SideOnly(Side.CLIENT)

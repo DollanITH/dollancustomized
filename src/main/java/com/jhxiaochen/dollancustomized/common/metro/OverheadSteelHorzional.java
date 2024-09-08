@@ -29,13 +29,14 @@ public class OverheadSteelHorzional extends Block {
         this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
-        this.setLightOpacity(1);
+        this.setLightOpacity(0);
     }
 
     protected OverheadSteelHorzional() {
         super(Material.IRON);
         this.setHardness(2.5F);
         this.setResistance(5.0F);
+        this.setLightOpacity(0);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }

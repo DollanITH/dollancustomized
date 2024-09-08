@@ -4,11 +4,11 @@
       "model": "dollancustomized:overhead_steel"
     },
     "shape=north_south": {
-      "model": "dollancustomized:overhead_steel"
-    },
-    "shape=east_west": {
       "model": "dollancustomized:overhead_steel",
       "y": 90
+    },
+    "shape=east_west": {
+      "model": "dollancustomized:overhead_steel"
     }
   }
 }

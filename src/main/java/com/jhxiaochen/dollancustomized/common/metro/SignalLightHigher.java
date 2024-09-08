@@ -28,7 +28,7 @@ public class SignalLightHigher extends Block {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
-        this.setHardness(0.7F);
+        this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);

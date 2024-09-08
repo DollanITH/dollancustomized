@@ -24,8 +24,8 @@ import javax.annotation.Nonnull;
 
 public class OverheadSteel extends Block
 {
-    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 0.375D, 1.0D);
-    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 0.375D, 0.625D);
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 0.296875D, 0.625D);
     public static final PropertyEnum<BlockRailBase.EnumRailDirection> SHAPE =
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     public OverheadSteel(String name) {
@@ -34,7 +34,8 @@ public class OverheadSteel extends Block
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(2.5F);
-        this.setLightOpacity(1);
+        this.setResistance(5.0F);
+        this.setLightOpacity(0);
         this.setSoundType(SoundType.METAL);
     }
 
@@ -42,7 +43,7 @@ public class OverheadSteel extends Block
     @Override
     @Nonnull
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
     }
     public boolean isOpaqueCube(IBlockState state)
     {

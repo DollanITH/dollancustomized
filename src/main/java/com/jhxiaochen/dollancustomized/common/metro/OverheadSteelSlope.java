@@ -13,18 +13,16 @@ import net.minecraft.world.IBlockAccess;
 import javax.annotation.Nonnull;
 
 public class OverheadSteelSlope extends OverheadSteelHorzional {
-    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.875D, 1.0D);
-    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.875D, 0.55D);
-    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.875D, 1.0D);
-    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.875D, 0.55D);
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.296875D, 0.55D);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.296875D, 0.55D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public OverheadSteelSlope(String name) {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
-        this.setHardness(2.5F);
-        this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }
@@ -85,14 +83,14 @@ public class OverheadSteelSlope extends OverheadSteelHorzional {
     {
         switch (state.getValue(FACING)){
             case WEST:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.375D, 0.625D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.296875D, 0.625D);
             case NORTH:
             default:
-                return new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.375D, 1.0D);
+                return new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.296875D, 1.0D);
             case SOUTH:
-                return new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.375D, 1.0D);
+                return new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.296875D, 1.0D);
             case EAST:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.375D, 0.625D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.296875D, 0.625D);
         }
     }
 }

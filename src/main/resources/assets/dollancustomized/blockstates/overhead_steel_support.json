@@ -3,20 +3,12 @@
     "normal": {
       "model": "dollancustomized:overhead_steel_support"
     },
-    "facing=east": {
-      "model": "dollancustomized:overhead_steel_support"
-    },
-    "facing=west": {
-      "model": "dollancustomized:overhead_steel_support",
-      "y" : 180
-    },
-    "facing=south": {
-      "model": "dollancustomized:overhead_steel_support",
-      "y": 270
-    },
-    "facing=north": {
+    "shape=north_south": {
       "model": "dollancustomized:overhead_steel_support",
       "y": 90
+    },
+    "shape=east_west": {
+      "model": "dollancustomized:overhead_steel_support"
     }
   }
 }

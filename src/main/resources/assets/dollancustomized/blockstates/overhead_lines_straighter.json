@@ -4,11 +4,11 @@
       "model": "dollancustomized:overhead_lines_straighter"
     },
     "shape=north_south": {
-      "model": "dollancustomized:overhead_lines_straighter"
-    },
-    "shape=east_west": {
       "model": "dollancustomized:overhead_lines_straighter",
       "y": 90
+    },
+    "shape=east_west": {
+      "model": "dollancustomized:overhead_lines_straighter"
     }
   }
 }

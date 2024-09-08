@@ -37,8 +37,7 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
-            args "--username=jhxiaochen"
-            args "-Xms7G -Xmx7G"
+            args "-Xms7G -Xmx7G --username=jhxiaochen"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'

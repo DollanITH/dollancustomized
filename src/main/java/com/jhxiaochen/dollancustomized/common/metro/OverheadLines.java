@@ -24,8 +24,8 @@ import javax.annotation.Nonnull;
 
 public class OverheadLines extends Block
 {
-    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.875D, 1.0D);
-    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.875D, 0.55D);
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
     public static final PropertyEnum<BlockRailBase.EnumRailDirection> SHAPE =
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     public OverheadLines(String name) {
@@ -33,8 +33,8 @@ public class OverheadLines extends Block
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
-        this.setHardness(1.25F);
-        this.setLightOpacity(1);
+        this.setHardness(1.5F);
+        this.setLightOpacity(0);
         this.setSoundType(SoundType.CLOTH);
     }
 
@@ -42,7 +42,7 @@ public class OverheadLines extends Block
     @Override
     @Nonnull
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
     }
     public boolean isOpaqueCube(IBlockState state)
     {

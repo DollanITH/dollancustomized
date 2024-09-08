@@ -378,6 +378,7 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.white_color_purple_block);
             registerItemBlock(DollanBlocks.elder_sea_lantern);
             registerItemBlock(DollanBlocks.modern_stone_tile);
+            registerItemBlock(DollanBlocks.dollan_line_20);
             registerItemBlock(DollanBlocks.froglight,
                     new ItemMultiTexture(DollanBlocks.froglight,DollanBlocks.froglight, new ItemMultiTexture.Mapper() {
                         public String apply(ItemStack p_apply_1_) {
@@ -393,18 +394,28 @@ public class DollanItems{
                     })
             );
 
-
-
-            registerItemBlock(DollanBlocks.dollan_line_20);
             registerItemBlock(DollanBlocks.overhead_lines);
             registerItemBlock(DollanBlocks.overhead_lines_slope);
             registerItemBlock(DollanBlocks.overhead_lines_diagonal);
             registerItemBlock(DollanBlocks.overhead_lines_straighter);
             registerItemBlock(DollanBlocks.overhead_lines_support);
+            registerItemBlock(DollanBlocks.overhead_lines_double_diagonal);
+            registerItemBlock(DollanBlocks.overhead_lines_double_diagonal_1);
+            registerItemBlock(DollanBlocks.overhead_lines_double_wye);
+
+            registerItemBlock(DollanBlocks.metro_tran0);
+            registerItemBlock(DollanBlocks.metro_tran1);
+            registerItemBlock(DollanBlocks.metro_tran2);
+            registerItemBlock(DollanBlocks.metro_tran3);
+
             registerItemBlock(DollanBlocks.overhead_steel);
             registerItemBlock(DollanBlocks.overhead_steel_slope);
             registerItemBlock(DollanBlocks.overhead_steel_diagonal);
             registerItemBlock(DollanBlocks.overhead_steel_support);
+            registerItemBlock(DollanBlocks.overhead_steel_double_diagonal);
+            registerItemBlock(DollanBlocks.overhead_steel_double_diagonal_1);
+            registerItemBlock(DollanBlocks.overhead_steel_double_wye);
+            registerItemBlock(DollanBlocks.overhead_steel_double_wye_1);
 
             registerItemBlock(DollanBlocks.signal_none_one_light);
             registerItemBlock(DollanBlocks.signal_red_one_light);

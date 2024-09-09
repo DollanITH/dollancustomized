@@ -11,10 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class OverheadLinesSupport extends OverheadLinesHorzional {
-    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
-    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
-    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
-    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public OverheadLinesSupport(String name) {
@@ -28,7 +28,17 @@ public class OverheadLinesSupport extends OverheadLinesHorzional {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        switch (state.getValue(FACING)){
+            case WEST:
+                return WEST_AABB;
+            case NORTH:
+            default:
+                return NORTH_AABB;
+            case SOUTH:
+                return SOUTH_AABB;
+            case EAST:
+                return EAST_AABB;
+        }
     }
 }

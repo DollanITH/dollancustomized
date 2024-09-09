@@ -34,6 +34,11 @@ public class OverheadLinesHorzional extends Block {
 
     protected OverheadLinesHorzional() {
         super(Material.ROCK);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setHardness(1.5F);
+        this.setResistance(5.0F);
+        this.setSoundType(SoundType.CLOTH);
+        this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
     }
 

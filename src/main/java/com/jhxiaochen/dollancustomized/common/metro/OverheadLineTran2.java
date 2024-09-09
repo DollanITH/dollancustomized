@@ -18,7 +18,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class OverheadLineTran2 extends Block {
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(1- 0.009375, 0.0D, 0.0D, 1 - 0.34375, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.009375D, 1.0D, 0.296875D, 0.34375D);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.009375D, 0.0D, 0.0D, 0.34375D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 1 - 0.009375, 1.0D, 0.296875D, 1 - 0.34375);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public OverheadLineTran2() {
         super(Material.ROCK);
@@ -38,8 +44,20 @@ public class OverheadLineTran2 extends Block {
         return BlockRenderLayer.CUTOUT;
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
+    @Override
+    @Nonnull
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos){
+        switch (state.getValue(FACING)){
+            case WEST:
+                return WEST_AABB;
+            case NORTH:
+            default:
+                return NORTH_AABB;
+            case SOUTH:
+                return SOUTH_AABB;
+            case EAST:
+                return EAST_AABB;
+        }
     }
 
     public boolean isOpaqueCube(IBlockState state)

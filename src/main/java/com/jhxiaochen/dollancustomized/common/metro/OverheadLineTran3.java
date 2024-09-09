@@ -18,7 +18,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import java.util.LinkedList;
+
 public class OverheadLineTran3 extends Block {
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(1- 0.009375, 0.0D, 0.0D, 1 - 0.575, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.009375D, 1.0D, 0.296875D, 0.575D);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.009375D, 0.0D, 0.0D, 0.575D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 1 - 0.009375, 1.0D, 0.296875D, 1 - 0.575);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public OverheadLineTran3() {
         super(Material.ROCK);
@@ -38,8 +45,53 @@ public class OverheadLineTran3 extends Block {
         return BlockRenderLayer.CUTOUT;
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
+    static LinkedList<AxisAlignedBB> AABBs = new LinkedList<>();
+    static AxisAlignedBB getAABB(double x1, double y1, double z1, double x2, double y2, double z2) {
+        AxisAlignedBB aabb = new AxisAlignedBB(x1, y1, z1, x2, y2, z2);
+        for (AxisAlignedBB i : AABBs) {
+            if (i.equals(aabb)) return i;
+        }
+        AABBs.add(aabb);
+        return aabb;
+    }
+
+    protected AxisAlignedBB getBoxByXYZ(IBlockState state, double x, double y, double z) {
+        double x1 = 0.5 - x / 2, y1 = 0, z1 = 0.5 - z / 2;
+        double x2 = 0.5 + x / 2, y2 = y, z2 = 0.5 + z / 2;
+        EnumFacing facing = state.getValue(FACING);
+
+        switch (facing) {
+            case NORTH:
+                return getAABB(1.0 - x2, z1, 1.0 - y2, 1.0 - x1, z2, 1.0 - y1);
+            case EAST:
+                return getAABB(y1, z1, 1.0 - x2, y2, z2, 1.0 - x1);
+            case SOUTH:
+                return getAABB(x1, z1, y1, x2, z2, y2);
+            case WEST:
+                return getAABB(1.0 - y2, z1, x1, 1.0 - y1, z2, x2);
+        }
+        return Block.FULL_BLOCK_AABB;
+    }
+
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        return getBoxByXYZ(state, 1, 0.296875,1 - 0.34375);
+    }
+
+    @Override
+    @Nonnull
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos){
+        switch (state.getValue(FACING)){
+            case WEST:
+                return WEST_AABB;
+            case NORTH:
+            default:
+                return NORTH_AABB;
+            case SOUTH:
+                return SOUTH_AABB;
+            case EAST:
+                return EAST_AABB;
+        }
     }
 
     public boolean isOpaqueCube(IBlockState state)

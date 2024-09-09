@@ -9,6 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -18,7 +19,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class OverheadLineTran1 extends Block {
+    protected static final AxisAlignedBB NORTH_AABB_0 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.03125D, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB_0 = new AxisAlignedBB(0.5D, 0.0D, 0.45D, 1.0D, 0.03125D, 0.55D);
+    protected static final AxisAlignedBB SOUTH_AABB_0 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.03125D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB_0 = new AxisAlignedBB(0.5D, 0.0D, 0.45D, 1.0D, 0.03125D, 0.55D);
+    protected static final AxisAlignedBB NORTH_AABB_1 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.84375D, 0.5D);
+    protected static final AxisAlignedBB WEST_AABB_1 = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.5D, 0.84375D, 0.55D);
+    protected static final AxisAlignedBB SOUTH_AABB_1 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.84375D, 0.5D);
+    protected static final AxisAlignedBB EAST_AABB_1 = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.5D, 0.84375D, 0.55D);
+
     protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
     protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -39,9 +51,32 @@ public class OverheadLineTran1 extends Block {
         return BlockRenderLayer.CUTOUT;
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState) {
+        EnumFacing facing = state.getValue(FACING);
+        switch(facing) {
+            case SOUTH:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB_1);
+                break;
+            case NORTH:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB_1);
+                break;
+            case WEST:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB_1);
+                break;
+            case EAST:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB_1);
+                break;
+            default:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NULL_AABB);
+                break;
+        }
     }
+
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         switch (state.getValue(FACING))

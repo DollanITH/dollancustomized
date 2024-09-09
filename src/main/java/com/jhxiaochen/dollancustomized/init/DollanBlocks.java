@@ -278,8 +278,8 @@ public static Block overhead_lines_straighter = new OverheadLines("overhead_line
 public static Block overhead_lines_diagonal = new OverheadLinesDiagonal("overhead_lines_diagonal");
 public static Block overhead_lines_support = new OverheadLinesSupport("overhead_lines_support");
 public static Block overhead_lines_slope = new OverheadLinesSlope("overhead_lines_slope");
-public static Block overhead_lines_double_diagonal = new OverheadLinesHorzional("overhead_lines_double_diagonal");
-public static Block overhead_lines_double_diagonal_1 = new OverheadLinesHorzional("overhead_lines_double_diagonal_1");
+public static Block overhead_lines_double_diagonal = new OverheadLinesDD("overhead_lines_double_diagonal");
+public static Block overhead_lines_double_diagonal_1 = new OverheadLinesDD1("overhead_lines_double_diagonal_1");
 public static Block overhead_lines_double_wye = new OverheadLinesHorzional("overhead_lines_double_wye");
 
 public static Block overhead_steel = new OverheadSteel("overhead_steel");
@@ -287,8 +287,8 @@ public static Block overhead_steel_diagonal = new OverheadSteelDiagonal("overhea
 public static Block overhead_steel_support = new OverheadSteelSupport("overhead_steel_support");
 //public static Block overhead_steel_diagonal_support = new OverheadSteelHorzional("overhead_steel_diagonal_support");
 public static Block overhead_steel_slope = new OverheadSteelSlope("overhead_steel_slope");
-public static Block overhead_steel_double_diagonal = new OverheadSteelHorzional("overhead_steel_double_diagonal");
-public static Block overhead_steel_double_diagonal_1 = new OverheadSteelHorzional("overhead_steel_double_diagonal_1");
+public static Block overhead_steel_double_diagonal = new OverheadSteelDD("overhead_steel_double_diagonal");
+public static Block overhead_steel_double_diagonal_1 = new OverheadSteelDD1("overhead_steel_double_diagonal_1");
 public static Block overhead_steel_double_wye = new OverheadSteelHorzional("overhead_steel_double_wye");
 public static Block overhead_steel_double_wye_1 = new OverheadSteelHorzional("overhead_steel_double_wye_1");
 

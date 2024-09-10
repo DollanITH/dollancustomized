@@ -398,7 +398,10 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.overhead_lines_slope);
             registerItemBlock(DollanBlocks.overhead_lines_diagonal);
             registerItemBlock(DollanBlocks.overhead_lines_straighter);
+            registerItemBlock(DollanBlocks.overhead_lines_diagonal_straighter);
             registerItemBlock(DollanBlocks.overhead_lines_support);
+            registerItemBlock(DollanBlocks.overhead_lines_support_a1);
+            registerItemBlock(DollanBlocks.overhead_lines_support_a2);
             registerItemBlock(DollanBlocks.overhead_lines_double_diagonal);
             registerItemBlock(DollanBlocks.overhead_lines_double_diagonal_1);
             registerItemBlock(DollanBlocks.overhead_lines_double_wye);
@@ -412,11 +415,23 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.overhead_steel_slope);
             registerItemBlock(DollanBlocks.overhead_steel_diagonal);
             registerItemBlock(DollanBlocks.overhead_steel_support);
+            registerItemBlock(DollanBlocks.overhead_steel_support_1);
             registerItemBlock(DollanBlocks.overhead_steel_double_diagonal);
             registerItemBlock(DollanBlocks.overhead_steel_double_diagonal_1);
             registerItemBlock(DollanBlocks.overhead_steel_double_wye);
             registerItemBlock(DollanBlocks.overhead_steel_double_wye_1);
+            registerItemBlock(DollanBlocks.steel_double);
+            registerItemBlock(DollanBlocks.steel_double_support);
 
+            registerItemBlock(DollanBlocks.overhead_post);
+            registerItemBlock(DollanBlocks.overhead_post_1);
+            registerItemBlock(DollanBlocks.overhead_steel_post_up);
+            registerItemBlock(DollanBlocks.overhead_web_corner);
+            registerItemBlock(DollanBlocks.overhead_web_pillar);
+            registerItemBlock(DollanBlocks.overhead_web_pillar_post);
+            registerItemBlock(DollanBlocks.overhead_web_pillar_post_1);
+
+            registerItemBlock(DollanBlocks.signal_post);
             registerItemBlock(DollanBlocks.signal_none_one_light);
             registerItemBlock(DollanBlocks.signal_red_one_light);
             registerItemBlock(DollanBlocks.signal_blue_one_light);

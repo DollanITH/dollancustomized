@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class BlockElderPrismarine extends Block {
     public static final PropertyEnum<BlockElderPrismarine.PrismarineType> VARIANT = PropertyEnum.<BlockElderPrismarine.PrismarineType>create("variant", BlockElderPrismarine.PrismarineType.class);
 
-    public static enum PrismarineType implements IStringSerializable {
+    public enum PrismarineType implements IStringSerializable {
         NORMAL(0, "elder_prismarine","normal"),
         BRICKS(1, "elder_prismarine_bricks","bricks"),
         SMOOTH(2, "smooth_elder_prismarine","smooth");
@@ -30,11 +30,11 @@ public class BlockElderPrismarine extends Block {
         private final String name;
         private final String unlocalizedName;
 
-        private PrismarineType(int metadataIn, String nameIn) {
+        PrismarineType(int metadataIn, String nameIn) {
             this(metadataIn, nameIn, nameIn);
         }
 
-        private PrismarineType(int metadataIn, String nameIn, String unlocalizedNameIn) {
+        PrismarineType(int metadataIn, String nameIn, String unlocalizedNameIn) {
             this.metadata = metadataIn;
             this.name = nameIn;
             this.unlocalizedName = unlocalizedNameIn;

@@ -22,10 +22,10 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 
 public class OverheadLineTran3 extends Block {
-    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(1- 0.009375, 0.0D, 0.0D, 1 - 0.575, 0.296875D, 1.0D);
-    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.009375D, 1.0D, 0.296875D, 0.575D);
-    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.009375D, 0.0D, 0.0D, 0.575D, 0.296875D, 1.0D);
-    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 1 - 0.009375, 1.0D, 0.296875D, 1 - 0.575);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(1- 0.009375, 0.0D, 0.0D, 1 - 0.575, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.009375D, 1.0D, 0.296875D, 0.575D);
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.009375D, 0.0D, 0.0D, 0.575D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 1 - 0.009375, 1.0D, 0.296875D, 1 - 0.575);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public OverheadLineTran3() {
         super(Material.ROCK);
@@ -62,20 +62,20 @@ public class OverheadLineTran3 extends Block {
 
         switch (facing) {
             case NORTH:
-                return getAABB(1.0 - x2, z1, 1.0 - y2, 1.0 - x1, z2, 1.0 - y1);
+                return getAABB(1.0 - x2, 0, 1.0 - y2, 1.0 - x1, 0.296875D, 1.0 - y1);
             case EAST:
-                return getAABB(y1, z1, 1.0 - x2, y2, z2, 1.0 - x1);
+                return getAABB(y1, 0, 1.0 - x2, y2, 0.296875D, 1.0 - x1);
             case SOUTH:
-                return getAABB(x1, z1, y1, x2, z2, y2);
+                return getAABB(x1, 0, y1, x2, 0.296875D, y2);
             case WEST:
-                return getAABB(1.0 - y2, z1, x1, 1.0 - y1, z2, x2);
+                return getAABB(1.0 - y2, 0, x1, 1.0 - y1, 0.296875D, x2);
         }
         return Block.FULL_BLOCK_AABB;
     }
 
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return getBoxByXYZ(state, 1, 0.296875,1 - 0.34375);
+        return getBoxByXYZ(state, 0.34375, 1 - 0.34375,0.34375);
     }
 
     @Override

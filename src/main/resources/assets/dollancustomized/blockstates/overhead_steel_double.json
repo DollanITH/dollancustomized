@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:overhead_steel_double"
+  },
+  "variants": {
+    "inventory": [{}],
+    "facing": {
+      "north": {"model": "dollancustomized:overhead_steel_double",
+        "y": 90},
+      "west": {"model": "dollancustomized:overhead_steel_double",
+        "y": 180},
+      "east": {"model": "dollancustomized:overhead_steel_double"},
+      "south": {"model": "dollancustomized:overhead_steel_double",
+        "y": 270}
+    }
+  }
+}

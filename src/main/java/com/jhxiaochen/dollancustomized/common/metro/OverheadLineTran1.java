@@ -26,9 +26,9 @@ public class OverheadLineTran1 extends Block {
     protected static final AxisAlignedBB WEST_AABB_0 = new AxisAlignedBB(0.5D, 0.0D, 0.45D, 1.0D, 0.03125D, 0.55D);
     protected static final AxisAlignedBB SOUTH_AABB_0 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.03125D, 1.0D);
     protected static final AxisAlignedBB EAST_AABB_0 = new AxisAlignedBB(0.5D, 0.0D, 0.45D, 1.0D, 0.03125D, 0.55D);
-    protected static final AxisAlignedBB NORTH_AABB_1 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.84375D, 0.5D);
+    protected static final AxisAlignedBB NORTH_AABB_1 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.84375D, 1.0D);
     protected static final AxisAlignedBB WEST_AABB_1 = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.5D, 0.84375D, 0.55D);
-    protected static final AxisAlignedBB SOUTH_AABB_1 = new AxisAlignedBB(0.45D, 0.0D, 0.5D, 0.55D, 0.84375D, 0.5D);
+    protected static final AxisAlignedBB SOUTH_AABB_1 = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 0.5D);
     protected static final AxisAlignedBB EAST_AABB_1 = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.5D, 0.84375D, 0.55D);
 
     protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);

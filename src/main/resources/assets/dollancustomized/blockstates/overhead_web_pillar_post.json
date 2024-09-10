@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:overhead_web_pillar_post"
+  },
+  "variants": {
+    "inventory": [{}],
+    "shape": {
+      "north_south": {"model": "dollancustomized:overhead_web_pillar_post"},
+      "east_west": {"model": "dollancustomized:overhead_web_pillar_post",
+        "y": 90}
+    }
+  }
+}

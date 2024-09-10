@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class OverheadLinesDD1 extends OverheadSteelHorzional {
+public class OverheadLinesDD1 extends OverheadLinesHorzional {
     protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.45D, 0.0D, 0.0D, 0.55D, 0.84375D, 1.0D);
     protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 0.55D);
 
@@ -59,14 +59,14 @@ public class OverheadLinesDD1 extends OverheadSteelHorzional {
     {
         switch (state.getValue(FACING)){
             case WEST:
-                return new AxisAlignedBB(0.45D, 0.0D, 0.0D, 1.0D, 0.84375D, 0.55D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.84375D, 0.55D);
             case SOUTH:
             default:
-                return new AxisAlignedBB(0.55D, 0.0D, 0.45D, 1.0D, 0.84375D, 1.0D);
+                return new AxisAlignedBB(0.55D, 0.0D, 0.0D, 1.0D, 0.84375D, 1.0D);
             case NORTH:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.45D, 0.84375D, 0.55D);
+                return new AxisAlignedBB(0.55D, 0.0D, 0.45D, 1.0D, 0.84375D, 1.0D);
             case EAST:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.45D, 0.84375D, 1.0D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.55D, 1.0D, 0.84375D, 1.0D);
         }
     }
     @Override

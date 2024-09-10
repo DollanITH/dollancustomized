@@ -57,16 +57,16 @@ public class OverheadLinesDD extends OverheadLinesHorzional {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        switch (state.getValue(FACING)){
+        switch (state.getValue(FACING)) {
             case WEST:
-                return new AxisAlignedBB(0.45D, 0.0D, 0.0D, 1.0D, 0.84375D, 0.55D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.45D, 1.0D, 0.84375D, 1.0D);
             case SOUTH:
             default:
-                return new AxisAlignedBB(0.55D, 0.0D, 0.45D, 1.0D, 0.84375D, 1.0D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.45D, 0.84375D, 1.0D);
             case NORTH:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.45D, 0.84375D, 0.55D);
+                return new AxisAlignedBB(0.55D, 0.0D, 0.0D, 1.0D, 0.84375D, 1.0D);
             case EAST:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.45D, 0.84375D, 1.0D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.84375D, 0.45D);
         }
     }
     @Override

@@ -67,14 +67,14 @@ public class OverheadSteelDD extends OverheadSteelHorzional {
     {
         switch (state.getValue(FACING)){
             case WEST:
-                return new AxisAlignedBB(0.45D, 0.0D, 0.0D, 1.0D, 0.296875D, 0.55D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 0.296875D, 1.0D);
             case SOUTH:
             default:
-                return new AxisAlignedBB(0.55D, 0.0D, 0.45D, 1.0d, 0.296875D, 1.0D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.625D, 0.296875D, 1.0D);
             case NORTH:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.45D, 0.296875D, 0.55D);
+                return new AxisAlignedBB(0.375D, 0.0D, 0.0D, 1.0D, 0.296875D, 1.0D);
             case EAST:
-                return new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.45D, 0.296875D, 1.0D);
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.296875D, 0.625D);
         }
     }
     @Override

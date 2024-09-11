@@ -65,7 +65,7 @@ public class BlockOverHeadWebRotated extends BlockRotatedPillar {
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(5.0F);
         this.setResistance(8.0F);
-        this.setLightOpacity(32);
+        this.setLightOpacity(0);
         this.setSoundType(SoundType.METAL);
     }
 

@@ -30,7 +30,8 @@ public class RoadLamp1B extends BlockHorizontal
         this.setRegistryName("road_lamp_1_bottom");
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(1.5F);
-        this.setLightOpacity(1);
+        this.setLightLevel(0.54F);
+        this.setLightOpacity(0);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 

@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common;
 
-import com.jhxiaochen.dollancustomized.init.DollanCraftDamageSource;
+import com.jhxiaochen.dollancustomized.init.DollanDamageSource;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -36,7 +36,7 @@ public class ItemDollanCraft extends ItemFood
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!worldIn.isRemote) {
             if (stack.getMetadata() > 0) {
-                player.attackEntityFrom(DollanCraftDamageSource.VALLID, 28.5F);
+                player.attackEntityFrom(DollanDamageSource.VALLID, 28.5F);
                 player.addPotionEffect(new PotionEffect(MobEffects.UNLUCK, 114514, 1));
             }
         }

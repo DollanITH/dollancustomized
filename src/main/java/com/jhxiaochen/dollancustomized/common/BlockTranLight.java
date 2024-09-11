@@ -25,7 +25,7 @@ public class BlockTranLight extends BlockColored
             this.setSoundType(SoundType.GLASS);
             this.setLightLevel(1.0F);
             this.setResistance(15F);
-            this.setLightOpacity(1);
+            this.setLightOpacity(0);
             this.isAmbientOcclusion();
         }
         public boolean isAmbientOcclusion()

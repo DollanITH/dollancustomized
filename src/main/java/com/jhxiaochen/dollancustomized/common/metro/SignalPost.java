@@ -25,7 +25,7 @@ public class SignalPost extends Block {
         this.setHardness(3.0F);
         this.setResistance(6.0F);
         this.setLightOpacity(0);
-        this.setSoundType(SoundType.STONE);
+        this.setSoundType(SoundType.METAL);
     }
     @SideOnly(Side.CLIENT)
     @Override
@@ -46,7 +46,7 @@ public class SignalPost extends Block {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0.4,0,0.4,0.6,1,0.6);
+        return new AxisAlignedBB(0.375,0,0.375,0.375,1,0.375);
     }
 
 }

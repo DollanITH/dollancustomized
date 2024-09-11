@@ -30,7 +30,7 @@ public class BlockOverHeadWebWithPost extends Block {
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
 
 
-    protected static final AxisAlignedBB X_BOUNDING_BOX = new AxisAlignedBB(0,0.25,0.25,1,0.75,0.75);
+    protected static final AxisAlignedBB X_BOUNDING_BOX = new AxisAlignedBB(0,0,0.25,1,0.75,0.75);
     protected static final AxisAlignedBB X_AABB_0 = new AxisAlignedBB(0, 0.25, 0.25, 1, 0.375, 0.375);
     protected static final AxisAlignedBB X_AABB_1 = new AxisAlignedBB(0, 0.25, 0.625, 1, 0.375, 0.75);
     protected static final AxisAlignedBB X_AABB_2 = new AxisAlignedBB(0, 0.625, 0.25, 1, 0.75, 0.375);
@@ -40,7 +40,7 @@ public class BlockOverHeadWebWithPost extends Block {
     protected static final AxisAlignedBB X_AABB_6 = new AxisAlignedBB( 0.015625,0.375, 0.25, 0.953125, 0.625, 0.375);
     protected static final AxisAlignedBB X_AABB_7 = new AxisAlignedBB( 0.015625,0.375, 0.625, 0.953125, 0.625, 0.75);
 
-    protected static final AxisAlignedBB Z_BOUNDING_BOX = new AxisAlignedBB(0.25,0.25,0,0.75,0.75,1);
+    protected static final AxisAlignedBB Z_BOUNDING_BOX = new AxisAlignedBB(0.25,0,0,0.75,0.75,1);
     protected static final AxisAlignedBB Z_AABB_0 = new AxisAlignedBB(0.25, 0.25, 0, 0.375, 0.375,1);
     protected static final AxisAlignedBB Z_AABB_1 = new AxisAlignedBB(0.25, 0.625,0,  0.375,0.75,1);
     protected static final AxisAlignedBB Z_AABB_2 = new AxisAlignedBB(0.625,0.25,  0,0.75,  0.375,1);
@@ -58,7 +58,7 @@ public class BlockOverHeadWebWithPost extends Block {
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(5.0F);
         this.setResistance(8.0F);
-        this.setLightOpacity(32);
+        this.setLightOpacity(0);
         this.setSoundType(SoundType.METAL);
     }
 

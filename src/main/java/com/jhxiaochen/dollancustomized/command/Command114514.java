@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.command;
 
-import com.jhxiaochen.dollancustomized.init.DollanCraftDamageSource;
+import com.jhxiaochen.dollancustomized.init.DollanDamageSource;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -44,7 +44,7 @@ public class Command114514 extends CommandBase
         else
         {
             EntityPlayer entityplayer = getCommandSenderAsPlayer(sender);
-            entityplayer.attackEntityFrom(DollanCraftDamageSource.HENG, 1145F);
+            entityplayer.attackEntityFrom(DollanDamageSource.HENG, 1145F);
             Entity entity = getEntity(server, sender, args[0]);
             notifyCommandListener(entity, this, "commands.114514.fail", new Object[] {entity.getDisplayName()});
         }

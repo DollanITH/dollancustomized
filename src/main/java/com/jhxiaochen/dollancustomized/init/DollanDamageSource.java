@@ -7,17 +7,17 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 
 
-public class DollanCraftDamageSource extends DamageSource {
+public class DollanDamageSource extends DamageSource {
 
-    public static final DollanCraftDamageSource VALLID = new DollanCraftDamageSource("vallid");
-    public static final DollanCraftDamageSource HENG = new DollanCraftDamageSource("heng");
+    public static final DollanDamageSource VALLID = new DollanDamageSource("vallid");
+    public static final DollanDamageSource HENG   = new DollanDamageSource("heng");
 
     static {
         VALLID.setDamageBypassesArmor();
         HENG.setDamageAllowedInCreativeMode();
     }
 
-    public DollanCraftDamageSource(String damageTypeIn)
+    public DollanDamageSource(String damageTypeIn)
     {
         super(damageTypeIn);
         this.damageType = damageTypeIn;

@@ -1,47 +1,6 @@
 {
     "forge_marker": 1,
-    "defaults": {
-        "transform": {
-            "thirdperson_righthand": {
-                "rotation": [75, 0, 0],
-                "translation": [-0.1, 0, -0.17],
-                "scale": [0.75, 0.75, 0.75]
-            },
-            "thirdperson_lefthand": {
-                "rotation": [75, 0, 0],
-                "translation": [-0.1, 0, -0.17],
-                "scale": [0.75, 0.75, 0.75]
-            },
-            "firstperson_righthand": {
-                "rotation": [15, -45, 0],
-                "translation": [0.0, 0.15, 0.2],
-                "scale": [0.75, 0.75, 0.75]
-            },
-            "firstperson_lefthand": {
-                "rotation": [15, -45, 0],
-                "translation": [0.0, 0.15, 0.2],
-                "scale": [0.75, 0.75, 0.75]
-            },
-            "ground": {
-                "translation": [0, 0.5, 0],
-                "scale": [0.25, 0.25, 0.25]
-            },
-            "gui": {
-                "rotation": [12.5, -35, 0],
-                "translation": [0.0, 0, 0.25],
-                "scale": [0.875, 0.875, 0.875]
-            },
-            "head": {
-                "rotation": [-90, -180, 90],
-                "translation": [0, 1.75, 0]
-            },
-            "fixed": {
-                "rotation": [0, 180, 0],
-                "translation": [-0.01, 0, 0.0],
-                "scale": [1, 1, 1]
-            }
-        }
-    },
+    "defaults": {"model": "dollancustomized:road_traffic_light_1"},
     "variants": {
         "facing": {
             "south": {

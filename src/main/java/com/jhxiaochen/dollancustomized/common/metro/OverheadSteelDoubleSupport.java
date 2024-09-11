@@ -9,6 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class OverheadSteelDoubleSupport extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -59,43 +60,140 @@ public class OverheadSteelDoubleSupport extends Block {
         return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
     }
 
-
-    static LinkedList<AxisAlignedBB> AABBs = new LinkedList<>();
-    static AxisAlignedBB getAABB(double x1, double y1, double z1, double x2, double y2, double z2) {
-        AxisAlignedBB aabb = new AxisAlignedBB(x1, y1, z1, x2, y2, z2);
-        for (AxisAlignedBB i : AABBs) {
-            if (i.equals(aabb)) return i;
-        }
-        AABBs.add(aabb);
-        return aabb;
-    }
-
-    protected AxisAlignedBB getBoxByXYZ(IBlockState state, double x, double y, double z) {
-        double x1 = 0.5 - x / 2, y1 = 0, z1 = 0.5 - z / 2;
-        double x2 = 0.5 + x / 2, y2 = y, z2 = 0.5 + z / 2;
-        EnumFacing facing = state.getValue(FACING);
-
-        switch (facing) {
-            case NORTH:
-                return getAABB(1.0 - x2, 0, 1.0 - y2, 1.0 - x1, 0.296875, 1.0 - y1);
-            case EAST:
-                return getAABB(1.0 - y1, 0, 1.0 - x2, y2, 0.296875, 1.0 - x1);
-            case SOUTH:
-                return getAABB(x1, 0, y1, x2, 0.296875, y2);
-            case WEST:
-                return getAABB(1.0 - y2, 0, x1, 1.0 - y1, 0.296875, x2);
-        }
-        return Block.FULL_BLOCK_AABB;
-    }
-
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getBoxByXYZ(state, 0.875, 1.0,0.875);
+        return FULL_BLOCK_AABB;
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+    }
+
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState) {
+        EnumFacing facing = state.getValue(FACING);
+        switch (facing) {
+            case NORTH:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_9);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_10);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_11);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_12);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_13);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_14);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_15);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_16);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_17);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_18);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_19);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_20);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_21);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_22);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_23);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_24);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_25);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.NORTH_AABB_26);
+                break;
+            case SOUTH:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_9);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_10);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_11);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_12);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_13);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_14);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_15);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_16);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_17);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_18);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_19);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_20);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_21);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_22);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_23);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_24);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_25);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.SOUTH_AABB_26);
+                break;
+            case EAST:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_9);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_10);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_11);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_12);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_13);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_14);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_15);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_16);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_17);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_18);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_19);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_20);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_21);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_22);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_23);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_24);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_25);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.EAST_AABB_26);
+                break;
+            case WEST:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_0);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_9);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_10);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_11);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_12);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_13);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_14);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_15);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_16);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_17);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_18);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_19);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_20);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_21);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_22);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_23);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_24);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_25);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, OverheadLineTran0_BoundingBox.WEST_AABB_26);
+                break;
+            default:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NULL_AABB);
+                break;
+        }
     }
 
     public int getMetaFromState(IBlockState state) {

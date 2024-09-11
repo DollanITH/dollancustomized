@@ -16,12 +16,7 @@ public class BlockLight extends BlockColored {
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(2F);
         this.setLightLevel(1.0F);
-        this.isAmbientOcclusion();
         this.setSoundType(SoundType.GLASS);
-    }
-    public boolean isAmbientOcclusion()
-    {
-        return false;
     }
     @Override
     public boolean isOpaqueCube(IBlockState state) {

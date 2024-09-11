@@ -1,1 +1,26 @@
-{}
+{
+  "block.sakura_planks.step":{
+    "subtitle" :"subtitles.block.sakura_planks.step",
+    "sounds":["dollancustomized:block/sakura_planks/step"]
+  },
+  "block.sakura_planks.break":{
+    "subtitle" :"subtitles.block.sakura_planks.break",
+    "sounds":["dollancustomized:block/sakura_planks/break"]
+  },
+  "block.deepslate.break":{
+    "subtitle" :"subtitles.block.deepslate.break",
+    "sounds":["dollancustomized:block/deepslate/break"]
+  },
+  "block.deepslate.step":{
+    "subtitle" :"subtitles.block.deepslate.step",
+    "sounds":["dollancustomized:block/deepslate/step"]
+  },
+  "block.deepslate.fall":{
+    "subtitle" :"subtitles.block.deepslate.fall",
+    "sounds":["dollancustomized:block/deepslate/fall"]
+  },
+  "block.deepslate.place":{
+    "subtitle" :"subtitles.block.deepslate.place",
+    "sounds":["dollancustomized:block/deepslate/place"]
+  }
+}

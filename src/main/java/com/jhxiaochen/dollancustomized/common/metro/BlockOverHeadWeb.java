@@ -21,7 +21,7 @@ public class BlockOverHeadWeb extends Block {
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(5.0F);
         this.setResistance(8.0F);
-        this.setLightOpacity(32);
+        this.setLightOpacity(0);
         this.setSoundType(SoundType.METAL);
     }
 
@@ -39,7 +39,7 @@ public class BlockOverHeadWeb extends Block {
 
     public boolean isFullCube(IBlockState state)
     {
-        return false;
+        return true;
     }
 
 }

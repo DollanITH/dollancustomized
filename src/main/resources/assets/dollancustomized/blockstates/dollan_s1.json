@@ -1,7 +1,14 @@
 {
-  "variants": {
-    "normal": {
-      "model": "dollancustomized:s1"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "dollancustomized:blocks/s1",
+      "particle": "dollancustomized:blocks/s1"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

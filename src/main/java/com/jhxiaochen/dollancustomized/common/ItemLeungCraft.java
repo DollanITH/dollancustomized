@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common;
 
-import com.jhxiaochen.dollancustomized.init.DollanCraftDamageSource;
+import com.jhxiaochen.dollancustomized.init.DollanDamageSource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
@@ -33,6 +33,6 @@ public class ItemLeungCraft extends ItemFood
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
     {
         player.addPotionEffect(new PotionEffect(MobEffects.POISON, 3, 1));
-        player.attackEntityFrom(DollanCraftDamageSource.VALLID, 20.5F);
+        player.attackEntityFrom(DollanDamageSource.VALLID, 20.5F);
     }
 }

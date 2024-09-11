@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.proxy;
 
+import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy implements CommonProxy {
@@ -7,12 +8,12 @@ public class ClientProxy implements CommonProxy {
     @Override
     public void preInit() {
         MinecraftForge.EVENT_BUS.register(this);
+        DollanSounds.registerSounds();
         new ModelLoader();
     }
 
     @Override
     public void init() {
-
     }
 
     @Override

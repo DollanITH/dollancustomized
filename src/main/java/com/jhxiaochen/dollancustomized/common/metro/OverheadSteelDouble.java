@@ -18,9 +18,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.LinkedList;
-
 public class OverheadSteelDouble extends Block {
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB X_AABB_1 = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 0.296875D, 1.0D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 0.296875D, 0.625D);
+    protected static final AxisAlignedBB Z_AABB_1 = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 0.296875D, 0.625D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public OverheadSteelDouble() {
         super(Material.ROCK);
@@ -49,6 +51,19 @@ public class OverheadSteelDouble extends Block {
         return false;
     }
 
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        switch (state.getValue(FACING))
+        {
+            case NORTH:
+            case SOUTH:
+            default:
+                return X_AABB;
+            case EAST:
+            case WEST:
+                return Z_AABB;
+        }
+    }
+
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
         return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
@@ -57,40 +72,6 @@ public class OverheadSteelDouble extends Block {
     @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
         return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
-    }
-
-
-    static LinkedList<AxisAlignedBB> AABBs = new LinkedList<>();
-    static AxisAlignedBB getAABB(double x1, double y1, double z1, double x2, double y2, double z2) {
-        AxisAlignedBB aabb = new AxisAlignedBB(x1, y1, z1, x2, y2, z2);
-        for (AxisAlignedBB i : AABBs) {
-            if (i.equals(aabb)) return i;
-        }
-        AABBs.add(aabb);
-        return aabb;
-    }
-
-    protected AxisAlignedBB getBoxByXYZ(IBlockState state, double x, double y, double z) {
-        double x1 = 0.5 - x / 2, y1 = 0, z1 = 0.5 - z / 2;
-        double x2 = 0.5 + x / 2, y2 = y, z2 = 0.5 + z / 2;
-        EnumFacing facing = state.getValue(FACING);
-
-        switch (facing) {
-            case NORTH:
-                return getAABB(1.0 - x2, 0, 1.0 - y2, 1.0 - x1, 1.0, 1.0 - y1);
-            case EAST:
-                return getAABB(1.0 - y1, 0, 1.0 - x2, y2, 1.0, 1.0 - x1);
-            case SOUTH:
-                return getAABB(x1, 0, y1, x2, 1.0, y2);
-            case WEST:
-                return getAABB(1.0 - y2, 0, x1, 1.0 - y1, 1.0, x2);
-        }
-        return Block.FULL_BLOCK_AABB;
-    }
-
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getBoxByXYZ(state, 0.875, 1.0,0.875);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class OverheadPost1 extends Block {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0.4,0,0.4,0.6,1,0.6);
+        return new AxisAlignedBB(0.375,0,0.375,0.625,1,0.625);
     }
 
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)

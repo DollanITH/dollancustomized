@@ -2,13 +2,16 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
@@ -78,7 +81,9 @@ public class BlockDeepSlate extends Block {
         this.setHardness(1.0F);
         this.setResistance(10F);
         this.setLightLevel(0F);
-    }
+        this.setSoundType(new SoundType(1.0F, 1.0F, DollanSounds.BLOCK_DEEPSLATE_BREAK, DollanSounds.BLOCK_DEEPSLATE_STEP, DollanSounds.BLOCK_DEEPSLATE_PLACE, SoundEvents.BLOCK_STONE_HIT, DollanSounds.BLOCK_DEEPSLATE_FALL));
+
+        }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {

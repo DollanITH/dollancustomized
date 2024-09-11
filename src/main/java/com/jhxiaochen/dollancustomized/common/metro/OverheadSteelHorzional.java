@@ -11,26 +11,13 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class OverheadSteelHorzional extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    public OverheadSteelHorzional(String name) {
-        super(Material.IRON);
-        this.setRegistryName(name);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
-        this.setHardness(2.5F);
-        this.setResistance(5.0F);
-        this.setSoundType(SoundType.METAL);
-        this.setCreativeTab(DollanCustomized.METRO_TAB);
-        this.setLightOpacity(0);
-    }
 
     protected OverheadSteelHorzional() {
         super(Material.IRON);
@@ -46,10 +33,6 @@ public class OverheadSteelHorzional extends Block {
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
-    }
-
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
     }
 
     public boolean isOpaqueCube(IBlockState state)

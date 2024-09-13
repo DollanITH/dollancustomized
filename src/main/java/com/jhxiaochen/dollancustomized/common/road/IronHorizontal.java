@@ -30,7 +30,7 @@ public class IronHorizontal extends Block {
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setHardness(1.2F);
         this.setResistance(10F);
-        this.setLightOpacity(1);
+        this.setLightOpacity(0);
 
     }
 

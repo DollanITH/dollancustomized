@@ -46,7 +46,7 @@ public class SignalPost extends Block {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0.375,0,0.375,0.375,1,0.375);
+        return new AxisAlignedBB(0.375,0,0.375,0.625,1,0.625);
     }
 
 }

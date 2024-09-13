@@ -19,8 +19,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SignalLightHigher extends Block {
-    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.5D, 0.7D);
-    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.5D, 0.7D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.625D, 0.7D);
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.625D, 0.7D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public SignalLightHigher(String name) {

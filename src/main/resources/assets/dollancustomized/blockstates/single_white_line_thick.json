@@ -6,13 +6,10 @@
   },
   "variants": {
     "inventory": [{"transform": "forge:default-block"}],
-    "facing": {
-      "west": {"model": "dollancustomized:single_white_line_thick",
+    "shape": {
+      "east_west": {"model": "dollancustomized:single_white_line_thick",
         "y": 90},
-      "east": {"model": "dollancustomized:single_white_line_thick",
-        "y": 90},
-      "north": {"model": "dollancustomized:single_white_line_thick"},
-      "south": {"model": "dollancustomized:single_white_line_thick"}
+      "north_south": {"model": "dollancustomized:single_white_line_thick"}
     }
   }
 }

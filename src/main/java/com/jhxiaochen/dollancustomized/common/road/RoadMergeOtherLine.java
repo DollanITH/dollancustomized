@@ -158,9 +158,9 @@ public RoadMergeOtherLine(String name){
     public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        switch ((EnumFacing) state.getValue(FACING)) {
+        switch (state.getValue(FACING)) {
             case SOUTH:
-                switch ((EnumVariant) state.getValue(VARIANT)){
+                switch (state.getValue(VARIANT)){
                     case MERGE_WHITE:
                       return   i = i | 0;
                     case MERGE_YELLOW:
@@ -172,7 +172,7 @@ public RoadMergeOtherLine(String name){
                 }
                 break;
             case WEST:
-                switch ((EnumVariant) state.getValue(VARIANT)){
+                switch (state.getValue(VARIANT)){
                     case MERGE_WHITE:
                       return   i = i | 4;
                     case MERGE_YELLOW:

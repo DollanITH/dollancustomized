@@ -24,10 +24,10 @@ public class DollanItems{
 
 
     public static void init() {
-        leungcraft = new ItemLeungCraft(3,1.2F,false)
+        leungcraft = new ItemLeungCraft(5,1.2F,false)
                 .setAlwaysEdible()
                 .setUnlocalizedName("leungcraft").setRegistryName("leungcraft");
-        dollancraft = new ItemDollanCraft(3,1.2F,false)
+        dollancraft = new ItemDollanCraft(5,1.2F,false)
                 .setAlwaysEdible()
                 .setUnlocalizedName("dollancraft").setRegistryName("dollancraft");
         }

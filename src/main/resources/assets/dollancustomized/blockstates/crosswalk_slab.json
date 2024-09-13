@@ -1,19 +1,14 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "dollancustomized:crosswalk_slab",
-    "transform": "forge:default-block"
+    "model": "dollancustomized:crosswalk_slab"
   },
   "variants": {
     "inventory": [{"transform": "forge:default-block"}],
-    "facing": {
-      "west": {"model": "dollancustomized:crosswalk_slab",
+    "shape": {
+      "east_west": {"model": "dollancustomized:crosswalk_slab",
         "y": 90},
-      "north": {"model": "dollancustomized:crosswalk_slab",
-        "y": 180},
-      "south": {"model": "dollancustomized:crosswalk_slab"},
-      "east": {"model": "dollancustomized:crosswalk_slab",
-        "y": 270}
+      "north_south": {"model": "dollancustomized:crosswalk_slab"}
     }
   }
 }

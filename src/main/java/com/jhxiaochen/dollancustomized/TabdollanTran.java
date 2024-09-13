@@ -14,7 +14,7 @@ public class TabdollanTran extends CreativeTabs {
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(DollanBlocks.dollan_loop_line);
+        return new ItemStack(DollanBlocks.dollan_s1);
     }
 
 

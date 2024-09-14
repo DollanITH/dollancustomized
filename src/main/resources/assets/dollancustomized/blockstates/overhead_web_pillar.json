@@ -7,7 +7,7 @@
     "inventory": [{}],
     "axis": {
       "x": {"model": "dollancustomized:overhead_web_pillar",
-        "x": 90, "z": 90},
+        "y": 90, "x": 90},
       "y": {"model": "dollancustomized:overhead_web_pillar"},
       "z": {"model": "dollancustomized:overhead_web_pillar",
         "x": 90}

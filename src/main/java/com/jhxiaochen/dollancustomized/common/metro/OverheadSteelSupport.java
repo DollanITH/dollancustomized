@@ -3,10 +3,13 @@ package com.jhxiaochen.dollancustomized.common.metro;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -26,6 +29,7 @@ import java.util.List;
 
 public class OverheadSteelSupport extends Block
 {
+    private static final PropertyBool UP = PropertyBool.create("up");
     private static final AxisAlignedBB WEST_1 = new AxisAlignedBB(0.40625, 0.29687499999999994, 0.40625, 0.59375, 0.328125, 0.59375);
     private static final AxisAlignedBB WEST_2 = new AxisAlignedBB(0.390625, 0.3046875, 0.390625, 0.609375, 0.3203125, 0.609375);
     private static final AxisAlignedBB WEST_3 = new AxisAlignedBB(0.375, 0.3281249999999999, 0.15625, 0.625, 0.5140624999999999, 0.84375);
@@ -59,12 +63,40 @@ public class OverheadSteelSupport extends Block
         super(Material.IRON);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, BlockRailBase.EnumRailDirection.NORTH_SOUTH).withProperty(UP, Boolean.FALSE));
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(2.5F);
         this.setResistance(5.0F);
         this.setLightOpacity(0);
         this.setSoundType(SoundType.METAL);
     }
+
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
+    {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
+        Block block = iblockstate.getBlock();
+        return block instanceof BlockSlab && blockfaceshape != BlockFaceShape.SOLID;
+    }
+
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return state.withProperty(UP, canFenceConnectTo(worldIn, pos, EnumFacing.UP));
+    }
+
+    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        BlockPos other = pos.offset(facing);
+        Block block = world.getBlockState(other).getBlock();
+        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+    }
+
+    @Override
+    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        return canConnectTo(world, pos.offset(facing), facing.getOpposite());
+    }
+
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -181,7 +213,7 @@ public class OverheadSteelSupport extends Block
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {SHAPE});
+        return new BlockStateContainer(this, new IProperty[] {SHAPE, UP});
     }
 
 }

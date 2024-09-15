@@ -3,10 +3,13 @@ package com.jhxiaochen.dollancustomized.common.metro;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -22,17 +25,44 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class OverheadSteelDoubleSupport extends Block {
+    private static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public OverheadSteelDoubleSupport() {
         super(Material.ROCK);
         this.setRegistryName("overhead_steel_double_support");
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(UP, Boolean.FALSE));
         this.setUnlocalizedName("overhead_steel_double_support");
         this.setHardness(2.25F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
+    }
+
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
+    {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
+        Block block = iblockstate.getBlock();
+        return block instanceof BlockSlab && blockfaceshape != BlockFaceShape.SOLID;
+    }
+
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return state.withProperty(UP, canFenceConnectTo(worldIn, pos, EnumFacing.UP));
+    }
+
+    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        BlockPos other = pos.offset(facing);
+        Block block = world.getBlockState(other).getBlock();
+        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+    }
+
+    @Override
+    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        return canConnectTo(world, pos.offset(facing), facing.getOpposite());
     }
 
     @SideOnly(Side.CLIENT)
@@ -201,7 +231,7 @@ public class OverheadSteelDoubleSupport extends Block {
     }
 
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING});
+        return new BlockStateContainer(this, new IProperty[]{FACING, UP});
     }
 
     @Override

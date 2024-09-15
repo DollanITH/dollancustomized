@@ -14,7 +14,7 @@ public class TabMetroBlocks extends CreativeTabs {
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(DollanBlocks.signal_none_one_light);
+        return new ItemStack(DollanBlocks.signal_white_two_lights);
     }
 
 

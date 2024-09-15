@@ -53,6 +53,7 @@ tile.overhead_web_corner.name=接触网网格柱拐角
 tile.overhead_web_pillar.name=接触网网格桩
 tile.overhead_web_pillar_post.name=接触网网格桩（带接触网柱）
 tile.overhead_web_pillar_post_1.name=接触网网格桩（带接触网工字桩）
+tile.overhead_web_pillar_post_2.name=接触网网格桩（带接触网工字桩, Y Rotated）
 
 tile.signal_post.name=信号灯柱
 tile.signal_none_one_light.name=单灯信号灯(灭灯)

@@ -4,11 +4,11 @@
       "model": "dollancustomized:overhead_lines_support"
     },
     "facing=east": {
-      "model": "dollancustomized:overhead_lines_support"
-    },
-    "facing=west": {
       "model": "dollancustomized:overhead_lines_support",
       "y" : 180
+    },
+    "facing=west": {
+      "model": "dollancustomized:overhead_lines_support"
     },
     "facing=south": {
       "model": "dollancustomized:overhead_lines_support",

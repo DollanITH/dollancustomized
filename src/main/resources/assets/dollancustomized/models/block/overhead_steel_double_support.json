@@ -1,7 +1,6 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "dollancustomized:blocks/black_post",
 		"1": "dollancustomized:blocks/concrete_black",
 		"2": "dollancustomized:blocks/concrete_gray",
 		"3": "dollancustomized:blocks/overhead_steel_support",
@@ -14,12 +13,12 @@
 			"to": [16, 0.5, 8.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 7]},
 			"faces": {
-				"north": {"uv": [0, 15.375, 16, 16], "texture": "#0"},
-				"east": {"uv": [7.5, 15.375, 8.5, 16], "texture": "#0"},
-				"south": {"uv": [0, 15.375, 16, 16], "texture": "#0"},
-				"west": {"uv": [7.5, 15.375, 8.5, 16], "texture": "#0"},
-				"up": {"uv": [7.5, 0, 8.5, 16], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [7.5, 0, 8.5, 16], "rotation": 270, "texture": "#0"}
+				"north": {"uv": [0, 15.375, 16, 16], "texture": "#1"},
+				"east": {"uv": [7.5, 15.375, 8.5, 16], "texture": "#1"},
+				"south": {"uv": [0, 15.375, 16, 16], "texture": "#1"},
+				"west": {"uv": [7.5, 15.375, 8.5, 16], "texture": "#1"},
+				"up": {"uv": [7.5, 0, 8.5, 16], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [7.5, 0, 8.5, 16], "rotation": 270, "texture": "#1"}
 			}
 		},
 		{

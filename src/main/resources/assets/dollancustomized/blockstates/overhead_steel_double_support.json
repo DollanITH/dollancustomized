@@ -5,14 +5,15 @@
   },
   "variants": {
     "inventory": [{}],
+    "up": {
+      "false": {},
+      "true": {"model": "dollancustomized:overhead_steel_double_support_half"}
+    },
     "facing": {
-      "north": {"model": "dollancustomized:overhead_steel_double_support",
-        "y": 90},
-      "west": {"model": "dollancustomized:overhead_steel_double_support",
-        "y": 180},
-      "east": {"model": "dollancustomized:overhead_steel_double_support"},
-      "south": {"model": "dollancustomized:overhead_steel_double_support",
-        "y": 270}
+      "north": {"y": 90},
+      "west": {"y": 180},
+      "east": {},
+      "south": {"y": 270}
     }
   }
 }

@@ -1,22 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:overhead_translation_0"
+  },
   "variants": {
-    "normal": {
-      "model": "dollancustomized:overhead_translation_0"
+    "inventory": [{}],
+    "up": {
+      "false": {},
+      "true": {"model": "dollancustomized:overhead_translation_0_half"}
     },
-    "facing=east": {
-      "model": "dollancustomized:overhead_translation_0"
-    },
-    "facing=west": {
-      "model": "dollancustomized:overhead_translation_0",
-      "y" : 180
-    },
-    "facing=south": {
-      "model": "dollancustomized:overhead_translation_0",
-      "y": 270
-    },
-    "facing=north": {
-      "model": "dollancustomized:overhead_translation_0",
-      "y": 90
+    "facing": {
+      "north": {"y": 90},
+      "west": {"y": 180},
+      "east": {},
+      "south": {"y": 270}
     }
   }
 }

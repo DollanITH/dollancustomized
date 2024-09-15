@@ -2,9 +2,9 @@
 	"parent": "dollancustomized:custom/signal_none_four_lights",
 	"textures": {
 		"up": "dollancustomized:blocks/signal_none",
-		"middle_2": "dollancustomized:blocks/signal_blue",
+		"middle_2": "dollancustomized:blocks/signal_none",
 		"middle_1": "dollancustomized:blocks/signal_none",
-		"down": "dollancustomized:blocks/signal_none",
+		"down": "dollancustomized:blocks/signal_blue",
 		"post": "dollancustomized:blocks/black_post"
 	}
 }

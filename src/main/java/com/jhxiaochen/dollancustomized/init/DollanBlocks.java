@@ -305,6 +305,7 @@ public static Block overhead_web_corner = new BlockOverHeadWeb("overhead_web_cor
 public static Block overhead_web_pillar = new BlockOverHeadWebRotated("overhead_web_pillar");
 public static Block overhead_web_pillar_post = new BlockOverHeadWebWithPost("overhead_web_pillar_post");
 public static Block overhead_web_pillar_post_1 = new BlockOverHeadWebWithPost("overhead_web_pillar_post_1");
+public static Block overhead_web_pillar_post_2 = new BlockOverHeadWebWithPost("overhead_web_pillar_post_2");
 
 public static Block signal_post  = new SignalPost("signal_post");
 public static Block signal_none_one_light  = new SignalLight("signal_none_one_light");
@@ -648,6 +649,7 @@ public static Block metro_tran3 = new OverheadLineTran3();
         registerBlock(overhead_web_pillar);
         registerBlock(overhead_web_pillar_post);
         registerBlock(overhead_web_pillar_post_1);
+        registerBlock(overhead_web_pillar_post_2);
 
         registerBlock(signal_post);
         registerBlock(signal_none_one_light);
@@ -1051,6 +1053,7 @@ public static Block metro_tran3 = new OverheadLineTran3();
         registerModel(overhead_web_pillar);
         registerModel(overhead_web_pillar_post);
         registerModel(overhead_web_pillar_post_1);
+        registerModel(overhead_web_pillar_post_2);
 
         registerModel(signal_post);
         registerModel(signal_none_one_light);

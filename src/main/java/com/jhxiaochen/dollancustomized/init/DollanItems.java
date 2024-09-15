@@ -430,6 +430,7 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.overhead_web_pillar);
             registerItemBlock(DollanBlocks.overhead_web_pillar_post);
             registerItemBlock(DollanBlocks.overhead_web_pillar_post_1);
+            registerItemBlock(DollanBlocks.overhead_web_pillar_post_2);
 
             registerItemBlock(DollanBlocks.signal_post);
             registerItemBlock(DollanBlocks.signal_none_one_light);

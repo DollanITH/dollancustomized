@@ -45,7 +45,7 @@ public class OverheadLinesHorzional extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

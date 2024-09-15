@@ -32,7 +32,7 @@ public class OverheadSteelHorzional extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     public boolean isOpaqueCube(IBlockState state)

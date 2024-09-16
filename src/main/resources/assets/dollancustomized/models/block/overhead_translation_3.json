@@ -1,13 +1,13 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "dollancustomized:blocks/black_post",
+		"0": "dollancustomized:blocks/concrete_black",
 		"1": "dollancustomized:blocks/brushed_aluminum",
 		"particle": "dollancustomized:blocks/brushed_aluminum"
 	},
 	"elements": [
 		{
-			"from": [4, 0, 12],
+			"from": [4.275, 0, 12],
 			"to": [16, 0.5, 13],
 			"rotation": {"angle": 0, "axis": "y", "origin": [-3.25, 2.21875, 10.25]},
 			"faces": {

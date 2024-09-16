@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:overhead_lines_support_a4"
+  },
+  "variants": {
+    "inventory": [{}],
+    "facing": {
+      "west": {"model": "dollancustomized:overhead_lines_support_a4",
+        "y": 180},
+      "north": {"model": "dollancustomized:overhead_lines_support_a4",
+        "y": 270},
+      "south": {"model": "dollancustomized:overhead_lines_support_a4",
+      "y": 90},
+      "east": {"model": "dollancustomized:overhead_lines_support_a4"}
+    }
+  }
+}

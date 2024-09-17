@@ -311,11 +311,11 @@ public static Block overhead_web_pillar_post_1 = new BlockOverHeadWebWithPost("o
 public static Block overhead_web_pillar_post_2 = new BlockOverHeadWebWithPost("overhead_web_pillar_post_2");
 
 public static Block signal_post  = new SignalPost("signal_post");
-public static Block signal_none_one_light  = new SignalLight("signal_none_one_light");
-public static Block signal_blue_one_light  = new SignalLight("signal_blue_one_light");
-public static Block signal_red_one_light   = new SignalLight("signal_red_one_light");
-public static Block signal_green_one_light = new SignalLight("signal_green_one_light");
-public static Block signal_white_one_light = new SignalLight("signal_white_one_light");
+public static Block signal_none_one_light  = new SignalLightLower("signal_none_one_light");
+public static Block signal_blue_one_light  = new SignalLightLower("signal_blue_one_light");
+public static Block signal_red_one_light   = new SignalLightLower("signal_red_one_light");
+public static Block signal_green_one_light = new SignalLightLower("signal_green_one_light");
+public static Block signal_white_one_light = new SignalLightLower("signal_white_one_light");
 
 public static Block signal_none_two_lights = new SignalLight("signal_none_two_lights");
 public static Block signal_blue_two_lights = new SignalLight("signal_blue_two_lights");
@@ -331,10 +331,10 @@ public static Block signal_red_three_lights = new SignalLightHigher("signal_red_
 public static Block signal_green_three_lights = new SignalLightHigher("signal_green_three_lights");
 public static Block signal_white_three_lights = new SignalLightHigher("signal_white_three_lights");
 
-public static Block signal_blue_four_lights = new SignalLightHigher("signal_blue_four_lights");
-public static Block signal_yellow_four_lights = new SignalLightHigher("signal_yellow_four_lights");
-public static Block signal_red_four_lights = new SignalLightHigher("signal_red_four_lights");
-public static Block signal_green_four_lights = new SignalLightHigher("signal_green_four_lights");
+public static Block signal_blue_four_lights = new SignalLightHighest("signal_blue_four_lights");
+public static Block signal_yellow_four_lights = new SignalLightHighest("signal_yellow_four_lights");
+public static Block signal_red_four_lights = new SignalLightHighest("signal_red_four_lights");
+public static Block signal_green_four_lights = new SignalLightHighest("signal_green_four_lights");
 
 public static Block metro_tran0 = new OverheadLineTran0();
 public static Block metro_tran1 = new OverheadLineTran1();

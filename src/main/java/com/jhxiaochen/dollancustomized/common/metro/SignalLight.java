@@ -20,8 +20,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SignalLight extends Block {
-    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.0D, 0.7D);
-    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.0D, 0.7D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.875D, 0.7D);
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.875D, 0.7D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public SignalLight(String name) {
@@ -31,6 +31,7 @@ public class SignalLight extends Block {
         this.setUnlocalizedName(name);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
+        this.setLightLevel(0.25F);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }
@@ -59,7 +60,7 @@ public class SignalLight extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
     public boolean isOpaqueCube(IBlockState state)
     {

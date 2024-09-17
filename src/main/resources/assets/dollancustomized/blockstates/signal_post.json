@@ -5,6 +5,28 @@
   },
   "variants": {
     "normal": [{}],
-    "inventory": [{}]
+    "inventory": [{}],
+    "up": {
+      "true": {
+        "submodel": {
+          "post_up": {
+            "model": "dollancustomized:signal_post_up",
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "down": {
+      "true": {
+        "submodel": {
+          "post_down": {
+            "model": "dollancustomized:signal_post_down",
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    }
   }
 }

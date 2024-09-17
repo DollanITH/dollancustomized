@@ -37,13 +37,6 @@ public class OverheadPost2 extends Block {
         this.setSoundType(SoundType.METAL);
     }
 
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
-
-        return face != EnumFacing.UP && face != EnumFacing.DOWN ? BlockFaceShape.CENTER : BlockFaceShape.MIDDLE_POLE;
-
-    }
-
     public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);

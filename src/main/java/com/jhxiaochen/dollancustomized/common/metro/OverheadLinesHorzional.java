@@ -7,6 +7,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,6 +31,14 @@ public class OverheadLinesHorzional extends Block {
         this.setSoundType(SoundType.CLOTH);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
+    }
+
+
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+
+        return BlockFaceShape.UNDEFINED;
+
     }
 
     protected OverheadLinesHorzional() {

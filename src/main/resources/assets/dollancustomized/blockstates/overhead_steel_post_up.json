@@ -4,7 +4,17 @@
     "model": "dollancustomized:overhead_steel_post_up"
   },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "up": {
+      "true": {
+        "model": "dollancustomized:overhead_steel_post_up_max"
+      },
+      "false": {}
+    }
   }
 }

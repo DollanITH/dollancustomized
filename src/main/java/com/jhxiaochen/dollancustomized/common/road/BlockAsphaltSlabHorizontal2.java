@@ -35,6 +35,12 @@ public class BlockAsphaltSlabHorizontal2 extends Block {
 
     }
 
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    {
+        return (face == EnumFacing.UP) || (face == EnumFacing.DOWN);
+    }
+
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return AABB_BOTTOM_HALF;
     }
@@ -42,7 +48,7 @@ public class BlockAsphaltSlabHorizontal2 extends Block {
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
 
-        return face != EnumFacing.UP && face != EnumFacing.DOWN ? BlockFaceShape.CENTER : BlockFaceShape.MIDDLE_POLE;
+        return BlockFaceShape.UNDEFINED;
 
     }
 

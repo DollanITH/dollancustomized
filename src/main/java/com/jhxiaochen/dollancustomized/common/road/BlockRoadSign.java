@@ -176,7 +176,6 @@ public class BlockRoadSign extends Block {
     private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-        String blockname = block.getRegistryName().toString();
             return block instanceof BlockRoadSign || block == DollanBlocks.road_sign_sl_15
                     || block == DollanBlocks.road_sign_post;
         }

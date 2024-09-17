@@ -4,6 +4,7 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,6 +27,15 @@ public class OverheadSteelSlope extends OverheadSteelHorzional {
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }
+
+
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+
+        return BlockFaceShape.UNDEFINED;
+
+    }
+
 
     @Override
     @Nonnull

@@ -4,7 +4,29 @@
     "model": "dollancustomized:overhead_post"
   },
   "variants": {
+    "normal": [{}],
     "inventory": [{}],
-    "normal": [{}]
+    "up": {
+      "true": {
+        "submodel": {
+          "post_up": {
+            "model": "dollancustomized:overhead_post_up",
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "down": {
+      "true": {
+        "submodel": {
+          "post_down": {
+            "model": "dollancustomized:overhead_post_down",
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    }
   }
 }

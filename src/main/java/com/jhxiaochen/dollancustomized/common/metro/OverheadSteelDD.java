@@ -62,6 +62,7 @@ public class OverheadSteelDD extends OverheadSteelHorzional {
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
     }
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

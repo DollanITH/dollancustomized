@@ -83,10 +83,16 @@ public class BlockAsphaltSlab extends Block {
         this.setLightOpacity(1);
     }
 
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    {
+        return (face == EnumFacing.UP) || (face == EnumFacing.DOWN);
+    }
+
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
 
-        return face != EnumFacing.UP && face != EnumFacing.DOWN ? BlockFaceShape.CENTER : BlockFaceShape.MIDDLE_POLE;
+        return BlockFaceShape.UNDEFINED;
 
     }
 

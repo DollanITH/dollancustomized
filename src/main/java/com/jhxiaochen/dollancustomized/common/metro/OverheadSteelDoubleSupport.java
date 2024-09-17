@@ -39,6 +39,14 @@ public class OverheadSteelDoubleSupport extends Block {
         this.setLightOpacity(0);
     }
 
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+
+        return BlockFaceShape.UNDEFINED;
+
+    }
+
+
     public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);

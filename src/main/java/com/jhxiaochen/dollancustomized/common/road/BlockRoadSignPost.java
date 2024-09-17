@@ -1,6 +1,10 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.common.metro.OverheadLines;
+import com.jhxiaochen.dollancustomized.common.metro.OverheadLinesHorzional;
+import com.jhxiaochen.dollancustomized.common.metro.OverheadSteel;
+import com.jhxiaochen.dollancustomized.common.metro.OverheadSteelHorzional;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -107,7 +111,7 @@ public class BlockRoadSignPost extends Block {
     private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-        return block != Blocks.AIR && block != Blocks.WALL_SIGN;
+        return block != Blocks.AIR && block != Blocks.WALL_SIGN && !(block instanceof OverheadSteel) &&!(block instanceof OverheadLinesHorzional)&& !(block instanceof OverheadSteelHorzional) &&!(block instanceof OverheadLines);
 
     }
 

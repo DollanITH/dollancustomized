@@ -6,13 +6,13 @@
   "variants": {
     "inventory": [{}],
     "facing": {
-      "west": {"model": "dollancustomized:overhead_lines_support_a3"},
+      "west": {"model": "dollancustomized:overhead_lines_support_a3",
+        "y": 180},
       "north": {"model": "dollancustomized:overhead_lines_support_a3",
-        "y": 90},
-      "south": {"model": "dollancustomized:overhead_lines_support_a3",
         "y": 270},
-      "east": {"model": "dollancustomized:overhead_lines_support_a3",
-        "y": 180}
+      "south": {"model": "dollancustomized:overhead_lines_support_a3",
+        "y": 90},
+      "east": {"model": "dollancustomized:overhead_lines_support_a3"}
     }
   }
 }

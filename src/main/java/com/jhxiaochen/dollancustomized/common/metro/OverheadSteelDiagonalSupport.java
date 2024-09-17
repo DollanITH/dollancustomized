@@ -102,10 +102,10 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
         switch (state.getValue(FACING)){
             case WEST:
                 return new AxisAlignedBB(0.45D, 0.0D, 0.0D, 1.0D, 0.296875D, 0.55D);
-            case SOUTH:
+            case NORTH:
             default:
                 return new AxisAlignedBB(0.55D, 0.0D, 0.45D, 1.0d, 0.296875D, 1.0D);
-            case NORTH:
+            case SOUTH:
                 return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.45D, 0.296875D, 0.55D);
             case EAST:
                 return new AxisAlignedBB(0.0D, 0.0D, 0.45D, 0.45D, 0.296875D, 1.0D);

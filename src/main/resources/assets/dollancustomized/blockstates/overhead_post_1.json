@@ -5,10 +5,31 @@
   },
   "variants": {
     "inventory": [{}],
+    "up": {
+      "true": {
+        "submodel": {
+          "post_up": {
+            "model": "dollancustomized:overhead_post_1_up",
+            "uvlock": true
+          }
+        }
+      },
+      "false": {}
+    },
+    "down": {
+      "true": {
+        "submodel": {
+        "post_down": {
+          "model": "dollancustomized:overhead_post_1_down",
+          "uvlock": true
+        }
+      }
+      },
+      "false": {}
+    },
     "shape": {
-      "north_south": {"model": "dollancustomized:overhead_post_1"},
-      "east_west": {"model": "dollancustomized:overhead_post_1",
-        "y": 90}
+      "north_south": {},
+      "east_west": {"y": 90}
     }
   }
 }

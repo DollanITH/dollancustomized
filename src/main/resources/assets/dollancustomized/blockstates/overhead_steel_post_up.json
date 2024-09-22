@@ -12,7 +12,12 @@
     ],
     "up": {
       "true": {
-        "model": "dollancustomized:overhead_steel_post_up_max"
+        "submodel": {
+          "post_up": {
+            "model": "dollancustomized:overhead_steel_post_up_max",
+            "uvlock": true
+          }
+        }
       },
       "false": {}
     }

@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 
 public class SignalPost extends Block {
     private static final PropertyBool UP   = PropertyBool.create("up");
-    private static final     PropertyBool DOWN = PropertyBool.create("down");
+    private static final PropertyBool DOWN = PropertyBool.create("down");
 
     public SignalPost(String name) {
         super(Material.ROCK, MapColor.STONE);

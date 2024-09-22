@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dollancustomized:overhead_lines_slope_1"
+    },
+    "facing=east": {
+      "model": "dollancustomized:overhead_lines_slope_1"
+    },
+    "facing=west": {
+      "model": "dollancustomized:overhead_lines_slope_1",
+      "y" : 180
+    },
+    "facing=south": {
+      "model": "dollancustomized:overhead_lines_slope_1",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dollancustomized:overhead_lines_slope_1",
+      "y": 90
+    }
+  }
+}

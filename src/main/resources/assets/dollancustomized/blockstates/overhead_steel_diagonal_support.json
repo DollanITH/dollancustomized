@@ -4,9 +4,16 @@
     "model": "dollancustomized:overhead_steel_diagonal_support"
   },
   "variants": {
-    "inventory": [{"transform": "forge:default-block"}],
+    "inventory": [{}],
     "up": {
-      "true": {"model": "dollancustomized:overhead_steel_diagonal_support_up"},
+      "true": {
+        "submodel": {
+          "post_up": {
+            "model": "dollancustomized:overhead_steel_diagonal_support_up",
+            "uvlock": true
+          }
+        }
+      },
       "false": {}
     },
     "facing": {

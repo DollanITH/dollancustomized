@@ -396,6 +396,8 @@ public class DollanItems{
 
             registerItemBlock(DollanBlocks.overhead_lines);
             registerItemBlock(DollanBlocks.overhead_lines_slope);
+            registerItemBlock(DollanBlocks.overhead_lines_slope_1);
+            registerItemBlock(DollanBlocks.overhead_lines_slope_2);
             registerItemBlock(DollanBlocks.overhead_lines_diagonal);
             registerItemBlock(DollanBlocks.overhead_lines_straighter);
             registerItemBlock(DollanBlocks.overhead_lines_diagonal_straighter);
@@ -412,12 +414,16 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.metro_tran1);
             registerItemBlock(DollanBlocks.metro_tran2);
             registerItemBlock(DollanBlocks.metro_tran3);
+            registerItemBlock(DollanBlocks.metro_tran4);
+            registerItemBlock(DollanBlocks.metro_tran5);
+            registerItemBlock(DollanBlocks.metro_tran6);
 
             registerItemBlock(DollanBlocks.overhead_steel);
             registerItemBlock(DollanBlocks.overhead_steel_slope);
             registerItemBlock(DollanBlocks.overhead_steel_diagonal);
             registerItemBlock(DollanBlocks.overhead_steel_support);
             registerItemBlock(DollanBlocks.overhead_steel_diagonal_support);
+            registerItemBlock(DollanBlocks.overhead_steel_diagonal_support_1);
             registerItemBlock(DollanBlocks.overhead_steel_support_1);
             registerItemBlock(DollanBlocks.overhead_steel_double_diagonal);
             registerItemBlock(DollanBlocks.overhead_steel_double_diagonal_1);

@@ -39,6 +39,7 @@ tile.overhead_translation_3.name=刚柔接触网转换配件3
 tile.overhead_translation_4.name=刚柔接触网转换配件4
 tile.overhead_translation_5.name=刚柔接触网转换配件5
 tile.overhead_translation_6.name=刚柔接触网转换配件6
+tile.overhead_translation_7.name=刚柔接触网转换配件7
 
 tile.overhead_steel.name=刚性接触网
 tile.overhead_steel_slope.name=刚性接触网(斜坡)

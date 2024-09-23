@@ -417,6 +417,7 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.metro_tran4);
             registerItemBlock(DollanBlocks.metro_tran5);
             registerItemBlock(DollanBlocks.metro_tran6);
+            registerItemBlock(DollanBlocks.metro_tran7);
 
             registerItemBlock(DollanBlocks.overhead_steel);
             registerItemBlock(DollanBlocks.overhead_steel_slope);

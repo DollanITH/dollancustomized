@@ -346,6 +346,7 @@ public static Block metro_tran3 = new OverheadLineTran3();
 public static Block metro_tran4 = new OverheadLineTran4();
 public static Block metro_tran5 = new OverheadLineTran5("overhead_translation_5");
 public static Block metro_tran6 = new OverheadLineTran6("overhead_translation_6");
+public static Block metro_tran7 = new OverheadLineTran7();
 
     public static void register() {
         registerBlock(white_flat_lamp);
@@ -645,6 +646,7 @@ public static Block metro_tran6 = new OverheadLineTran6("overhead_translation_6"
         registerBlock(metro_tran4);
         registerBlock(metro_tran5);
         registerBlock(metro_tran6);
+        registerBlock(metro_tran7);
 
         registerBlock(overhead_steel);
         registerBlock(overhead_steel_slope);
@@ -1058,6 +1060,7 @@ public static Block metro_tran6 = new OverheadLineTran6("overhead_translation_6"
         registerModel(metro_tran4);
         registerModel(metro_tran5);
         registerModel(metro_tran6);
+        registerModel(metro_tran7);
 
         registerModel(overhead_steel);
         registerModel(overhead_steel_slope);

@@ -6,9 +6,16 @@
   "variants": {
     "inventory": [{}],
     "up": {
-      "false": {},
-      "true": {"model": "dollancustomized:overhead_steel_double_support_half"}
-    },
+      "true": {
+        "submodel": {
+          "post_up": {
+            "model": "dollancustomized:overhead_steel_double_support_half",
+            "uvlock": true
+          }
+        }
+      },
+        "false": {}
+      },
     "facing": {
       "north": {"y": 90},
       "west": {"y": 180},

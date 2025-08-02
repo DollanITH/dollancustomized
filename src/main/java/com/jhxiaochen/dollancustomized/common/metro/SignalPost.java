@@ -53,14 +53,18 @@ public class SignalPost extends Block {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
         Block block = iblockstate.getBlock();
-        return block instanceof BlockSlab && blockfaceshape != BlockFaceShape.SOLID;
+        return block instanceof BlockSlab &&
+                blockfaceshape != BlockFaceShape.SOLID && blockfaceshape != BlockFaceShape.MIDDLE_POLE
+                && blockfaceshape != BlockFaceShape.MIDDLE_POLE_THICK && blockfaceshape != BlockFaceShape.MIDDLE_POLE_THIN;
     }
 
     private boolean canConnectToDown(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
-        return block instanceof BlockSlab || block instanceof BlockAsphaltSlab || block instanceof BlockAsphaltSlab1 || block instanceof BlockAsphaltSlabHorizontal || block instanceof BlockAsphaltSlabHorizontal2 && blockfaceshape == BlockFaceShape.UNDEFINED;
+        return block instanceof BlockSlab || block instanceof BlockAsphaltSlab || block instanceof BlockAsphaltSlab1 || block instanceof BlockAsphaltSlabHorizontal || block instanceof BlockAsphaltSlabHorizontal2 &&
+                blockfaceshape != BlockFaceShape.SOLID && blockfaceshape != BlockFaceShape.MIDDLE_POLE
+                && blockfaceshape != BlockFaceShape.MIDDLE_POLE_THICK && blockfaceshape != BlockFaceShape.MIDDLE_POLE_THIN;
 
     }
 

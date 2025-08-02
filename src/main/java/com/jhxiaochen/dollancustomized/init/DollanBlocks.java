@@ -151,7 +151,7 @@ public static Block road_excl_zone_split_in_l_slab = new BlockAsphaltSlabHorizon
 public static Block platform_fence = new BlockPlatFormFence("platform_fence");
 public static Block crosswalk = new BlockAsphaltHorizontal1("crosswalk");
 public static Block crosswalk_slab = new BlockAsphaltSlabHorizontal2("crosswalk_slab");
-public static Block stop_line = new BlockAsphaltHorizontal("stop_line");
+public static Block stop_line = new StopLineBlock();
 public static Block stop_line_slab = new BlockAsphaltSlabHorizontal("stop_line_slab");
 public static Block stop_line_left = new BlockAsphaltHorizontal("stop_line_left");
 public static Block stop_line_left_slab = new BlockAsphaltSlabHorizontal("stop_line_left_slab");
@@ -800,7 +800,9 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerModel(crosswalk);
         registerModel(crosswalk_slab);
         registerModel(stop_line_slab);
-        registerModel(stop_line);
+        registerModel(stop_line,0, "stop_line");
+        registerModel(stop_line,8, "road_stop_diagonal");
+        registerModel(stop_line,4, "road_stop_diagonal_1");
         registerModel(stop_line_slab);
         registerModel(stop_line);
         registerModel(stop_line_left_slab);
@@ -1129,6 +1131,8 @@ public static Block metro_tran7 = new OverheadLineTran7();
                 new StateMap.Builder().withName(BlockFrogLight.COLOR).withSuffix("_froglight").build());
         registerStateMapper(DollanBlocks.marble_tile,
                 new StateMap.Builder().withName(BlockColored.COLOR).withSuffix("_marble_tile").build());
+        registerStateMapper(DollanBlocks.stop_line,
+                new StateMap.Builder().withName(StopLineBlock.VARIENT).build());
 
     }
 

@@ -90,8 +90,8 @@ public class BlockAsphalt extends Block {
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
     {
         items.add(new ItemStack(this, 1, AsphaltType.BLACK.getMetadata()));
-        items.add(new ItemStack(this, 1, AsphaltType.CYAN.getMetadata()));
         items.add(new ItemStack(this, 1, AsphaltType.RED.getMetadata()));
+        items.add(new ItemStack(this, 1, AsphaltType.CYAN.getMetadata()));
         items.add(new ItemStack(this,1,AsphaltType.WHITE.getMetadata()));
         items.add(new ItemStack(this,1,AsphaltType.YELLOW.getMetadata()));
     }

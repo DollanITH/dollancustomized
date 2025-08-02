@@ -1,0 +1,25 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "dollancustomized:blocks/roads/black_asphalt",
+		"2": "dollancustomized:blocks/roads/stop_diagonal_1_line_white",
+		"3": "dollancustomized:blocks/roads/stop",
+		"4": "dollancustomized:blocks/roads/road_single_white_thin",
+		"particle": "dollancustomized:blocks/roads/black_asphalt"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 16], "rotation": 270, "texture": "#3"},
+				"east": {"uv": [0, 0, 8, 16], "rotation": 90, "texture": "#3"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "down"}
+			}
+		}
+	]
+}

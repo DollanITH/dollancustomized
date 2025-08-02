@@ -115,8 +115,8 @@ public class BlockAsphaltSlab extends Block {
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
     {
         items.add(new ItemStack(this, 1, BlockAsphaltSlab.AsphaltType.BLACK.getMetadata()));
-        items.add(new ItemStack(this, 1, BlockAsphaltSlab.AsphaltType.CYAN.getMetadata()));
         items.add(new ItemStack(this, 1, BlockAsphaltSlab.AsphaltType.RED.getMetadata()));
+        items.add(new ItemStack(this, 1, AsphaltType.CYAN.getMetadata()));
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)

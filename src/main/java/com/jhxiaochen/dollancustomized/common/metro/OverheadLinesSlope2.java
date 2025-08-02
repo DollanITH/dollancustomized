@@ -13,10 +13,10 @@ import net.minecraft.world.IBlockAccess;
 import javax.annotation.Nonnull;
 
 public class OverheadLinesSlope2 extends OverheadLinesHorzional {
-    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.45D, -0.8125, 0.0D, 0.55D, 1.3125, 1.0D);
-    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, -0.8125, 0.45D, 1.0D, 1.3125, 0.55D);
-    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.45D, -0.8125, 0.0D, 0.55D, 1.3125, 1.0D);
-    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, -0.8125, 0.45D, 1.0D, 1.3125, 0.55D);
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.45D, 0, 0.0D, 0.55D, 1.3125, 1.0D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0D, 0, 0.45D, 1.0D, 1.3125, 0.55D);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.45D, 0, 0.0D, 0.55D, 1.3125, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0, 0.45D, 1.0D, 1.3125, 0.55D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public OverheadLinesSlope2(String name) {

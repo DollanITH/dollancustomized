@@ -46,7 +46,7 @@ public class ArrowSl extends Block {
 
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override

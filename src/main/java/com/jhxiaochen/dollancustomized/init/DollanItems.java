@@ -5,6 +5,7 @@ import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.road.BlockAsphalt;
 import com.jhxiaochen.dollancustomized.common.road.BlockAsphaltSlab;
 import com.jhxiaochen.dollancustomized.common.road.RoadMergeOtherLine;
+import com.jhxiaochen.dollancustomized.common.road.StopLineBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.*;
@@ -125,7 +126,12 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.crosswalk_slab);
             registerItemBlock(DollanBlocks.crosswalk);
             registerItemBlock(DollanBlocks.stop_line_slab);
-            registerItemBlock(DollanBlocks.stop_line);
+            registerItemBlock(DollanBlocks.stop_line, new ItemMultiTexture(DollanBlocks.stop_line,DollanBlocks.stop_line, new ItemMultiTexture.Mapper() {
+                                  public String apply(ItemStack p_apply_1_) {
+                                      return StopLineBlock.EnumVarient.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                                  }
+                              })
+            );
             registerItemBlock(DollanBlocks.stop_line_left_slab);
             registerItemBlock(DollanBlocks.stop_line_left);
             registerItemBlock(DollanBlocks.stop_line_right_slab);

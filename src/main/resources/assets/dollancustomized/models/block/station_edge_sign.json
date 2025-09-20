@@ -1,0 +1,30 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "dollancustomized:blocks/railway_sign/edge",
+		"1": "dollancustomized:blocks/brushed_aluminum",
+		"particle": "dollancustomized:blocks/brushed_aluminum"
+	},
+	"elements": [
+		{
+			"from": [5, 3, 7],
+			"to": [11, 14, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 2, 10], "rescale": true},
+			"faces": {
+				"north": {"uv": [4, 0, 12, 16], "texture": "#0", "cullface": "north"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#1"},
+				"south": {"uv": [2, 0, 14, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 16], "texture": "#1"},
+				"up": {"uv": [2, 0, 14, 2], "texture": "#1", "cullface": "up"},
+				"down": {"uv": [2, 14, 14, 16], "texture": "#1", "cullface": "down"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, -135, 0]
+		}
+	}
+}

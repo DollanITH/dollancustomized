@@ -83,6 +83,11 @@ public class BlockMarble extends Block {
         this.setLightLevel(0F);
     }
 
+    public int damageDropped(IBlockState state)
+    {
+        return ((state.getValue(VARIANT)).getMetadata());
+    }
+
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return true;

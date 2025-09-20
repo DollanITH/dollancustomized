@@ -24,7 +24,7 @@ public class Command114514 extends CommandBase
 
     public int getRequiredPermissionLevel()
     {
-        return 3;
+        return 2;
     }
 
     public String getUsage(ICommandSender sender)
@@ -39,14 +39,14 @@ public class Command114514 extends CommandBase
             EntityPlayer entityplayer = getCommandSenderAsPlayer(sender);
             entityplayer.addPotionEffect(new PotionEffect(MobEffects.POISON, 100, 1));
             entityplayer.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 50, 1));
-            notifyCommandListener(sender, this, "commands.114514.successful", new Object[] {entityplayer.getDisplayName()});
+            notifyCommandListener(sender, this, "commands.114514.successful", entityplayer.getDisplayName());
         }
         else
         {
             EntityPlayer entityplayer = getCommandSenderAsPlayer(sender);
             entityplayer.attackEntityFrom(DollanDamageSource.HENG, 1145F);
             Entity entity = getEntity(server, sender, args[0]);
-            notifyCommandListener(entity, this, "commands.114514.fail", new Object[] {entity.getDisplayName()});
+            notifyCommandListener(entity, this, "commands.114514.fail", entity.getDisplayName());
         }
     }
 

@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -15,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAsphaltHorizontal extends Block {
+public class BlockAsphaltHorizontal extends BlockAsphaltBase {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockAsphaltHorizontal(String name) {
@@ -23,6 +22,15 @@ public class BlockAsphaltHorizontal extends Block {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setUnlocalizedName(name);
+        this.setHardness(1.0F);
+        this.setResistance(5.0F);
+        this.setTickRandomly(true);
+        this.setCreativeTab(DollanCustomized.ROAD_TAB);
+    }
+
+    public BlockAsphaltHorizontal() {
+        super(Material.ROCK);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setHardness(1.0F);
         this.setResistance(5.0F);
         this.setTickRandomly(true);

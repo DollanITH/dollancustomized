@@ -4,22 +4,76 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
     private static final PropertyBool UP = PropertyBool.create("up");
+
+    public static final PropertyEnum<EnumLineHalf>
+            TYPE = PropertyEnum.create("type", EnumLineHalf.class);
+    public enum EnumLineHalf implements IStringSerializable
+    {
+        SINGLE,
+        DOUBLE;
+        private static final EnumLineHalf[] METADATA_LOOKUP = new EnumLineHalf[values().length];
+
+        public String toString()
+        {
+            return this.getName();
+        }
+
+        public int getMetadata()
+        {
+            return this == SINGLE ? 0 : 1 ;
+        }
+
+        public String getName()
+        {
+            return this == SINGLE ? "single" : "double";
+        }
+
+        public static EnumLineHalf byMetadata(int metadata) {
+            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
+                metadata = 0;
+            }
+
+            return METADATA_LOOKUP[metadata];
+        }
+
+        static {
+            for (EnumLineHalf subtype : values()) {
+                METADATA_LOOKUP[subtype.getMetadata()] = subtype;
+            }
+        }
+    }
+
+
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, UP, TYPE, FACING);
+    }
+
 
     private static final AxisAlignedBB NORTH_1 = new AxisAlignedBB(0, 0, 0.20270381313759323, 0.6039322304658027, 0.296875, 0.23395381313759323);
     private static final AxisAlignedBB NORTH_2 = new AxisAlignedBB(0, 0, 0.2541554392112171, 0.6418570609361389, 0.296875, 0.2854054392112171);
@@ -75,14 +129,14 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        return state.withProperty(UP, canFenceConnectTo(worldIn, pos, EnumFacing.UP));
+        return state.withProperty(UP, canSupportConnectTo(worldIn, pos));
     }
 
-    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    private boolean canSupportConnectTo(IBlockAccess world, BlockPos pos)
     {
-        BlockPos other = pos.offset(facing);
+        BlockPos other = pos.offset(EnumFacing.UP);
         Block block = world.getBlockState(other).getBlock();
-        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+        return block.canBeConnectedTo(world, other, EnumFacing.UP.getOpposite()) || canConnectTo(world, other, EnumFacing.UP.getOpposite());
     }
 
     @Override
@@ -91,9 +145,11 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
         return canConnectTo(world, pos.offset(facing), facing.getOpposite());
     }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING, UP});
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        for (EnumLineHalf subtype : EnumLineHalf.values( )) {
+            items.add(new ItemStack(this, 1, subtype.getMetadata( )));
+        }
+
     }
 
     @Override
@@ -159,5 +215,38 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
                     addCollisionBoxToList(pos, entityBox, collidingBoxes, NULL_AABB);
                     break;
             }
+    }
+
+    @Override
+    @Nonnull
+    public IBlockState getStateFromMeta(int meta) {
+        EnumLineHalf type = EnumLineHalf.SINGLE;
+        if ((meta & 4) != 0) type = EnumLineHalf.DOUBLE;
+        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, type);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        EnumLineHalf type = state.getValue(TYPE);
+        int v = 0x0;
+        if (type == EnumLineHalf.DOUBLE) v = 0x4;
+        return state.getValue(FACING).getHorizontalIndex() | v;
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        EnumLineHalf subtype = EnumLineHalf.byMetadata(meta);
+     return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, placer.getHorizontalFacing()).withProperty(TYPE, subtype);
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        super.getPickBlock(state, target, world, pos, player);
+        return new ItemStack(this,1,state.getValue(TYPE).getMetadata());
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(TYPE).getMetadata();
     }
 }

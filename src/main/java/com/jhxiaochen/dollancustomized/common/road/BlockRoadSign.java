@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -176,8 +175,7 @@ public class BlockRoadSign extends Block {
     private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-            return block instanceof BlockRoadSign || block == DollanBlocks.road_sign_sl_15
-                    || block == DollanBlocks.road_sign_post;
+            return block instanceof BlockRoadSign || block instanceof BlockRoadSignPost;
         }
 
     @Override

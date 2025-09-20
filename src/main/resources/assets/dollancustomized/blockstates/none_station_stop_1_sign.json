@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:station_stop_1_sign"
+  },
+  "variants": {
+    "inventory": [{}],
+    "half": {
+      "lower": {"model": "dollancustomized:station_stop_1_lower"},
+      "upper": {"model": "dollancustomized:station_stop_1_upper"}
+    },
+    "facing": {
+      "west": {"y": 90},
+      "north": {"y": 180},
+      "south": {},
+      "east": {"y": 270}
+    }
+  }
+}

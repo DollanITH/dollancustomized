@@ -1,29 +1,38 @@
 package com.jhxiaochen.dollancustomized;
 
 import com.jhxiaochen.dollancustomized.command.Command114514;
+import com.jhxiaochen.dollancustomized.fix.Remaper;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
+import com.jhxiaochen.dollancustomized.init.DollanItems;
+import com.jhxiaochen.dollancustomized.model.Registry;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = "dollancustomized", useMetadata = true, updateJSON = "https://wiki.dollancraft.top", version = Reference.VERSION, dependencies = "after:sakura")
+import java.util.function.Supplier;
+
+@Mod(modid = Reference.MOD_ID, useMetadata = true, version = Reference.VERSION, dependencies = "after:sakura")
 public class DollanCustomized {
 
-    @Instance(Reference.MOD_ID)
-    public static com.jhxiaochen.dollancustomized.DollanCustomized instance;
+    @Mod.Instance(Reference.MOD_ID)
+    public static DollanCustomized instance;
+    public Registry registry = new Registry();
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
-    public static com.jhxiaochen.dollancustomized.DollanCustomized getInstance() {
-        return instance;
-    }
 
     public static final CreativeTabs LIGHT_TAB = new TabLight();
     public static final CreativeTabs DOLLAN_TRAN_TAB = new TabdollanTran();
@@ -35,23 +44,25 @@ public class DollanCustomized {
     public static final CreativeTabs Blocks = new TabBlocks();
 
 
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("Pre Init , thank you fucking mother");
-        MinecraftForge.EVENT_BUS.register(proxy);
+        MinecraftForge.EVENT_BUS.register(this);
+        Remaper.registerFixable();
+        registry.preInit(event);
+        MinecraftForge.EVENT_BUS.register(registry);
+        registry.getElements().forEach(registry -> registry.preInit(event));
         proxy.preInit();
-
-
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
+        registry.getElements().forEach(registry -> registry.init(event));
         System.out.println("Init, thank you fucking mother");
         proxy.init();
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         System.out.println("Post Init, thank you fucking mother");
         proxy.postInit();
@@ -61,5 +72,24 @@ public class DollanCustomized {
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Command114514());
         System.out.println("Hey guys, you're welcome.");
+    }
+
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void registerModels(ModelRegistryEvent event) {
+        DollanBlocks.registerModels();
+        DollanItems.registerModels();
+        registry.getElements().forEach(modelRegistry -> modelRegistry.registerBlockItemModel(event));
+    }
+
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(registry.getBlocks().stream().map(Supplier::get).toArray(Block[]::new));
+    }
+
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().registerAll(registry.getItems().stream().map(Supplier::get).toArray(Item[]::new));
     }
 }

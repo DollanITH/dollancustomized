@@ -4,7 +4,6 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,26 +16,22 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("Duplicates")
 public class BlockFrogLight extends Block {
-    public static final PropertyEnum<BlockFrogLight.FrogLightType> COLOR = PropertyEnum.<BlockFrogLight.FrogLightType>create("color", BlockFrogLight.FrogLightType.class);
+    public static final PropertyEnum<BlockFrogLight.FrogLightType> COLOR = PropertyEnum.create("color", BlockFrogLight.FrogLightType.class);
 
-    public static enum FrogLightType implements IStringSerializable {
-        PURPLE(0, "purple","purple"),
-        ORANGE(1, "orange","orange"),
-        GREEN(2, "green","green");
+    public enum FrogLightType implements IStringSerializable {
+        PURPLE(0, "purple"),
+        ORANGE(1, "orange"),
+        GREEN(2, "green");
 
         private static final BlockFrogLight.FrogLightType[] METADATA_LOOKUP = new BlockFrogLight.FrogLightType[values().length];
         private final int metadata;
         private final String name;
         private final String unlocalizedName;
 
-        private FrogLightType(int metadataIn, String nameIn) {
-            this(metadataIn, nameIn, nameIn);
-        }
-
-        private FrogLightType(int metadataIn, String nameIn, String unlocalizedNameIn) {
+        FrogLightType(int metadataIn, String nameIn) {
             this.metadata = metadataIn;
             this.name = nameIn;
-            this.unlocalizedName = unlocalizedNameIn;
+            this.unlocalizedName = nameIn;
         }
 
         public int getMetadata() {
@@ -80,6 +75,11 @@ public class BlockFrogLight extends Block {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(COLOR).getMetadata();
+    }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state) {
         return true;
     }
@@ -96,7 +96,7 @@ public class BlockFrogLight extends Block {
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(this, 1, ((BlockFrogLight.FrogLightType)state.getValue(COLOR)).getMetadata());
+        return new ItemStack(this, 1, (state.getValue(COLOR)).getMetadata());
     }
 
     public IBlockState getStateFromMeta(int meta)
@@ -106,12 +106,12 @@ public class BlockFrogLight extends Block {
 
     public int getMetaFromState(IBlockState state)
     {
-        return ((BlockFrogLight.FrogLightType)state.getValue(COLOR)).getMetadata();
+        return state.getValue(COLOR).getMetadata();
     }
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {COLOR});
+        return new BlockStateContainer(this, COLOR);
     }
 
 }

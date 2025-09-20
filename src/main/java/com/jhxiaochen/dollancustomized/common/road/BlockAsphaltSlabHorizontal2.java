@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAsphaltSlabHorizontal2 extends Block {
+public class BlockAsphaltSlabHorizontal2 extends BlockAsphaltBase {
     public static final PropertyEnum<BlockRailBase.EnumRailDirection> SHAPE            =
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     protected static final  AxisAlignedBB                                 AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
@@ -33,12 +33,6 @@ public class BlockAsphaltSlabHorizontal2 extends Block {
         this.setResistance(10F);
         this.setLightOpacity(1);
 
-    }
-
-    @Override
-    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-        return (face == EnumFacing.UP) || (face == EnumFacing.DOWN);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -74,7 +68,9 @@ public class BlockAsphaltSlabHorizontal2 extends Block {
             case EAST:
                 IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
                 Block block = iblockstate.getBlock();
-                return iblockstate.isOpaqueCube() && block != Blocks.FARMLAND && block != Blocks.GRASS_PATH;
+                return !(block instanceof BlockAsphaltSlab) && !(block instanceof BlockAsphaltSlab1) &&
+                        !(block instanceof BlockAsphaltSlabHorizontal) && !(block instanceof BlockAsphaltSlabHorizontal2) &&
+                        !iblockstate.isOpaqueCube() && block != this && block != Blocks.FARMLAND && block != Blocks.GRASS_PATH;
             default:
                 return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
         }

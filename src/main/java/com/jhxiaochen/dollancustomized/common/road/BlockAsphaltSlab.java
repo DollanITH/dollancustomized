@@ -9,6 +9,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -19,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAsphaltSlab extends Block {
+public class BlockAsphaltSlab extends BlockAsphaltBase {
     public static final PropertyEnum<BlockAsphaltSlab.AsphaltType> VARIANT = PropertyEnum.<BlockAsphaltSlab.AsphaltType>create("variant", BlockAsphaltSlab.AsphaltType.class);
 
     public static enum AsphaltType implements IStringSerializable {
@@ -83,10 +84,29 @@ public class BlockAsphaltSlab extends Block {
         this.setLightOpacity(1);
     }
 
-    @Override
-    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    public int damageDropped(IBlockState state)
     {
-        return (face == EnumFacing.UP) || (face == EnumFacing.DOWN);
+        return ((state.getValue(VARIANT)).getMetadata());
+    }
+
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        switch (side)
+        {
+            case UP:
+                return true;
+            case NORTH:
+            case SOUTH:
+            case WEST:
+            case EAST:
+                IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+                Block block = iblockstate.getBlock();
+                return !(block instanceof BlockAsphaltSlab) && !(block instanceof BlockAsphaltSlab1) &&
+                        !(block instanceof BlockAsphaltSlabHorizontal) && !(block instanceof BlockAsphaltSlabHorizontal2) &&
+                        !iblockstate.isOpaqueCube() && block != this && block != Blocks.FARMLAND && block != Blocks.GRASS_PATH;
+            default:
+                return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        }
     }
 
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)

@@ -87,6 +87,11 @@ public class BlockMyalite extends Block {
         this.setResistance(10F);
     }
 
+    public int damageDropped(IBlockState state)
+    {
+        return ((state.getValue(VARIANT)).getMetadata());
+    }
+
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         BlockMyalite.MyaliteType variant = state.getValue(VARIANT);

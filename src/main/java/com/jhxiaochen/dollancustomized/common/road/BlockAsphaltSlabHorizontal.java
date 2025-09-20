@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAsphaltSlabHorizontal extends Block {
+public class BlockAsphaltSlabHorizontal extends BlockAsphaltBase {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
@@ -34,13 +34,16 @@ public class BlockAsphaltSlabHorizontal extends Block {
         this.setResistance(10F);
         this.setTickRandomly(true);
         this.setLightOpacity(1);
-
     }
 
-    @Override
-    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-        return (face == EnumFacing.UP) || (face == EnumFacing.DOWN);
+    public BlockAsphaltSlabHorizontal() {
+        super(Material.ROCK);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setCreativeTab(DollanCustomized.ROAD_TAB);
+        this.setHardness(1.2F);
+        this.setResistance(10F);
+        this.setTickRandomly(true);
+        this.setLightOpacity(1);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -66,7 +69,9 @@ public class BlockAsphaltSlabHorizontal extends Block {
             case EAST:
                 IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
                 Block block = iblockstate.getBlock();
-                return iblockstate.isOpaqueCube() && block != Blocks.FARMLAND && block != Blocks.GRASS_PATH;
+                return !(block instanceof BlockAsphaltSlab) && !(block instanceof BlockAsphaltSlab1) &&
+                        !(block instanceof BlockAsphaltSlabHorizontal) && !(block instanceof BlockAsphaltSlabHorizontal2) &&
+                        !iblockstate.isOpaqueCube() && block != this && block != Blocks.FARMLAND && block != Blocks.GRASS_PATH;
             default:
                 return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
         }

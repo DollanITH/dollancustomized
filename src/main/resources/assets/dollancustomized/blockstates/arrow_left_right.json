@@ -6,14 +6,15 @@
   },
   "variants": {
     "inventory": [{"transform": "forge:default-block"}],
+    "type": {
+      "full" : {},
+      "slab": {"model": "dollancustomized:arrow_left_right_sl"}
+    },
     "facing": {
-      "west": {"model": "dollancustomized:arrow_left_right",
-        "y": 90},
-      "north": {"model": "dollancustomized:arrow_left_right",
-        "y": 180},
-      "south": {"model": "dollancustomized:arrow_left_right"},
-      "east": {"model": "dollancustomized:arrow_left_right",
-        "y": 270}
+      "west": {"y": 90},
+      "north": {"y": 180},
+      "south": {},
+      "east": {"y": 270}
     }
   }
 }

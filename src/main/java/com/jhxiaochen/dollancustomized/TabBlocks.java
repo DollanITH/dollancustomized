@@ -14,7 +14,7 @@ public class TabBlocks extends CreativeTabs {
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(DollanItems.dollancraft);
+        return new ItemStack(DollanItems.dollan);
     }
 
 

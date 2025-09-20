@@ -1,0 +1,19 @@
+{
+  "format_version": "1.21.6",
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "textures": {
+    "0": "dollancustomized:blocks/roads/road_give_way_mark",
+    "particle": "dollancustomized:blocks/roads/road_give_way_mark"
+  },
+  "elements": [
+    {
+      "from": [-8, -8, -8],
+      "to": [24, -7.99, 24],
+      "faces": {
+        "up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
+        "down": {"uv": [16, 0, 0, 16], "texture": "#0", "cullface": "down"}
+      }
+    }
+  ]
+}

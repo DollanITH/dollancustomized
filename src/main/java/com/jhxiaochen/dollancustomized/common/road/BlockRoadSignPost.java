@@ -108,10 +108,10 @@ public class BlockRoadSignPost extends Block {
         return false;
     }
 
-    private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos) {
+    private boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-        return block != Blocks.AIR && block != Blocks.WALL_SIGN && !(block instanceof OverheadSteel) &&!(block instanceof OverheadLinesHorzional)&& !(block instanceof OverheadSteelHorzional) &&!(block instanceof OverheadLines);
+        return (worldIn.isSideSolid(pos,side,false) || block instanceof BlockRoadSign || block == this) && block != Blocks.AIR && block != Blocks.WALL_SIGN && !(block instanceof OverheadSteel) &&!(block instanceof OverheadLinesHorzional)&& !(block instanceof OverheadSteelHorzional) &&!(block instanceof OverheadLines);
 
     }
 
@@ -130,12 +130,12 @@ public class BlockRoadSignPost extends Block {
      */
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(UP, this.canConnectTo(worldIn, pos.up()))
-                .withProperty(DOWN, this.canConnectTo(worldIn, pos.down()))
-                .withProperty(NORTH, this.canConnectTo(worldIn, pos.north()))
-                .withProperty(EAST, this.canConnectTo(worldIn, pos.east()))
-                .withProperty(SOUTH, this.canConnectTo(worldIn, pos.south()))
-                .withProperty(WEST, this.canConnectTo(worldIn, pos.west()));
+        return state.withProperty(UP, this.canConnectTo(worldIn, pos.up(), EnumFacing.UP))
+                .withProperty(DOWN, this.canConnectTo(worldIn, pos.down(), EnumFacing.DOWN))
+                .withProperty(NORTH, this.canConnectTo(worldIn, pos.north(), EnumFacing.NORTH))
+                .withProperty(EAST, this.canConnectTo(worldIn, pos.east(), EnumFacing.EAST))
+                .withProperty(SOUTH, this.canConnectTo(worldIn, pos.south(), EnumFacing.SOUTH))
+                .withProperty(WEST, this.canConnectTo(worldIn, pos.west(), EnumFacing.WEST));
     }
 
     /**

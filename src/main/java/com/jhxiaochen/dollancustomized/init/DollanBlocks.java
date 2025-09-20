@@ -4,6 +4,9 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
 import com.jhxiaochen.dollancustomized.common.metro.*;
+import com.jhxiaochen.dollancustomized.common.rail.PowerMethodChangeSign;
+import com.jhxiaochen.dollancustomized.common.rail.RailwaySignPost;
+import com.jhxiaochen.dollancustomized.common.rail.StationStopSign;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -59,7 +62,7 @@ public static Block road_sign_triangle_t2 = new BlockRoadSign("road_sign_triangl
 public static Block road_sign_triangle_y = new BlockRoadSign("road_sign_triangle_y");
 public static Block road_sign_triangle_warn = new BlockRoadSign("road_sign_triangle_warn");
 public static Block road_sign_triangle_shizi = new BlockRoadSign("road_sign_triangle_shizi");
-public static Block bus_lane_mark = new IronHorizontal("bus_lane_mark");
+public static Block bus_lane_mark = new BusLaneMark( );
 public static Block road_sign_do_not_enter = new BlockRoadSign("road_sign_do_not_enter");
 public static Block road_sign_do_not_enter_1 = new BlockRoadSign("road_sign_do_not_enter_1");
 public static Block road_sign_do_not_left = new BlockRoadSign("road_sign_do_not_left");
@@ -151,40 +154,31 @@ public static Block road_excl_zone_split_in_l_slab = new BlockAsphaltSlabHorizon
 public static Block platform_fence = new BlockPlatFormFence("platform_fence");
 public static Block crosswalk = new BlockAsphaltHorizontal1("crosswalk");
 public static Block crosswalk_slab = new BlockAsphaltSlabHorizontal2("crosswalk_slab");
+public static Block railway_sign_post = new RailwaySignPost( );
 public static Block stop_line = new StopLineBlock();
-public static Block stop_line_slab = new BlockAsphaltSlabHorizontal("stop_line_slab");
+public static Block stop_line_slab = new StopLineBlockSlab();
 public static Block stop_line_left = new BlockAsphaltHorizontal("stop_line_left");
 public static Block stop_line_left_slab = new BlockAsphaltSlabHorizontal("stop_line_left_slab");
 public static Block stop_line_right = new BlockAsphaltHorizontal("stop_line_right");
 public static Block stop_line_right_1 = new BlockAsphaltHorizontal("stop_line_right_1");
 public static Block stop_line_right_slab = new BlockAsphaltSlabHorizontal("stop_line_right_slab");
 public static Block stop_line_right_1_slab = new BlockAsphaltSlabHorizontal("stop_line_right_1_slab");
+public static Block stop_line_cross = new DiagonalStopLineBlock();
+public static Block stop_line_cross_slab = new DiagonalStopLineBlockSlab();
 public static Block road_lamp_1_up = new RoadLamp1U();
 public static Block road_lamp_1_bottom = new RoadLamp1B();
-public static Block arrow_diaotou = new Arrow("arrow_diaotou");
-public static Block arrow_left_diaotou = new Arrow("arrow_left_diaotou");
-public static Block arrow_left_right = new Arrow("arrow_left_right");
-public static Block arrow_left_right_staright = new Arrow("arrow_left_right_staright");
-public static Block arrow_left_staright = new Arrow("arrow_left_staright");
-public static Block arrow_right_staright = new Arrow("arrow_right_staright");
-public static Block arrow_left = new Arrow("arrow_left");
-public static Block arrow_right = new Arrow("arrow_right");
-public static Block arrow_staright = new Arrow("arrow_staright");
-public static Block arrow_staright_diaotou = new Arrow("arrow_staright_diaotou");
-public static Block arrow_diaotou_sl = new ArrowSl("arrow_diaotou_sl");
-public static Block arrow_left_diaotou_sl = new ArrowSl("arrow_left_diaotou_sl");
-public static Block arrow_left_right_sl = new ArrowSl("arrow_left_right_sl");
-public static Block arrow_left_right_staright_sl = new ArrowSl("arrow_left_right_staright_sl");
-public static Block arrow_left_staright_sl = new ArrowSl("arrow_left_staright_sl");
-public static Block arrow_right_staright_sl = new ArrowSl("arrow_right_staright_sl");
-public static Block arrow_left_sl = new ArrowSl("arrow_left_sl");
-public static Block arrow_right_sl = new ArrowSl("arrow_right_sl");
-public static Block arrow_staright_sl = new ArrowSl("arrow_staright_sl");
-public static Block arrow_staright_diaotou_sl = new ArrowSl("arrow_staright_diaotou_sl");
-public static Block arrow_confluence_left_sl = new ArrowSl("arrow_confluence_left_sl");
-public static Block arrow_confluence_right_sl = new ArrowSl("arrow_confluence_right_sl");
-public static Block arrow_confluence_left = new Arrow("arrow_confluence_left");
-public static Block arrow_confluence_right = new Arrow("arrow_confluence_right");
+public static Block arrow_diaotou = new ArrowNew("arrow_diaotou");
+public static Block arrow_left_diaotou = new ArrowNew("arrow_left_diaotou");
+public static Block arrow_left_right          = new ArrowNew("arrow_left_right");
+public static Block arrow_left_right_straight = new ArrowNew("arrow_left_right_straight");
+public static Block arrow_left_straight  = new ArrowNew("arrow_left_straight");
+public static Block arrow_right_straight = new ArrowNew("arrow_right_straight");
+public static Block arrow_left           = new ArrowNew("arrow_left");
+public static Block arrow_right            = new ArrowNew("arrow_right");
+public static Block arrow_straight         = new ArrowNew("arrow_straight");
+public static Block arrow_straight_diaotou = new ArrowNew("arrow_straight_diaotou");
+public static Block arrow_confluence_left = new ArrowNew("arrow_confluence_left");
+public static Block arrow_confluence_right = new ArrowNew("arrow_confluence_right");
 public static Block asphalt_cyan_black_half_line_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_line_slab");
 public static Block asphalt_cyan_black_half_line = new BlockAsphaltHorizontal("asphalt_cyan_black_half_line");
 public static Block asphalt_cyan_black_half_slab = new BlockAsphaltSlabHorizontal("asphalt_cyan_black_half_slab");
@@ -227,14 +221,14 @@ public static Block road_traffic_light = new BlockRoadSign("road_traffic_light")
 public static Block road_traffic_light_red = new BlockRoadSign("road_traffic_light_red");
 public static Block road_traffic_light_green = new BlockRoadSign("road_traffic_light_green");
 public static Block road_traffic_light_yellow = new BlockRoadSign("road_traffic_light_yellow");
-
+public static Block power_method_change_sign = new PowerMethodChangeSign.Register().setRegistryName("power_method_change_sign").setUnlocalizedName("PowerMethodChangeSign");
+public static Block station_stop_sign = new StationStopSign().setRegistryName("station_stop_sign").setUnlocalizedName("StationStopSign");
 public static Block thick_white_line_45 = new BlockAsphaltHorizontal("thick_white_line_45");
 public static Block thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
 public static Block thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
 public static Block thick_yellow_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_yellow_line_slab_45");
 public static Block platform_wall = new DollanBlock("platform_wall");
 public static Block marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
-            //
 
 public static Block beautiful_marble = new BlockMarble("beautiful_marble");
 public static Block dollan_line_20 = new BlockMetroBlock("dollan_line_20");
@@ -359,16 +353,20 @@ public static Block metro_tran7 = new OverheadLineTran7();
 
         registerBlock(platform_fence);
         registerBlock(metro_fence);
+        registerBlock(railway_sign_post);
+        registerBlock(station_stop_sign);
+        registerBlock(power_method_change_sign);
+
 
         registerBlock(arrow_diaotou);
         registerBlock(arrow_left_diaotou);
         registerBlock(arrow_left_right);
-        registerBlock(arrow_left_right_staright);
-        registerBlock(arrow_left_staright);
-        registerBlock(arrow_right_staright);
+        registerBlock(arrow_left_right_straight);
+        registerBlock(arrow_left_straight);
+        registerBlock(arrow_right_straight);
         registerBlock(arrow_left);
         registerBlock(arrow_right);
-        registerBlock(arrow_staright);
+        registerBlock(arrow_straight);
         registerBlock(bike_words);
         registerBlock(bus_lane_mark);
         registerBlock(road_traffic_light);
@@ -413,6 +411,8 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerBlock(crosswalk);
         registerBlock(stop_line_slab);
         registerBlock(stop_line);
+        registerBlock(stop_line_cross_slab);
+        registerBlock(stop_line_cross);
         registerBlock(stop_line_left_slab);
         registerBlock(stop_line_left);
         registerBlock(stop_line_right_slab);
@@ -559,7 +559,7 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerBlock(crosswalk_diagonal);
         registerBlock(crosswalk_diagonal_slab);
 
-        registerBlock(arrow_staright_diaotou);
+        registerBlock(arrow_straight_diaotou);
         registerBlock(platform_wall);
         registerBlock(marble_block);
 
@@ -570,18 +570,18 @@ public static Block metro_tran7 = new OverheadLineTran7();
 
         registerBlock(arrow_confluence_left);
         registerBlock(arrow_confluence_right);
-        registerBlock(arrow_diaotou_sl);
-        registerBlock(arrow_left_diaotou_sl);
-        registerBlock(arrow_left_right_sl);
-        registerBlock(arrow_left_right_staright_sl);
-        registerBlock(arrow_left_staright_sl);
-        registerBlock(arrow_right_staright_sl);
-        registerBlock(arrow_left_sl);
-        registerBlock(arrow_right_sl);
-        registerBlock(arrow_staright_sl);
-        registerBlock(arrow_staright_diaotou_sl);
-        registerBlock(arrow_confluence_left_sl);
-        registerBlock(arrow_confluence_right_sl);
+        //registerBlock(arrow_diaotou_sl);
+        //registerBlock(arrow_left_diaotou_sl);
+        //registerBlock(arrow_left_right_sl);
+        //registerBlock(arrow_left_right_staright_sl);
+        //registerBlock(arrow_left_staright_sl);
+        //registerBlock(arrow_right_staright_sl);
+        //registerBlock(arrow_left_sl);
+        //registerBlock(arrow_right_sl);
+        //registerBlock(arrow_staright_sl);
+        //registerBlock(arrow_staright_diaotou_sl);
+        //registerBlock(arrow_confluence_left_sl);
+        //registerBlock(arrow_confluence_right_sl);
         //other
         registerBlock(beautiful_marble);
         registerBlock(cherry_planks);
@@ -701,10 +701,12 @@ public static Block metro_tran7 = new OverheadLineTran7();
 
     @SideOnly(Side.CLIENT)
     public static void registerModels() {
+        registerModel(railway_sign_post);
+        registerModel(station_stop_sign);
+        registerModel(station_stop_sign,1,"station_stop_sign_wall");
+        registerModel(station_stop_sign,2,"station_stop_sign_wall_single");
         registerModel(arrow_confluence_left);
         registerModel(arrow_confluence_right);
-        registerModel(arrow_confluence_left_sl);
-        registerModel(arrow_confluence_right_sl);
 
         registerModel(road_sign_left_warn);
         registerModel(road_sign_right_warn);
@@ -765,7 +767,9 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerModel(road_sign_go_right);
         registerModel(road_sign_go_left);
         registerModel(road_sign_go_both);
-        registerModel(bus_lane_mark);
+        for (BusLaneMark.EnumType subtype : BusLaneMark.EnumType.values()) {
+            registerModel(bus_lane_mark, subtype.getMetadata(), "bus_lane_" + subtype.getName());
+        }
         registerModel(road_sign_do_not_enter);
         registerModel(road_traffic_light);
         registerModel(road_traffic_light_red);
@@ -799,11 +803,20 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerModel(thick_yellow_line_slab_45);
         registerModel(crosswalk);
         registerModel(crosswalk_slab);
-        registerModel(stop_line_slab);
         registerModel(stop_line,0, "stop_line");
-        registerModel(stop_line,8, "road_stop_diagonal");
-        registerModel(stop_line,4, "road_stop_diagonal_1");
-        registerModel(stop_line_slab);
+        registerModel(stop_line,2, "road_stop_diagonal");
+        registerModel(stop_line,1, "road_stop_diagonal_1");
+        registerModel(stop_line_slab,0, "stop_line_slab");
+        registerModel(stop_line_slab,2, "road_stop_diagonal_slab");
+        registerModel(stop_line_slab,1, "road_stop_diagonal_1_slab");
+        registerModel(stop_line_cross,0, "road_stop_diagonal_white_line");
+        registerModel(stop_line_cross,1, "road_stop_diagonal_white_line_1");
+        registerModel(stop_line_cross,2, "road_stop_diagonal_yellow_line");
+        registerModel(stop_line_cross,3, "road_stop_diagonal_yellow_line_1");
+        registerModel(stop_line_cross_slab,0, "road_stop_diagonal_white_line_slab");
+        registerModel(stop_line_cross_slab,1, "road_stop_diagonal_white_line_1_slab");
+        registerModel(stop_line_cross_slab,2, "road_stop_diagonal_yellow_line_slab");
+        registerModel(stop_line_cross_slab,3, "road_stop_diagonal_yellow_line_1_slab");
         registerModel(stop_line);
         registerModel(stop_line_left_slab);
         registerModel(stop_line_left);
@@ -914,12 +927,12 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerModel(arrow_diaotou);
         registerModel(arrow_left_diaotou);
         registerModel(arrow_left_right);
-        registerModel(arrow_left_right_staright);
-        registerModel(arrow_left_staright);
-        registerModel(arrow_right_staright);
+        registerModel(arrow_left_right_straight);
+        registerModel(arrow_left_straight);
+        registerModel(arrow_right_straight);
         registerModel(arrow_left);
         registerModel(arrow_right);
-        registerModel(arrow_staright);
+        registerModel(arrow_straight);
         registerModel(road_sign_sl_15);
         registerModel(road_sign_sl_20);
         registerModel(road_sign_sl_30);
@@ -951,20 +964,9 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(),"separate_line_slab");
         registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(),"separate_line_yellow_slab");
 
-        registerModel(arrow_staright_diaotou);
+        registerModel(arrow_straight_diaotou);
         registerModel(platform_wall);
         registerModel(marble_block);
-
-        registerModel(arrow_diaotou_sl);
-        registerModel(arrow_left_diaotou_sl);
-        registerModel(arrow_left_right_sl);
-        registerModel(arrow_left_right_staright_sl);
-        registerModel(arrow_left_staright_sl);
-        registerModel(arrow_right_staright_sl);
-        registerModel(arrow_left_sl);
-        registerModel(arrow_right_sl);
-        registerModel(arrow_staright_sl);
-        registerModel(arrow_staright_diaotou_sl);
 
         registerModel(dollan_line_17);
         registerModel(dollan_line_19);
@@ -1070,6 +1072,8 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerModel(overhead_steel_support);
         registerModel(overhead_steel_diagonal_support);
         registerModel(overhead_steel_diagonal_support_1);
+        registerModel(overhead_steel_diagonal_support,1,"overhead_steel_diagonal_support_2");
+        registerModel(overhead_steel_diagonal_support_1,1,"overhead_steel_diagonal_support_3");
         registerModel(overhead_steel_support_1);
         registerModel(overhead_steel_double_diagonal);
         registerModel(overhead_steel_double_diagonal_1);
@@ -1133,6 +1137,21 @@ public static Block metro_tran7 = new OverheadLineTran7();
                 new StateMap.Builder().withName(BlockColored.COLOR).withSuffix("_marble_tile").build());
         registerStateMapper(DollanBlocks.stop_line,
                 new StateMap.Builder().withName(StopLineBlock.VARIENT).build());
+        registerStateMapper(DollanBlocks.stop_line_slab,
+                new StateMap.Builder().withName(StopLineBlockSlab.VARIENT).withSuffix("_slab").build());
+        registerStateMapper(DollanBlocks.stop_line_cross,
+                new StateMap.Builder().withName(DiagonalStopLineBlock.VARIENT).build());
+        registerStateMapper(DollanBlocks.stop_line_cross_slab,
+                new StateMap.Builder().withName(DiagonalStopLineBlockSlab.VARIENT).withSuffix("_slab").build());
+        registerStateMapper(DollanBlocks.overhead_steel_diagonal_support,
+                new StateMap.Builder()
+                        .withName(OverheadSteelDiagonalSupport.TYPE)
+                        .withSuffix("_overhead_steel_diagonal_support").build()
+        );        registerStateMapper(DollanBlocks.overhead_steel_diagonal_support_1,
+                new StateMap.Builder()
+                        .withName(OverheadSteelDiagonalSupport.TYPE)
+                        .withSuffix("_overhead_steel_diagonal_support_1").build()
+        );
 
     }
 
@@ -1157,6 +1176,11 @@ public static Block metro_tran7 = new OverheadLineTran7();
         ModelResourceLocation model = new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory");
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
     }
+    @SideOnly(Side.CLIENT)
+    private static void registerModel(net.minecraft.block.Block block, int metadata) {
+        ModelResourceLocation model = new ModelResourceLocation(block.getRegistryName(), "inventory");
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
+    }
 
     @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block) {
@@ -1173,4 +1197,5 @@ public static Block metro_tran7 = new OverheadLineTran7();
             BLOCKS.stream().forEach(block -> event.getRegistry().register(block));
         }
     }
+
 }

@@ -6,7 +6,6 @@ import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -26,8 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 
 public class BandLamp extends BlockHorizontal {
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    public static enum EnumVertical implements IStringSerializable {
+    public enum EnumVertical implements IStringSerializable {
         UP("up"),
         DOWN("down"),
         MID("mid");
@@ -162,12 +160,12 @@ public class BandLamp extends BlockHorizontal {
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase player) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, player);
         state = state.withProperty(FACING, player.getHorizontalFacing().getOpposite());
-        if (player.rotationPitch > 22.5F) {
-            state = state.withProperty(VERTICAL, EnumVertical.DOWN);
-        } else if (player.rotationPitch > -22.5F) {
-            state = state.withProperty(VERTICAL, EnumVertical.MID);
-        } else {
+        if (facing == EnumFacing.DOWN) {
             state = state.withProperty(VERTICAL, EnumVertical.UP);
+        } else if (facing == EnumFacing.UP) {
+            state = state.withProperty(VERTICAL, EnumVertical.DOWN);
+        } else {
+            state = state.withProperty(VERTICAL, EnumVertical.MID);
         }
         return state;
     }

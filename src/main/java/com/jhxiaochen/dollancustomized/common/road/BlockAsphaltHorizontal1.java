@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -17,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAsphaltHorizontal1 extends Block {
+public class BlockAsphaltHorizontal1 extends BlockAsphaltBase {
     public static final PropertyEnum<BlockRailBase.EnumRailDirection> SHAPE =
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     public BlockAsphaltHorizontal1(String name) {

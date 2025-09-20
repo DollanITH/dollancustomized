@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -15,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("Duplicates")
-public class BlockAsphalt extends Block {
+public class BlockAsphalt extends BlockAsphaltBase {
     public static final PropertyEnum<BlockAsphalt.AsphaltType> VARIANT = PropertyEnum.<BlockAsphalt.AsphaltType>create("variant", BlockAsphalt.AsphaltType.class);
     public static enum AsphaltType implements IStringSerializable {
         BLACK(0, "black"),
@@ -77,6 +76,11 @@ public class BlockAsphalt extends Block {
         this.setHardness(1.0F);
         this.setResistance(10F);
         this.setLightLevel(0F);
+    }
+
+    public int damageDropped(IBlockState state)
+    {
+        return ((state.getValue(VARIANT)).getMetadata());
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "dollancustomized:road_stop_diagonal_white_line"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "facing": {
+      "west": {
+        "y": 90},
+      "north": {
+        "y": 180},
+      "south": {},
+      "east": {
+        "y": 270}
+    }
+  }
+}

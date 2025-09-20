@@ -117,6 +117,11 @@ public class BlockMetroFence extends Block {
         this.setSoundType(SoundType.STONE);
     }
 
+    public int damageDropped(IBlockState state)
+    {
+        return ((state.getValue(TYPE)).getMetadata());
+    }
+
     public String getUnlocalizedName(ItemStack stack)
     {
         return super.getUnlocalizedName() + "." + FenceType.byMetadata(stack.getMetadata()).getUnlocalizedName();
@@ -273,17 +278,14 @@ public class BlockMetroFence extends Block {
 
         switch ((FenceType)state.getValue(TYPE))
         {
-            case METRO:
-                i = i | 0;
-                break;
             case ROAD_CENTER:
                 i = i | 1;
                 break;
             case ROAD:
                 i = i | 2;
                 break;
+            case METRO:
             default:
-                i = i | 0;
         }
 
         return i;
@@ -293,15 +295,11 @@ public class BlockMetroFence extends Block {
         int meta = state.getValue(TYPE).getMetadata();
         switch (meta) {
             case 0:
-               return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
+            case 1:
+                return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
                     .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
                     .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
                     .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
-            case 1:
-               return state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
-                        .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))
-                        .withProperty(SOUTH, canFenceConnectTo(worldIn, pos, EnumFacing.SOUTH))
-                        .withProperty(WEST, canFenceConnectTo(worldIn, pos, EnumFacing.WEST));
             case 2:
                 state.withProperty(NORTH, canFenceConnectTo(worldIn, pos, EnumFacing.NORTH))
                         .withProperty(EAST, canFenceConnectTo(worldIn, pos, EnumFacing.EAST))

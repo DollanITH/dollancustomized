@@ -53,4 +53,10 @@ public class BlockTranLight extends BlockColored
         public boolean isFullCube(IBlockState state) {
             return true;
         }
+
+        @Override
+        public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+            return true;
+        }
+
     }

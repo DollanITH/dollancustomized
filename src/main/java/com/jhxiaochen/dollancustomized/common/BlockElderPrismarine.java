@@ -81,6 +81,11 @@ public class BlockElderPrismarine extends Block {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(VARIANT).getMetadata();
+    }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state) {
         return true;
     }

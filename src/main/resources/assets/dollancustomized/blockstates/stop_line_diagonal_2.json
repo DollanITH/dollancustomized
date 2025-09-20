@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "transform": "forge:default-block",
-    "model": "dollancustomized:road_stop_diagonal_1"
+    "model": "dollancustomized:road_stop_diagonal"
   },
   "variants": {
     "inventory": [{"transform": "forge:default-block"}],

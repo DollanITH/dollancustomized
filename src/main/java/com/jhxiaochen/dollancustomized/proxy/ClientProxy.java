@@ -9,7 +9,6 @@ public class ClientProxy implements CommonProxy {
     public void preInit() {
         MinecraftForge.EVENT_BUS.register(this);
         DollanSounds.registerSounds();
-        new ModelLoader();
     }
 
     @Override

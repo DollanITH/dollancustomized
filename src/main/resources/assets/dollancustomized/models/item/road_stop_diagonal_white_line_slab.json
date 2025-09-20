@@ -5,7 +5,7 @@
 		"1": "dollancustomized:blocks/roads/black_asphalt",
 		"2": "dollancustomized:blocks/roads/stop_diagonal_1_line_white",
 		"3": "dollancustomized:blocks/roads/stop",
-		"4": "dollancustomized:blocks/roads/road_single_white_thin",
+		"4": "dollancustomized:blocks/roads/single_white_thin",
 		"particle": "dollancustomized:blocks/roads/black_asphalt"
 	},
 	"elements": [

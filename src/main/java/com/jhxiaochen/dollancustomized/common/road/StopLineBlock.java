@@ -5,11 +5,15 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -69,20 +73,23 @@ public class StopLineBlock extends BlockAsphaltHorizontal
         super("stop_line");
     }
 
-    @Override
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+    public int damageDropped(IBlockState state)
     {
-        items.add(new ItemStack(this, 1, 0));
-        items.add(new ItemStack(this, 1, 4));
-        items.add(new ItemStack(this, 1, 8));
+        return ((state.getValue(VARIENT)).getMetadata());
+    }
+
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        for (EnumVarient subtype : EnumVarient.values( )) {
+        items.add(new ItemStack(this, 1, subtype.getMetadata( )));
+        }
     }
 
     @Override
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
         EnumVarient varient = EnumVarient.NORMAL;
-        if ((meta & 0x8) != 0) varient = EnumVarient.DIAGONAL_1;
-        else if ((meta & 0x4) != 0) varient = EnumVarient.DIAGONAL_2;
+        if ((meta & 0x4) != 0) varient = EnumVarient.DIAGONAL_1;
+        else if ((meta & 0x8) != 0) varient = EnumVarient.DIAGONAL_2;
         return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(VARIENT, varient);
     }
 
@@ -90,20 +97,28 @@ public class StopLineBlock extends BlockAsphaltHorizontal
     public int getMetaFromState(IBlockState state) {
         EnumVarient varient = state.getValue(VARIENT);
         int v = 0x0;
-        if (varient == EnumVarient.DIAGONAL_1) v = 0x8;
-        else if (varient == EnumVarient.DIAGONAL_2) v = 0x4;
+        if (varient == EnumVarient.DIAGONAL_1) v = 0x4;
+        else if (varient == EnumVarient.DIAGONAL_2) v = 0x8;
         return state.getValue(FACING).getHorizontalIndex() | v;
     }
 
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
-        return new ItemStack(this, 1, (state.getValue(VARIENT)).getMetadata());
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        super.getPickBlock(state, target, world, pos, player);
+        return new ItemStack(this, 1 , (state.getValue(VARIENT).getMetadata()));
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[]{FACING, VARIENT});
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
+        EnumVarient varient = EnumVarient.byMetadata(meta);
+        state = state.withProperty(FACING, placer.getHorizontalFacing()).withProperty(VARIENT, varient);
+        return state;
     }
 
 }

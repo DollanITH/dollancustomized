@@ -26,6 +26,7 @@ import javax.annotation.Nonnull;
 @SuppressWarnings("Duplicates")
 public class BlockMyalite extends Block {
     public static final PropertyEnum<BlockMyalite.MyaliteType> VARIANT = PropertyEnum.create("variant", BlockMyalite.MyaliteType.class);
+
     public enum MyaliteType implements IStringSerializable {
         NORMAL(0, "myalite","normal"),
         CRYSTAL(1, "myalite_crystal","crystal"),
@@ -85,6 +86,7 @@ public class BlockMyalite extends Block {
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);
+        this.setLightOpacity(getDefaultState().getValue(VARIANT).getMetadata() == 1 ? 0 : 255);
     }
 
     public int damageDropped(IBlockState state)
@@ -94,13 +96,7 @@ public class BlockMyalite extends Block {
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        BlockMyalite.MyaliteType variant = state.getValue(VARIANT);
-        switch (variant){
-            case NORMAL: return true;
-            case PAVEMENT: return true;
-            case CRYSTAL: return false;
-        }
-        return false;
+        return !(state.getValue(VARIANT).getMetadata() == 1);
     }
 
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
@@ -114,14 +110,10 @@ public class BlockMyalite extends Block {
         return BlockFaceShape.UNDEFINED;
 
     }
-    public boolean isFullCube(IBlockState state){
-        BlockMyalite.MyaliteType variant = state.getValue(VARIANT);
-        switch (variant){
-            case NORMAL: return true;
-            case PAVEMENT: return true;
-            case CRYSTAL: return false;
-        }
-        return false;
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return !(state.getValue(VARIANT).getMetadata() == 1);
     }
 
     @SideOnly(Side.CLIENT)

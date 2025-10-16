@@ -63,6 +63,7 @@ public static Block road_sign_triangle_y = new BlockRoadSign("road_sign_triangle
 public static Block road_sign_triangle_warn = new BlockRoadSign("road_sign_triangle_warn");
 public static Block road_sign_triangle_shizi = new BlockRoadSign("road_sign_triangle_shizi");
 public static Block bus_lane_mark = new BusLaneMark( );
+public static Block bus_lane_mark_slab = new BusLaneMarkSlab( );
 public static Block road_sign_do_not_enter = new BlockRoadSign("road_sign_do_not_enter");
 public static Block road_sign_do_not_enter_1 = new BlockRoadSign("road_sign_do_not_enter_1");
 public static Block road_sign_do_not_left = new BlockRoadSign("road_sign_do_not_left");
@@ -369,6 +370,7 @@ public static Block metro_tran7 = new OverheadLineTran7();
         registerBlock(arrow_straight);
         registerBlock(bike_words);
         registerBlock(bus_lane_mark);
+        registerBlock(bus_lane_mark_slab);
         registerBlock(road_traffic_light);
         registerBlock(road_traffic_light_red);
         registerBlock(road_traffic_light_green);
@@ -1127,8 +1129,7 @@ public static Block metro_tran7 = new OverheadLineTran7();
                 new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
         registerStateMapper(DollanBlocks.limestone,
                 new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
-        registerStateMapper(DollanBlocks.myalite,
-                new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
+        registerStateMapper(DollanBlocks.myalite, new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
         registerStateMapper(DollanBlocks.polished_blackstone,
                 new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
         registerStateMapper(DollanBlocks.froglight,

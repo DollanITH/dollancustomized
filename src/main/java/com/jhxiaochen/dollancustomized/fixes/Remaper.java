@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.fix;
+package com.jhxiaochen.dollancustomized.fixes;
 
 import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.Block;
@@ -6,11 +6,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.datafix.FixTypes;
+import net.minecraftforge.common.util.CompoundDataFixer;
+import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -76,14 +79,9 @@ public class Remaper {
             if (ignoredMappings.contains(resourcePath)) {
                 missingMapping.ignore();
             } else if (itemRemappings.containsKey(resourcePath)) {
-                ResourceLocation remappedResourceLocation = new ResourceLocation(resourceLocation.getResourceDomain(), itemRemappings.get(resourcePath));
-                    Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
-                if (remappedItem != Items.AIR) {
-                    missingMapping.remap(remappedItem);
-                }
-            } else if (blockRemappings.containsKey(resourcePath)) {
-                ResourceLocation remappedResourceLocation = new ResourceLocation(resourceLocation.getResourceDomain(), blockRemappings.get(resourcePath));
-                    Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
+                ResourceLocation remappedResourceLocation =
+                        new ResourceLocation(resourceLocation.getResourceDomain( ), itemRemappings.get(resourcePath));
+                Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
                 if (remappedItem != Items.AIR) {
                     missingMapping.remap(remappedItem);
                 }
@@ -93,7 +91,9 @@ public class Remaper {
 
 
     public static void registerFixable() {
-
+        CompoundDataFixer fixer = FMLCommonHandler.instance().getDataFixer();
+        ModFixs modFixs = fixer.init(Reference.MOD_ID,1340);
+        modFixs.registerFix(FixTypes.ITEM_INSTANCE, new ItemDataFixable());
     }
 
     private Remaper() {
@@ -101,14 +101,10 @@ public class Remaper {
 
     @Nullable
     public static String getRemappedTileName(String resourcePath) {
-        if (tileRemappings.containsKey(resourcePath)) {
-            return Reference.MOD_ID + ":" + tileRemappings.get(resourcePath);
+        if (blockRemappings.containsKey(resourcePath)) {
+            return Reference.MOD_ID + ":" + blockRemappings.get(resourcePath);
         }
         return null;
-    }
-
-    public static void addTileRemappingName(String oldName, String remappedName) {
-        tileRemappings.put("dollancustomized." + WordUtils.uncapitalize(oldName), remappedName);
     }
 
 }

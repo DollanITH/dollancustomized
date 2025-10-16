@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized;
 
 import com.jhxiaochen.dollancustomized.command.Command114514;
-import com.jhxiaochen.dollancustomized.fix.Remaper;
+import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.model.Registry;
@@ -29,6 +29,7 @@ public class DollanCustomized {
 
     @Mod.Instance(Reference.MOD_ID)
     public static DollanCustomized instance;
+    public static Remaper remaper;
     public Registry registry = new Registry();
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)

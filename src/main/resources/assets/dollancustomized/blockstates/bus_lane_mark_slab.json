@@ -1,0 +1,37 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:bus_lane_mark_slab",
+    "textures": {
+      "mark": "dollancustomized:blocks/roads/buslane_1"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "type": {
+      "gong": {},
+      "jiao": {
+        "model": "dollancustomized:bus_lane_mark_slab",
+        "textures": {
+          "mark": "dollancustomized:blocks/roads/buslane_2"
+        }},
+      "zhuan": {
+        "model": "dollancustomized:bus_lane_mark_slab",
+        "textures": {
+          "mark": "dollancustomized:blocks/roads/buslane_3"
+        }},
+      "yong": {
+        "model": "dollancustomized:bus_lane_mark_slab",
+        "textures": {
+          "mark": "dollancustomized:blocks/roads/buslane_4"
+        }}
+    },
+    "facing": {
+      "west": {"y": 90},
+      "north": {"y": 180},
+      "south": {},
+      "east": {"y": 270}
+    }
+  }
+}

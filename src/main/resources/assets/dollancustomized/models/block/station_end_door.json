@@ -1,8 +1,0 @@
-{
-  "parent": "block/block",
-  "textures": {
-    "0": "dollancustomized:blocks/station_end_door_sign",
-    "1": "dollancustomized:blocks/station_end_door_yellow_pipe",
-    "particle": "dollancustomized:blocks/station_end_door_sign"
-  }
-}

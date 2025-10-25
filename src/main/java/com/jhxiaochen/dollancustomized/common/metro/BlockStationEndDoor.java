@@ -51,7 +51,7 @@ public class BlockStationEndDoor extends BlockDoor {
                 state = iblockstate.cycleProperty(OPEN);
                 worldIn.setBlockState(blockpos, state, 10);
                 worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-                worldIn.playEvent(playerIn, ((Boolean)state.getValue(OPEN)).booleanValue() ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+                worldIn.playEvent(playerIn, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
                 return true;
             }
     }
@@ -61,4 +61,8 @@ public class BlockStationEndDoor extends BlockDoor {
         return new ItemStack(this);
     }
 
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return getBlockLayer() == layer;
+    }
 }

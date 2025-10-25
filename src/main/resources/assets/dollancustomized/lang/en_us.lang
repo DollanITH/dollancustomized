@@ -6,6 +6,7 @@ tile.line_10.name=§2§l东安轨道交通§r 10号线
 tile.line_13.name=§2§l东安轨道交通§r 13号线
 tile.line_14.name=§2§l东安轨道交通§r 14号线
 tile.greenlight.name=原谅绿现代灯
+tile.station_end_door.name=站台首尾全高端门
 
 itemGroup.tabLight=东安自定义 | 灯具
 itemGroup.tabdollanMetro=东安自定义 | 东安轨道交通

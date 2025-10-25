@@ -86,7 +86,6 @@ public class BlockMyalite extends Block {
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);
-        this.setLightOpacity(getDefaultState().getValue(VARIANT).getMetadata() == 1 ? 0 : 255);
     }
 
     public int damageDropped(IBlockState state)
@@ -169,5 +168,15 @@ public class BlockMyalite extends Block {
         return new BlockStateContainer(this, new IProperty[] {VARIANT});
     }
 
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return state != getDefaultState().withProperty(BlockMyalite.VARIANT, MyaliteType.CRYSTAL) ? true : super.canRenderInLayer(state, layer);
+    }
+
+    @Override
+    public int getLightOpacity(IBlockState state)
+    {
+        return state.getValue(BlockMyalite.VARIANT) == BlockMyalite.MyaliteType.CRYSTAL ? 0 : this.lightOpacity;
+    }
 }
 

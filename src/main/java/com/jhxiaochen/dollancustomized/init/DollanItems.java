@@ -2,8 +2,8 @@ package com.jhxiaochen.dollancustomized.init;
 
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.*;
-import com.jhxiaochen.dollancustomized.common.item.ItemArrow;
 import com.jhxiaochen.dollancustomized.common.item.*;
+import com.jhxiaochen.dollancustomized.common.item.ItemArrow;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -33,6 +33,7 @@ public class DollanItems{
 
         public static void register()
         {
+            registerItemBlock(DollanBlocks.station_end_door, new ItemStationEndDoor(DollanBlocks.station_end_door));
             registerItemBlock(DollanBlocks.dollan_line_18);
             registerItem(leungcraft);
             registerItem(dollan);

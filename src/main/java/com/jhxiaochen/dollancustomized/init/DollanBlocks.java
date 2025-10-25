@@ -343,7 +343,10 @@ public static Block metro_tran5 = new OverheadLineTran5("overhead_translation_5"
 public static Block metro_tran6 = new OverheadLineTran6("overhead_translation_6");
 public static Block metro_tran7 = new OverheadLineTran7();
 
+public static Block station_end_door = new BlockStationEndDoor("station_end_door");
+
     public static void register() {
+        registerBlock(station_end_door);
         registerBlock(white_flat_lamp);
         registerBlock(white_punctiform_lamp);
         registerBlock(white_banding_lamp);
@@ -703,6 +706,7 @@ public static Block metro_tran7 = new OverheadLineTran7();
 
     @SideOnly(Side.CLIENT)
     public static void registerModels() {
+        registerModel(station_end_door);
         registerModel(railway_sign_post);
         registerModel(station_stop_sign);
         registerModel(station_stop_sign,1,"station_stop_sign_wall");
@@ -1153,6 +1157,7 @@ public static Block metro_tran7 = new OverheadLineTran7();
                         .withName(OverheadSteelDiagonalSupport.TYPE)
                         .withSuffix("_overhead_steel_diagonal_support_1").build()
         );
+        registerStateMapper(DollanBlocks.station_end_door, new StateMap.Builder().ignore(BlockStationEndDoor.POWERED).build());
 
     }
 

@@ -7,8 +7,11 @@ import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.model.Registry;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -92,5 +95,15 @@ public class DollanCustomized {
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(registry.getItems().stream().map(Supplier::get).toArray(Item[]::new));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onModelBake(ModelBakeEvent event){
+        for (IBlockState state : DollanBlocks.station_end_door.getBlockState().getValidStates())
+        {
+            ModelResourceLocation modelResourceLocation = event.getModelManager().getBlockModelShapes().getBlockStateMapper().putAllStateModelLocations().get(state);
+            event.getModelRegistry().putObject(modelResourceLocation, event.getModelManager().getModel(modelResourceLocation));
+        }
     }
 }

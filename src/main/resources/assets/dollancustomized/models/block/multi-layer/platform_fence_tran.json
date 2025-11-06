@@ -1,0 +1,18 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"47203832": "blocks/glass_white"
+    },
+    "elements": [
+		{
+			"from": [1, 0, 0],
+			"to": [15, 15, 1],
+			"faces": {
+				"north": {"uv": [1, 1, 15, 16], "texture": "#47203832"},
+				"south": {"uv": [1, 1, 15, 16], "texture": "#47203832"},
+				"down": {"uv": [1, 15, 15, 16], "texture": "#47203832"}
+			}
+		}
+    ]
+}

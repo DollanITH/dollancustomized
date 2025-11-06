@@ -66,7 +66,12 @@ public class BlockPlatFormFence extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return layer == BlockRenderLayer.TRANSLUCENT || super.canRenderInLayer(state, layer);
     }
 
     @Override
@@ -105,4 +110,5 @@ public class BlockPlatFormFence extends Block {
         state = state.withProperty(FACING, placer.getHorizontalFacing());
         return state;
     }
+
 }

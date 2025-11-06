@@ -85,6 +85,14 @@ public class Remaper {
                 if (remappedItem != Items.AIR) {
                     missingMapping.remap(remappedItem);
                 }
+
+            } else if (blockRemappings.containsKey(resourcePath)) {
+                ResourceLocation remappedResourceLocation =
+                        new ResourceLocation(resourceLocation.getResourceDomain( ), blockRemappings.get(resourcePath));
+                Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
+                if (remappedItem != Items.AIR) {
+                    missingMapping.remap(remappedItem);
+                }
             }
         }
     }

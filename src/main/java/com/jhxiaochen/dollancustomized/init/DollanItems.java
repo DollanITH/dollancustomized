@@ -52,6 +52,8 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.metro_fence, new ItemMultiTexture(DollanBlocks.metro_fence, DollanBlocks.metro_fence, p_apply_1_ -> BlockMetroFence.FenceType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName())
             );
 
+            registerItemBlock(DollanBlocks.road_give_way_mark, new ItemArrow(DollanBlocks.road_give_way_mark));
+            registerItemBlock(DollanBlocks.road_slow_down_mark, new ItemArrow(DollanBlocks.road_slow_down_mark));
             registerItemBlock(DollanBlocks.arrow_diaotou, new ItemArrow(DollanBlocks.arrow_diaotou));
             registerItemBlock(DollanBlocks.arrow_left_diaotou, new ItemArrow(DollanBlocks.arrow_left_diaotou));
             registerItemBlock(DollanBlocks.arrow_left_right, new ItemArrow(DollanBlocks.arrow_left_right));
@@ -61,7 +63,7 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.arrow_left, new ItemArrow(DollanBlocks.arrow_left));
             registerItemBlock(DollanBlocks.arrow_right, new ItemArrow(DollanBlocks.arrow_right));
             registerItemBlock(DollanBlocks.arrow_straight, new ItemArrow(DollanBlocks.arrow_straight));
-            registerItemBlock(DollanBlocks.bike_words);
+            registerItemBlock(DollanBlocks.bike_words, new ItemArrow(DollanBlocks.bike_words));
             registerItemBlock(DollanBlocks.bus_lane_mark, new ItemBusLaneMark());
             registerItemBlock(DollanBlocks.road_traffic_light);
             registerItemBlock(DollanBlocks.road_traffic_light_red);
@@ -293,7 +295,7 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.beautiful_marble,new
                     ItemMultiTexture(DollanBlocks.beautiful_marble, DollanBlocks.beautiful_marble,
                                      p_apply_1_ -> BlockMarble.MarbleType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
-            registerItemBlock(DollanBlocks.cherry_planks);
+            //registerItemBlock(DollanBlocks.cherry_planks);
             registerItemBlock(DollanBlocks.dollan_line_21);
             registerItemBlock(DollanBlocks.calcite);
             registerItemBlock(DollanBlocks.cracked_deepslate, new ItemMultiTexture(DollanBlocks.cracked_deepslate, DollanBlocks.cracked_deepslate, p_apply_1_ -> BlockCrackedDeepSlate.DeepslateType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName())
@@ -321,7 +323,10 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.metal);
             registerItemBlock(DollanBlocks.mud_bricks);
             registerItemBlock(DollanBlocks.packed_mud);
-            registerItemBlock(DollanBlocks.myalite, new ItemMultiTexture(DollanBlocks.myalite, DollanBlocks.myalite, p_apply_1_ -> BlockMyalite.MyaliteType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
+            //registerItemBlock(DollanBlocks.myalite, new ItemMultiTexture(DollanBlocks.myalite, DollanBlocks.myalite, p_apply_1_ -> BlockMyalite.MyaliteType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
+            registerItemBlock(DollanBlocks.myalite);
+            registerItemBlock(DollanBlocks.myalite_crystal);
+            registerItemBlock(DollanBlocks.myalite_pavement);
             registerItemBlock(DollanBlocks.polished_blackstone,
                     new ItemMultiTexture(DollanBlocks.polished_blackstone,DollanBlocks.polished_blackstone, new ItemMultiTexture.Mapper() {
                         public String apply(ItemStack p_apply_1_) {

@@ -39,7 +39,7 @@ public class BlockOverHeadWeb extends Block {
 
     public boolean isFullCube(IBlockState state)
     {
-        return true;
+        return false;
     }
 
 }

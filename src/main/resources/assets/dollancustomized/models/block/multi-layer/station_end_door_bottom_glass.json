@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"particle": "dollancustomized:blocks/concrete_gray",
+		"particle": "blocks/light_gray_stained_glass",
 		"glass": "blocks/light_gray_stained_glass"
 	},
 	"elements": [
@@ -15,14 +15,6 @@
 				"east": {"uv": [1, 1, 15, 15], "texture": "#glass"},
 				"west": {"uv": [1, 1, 15, 15], "texture": "#glass"}
 			}
-		}
-	],
-	"groups": [
-		{
-			"name": "group",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [0]
 		}
 	]
 }

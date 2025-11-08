@@ -32,7 +32,7 @@ public class BlockStationEndDoor extends BlockDoor {
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
     }
 
     private int getOpenSound()

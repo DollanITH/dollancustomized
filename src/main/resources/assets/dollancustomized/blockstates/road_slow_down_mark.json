@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "dollancustomized:road_slow_down_mark"
+  },
+  "variants": {
+    "inventory": [{"transform": "forge:default-block"}],
+    "type": {
+      "full" : {},
+      "slab": {"model": "dollancustomized:road_slow_down_mark_slab"}
+    },
+    "facing": {
+      "west": {"y": 90},
+      "north": {"y": 180},
+      "south": {},
+      "east": {"y": 270}
+    }
+  }
+}

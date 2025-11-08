@@ -1,8 +1,24 @@
 {
+  "forge_marker": 1,
+  "defaults" : {
+      "model": "dollancustomized:road_lamp_1_bottom"
+  },
     "variants": {
-        "facing=east":  { "model": "dollancustomized:road_lamp_1_bottom", "y": 270  },
-        "facing=west":  { "model": "dollancustomized:road_lamp_1_bottom", "y": 90 },
-        "facing=south": { "model": "dollancustomized:road_lamp_1_bottom"},
-        "facing=north": { "model": "dollancustomized:road_lamp_1_bottom", "y": 180 }
+      "facing": {
+        "east": {
+          "y": 270
+        },
+        "west": {
+          "y": 90
+        },
+        "south": {},
+        "north": {
+          "y": 180
+        }
+      },
+      "down": {
+        "true": {"submodel": "dollancustomized:road_lamp_1_bottom_bottom", "uvlock": true},
+        "false": {}
+      }
     }
 }

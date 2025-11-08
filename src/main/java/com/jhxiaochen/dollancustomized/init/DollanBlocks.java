@@ -10,6 +10,7 @@ import com.jhxiaochen.dollancustomized.common.rail.StationStopSign;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -111,7 +112,9 @@ public static Block lamp_tran = new BlockTranLight("lamp_tran").setRegistryName(
 public static Block light = new BlockLight("light");
 public static Block asphalt_slab = new BlockAsphaltSlab("asphalt_slab");
 public static Block asphalt = new BlockAsphalt("asphalt");
-public static Block bike_words = new IronHorizontal("bike_words");
+public static Block bike_words = new ArrowNew("bike_words");
+public static Block road_slow_down_mark = new ArrowNew("road_slow_down_mark");
+public static Block road_give_way_mark = new ArrowNew("road_give_way_mark");
 public static Block double_white_line = new BlockAsphaltHorizontal1("double_white_line");
 public static Block double_yellow_line = new BlockAsphaltHorizontal1("double_yellow_line");
 public static Block double_white_line_slab = new BlockAsphaltSlabHorizontal2("double_white_line_slab");
@@ -247,7 +250,10 @@ public static Block limestone = new BlockLimeStone();
 public static Block mangrove_planks = new DollanPlanks("mangrove_planks");
 public static Block metal = new DollanBlock4("metal");
 public static Block mud_bricks = new DollanBlock2("mud_bricks");
-public static Block myalite = new BlockMyalite("myalite");
+//public static Block myalite = new BlockMyalite("myalite");
+public static Block myalite = new Block(Material.ROCK).setRegistryName("myalite").setCreativeTab(DollanCustomized.Blocks).setUnlocalizedName(Reference.MOD_ID + ".myalite.myalite").setHardness(1.0F).setResistance(10F);
+public static Block myalite_crystal = new BlockMyaliteCrystal();
+public static Block myalite_pavement = new Block(Material.ROCK).setRegistryName("myalite_pavement").setCreativeTab(DollanCustomized.Blocks).setUnlocalizedName(Reference.MOD_ID + ".myalite.pavement").setHardness(1.0F).setResistance(10F);
 public static Block packed_mud = new DollanBlock2("packed_mud");
 public static Block polished_blackstone = new BlockPolishedBlackStone();
 public static Block polished_deepslate = new DollanPolishedDeepSlate("polished_deepslate");
@@ -346,6 +352,8 @@ public static Block metro_tran7 = new OverheadLineTran7();
 public static Block station_end_door = new BlockStationEndDoor("station_end_door");
 
     public static void register() {
+        registerBlock(road_slow_down_mark);
+        registerBlock(road_give_way_mark);
         registerBlock(station_end_door);
         registerBlock(white_flat_lamp);
         registerBlock(white_punctiform_lamp);
@@ -589,7 +597,7 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         //registerBlock(arrow_confluence_right_sl);
         //other
         registerBlock(beautiful_marble);
-        registerBlock(cherry_planks);
+        //registerBlock(cherry_planks);
         registerBlock(calcite);
         registerBlock(dollan_line_18);
         registerBlock(cracked_deepslate);
@@ -608,6 +616,8 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         registerBlock(modern_stone_tile);
         registerBlock(mud_bricks);
         registerBlock(myalite);
+        registerBlock(myalite_pavement);
+        registerBlock(myalite_crystal);
         registerBlock(packed_mud);
         registerBlock(polished_blackstone);
         registerBlock(polished_limestone);
@@ -706,6 +716,8 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
 
     @SideOnly(Side.CLIENT)
     public static void registerModels() {
+        registerModel(road_give_way_mark);
+        registerModel(road_slow_down_mark);
         registerModel(station_end_door);
         registerModel(railway_sign_post);
         registerModel(station_stop_sign);
@@ -1013,6 +1025,8 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         registerModel(myalite,0,BlockMyalite.MyaliteType.NORMAL.getName());
         registerModel(myalite,1,BlockMyalite.MyaliteType.CRYSTAL.getName());
         registerModel(myalite,2,BlockMyalite.MyaliteType.PAVEMENT.getName());
+        registerModel(myalite_crystal,0,BlockMyalite.MyaliteType.CRYSTAL.getName());
+        registerModel(myalite_pavement,0,BlockMyalite.MyaliteType.PAVEMENT.getName());
         registerModel(packed_mud);
         registerModel(polished_blackstone,0,BlockPolishedBlackStone.BlackStoneType.NORMAL.getName());
         registerModel(polished_blackstone,1,BlockPolishedBlackStone.BlackStoneType.BRICKS.getName());
@@ -1133,7 +1147,7 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
                 new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
         registerStateMapper(DollanBlocks.limestone,
                 new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
-        registerStateMapper(DollanBlocks.myalite, new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
+        //registerStateMapper(DollanBlocks.myalite, new StateMap.Builder().withName(BlockMyalite.VARIANT).build());
         registerStateMapper(DollanBlocks.polished_blackstone,
                 new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
         registerStateMapper(DollanBlocks.froglight,
@@ -1157,7 +1171,7 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
                         .withName(OverheadSteelDiagonalSupport.TYPE)
                         .withSuffix("_overhead_steel_diagonal_support_1").build()
         );
-        registerStateMapper(DollanBlocks.station_end_door, new StateMap.Builder().ignore(BlockStationEndDoor.POWERED).build());
+        registerStateMapper(DollanBlocks.station_end_door, new StateMap.Builder().withName(BlockStationEndDoor.HALF).withSuffix("_station_end_door").ignore(BlockStationEndDoor.POWERED).build());
 
     }
 

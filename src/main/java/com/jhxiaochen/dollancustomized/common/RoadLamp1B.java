@@ -1,9 +1,11 @@
 package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -19,6 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RoadLamp1B extends BlockHorizontal
 {
+    private static final PropertyBool DOWN = PropertyBool.create("down");
     public static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.625D, 0.625D, 1.0D, 1.0D);
     public static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 0.375D, 1.0D, 0.625D);
     public static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.0D, 0.625D, 1.0D, 0.375D);
@@ -64,7 +67,7 @@ public class RoadLamp1B extends BlockHorizontal
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING});
+        return new BlockStateContainer(this, FACING, DOWN);
     }
 
     @Override
@@ -105,5 +108,32 @@ public class RoadLamp1B extends BlockHorizontal
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
+
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
+    {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
+        Block block = iblockstate.getBlock();
+        return block instanceof BlockSlab && blockfaceshape != BlockFaceShape.SOLID;
+    }
+
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return state.withProperty(DOWN, canFenceConnectTo(worldIn, pos, EnumFacing.DOWN));
+    }
+
+    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        BlockPos other = pos.offset(facing);
+        Block block = world.getBlockState(other).getBlock();
+        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+    }
+
+    @Override
+    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        return canConnectTo(world, pos.offset(facing), facing.getOpposite());
+    }
+
 }
 

@@ -1,17 +1,18 @@
 {
+	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "dollancustomized:blocks/roads/yellow_bike_icon",
-		"particle": "dollancustomized:blocks/roads/yellow_bike_icon"
+		"particle": "dollancustomized:blocks/roads/yellow_bike_icon",
+		"words": "dollancustomized:blocks/roads/yellow_bike_icon"
 	},
 	"elements": [
 		{
 			"from": [-5, 0, -5],
 			"to": [21, 0.01, 21],
 			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "down"}
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#words"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#words", "cullface": "down"}
 			}
 		}
 	]

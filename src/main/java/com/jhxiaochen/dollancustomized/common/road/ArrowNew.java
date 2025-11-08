@@ -39,7 +39,7 @@ public class ArrowNew extends Block {
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setHardness(1.0F);
         this.setResistance(10F);
-        this.setLightOpacity(1);
+        this.setLightOpacity(0);
         this.setTickRandomly(true);
     }
 
@@ -109,7 +109,12 @@ public class ArrowNew extends Block {
 
     @Override
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return layer == BlockRenderLayer.CUTOUT || layer == BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
@@ -229,7 +234,7 @@ public class ArrowNew extends Block {
     }
 
     public boolean SlabChange(IBlockState state){
-       return state.getBlock() instanceof BlockAsphaltSlab || state.getBlock() instanceof BlockSlab || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
+       return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && state.getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.BOTTOM) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
     }
 
     protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)

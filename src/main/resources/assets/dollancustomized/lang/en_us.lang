@@ -32,6 +32,8 @@ tile.overhead_lines_support_a4.name=加大版柔性接触网线支架组件4
 tile.overhead_lines_double_diagonal.name=柔性接触网岔线
 tile.overhead_lines_double_diagonal_1.name=柔性接触网岔线1
 tile.overhead_lines_double_wye.name=柔性接触网双Y线
+tile.road_give_way_mark.name=让行地面标志
+tile.road_slow_down_mark.name=减速地面标志
 
 tile.overhead_translation_0.name=刚柔接触网转换配件
 tile.overhead_translation_1.name=刚柔接触网转换配件1

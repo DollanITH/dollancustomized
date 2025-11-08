@@ -24,6 +24,7 @@ import java.util.Set;
 @Mod.EventBusSubscriber
 public class Remaper {
     private static final Map<String, String>          blockRemappings = new HashMap<>();
+    private static final Map<String, String>          blockRemappings1 = new HashMap<>();
     private static final Map<String, String>          itemRemappings  = new HashMap<>();
     private static final Map<String, String>     tileRemappings  = new HashMap<>();
 
@@ -50,6 +51,7 @@ public class Remaper {
         blockRemappings.put("arrow_staright","arrow_straight");
 
         itemRemappings.put("dollancraft", "dollan");
+        blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
     }
 
     @SubscribeEvent
@@ -62,6 +64,12 @@ public class Remaper {
                 missingMapping.ignore();
             } else if (blockRemappings.containsKey(resourcePath)) {
                 ResourceLocation remappedResourceLocation = new ResourceLocation(resourceLocation.getResourceDomain(), blockRemappings.get(resourcePath));
+                    Block remappedBlock = ForgeRegistries.BLOCKS.getValue(remappedResourceLocation);
+                    if (remappedBlock != Blocks.AIR) {
+                        missingMapping.remap(remappedBlock);
+                    }
+            } else if (blockRemappings1.containsKey(resourcePath)) {
+                ResourceLocation remappedResourceLocation = new ResourceLocation(blockRemappings1.get(resourcePath));
                     Block remappedBlock = ForgeRegistries.BLOCKS.getValue(remappedResourceLocation);
                     if (remappedBlock != Blocks.AIR) {
                         missingMapping.remap(remappedBlock);
@@ -93,6 +101,13 @@ public class Remaper {
                 if (remappedItem != Items.AIR) {
                     missingMapping.remap(remappedItem);
                 }
+            } else if (blockRemappings1.containsKey(resourcePath)) {
+                ResourceLocation remappedResourceLocation =
+                        new ResourceLocation(blockRemappings1.get(resourcePath));
+                Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
+                if (remappedItem != Items.AIR) {
+                    missingMapping.remap(remappedItem);
+                }
             }
         }
     }
@@ -102,6 +117,8 @@ public class Remaper {
         CompoundDataFixer fixer = FMLCommonHandler.instance().getDataFixer();
         ModFixs modFixs = fixer.init(Reference.MOD_ID,1340);
         modFixs.registerFix(FixTypes.ITEM_INSTANCE, new ItemDataFixable());
+        modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
+        modFixs.registerFix(FixTypes.ITEM_INSTANCE, ItemFlatteningDefinitions.createItemFlattening());
     }
 
     private Remaper() {

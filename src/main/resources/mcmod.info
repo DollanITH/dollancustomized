@@ -11,7 +11,7 @@
   "credits": "Mods Created By jhxiaochen & HChanJ1689",
   "logoFile": "logo.png",
   "screenshots": [],
-  "dependencies": ["after:sakura", "after:opticzcraft", "after:railcraft"],
+  "dependencies": [],
   "dependants": []
 }
 ]

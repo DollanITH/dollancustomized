@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Supplier;
 
-@Mod(modid = Reference.MOD_ID, useMetadata = true, version = Reference.VERSION)
+@Mod(modid = Reference.MOD_ID, useMetadata = true, version = Reference.VERSION, dependencies = "after:optifine")
 public class DollanCustomized {
 
     @Mod.Instance(Reference.MOD_ID)

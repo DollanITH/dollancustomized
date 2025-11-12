@@ -237,7 +237,6 @@ public static Block marble_block = new DollanBlock("marble_block").setHardness(1
 public static Block beautiful_marble = new BlockMarble("beautiful_marble");
 public static Block dollan_line_20 = new BlockMetroBlock("dollan_line_20");
 public static Block calcite = new DollanBlock("calcite").setHardness(1.5F).setResistance(10.0F);
-public static Block cherry_planks = new DollanCherryPlanks("cherry_planks");
 public static Block cracked_deepslate = new BlockCrackedDeepSlate("cracked_deepslate");
 public static Block deepslate = new BlockDeepSlate("deepslate");
 public static Block elder_prismarine = new BlockElderPrismarine("elder_prismarine");
@@ -999,7 +998,6 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         registerModel(beautiful_marble,2,"cut_marble");
         registerModel(beautiful_marble,3,"litcut_marble");
         registerModel(beautiful_marble,4,"smooth_marble");
-        registerModel(cherry_planks);
         registerModel(cracked_deepslate);
         registerModel(cracked_deepslate,0,"bricks_cracked_deepslate");
         registerModel(cracked_deepslate,1,"tiles_cracked_deepslate");

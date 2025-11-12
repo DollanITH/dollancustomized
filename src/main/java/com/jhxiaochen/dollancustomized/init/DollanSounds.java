@@ -10,9 +10,7 @@ public class DollanSounds {
             BLOCK_DEEPSLATE_STEP,
             BLOCK_DEEPSLATE_PLACE,
             BLOCK_DEEPSLATE_FALL,
-            BLOCK_DEEPSLATE_BREAK,
-            BLOCK_SAKURA_PLANKS_STEP,
-            BLOCK_SAKURA_PLANKS_BREAK;
+            BLOCK_DEEPSLATE_BREAK;
 
 
     public static void registerSounds() {
@@ -20,8 +18,6 @@ public class DollanSounds {
         BLOCK_DEEPSLATE_PLACE = registerSound("block.deepslate.place");
         BLOCK_DEEPSLATE_FALL = registerSound("block.deepslate.fall");
         BLOCK_DEEPSLATE_BREAK = registerSound("block.deepslate.break");
-        BLOCK_SAKURA_PLANKS_STEP = registerSound("block.sakura_planks.step");
-        BLOCK_SAKURA_PLANKS_BREAK = registerSound("block.sakura_planks.break");
     }
 
     private static SoundEvent registerSound(String name) {

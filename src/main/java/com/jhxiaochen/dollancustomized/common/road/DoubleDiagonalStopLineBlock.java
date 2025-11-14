@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
-import com.jhxiaochen.dollancustomized.model.Registry;
+import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -23,37 +23,37 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-@Registry.ModElement.Tag
-public class DoubleDiagonalStopLineBlock extends Registry.ModElement {
-    @GameRegistry.ObjectHolder("dollancustomized:stop_line_cross_1")
-    public static Block block = null;
 
-    public DoubleDiagonalStopLineBlock(Registry registry) {
-        super(registry);
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+public class DoubleDiagonalStopLineBlock extends BlockAsphaltHorizontal {
+    public static Block block;
+
+    @SubscribeEvent
+    public static void registerBlock(RegistryEvent.Register<Block> event) {
+        event.getRegistry().register(block = new DoubleDiagonalStopLineBlock( ).setRegistryName(Reference.MOD_ID,"stop_line_cross_1").setUnlocalizedName("stop_line_cross_1"));
     }
 
-    @Override
-    public void initElements() {
-        registry.blocks.add(() -> new Register( ).setRegistryName("stop_line_cross_1").setUnlocalizedName("stop_line_cross_1"));
-        registry.items.add(() -> new ItemMultiTexture(block, block, var1 -> Register.EnumVarient.byMetadata(var1.getMetadata( )).getUnlocalizedName()).setRegistryName(block.getRegistryName( )));
+    @SubscribeEvent
+    public static void registerItem(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(new ItemMultiTexture(block, block, var1 -> DoubleDiagonalStopLineBlock.EnumVarient.byMetadata(var1.getMetadata( )).getUnlocalizedName()).setRegistryName(block.getRegistryName( )));
     }
 
-    @Override
+    @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public void registerBlockItemModel(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Register.EnumVarient.WHITE.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_white_line", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Register.EnumVarient.WHITE_1.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_white_line_1", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Register.EnumVarient.YELLOW.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_yellow_line", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Register.EnumVarient.YELLOW_1.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_yellow_line_1", "inventory"));
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder( ).withName(DoubleDiagonalStopLineBlock.Register.VARIENT).build( ));
+    public static void registerBlockItemModel(ModelRegistryEvent event) {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), EnumVarient.WHITE.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_white_line", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), EnumVarient.WHITE_1.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_white_line_1", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), EnumVarient.YELLOW.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_yellow_line", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), EnumVarient.YELLOW_1.getMetadata( ), new ModelResourceLocation("dollancustomized:road_stop_diagonal_double_yellow_line_1", "inventory"));
+        ModelLoader.setCustomStateMapper(block, new StateMap.Builder( ).withName(VARIENT).build( ));
     }
-
-    public static class Register extends BlockAsphaltHorizontal {
 
         public enum EnumVarient implements IStringSerializable {
             WHITE(0, "stop_diagonal_double_white_line", "white"),
@@ -108,8 +108,6 @@ public class DoubleDiagonalStopLineBlock extends Registry.ModElement {
         public static final PropertyEnum<EnumVarient>
                 VARIENT = PropertyEnum.create("varient", EnumVarient.class);
 
-        public Register() {
-        }
 
         public int damageDropped(IBlockState state) {
             return ((state.getValue(VARIENT)).getMetadata( ));
@@ -161,5 +159,4 @@ public class DoubleDiagonalStopLineBlock extends Registry.ModElement {
             state = state.withProperty(FACING, placer.getHorizontalFacing( )).withProperty(VARIENT, varient);
             return state;
         }
-    }
 }

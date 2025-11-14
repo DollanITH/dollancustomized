@@ -8,6 +8,7 @@ import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.*;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,22 +23,19 @@ public class DollanItems{
         public static Item leungcraft;
         public static Item dollan;
 
-    public static void init() {
-        leungcraft = new ItemLeungCraft(5,1.2F,false)
-                .setAlwaysEdible()
-                .setUnlocalizedName("leungcraft").setRegistryName("leungcraft");
-        dollan = new ItemDollanCraft(5, 1.2F, false)
-                .setAlwaysEdible()
-                .setUnlocalizedName("dollancraft").setRegistryName("dollan");
-        }
-
         public static void register()
         {
+            registerItem(leungcraft = new ItemLeungCraft(5,1.2F,false)
+                    .setAlwaysEdible()
+                    .setUnlocalizedName("leungcraft").setRegistryName("leungcraft"));
+            registerItem(dollan = new ItemDollanCraft(5, 1.2F, false)
+                    .setAlwaysEdible()
+                    .setUnlocalizedName("dollancraft").setRegistryName("dollan"));
             registerItemBlock(DollanBlocks.station_end_door, new ItemStationEndDoor(DollanBlocks.station_end_door));
             registerItemBlock(DollanBlocks.dollan_line_18);
-            registerItem(leungcraft);
-            registerItem(dollan);
             registerItemBlock(DollanBlocks.power_method_change_sign, new ItemRailwaySign(DollanBlocks.power_method_change_sign));
+            registerItemBlock(DollanBlocks.deport_stop_sign, new ItemRailwaySign(DollanBlocks.deport_stop_sign));
+            registerItemBlock(DollanBlocks.empty_railway_sign);
             registerItemBlock(DollanBlocks.white_flat_lamp);
             registerItemBlock(DollanBlocks.white_punctiform_lamp);
             registerItemBlock(DollanBlocks.white_banding_lamp);
@@ -481,9 +479,14 @@ public static class RegistrationHandler {
 
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event) {
-        DollanItems.init();
         DollanItems.register();
         ITEMS.stream().forEach(item -> event.getRegistry().register(item));
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public static void registerModels(ModelRegistryEvent event) {
+        DollanItems.registerModels();
     }
 }
 }

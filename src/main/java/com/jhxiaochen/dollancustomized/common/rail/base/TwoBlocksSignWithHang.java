@@ -163,7 +163,7 @@ public class TwoBlocksSignWithHang extends TwoBlocksSignBase {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(WALL) == EnumWallHalf.NONE ? getBoxXZ(state,2.0 / 16.0,1,14.0 / 16.0) : getBoxXZ(state,0.01 / 16.0,1,14.0 / 16.0);
+        return state.getValue(WALL) == EnumWallHalf.NONE ? getBoxXZ(state,2.0 / 16.0,5.0 / 16.0,12.0 / 16.0) : getBoxXZ(state,0.01 / 16.0,5.0 / 16.0,12.0 / 16.0);
     }
 
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)

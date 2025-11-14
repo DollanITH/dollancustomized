@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.rail;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.common.rail.base.RailwaySignBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockSlab;
@@ -47,7 +46,7 @@ public class RailwaySignPost extends BlockHorizontal {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
         Block block = iblockstate.getBlock();
-        return block instanceof BlockSlab && blockfaceshape != BlockFaceShape.SOLID;
+        return block instanceof BlockSlab && block.getDefaultState().getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.TOP && blockfaceshape != BlockFaceShape.SOLID;
     }
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
@@ -145,8 +144,4 @@ public class RailwaySignPost extends BlockHorizontal {
         return state;
     }
 
-    @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return side == EnumFacing.UP && blockAccess.getBlockState(pos.up()).getBlock() instanceof RailwaySignBase ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-    }
 }

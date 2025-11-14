@@ -65,7 +65,7 @@ public class BlockMyaliteCrystal extends BlockBreakable
             }
 
 
-        return block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 
 }

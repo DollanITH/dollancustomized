@@ -7,6 +7,7 @@ import com.jhxiaochen.dollancustomized.common.metro.*;
 import com.jhxiaochen.dollancustomized.common.rail.EmptySignBlock;
 import com.jhxiaochen.dollancustomized.common.rail.RailwaySignPost;
 import com.jhxiaochen.dollancustomized.common.rail.StationStopSign;
+import com.jhxiaochen.dollancustomized.common.rail.StationStopWallSign;
 import com.jhxiaochen.dollancustomized.common.rail.base.TwoBlocksSignBase;
 import com.jhxiaochen.dollancustomized.common.road.*;
 import net.minecraft.block.Block;
@@ -227,6 +228,7 @@ public static Block road_traffic_light_green = new BlockRoadSign("road_traffic_l
 public static Block road_traffic_light_yellow = new BlockRoadSign("road_traffic_light_yellow");
 public static Block power_method_change_sign = new TwoBlocksSignBase().setRegistryName("power_method_change_sign").setUnlocalizedName("PowerMethodChangeSign");
 public static Block station_stop_sign = new StationStopSign().setRegistryName("station_stop_sign").setUnlocalizedName("StationStopSign");
+public static Block station_stop_wall_sign = new StationStopWallSign().setRegistryName("station_stop_wall_sign").setUnlocalizedName("StationStopSign");
 public static Block thick_white_line_45 = new BlockAsphaltHorizontal("thick_white_line_45");
 public static Block thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
 public static Block thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
@@ -360,8 +362,11 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(deport_stop_sign);
         SimpleBlock(empty_railway_sign);
         SimpleBlock(station_stop_sign);
-        registerModel(station_stop_sign, 1, "station_stop_sign_wall");
-        registerModel(station_stop_sign, 2, "station_stop_sign_wall_single");
+        BlockHasMeta(station_stop_wall_sign);
+        registerModel(station_stop_wall_sign, 0, "station_stop_sign_wall_single");
+        registerModel(station_stop_wall_sign, 1, "station_stop_sign_wall");
+        registerModel(station_stop_wall_sign, 2, "station_stop_sign_wall_single_1");
+        registerModel(station_stop_wall_sign, 3, "station_stop_sign_wall_1");
         SimpleBlock(arrow_confluence_left);
         SimpleBlock(arrow_confluence_right);
 
@@ -534,6 +539,10 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(dollan_line_14);
         SimpleBlock(dollan_line_15);
         SimpleBlock(dollan_line_16);
+        SimpleBlock(dollan_line_17);
+        SimpleBlock(dollan_line_18);
+        SimpleBlock(dollan_line_19);
+        SimpleBlock(dollan_line_20);
         SimpleBlock(dollan_line_21);
         SimpleBlock(dollan_line_22);
 
@@ -632,11 +641,6 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(platform_wall);
         SimpleBlock(marble_block);
 
-        SimpleBlock(dollan_line_17);
-        SimpleBlock(dollan_line_19);
-        SimpleBlock(dollan_line_18);
-        SimpleBlock(dollan_line_20);
-
         SimpleBlock(dollan_loop_line);
 
 
@@ -734,11 +738,15 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(overhead_steel);
         SimpleBlock(overhead_steel_slope);
         SimpleBlock(overhead_steel_diagonal);
+        BlockHasMeta(overhead_steel_diagonal, 1, "overhead_steel_diagonal_1");
+        BlockHasMeta(overhead_steel_diagonal, 2, "overhead_steel_diagonal_2");
         SimpleBlock(overhead_steel_support);
         SimpleBlock(overhead_steel_diagonal_support);
         SimpleBlock(overhead_steel_diagonal_support_1);
         BlockHasMeta(overhead_steel_diagonal_support, 1, "overhead_steel_diagonal_support_2");
+        BlockHasMeta(overhead_steel_diagonal_support, 2, "overhead_steel_diagonal_support_4");
         BlockHasMeta(overhead_steel_diagonal_support_1, 1, "overhead_steel_diagonal_support_3");
+        BlockHasMeta(overhead_steel_diagonal_support_1, 2, "overhead_steel_diagonal_support_5");
         SimpleBlock(overhead_steel_support_1);
         SimpleBlock(overhead_steel_double_diagonal);
         SimpleBlock(overhead_steel_double_diagonal_1);

@@ -1,22 +1,20 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:overhead_steel_diagonal"
+  },
   "variants": {
-    "normal": {
-      "model": "dollancustomized:overhead_steel_diagonal"
+    "inventory": [{}],
+    "type": {
+        "single": {},
+        "double": {"model": "dollancustomized:overhead_steel_diagonal_1"},
+        "double_1": {"model": "dollancustomized:overhead_steel_diagonal_2"}
     },
-    "facing=east": {
-      "model": "dollancustomized:overhead_steel_diagonal"
-    },
-    "facing=west": {
-      "model": "dollancustomized:overhead_steel_diagonal",
-      "y" : 180
-    },
-    "facing=south": {
-      "model": "dollancustomized:overhead_steel_diagonal",
-      "y": 270
-    },
-    "facing=north": {
-      "model": "dollancustomized:overhead_steel_diagonal",
-      "y": 90
+    "facing": {
+      "west": {"y": 180},
+      "north": {"y": 90},
+      "south": {"y": 270},
+      "east": {}
     }
   }
 }

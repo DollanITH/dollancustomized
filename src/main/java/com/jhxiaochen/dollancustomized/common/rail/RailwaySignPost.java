@@ -46,7 +46,7 @@ public class RailwaySignPost extends BlockHorizontal {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
         Block block = iblockstate.getBlock();
-        return block instanceof BlockSlab && block.getDefaultState().getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.TOP && blockfaceshape != BlockFaceShape.SOLID;
+        return block instanceof BlockSlab && !block.isTopSolid(iblockstate) && blockfaceshape != BlockFaceShape.SOLID;
     }
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)

@@ -37,7 +37,7 @@ public class StationEdgeSign extends RailwaySignBase {
 
         @Override
         public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-            return getBoxXZ(state, 2.0 / 16.0, 12.0 / 16.0);
+            return getBoxXZ(state, 2.0 / 16.0,12.0 / 16.0,  10.0 / 16.0);
         }
 
 

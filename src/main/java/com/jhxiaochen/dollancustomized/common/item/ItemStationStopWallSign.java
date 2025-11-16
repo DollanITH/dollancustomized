@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
-import com.jhxiaochen.dollancustomized.common.rail.StationStopSign;
+import com.jhxiaochen.dollancustomized.common.rail.StationStopWallSign;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -15,16 +15,15 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemStationStopSign extends ItemMultiTexture {
-    public ItemStationStopSign() {
-        super(DollanBlocks.station_stop_sign, DollanBlocks.station_stop_sign, new String[]{"none", "wall", "wall"});
+public class ItemStationStopWallSign extends ItemMultiTexture {
+    public ItemStationStopWallSign() {
+        super(DollanBlocks.station_stop_wall_sign, DollanBlocks.station_stop_wall_sign, new String[]{"wall", "wall", "wall", "wall"});
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        int i = stack.getMetadata();
-        return i > 0 ? this.block.getUnlocalizedName() + "." + this.nameFunction.apply(stack) : this.block.getUnlocalizedName();
+        return this.block.getUnlocalizedName() + "." + this.nameFunction.apply(stack);
     }
 
     @Override
@@ -37,9 +36,17 @@ public class ItemStationStopSign extends ItemMultiTexture {
             int i = this.getMetadata(itemstack.getMetadata( ));
             IBlockState iblockstate1 =
                     this.block.getStateForPlacement(worldIn, pos.offset(facing), facing, hitX, hitY, hitZ, i, player, hand);
-                if (block2 == block && i == 2 && iblockstate.getValue(StationStopSign.WALL) == StationStopSign.EnumVarient.SINGLE_WALL) {
+                if (block2 == block && i == StationStopWallSign.EnumVarient.SINGLE_WALL_RIGHT.getMetadata() && iblockstate.getValue(StationStopWallSign.WALL) == StationStopWallSign.EnumVarient.SINGLE_WALL_RIGHT) {
                     iblockstate =
-                            iblockstate.withProperty(StationStopSign.WALL, StationStopSign.EnumVarient.DOUBLE_WALL);
+                            iblockstate.withProperty(StationStopWallSign.WALL, StationStopWallSign.EnumVarient.DOUBLE_WALL_RIGHT);
+                    worldIn.setBlockState(pos, iblockstate, 11);
+                    SoundType soundtype = iblockstate.getBlock( ).getSoundType(iblockstate, worldIn, pos, player);
+                    worldIn.playSound(player, pos, soundtype.getPlaceSound( ), SoundCategory.BLOCKS, (soundtype.getVolume( ) + 1.0F) / 2.0F, soundtype.getPitch( ) * 0.8F);
+                    itemstack.shrink(1);
+                    return EnumActionResult.SUCCESS;
+                } else if (block2 == block && i == StationStopWallSign.EnumVarient.SINGLE_WALL_LEFT.getMetadata() && iblockstate.getValue(StationStopWallSign.WALL) == StationStopWallSign.EnumVarient.SINGLE_WALL_LEFT) {
+                    iblockstate =
+                            iblockstate.withProperty(StationStopWallSign.WALL, StationStopWallSign.EnumVarient.DOUBLE_WALL_LEFT);
                     worldIn.setBlockState(pos, iblockstate, 11);
                     SoundType soundtype = iblockstate.getBlock( ).getSoundType(iblockstate, worldIn, pos, player);
                     worldIn.playSound(player, pos, soundtype.getPlaceSound( ), SoundCategory.BLOCKS, (soundtype.getVolume( ) + 1.0F) / 2.0F, soundtype.getPitch( ) * 0.8F);

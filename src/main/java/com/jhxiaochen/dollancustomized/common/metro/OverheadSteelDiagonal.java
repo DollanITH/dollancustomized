@@ -2,14 +2,25 @@ package com.jhxiaochen.dollancustomized.common.metro;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class OverheadSteelDiagonal extends OverheadSteelHorzional {
@@ -55,6 +66,50 @@ public class OverheadSteelDiagonal extends OverheadSteelHorzional {
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
+    }
+
+    public static final PropertyEnum<EnumLineHalf>
+            TYPE = PropertyEnum.create("type", EnumLineHalf.class);
+
+    public enum EnumLineHalf implements IStringSerializable
+    {
+        SINGLE,
+        DOUBLE,
+        DOUBLE_1;
+        private static final OverheadSteelDiagonal.EnumLineHalf[] METADATA_LOOKUP = new OverheadSteelDiagonal.EnumLineHalf[values().length];
+
+        public String toString()
+        {
+            return this.getName();
+        }
+
+        public int getMetadata()
+        {
+            switch (this){
+                case SINGLE: return 0;
+                case DOUBLE: return 1;
+                default: return 2;
+            }
+        }
+
+        public String getName()
+        {
+            return this.name().toLowerCase();
+        }
+
+        public static OverheadSteelDiagonal.EnumLineHalf byMetadata(int metadata) {
+            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
+                metadata = 0;
+            }
+
+            return METADATA_LOOKUP[metadata];
+        }
+
+        static {
+            for (OverheadSteelDiagonal.EnumLineHalf subtype : values()) {
+                METADATA_LOOKUP[subtype.getMetadata()] = subtype;
+            }
+        }
     }
 
     @Override
@@ -120,5 +175,52 @@ public class OverheadSteelDiagonal extends OverheadSteelHorzional {
                     addCollisionBoxToList(pos, entityBox, collidingBoxes, NULL_AABB);
                     break;
             }
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING, TYPE);
+    }
+
+    @Override
+    @Nonnull
+    public IBlockState getStateFromMeta(int meta) {
+        EnumLineHalf type = EnumLineHalf.SINGLE;
+        if ((meta & 4) != 0) type = EnumLineHalf.DOUBLE;
+        if ((meta & 8) != 0) type = EnumLineHalf.DOUBLE_1;
+        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, type);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        EnumLineHalf type = state.getValue(TYPE);
+        int v = 0x0;
+        if (type == EnumLineHalf.DOUBLE) v = 0x4;
+        if (type == EnumLineHalf.DOUBLE_1) v = 0x8;
+        return state.getValue(FACING).getHorizontalIndex() | v;
+    }
+
+        @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        EnumLineHalf subtype = EnumLineHalf.byMetadata(meta);
+     return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, placer.getHorizontalFacing()).withProperty(TYPE, subtype);
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        super.getPickBlock(state, target, world, pos, player);
+        return new ItemStack(this,1,state.getValue(TYPE).getMetadata());
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(TYPE).getMetadata();
+    }
+
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        for (EnumLineHalf subtype : EnumLineHalf.values( )) {
+            items.add(new ItemStack(this, 1, subtype.getMetadata( )));
+        }
+
     }
 }

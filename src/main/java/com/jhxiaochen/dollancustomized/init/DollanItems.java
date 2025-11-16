@@ -32,7 +32,6 @@ public class DollanItems{
                     .setAlwaysEdible()
                     .setUnlocalizedName("dollancraft").setRegistryName("dollan"));
             registerItemBlock(DollanBlocks.station_end_door, new ItemStationEndDoor(DollanBlocks.station_end_door));
-            registerItemBlock(DollanBlocks.dollan_line_18);
             registerItemBlock(DollanBlocks.power_method_change_sign, new ItemRailwaySign(DollanBlocks.power_method_change_sign));
             registerItemBlock(DollanBlocks.deport_stop_sign, new ItemRailwaySign(DollanBlocks.deport_stop_sign));
             registerItemBlock(DollanBlocks.empty_railway_sign);
@@ -120,7 +119,8 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.stop_line_right);
             registerItemBlock(DollanBlocks.stop_line_right_1);
             registerItemBlock(DollanBlocks.railway_sign_post);
-            registerItemBlock(DollanBlocks.station_stop_sign, new ItemStationStopSign());
+            registerItemBlock(DollanBlocks.station_stop_sign);
+            registerItemBlock(DollanBlocks.station_stop_wall_sign, new ItemStationStopWallSign());
 
             registerItemBlock(DollanBlocks.asphalt_cyan_black_half_line);
             registerItemBlock(DollanBlocks.asphalt_cyan_black_half_line_slab);
@@ -181,6 +181,12 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.dollan_line_14);
             registerItemBlock(DollanBlocks.dollan_line_15);
             registerItemBlock(DollanBlocks.dollan_line_16);
+            registerItemBlock(DollanBlocks.dollan_line_17);
+            registerItemBlock(DollanBlocks.dollan_line_18);
+            registerItemBlock(DollanBlocks.dollan_line_19);
+            registerItemBlock(DollanBlocks.dollan_line_20);
+            registerItemBlock(DollanBlocks.dollan_line_21);
+            registerItemBlock(DollanBlocks.dollan_line_22);
 
             registerItemBlock(DollanBlocks.mingsha_S1);
             registerItemBlock(DollanBlocks.mingsha_S2);
@@ -287,14 +293,10 @@ public class DollanItems{
             //registerItemBlock(DollanBlocks.arrow_confluence_left_sl);
             //registerItemBlock(DollanBlocks.arrow_confluence_right_sl);
             registerItemBlock(DollanBlocks.dollan_loop_line);
-            registerItemBlock(DollanBlocks.dollan_line_17);
-            registerItemBlock(DollanBlocks.dollan_line_19);
-            registerItemBlock(DollanBlocks.dollan_line_22);
             registerItemBlock(DollanBlocks.beautiful_marble,new
                     ItemMultiTexture(DollanBlocks.beautiful_marble, DollanBlocks.beautiful_marble,
                                      p_apply_1_ -> BlockMarble.MarbleType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
             //registerItemBlock(DollanBlocks.cherry_planks);
-            registerItemBlock(DollanBlocks.dollan_line_21);
             registerItemBlock(DollanBlocks.calcite);
             registerItemBlock(DollanBlocks.cracked_deepslate, new ItemMultiTexture(DollanBlocks.cracked_deepslate, DollanBlocks.cracked_deepslate, p_apply_1_ -> BlockCrackedDeepSlate.DeepslateType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName())
             );
@@ -344,7 +346,6 @@ public class DollanItems{
             registerItemBlock(DollanBlocks.white_color_purple_block);
             registerItemBlock(DollanBlocks.elder_sea_lantern);
             registerItemBlock(DollanBlocks.modern_stone_tile);
-            registerItemBlock(DollanBlocks.dollan_line_20);
             registerItemBlock(DollanBlocks.froglight,
                     new ItemMultiTexture(DollanBlocks.froglight,DollanBlocks.froglight, new ItemMultiTexture.Mapper() {
                         public String apply(ItemStack p_apply_1_) {
@@ -387,7 +388,7 @@ public class DollanItems{
 
             registerItemBlock(DollanBlocks.overhead_steel);
             registerItemBlock(DollanBlocks.overhead_steel_slope);
-            registerItemBlock(DollanBlocks.overhead_steel_diagonal);
+            registerItemBlock(DollanBlocks.overhead_steel_diagonal, new ItemOverheadSteelDiagonal(DollanBlocks.overhead_steel_diagonal));
             registerItemBlock(DollanBlocks.overhead_steel_support);
             registerItemBlock(DollanBlocks.overhead_steel_diagonal_support, new ItemOverheadSteelDiagonalSupport(DollanBlocks.overhead_steel_diagonal_support));
             registerItemBlock(DollanBlocks.overhead_steel_diagonal_support_1, new ItemOverheadSteelDiagonalSupport(DollanBlocks.overhead_steel_diagonal_support_1));

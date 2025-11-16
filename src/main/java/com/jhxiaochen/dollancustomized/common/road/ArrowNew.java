@@ -234,7 +234,7 @@ public class ArrowNew extends Block {
     }
 
     public boolean SlabChange(IBlockState state){
-       return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && state.getValue(BlockSlab.HALF) == BlockSlab.EnumBlockHalf.BOTTOM) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
+       return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && !state.getBlock().isTopSolid(state)) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
     }
 
     protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)

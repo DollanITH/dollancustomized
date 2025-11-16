@@ -1,20 +1,12 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "dollancustomized:station_stop"
-  },
   "variants": {
-    "inventory": [{}],
-    "wall": {
-      "double_wall": {"model": "dollancustomized:stop_sign_connected_wall"},
-      "single_wall": {"model": "dollancustomized:stop_sign_connected_wall_single"},
-      "none": {}
-    },
-    "facing": {
-      "west": {"y": 90},
-      "north": {"y": 180},
-      "south": {},
-      "east": {"y": 270}
-    }
+    "facing=west": {"model": "dollancustomized:station_stop",
+      "y": 90},
+    "facing=north": {"model": "dollancustomized:station_stop",
+      "y": 180},
+    "facing=south": {"model": "dollancustomized:station_stop"},
+    "facing=east": {"model": "dollancustomized:station_stop",
+      "y": 270}
   }
 }

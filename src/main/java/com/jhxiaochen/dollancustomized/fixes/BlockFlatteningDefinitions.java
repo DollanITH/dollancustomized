@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.fixes;
 
 import com.google.common.collect.ImmutableList;
-import com.jhxiaochen.dollancustomized.common.BlockMyalite;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 
 /**
@@ -20,15 +19,7 @@ public class BlockFlatteningDefinitions {
 
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "myalite",
-                    BlockMyalite.MyaliteType.NORMAL.getMetadata(),
-                    DollanBlocks.myalite,
-                    (block, tileEntityNBT) -> block.getDefaultState(),
-                    null
-            ));
-
-            flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
-                    "myalite",
-                    BlockMyalite.MyaliteType.CRYSTAL.getMetadata(),
+                    1,
                     DollanBlocks.myalite_crystal,
                     (block, tileEntityNBT) -> block.getDefaultState(),
                     null
@@ -36,7 +27,7 @@ public class BlockFlatteningDefinitions {
 
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "myalite",
-                    BlockMyalite.MyaliteType.PAVEMENT.getMetadata(),
+                    2,
                     DollanBlocks.myalite_pavement,
                     (block, tileEntityNBT) -> block.getDefaultState(),
                     null

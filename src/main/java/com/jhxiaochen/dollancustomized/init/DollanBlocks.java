@@ -791,6 +791,7 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(signal_yellow_four_lights);
     }
 
+    @SideOnly(Side.CLIENT)
     public static void RegStateMapper(){
         ModelLoader.setCustomStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());

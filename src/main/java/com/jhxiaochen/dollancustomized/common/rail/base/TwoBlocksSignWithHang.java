@@ -54,19 +54,6 @@ public class TwoBlocksSignWithHang extends TwoBlocksSignBase {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
-        if (pos.getY() >= worldIn.getHeight() - 1)
-        {
-            return false;
-        }
-        else
-        {
-            return super.canPlaceBlockAt(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos.up());
-        }
-    }
-
-    @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         items.add(new ItemStack(this));
         items.add(new ItemStack(this, 1, 1));

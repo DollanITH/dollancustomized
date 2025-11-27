@@ -116,9 +116,9 @@ public class StationStopWallSign extends RailwaySignBase {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         EnumVarient connected = EnumVarient.SINGLE_WALL_RIGHT;
-        if ((meta & 4) != 0) connected = EnumVarient.DOUBLE_WALL_RIGHT;
-        if ((meta & 8) != 0) connected = EnumVarient.SINGLE_WALL_LEFT;
-        if ((meta & 12) != 0) connected = EnumVarient.DOUBLE_WALL_LEFT;
+        if ((meta & 0x4) != 0) connected = EnumVarient.DOUBLE_WALL_RIGHT;
+        else if ((meta & 0x8) != 0) connected = EnumVarient.SINGLE_WALL_LEFT;
+        else if ((meta & 0xc) != 0) connected = EnumVarient.DOUBLE_WALL_LEFT;
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(WALL, connected);
     }
 
@@ -127,8 +127,8 @@ public class StationStopWallSign extends RailwaySignBase {
         EnumVarient connected = state.getValue(WALL);
         int v = 0x0;
         if (connected == EnumVarient.DOUBLE_WALL_RIGHT) v = 0x4;
-        if (connected == EnumVarient.SINGLE_WALL_LEFT) v = 0x8;
-        if (connected == EnumVarient.DOUBLE_WALL_LEFT) v = 0xc;
+        else if (connected == EnumVarient.SINGLE_WALL_LEFT) v = 0x8;
+        else if (connected == EnumVarient.DOUBLE_WALL_LEFT) v = 0xc;
         return state.getValue(FACING).getHorizontalIndex() | v;
     }
 

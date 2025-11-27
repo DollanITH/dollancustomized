@@ -31,24 +31,25 @@ public class Remaper {
     private static final Set<String> ignoredMappings = new HashSet<>();
 
     static {
-        blockRemappings.put("arrow_diaotou_sl","arrow_diaotou");
-        blockRemappings.put("arrow_left_diaotou_sl","arrow_left_diaotou");
-        blockRemappings.put("arrow_right_staright_sl","arrow_right_straight");
-        blockRemappings.put("arrow_left_staright_sl","arrow_left_straight");
-        blockRemappings.put("arrow_staright_diaotou_sl","arrow_straight_diaotou");
-        blockRemappings.put("arrow_staright_sl","arrow_straight");
-        blockRemappings.put("arrow_left_sl","arrow_left");
-        blockRemappings.put("arrow_right_sl","arrow_right");
-        blockRemappings.put("arrow_left_right_staright_sl","arrow_left_right_straight");
-        blockRemappings.put("arrow_left_right_sl","arrow_left_right");
-        blockRemappings.put("arrow_confluence_right_sl","arrow_confluence_right");
-        blockRemappings.put("arrow_confluence_left_sl","arrow_confluence_left");
+        ignoredMappings.add("arrow_left_right_staright");
+        ignoredMappings.add("arrow_right_staright");
+        ignoredMappings.add("arrow_left_staright");
+        ignoredMappings.add("arrow_staright_diaotou");
+        ignoredMappings.add("arrow_staright");
 
-        blockRemappings.put("arrow_left_right_staright","arrow_left_right_straight");
-        blockRemappings.put("arrow_right_staright","arrow_right_straight");
-        blockRemappings.put("arrow_left_staright","arrow_left_straight");
-        blockRemappings.put("arrow_staright_diaotou","arrow_straight_diaotou");
-        blockRemappings.put("arrow_staright","arrow_straight");
+        ignoredMappings.add("arrow_diaotou_sl");
+        ignoredMappings.add("arrow_left_diaotou_sl");
+        ignoredMappings.add("arrow_right_staright_sl");
+        ignoredMappings.add("arrow_left_staright_sl");
+        ignoredMappings.add("arrow_staright_diaotou_sl");
+        ignoredMappings.add("arrow_staright_sl");
+        ignoredMappings.add("arrow_left_sl");
+        ignoredMappings.add("arrow_right_sl");
+        ignoredMappings.add("arrow_left_right_staright_sl");
+        ignoredMappings.add("arrow_left_right_sl");
+        ignoredMappings.add("arrow_confluence_right_sl");
+        ignoredMappings.add("arrow_confluence_left_sl");
+
 
         itemRemappings.put("dollancraft", "dollan");
         blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");

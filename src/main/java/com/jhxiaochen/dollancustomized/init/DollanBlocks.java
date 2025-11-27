@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -833,24 +834,29 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
 
     private static void SimpleBlock(Block block){
         RegistrationHandler.BLOCKS.add(block);
-        registerModel(block);
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            registerModel(block);
+        }
     }
 
     private static void BlockHasMeta(Block block, int meta, String name){
         if (meta == 0) {
             RegistrationHandler.BLOCKS.add(block);
         }
-        registerModel(block, meta, name);
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            registerModel(block, meta, name);
+        }
     }
 
     private static void BlockHasMeta(Block block) {
         RegistrationHandler.BLOCKS.add(block);
     }
 
-    @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block, int metadata, String name) {
-        ModelResourceLocation model = new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory");
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            ModelResourceLocation model = new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory");
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), metadata, model);
+        }
     }
 
     @SideOnly(Side.CLIENT)

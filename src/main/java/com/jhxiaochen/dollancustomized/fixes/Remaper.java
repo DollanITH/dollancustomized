@@ -24,32 +24,35 @@ import java.util.Set;
 @Mod.EventBusSubscriber
 public class Remaper {
     private static final Map<String, String>          blockRemappings = new HashMap<>();
+    private static final Map<String, String>          blockRemappings1 = new HashMap<>();
     private static final Map<String, String>          itemRemappings  = new HashMap<>();
     private static final Map<String, String>     tileRemappings  = new HashMap<>();
 
     private static final Set<String> ignoredMappings = new HashSet<>();
 
     static {
-        blockRemappings.put("arrow_diaotou_sl","arrow_diaotou");
-        blockRemappings.put("arrow_left_diaotou_sl","arrow_left_diaotou");
-        blockRemappings.put("arrow_right_staright_sl","arrow_right_straight");
-        blockRemappings.put("arrow_left_staright_sl","arrow_left_straight");
-        blockRemappings.put("arrow_staright_diaotou_sl","arrow_straight_diaotou");
-        blockRemappings.put("arrow_staright_sl","arrow_straight");
-        blockRemappings.put("arrow_left_sl","arrow_left");
-        blockRemappings.put("arrow_right_sl","arrow_right");
-        blockRemappings.put("arrow_left_right_staright_sl","arrow_left_right_straight");
-        blockRemappings.put("arrow_left_right_sl","arrow_left_right");
-        blockRemappings.put("arrow_confluence_right_sl","arrow_confluence_right");
-        blockRemappings.put("arrow_confluence_left_sl","arrow_confluence_left");
+        ignoredMappings.add("arrow_left_right_staright");
+        ignoredMappings.add("arrow_right_staright");
+        ignoredMappings.add("arrow_left_staright");
+        ignoredMappings.add("arrow_staright_diaotou");
+        ignoredMappings.add("arrow_staright");
 
-        blockRemappings.put("arrow_left_right_staright","arrow_left_right_straight");
-        blockRemappings.put("arrow_right_staright","arrow_right_straight");
-        blockRemappings.put("arrow_left_staright","arrow_left_straight");
-        blockRemappings.put("arrow_staright_diaotou","arrow_straight_diaotou");
-        blockRemappings.put("arrow_staright","arrow_straight");
+        ignoredMappings.add("arrow_diaotou_sl");
+        ignoredMappings.add("arrow_left_diaotou_sl");
+        ignoredMappings.add("arrow_right_staright_sl");
+        ignoredMappings.add("arrow_left_staright_sl");
+        ignoredMappings.add("arrow_staright_diaotou_sl");
+        ignoredMappings.add("arrow_staright_sl");
+        ignoredMappings.add("arrow_left_sl");
+        ignoredMappings.add("arrow_right_sl");
+        ignoredMappings.add("arrow_left_right_staright_sl");
+        ignoredMappings.add("arrow_left_right_sl");
+        ignoredMappings.add("arrow_confluence_right_sl");
+        ignoredMappings.add("arrow_confluence_left_sl");
+
 
         itemRemappings.put("dollancraft", "dollan");
+        blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
     }
 
     @SubscribeEvent
@@ -62,6 +65,12 @@ public class Remaper {
                 missingMapping.ignore();
             } else if (blockRemappings.containsKey(resourcePath)) {
                 ResourceLocation remappedResourceLocation = new ResourceLocation(resourceLocation.getResourceDomain(), blockRemappings.get(resourcePath));
+                    Block remappedBlock = ForgeRegistries.BLOCKS.getValue(remappedResourceLocation);
+                    if (remappedBlock != Blocks.AIR) {
+                        missingMapping.remap(remappedBlock);
+                    }
+            } else if (blockRemappings1.containsKey(resourcePath)) {
+                ResourceLocation remappedResourceLocation = new ResourceLocation(blockRemappings1.get(resourcePath));
                     Block remappedBlock = ForgeRegistries.BLOCKS.getValue(remappedResourceLocation);
                     if (remappedBlock != Blocks.AIR) {
                         missingMapping.remap(remappedBlock);
@@ -85,6 +94,21 @@ public class Remaper {
                 if (remappedItem != Items.AIR) {
                     missingMapping.remap(remappedItem);
                 }
+
+            } else if (blockRemappings.containsKey(resourcePath)) {
+                ResourceLocation remappedResourceLocation =
+                        new ResourceLocation(resourceLocation.getResourceDomain( ), blockRemappings.get(resourcePath));
+                Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
+                if (remappedItem != Items.AIR) {
+                    missingMapping.remap(remappedItem);
+                }
+            } else if (blockRemappings1.containsKey(resourcePath)) {
+                ResourceLocation remappedResourceLocation =
+                        new ResourceLocation(blockRemappings1.get(resourcePath));
+                Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
+                if (remappedItem != Items.AIR) {
+                    missingMapping.remap(remappedItem);
+                }
             }
         }
     }
@@ -94,6 +118,8 @@ public class Remaper {
         CompoundDataFixer fixer = FMLCommonHandler.instance().getDataFixer();
         ModFixs modFixs = fixer.init(Reference.MOD_ID,1340);
         modFixs.registerFix(FixTypes.ITEM_INSTANCE, new ItemDataFixable());
+        modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
+        modFixs.registerFix(FixTypes.ITEM_INSTANCE, ItemFlatteningDefinitions.createItemFlattening());
     }
 
     private Remaper() {

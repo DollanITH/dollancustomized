@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class RailwaySignBase extends BlockHorizontal {
-    protected RailwaySignBase() {
+public class RailwaySignBase extends BlockHorizontal {
+    public RailwaySignBase() {
         super(Material.IRON);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
         this.setHardness(2.5F);

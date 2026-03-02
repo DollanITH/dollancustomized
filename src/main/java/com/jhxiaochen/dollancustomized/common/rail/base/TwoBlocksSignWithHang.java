@@ -54,19 +54,6 @@ public class TwoBlocksSignWithHang extends TwoBlocksSignBase {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
-        if (pos.getY() >= worldIn.getHeight() - 1)
-        {
-            return false;
-        }
-        else
-        {
-            return super.canPlaceBlockAt(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos.up());
-        }
-    }
-
-    @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         items.add(new ItemStack(this));
         items.add(new ItemStack(this, 1, 1));
@@ -163,7 +150,7 @@ public class TwoBlocksSignWithHang extends TwoBlocksSignBase {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(WALL) == EnumWallHalf.NONE ? getBoxXZ(state,2.0 / 16.0,1,14.0 / 16.0) : getBoxXZ(state,0.01 / 16.0,1,14.0 / 16.0);
+        return state.getValue(WALL) == EnumWallHalf.NONE ? getBoxXZ(state,2.0 / 16.0,5.0 / 16.0,12.0 / 16.0) : getBoxXZ(state,0.01 / 16.0,5.0 / 16.0,12.0 / 16.0);
     }
 
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)

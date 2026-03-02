@@ -35,7 +35,8 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
     public enum EnumLineHalf implements IStringSerializable
     {
         SINGLE,
-        DOUBLE;
+        DOUBLE,
+        DOUBLE_1;
         private static final EnumLineHalf[] METADATA_LOOKUP = new EnumLineHalf[values().length];
 
         public String toString()
@@ -45,12 +46,16 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
 
         public int getMetadata()
         {
-            return this == SINGLE ? 0 : 1 ;
+            switch (this){
+                case SINGLE: return 0;
+                case DOUBLE: return 1;
+                default: return 2;
+            }
         }
 
         public String getName()
         {
-            return this == SINGLE ? "single" : "double";
+            return this.name().toLowerCase();
         }
 
         public static EnumLineHalf byMetadata(int metadata) {
@@ -222,6 +227,7 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
     public IBlockState getStateFromMeta(int meta) {
         EnumLineHalf type = EnumLineHalf.SINGLE;
         if ((meta & 4) != 0) type = EnumLineHalf.DOUBLE;
+        if ((meta & 8) != 0) type = EnumLineHalf.DOUBLE_1;
         return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, type);
     }
 
@@ -230,6 +236,7 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
         EnumLineHalf type = state.getValue(TYPE);
         int v = 0x0;
         if (type == EnumLineHalf.DOUBLE) v = 0x4;
+        if (type == EnumLineHalf.DOUBLE_1) v = 0x8;
         return state.getValue(FACING).getHorizontalIndex() | v;
     }
 

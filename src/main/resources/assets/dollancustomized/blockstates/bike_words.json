@@ -1,19 +1,22 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "transform": "forge:default-block",
     "model": "dollancustomized:bike_words"
   },
   "variants": {
     "inventory": [{"transform": "forge:default-block"}],
     "facing": {
-      "west": {"model": "dollancustomized:bike_words",
+      "west": {
         "y": 90},
-      "north": {"model": "dollancustomized:bike_words",
+      "north": {
         "y": 180},
-      "south": {"model": "dollancustomized:bike_words"},
-      "east": {"model": "dollancustomized:bike_words",
+      "south": {},
+      "east": {
         "y": 270}
+    },
+    "type": {
+      "full" : {},
+      "slab" : {"model": "dollancustomized:bike_words_slab"}
     }
   }
 }

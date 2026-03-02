@@ -1,0 +1,20 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dollancustomized:blocks/roads/yellow_bike_icon",
+		"words": "dollancustomized:blocks/roads/yellow_bike_icon"
+	},
+	"elements": [
+		{
+			"from": [-5, -8, -5],
+			"to": [21, -7.99, 21],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, -8, 0]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#words"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#words", "cullface": "down"}
+			}
+		}
+	]
+}

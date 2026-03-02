@@ -1,30 +1,24 @@
 {
-  "variants": {
-    "normal": {
-      "model": "dollancustomized:platform_fence"
-    },
-    "facing=north": {
-      "model": "dollancustomized:platform_fence",
-      "y": 180
-    },
-    "facing=east": {
-      "model": "dollancustomized:platform_fence",
-      "y": 270
-    },
-    "facing=south": {
-      "model": "dollancustomized:platform_fence"
-    },
-    "facing=west": {
-      "model": "dollancustomized:platform_fence",
-      "y": 90
-    },
-    "facing=up": {
-      "model": "dollancustomized:platform_fence",
-      "x": 90
-    },
-    "facing=down": {
-      "model": "dollancustomized:platform_fence",
-      "x": 270
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:multi-layer",
+      "custom": {
+        "base": "dollancustomized:platform_fence#base",
+        "Cutout": "dollancustomized:platform_fence#base",
+        "Translucent": "dollancustomized:platform_fence#tran"
+      }
+  },
+  "variants":{
+    "normal": [{
+    }],
+    "inventory": [{"model": "dollancustomized:multi-layer/platform_fence_inventory"}],
+    "base": [{"model": "dollancustomized:multi-layer/platform_fence"}],
+    "tran": [{"model": "dollancustomized:multi-layer/platform_fence_tran"}],
+    "facing" : {
+      "north": {"y" : 180},
+      "south": {},
+      "west": {"y": 90},
+      "east": {"y": 270}
     }
   }
 }

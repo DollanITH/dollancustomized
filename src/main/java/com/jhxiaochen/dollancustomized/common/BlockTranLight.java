@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,18 +20,13 @@ public class BlockTranLight extends BlockColored
     {
     public BlockTranLight(String name)
         {
-            super(Material.ROCK);
+            super(Material.GLASS);
             this.setUnlocalizedName(name);
             this.setCreativeTab(DollanCustomized.LIGHT_TAB);
             this.setSoundType(SoundType.GLASS);
             this.setLightLevel(1.0F);
             this.setResistance(15F);
             this.setLightOpacity(0);
-            this.isAmbientOcclusion();
-        }
-        public boolean isAmbientOcclusion()
-        {
-            return false;
         }
 
         public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
@@ -55,8 +51,25 @@ public class BlockTranLight extends BlockColored
         }
 
         @Override
-        public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-            return true;
+        @SideOnly(Side.CLIENT)
+        public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+        {
+            IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+            Block block = iblockstate.getBlock();
+
+                if (blockState != iblockstate) {
+                    return true;
+                }
+                if (block == this) {
+                    return false;
+                }
+            return blockState == iblockstate ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        }
+
+
+        @Override
+        public float getAmbientOcclusionLightValue(IBlockState state) {
+            return 1.0F;
         }
 
     }

@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common.metro;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,20 +14,25 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
 public class BlockStationEndDoor extends BlockDoor {
     public BlockStationEndDoor(String name) {
-        super(Material.IRON);
+        super(Material.GLASS);
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
+        this.setSoundType(SoundType.GLASS);
+        this.setHardness(1.5F);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
+        return BlockRenderLayer.CUTOUT;
     }
 
     private int getOpenSound()
@@ -72,6 +78,6 @@ public class BlockStationEndDoor extends BlockDoor {
 
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return getBlockLayer() == layer;
+        return layer == BlockRenderLayer.TRANSLUCENT || super.canRenderInLayer(state, layer);
     }
 }

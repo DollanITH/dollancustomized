@@ -3,33 +3,29 @@ package com.jhxiaochen.dollancustomized.init;
 import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class DollanSounds {
     public static SoundEvent
-            BLOCK_DEEPSLATE_STEP,
-            BLOCK_DEEPSLATE_PLACE,
-            BLOCK_DEEPSLATE_FALL,
-            BLOCK_DEEPSLATE_BREAK,
-            BLOCK_SAKURA_PLANKS_STEP,
-            BLOCK_SAKURA_PLANKS_BREAK;
+            BLOCK_DEEPSLATE_STEP = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.deepslate.step"));
 
+    public static SoundEvent
+            BLOCK_DEEPSLATE_PLACE = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.deepslate.place"));
+    public static SoundEvent
+            BLOCK_DEEPSLATE_FALL = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.deepslate.fall"));
+    public static SoundEvent
+            BLOCK_DEEPSLATE_BREAK = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.deepslate.break"));
 
-    public static void registerSounds() {
-        BLOCK_DEEPSLATE_STEP = registerSound("block.deepslate.step");
-        BLOCK_DEEPSLATE_PLACE = registerSound("block.deepslate.place");
-        BLOCK_DEEPSLATE_FALL = registerSound("block.deepslate.fall");
-        BLOCK_DEEPSLATE_BREAK = registerSound("block.deepslate.break");
-        BLOCK_SAKURA_PLANKS_STEP = registerSound("block.sakura_planks.step");
-        BLOCK_SAKURA_PLANKS_BREAK = registerSound("block.sakura_planks.break");
+    @SubscribeEvent
+    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+        event.getRegistry().register(BLOCK_DEEPSLATE_STEP.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.deepslate.step")));
+        event.getRegistry().register(BLOCK_DEEPSLATE_PLACE.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.deepslate.place")));
+        event.getRegistry().register(BLOCK_DEEPSLATE_FALL.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.deepslate.fall")));
+        event.getRegistry().register(BLOCK_DEEPSLATE_BREAK.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.deepslate.break")));
     }
 
-    private static SoundEvent registerSound(String name) {
-        ResourceLocation location = new ResourceLocation(Reference.MOD_ID, name);
-        SoundEvent event = new SoundEvent(location);
-        event.setRegistryName(name);
-        ForgeRegistries.SOUND_EVENTS.register(event);
-        return event;
-    }
 }
 

@@ -64,30 +64,57 @@ public class TwoBlocksSignBase extends Block {
     {
         switch (state.getValue(FACING)){
             case WEST:
-                return new AxisAlignedBB(1 - x, 0, z, 1, y, 1 - z);
+                switch (state.getValue(HALF))
+                {
+                    case LOWER:
+                        return new AxisAlignedBB(1 - x, 0, z, 1, 1, 1 - z);
+                    case UPPER:
+                        return new AxisAlignedBB(1 - x, 0, z, 1, y, 1 - z);
+                }
+                break;
             case SOUTH:
-            default:
-                return new AxisAlignedBB(z, 0, 0, 1 - z, y, x);
+                switch (state.getValue(HALF))
+                {
+                    case LOWER:
+                        return new AxisAlignedBB(z, 0, 0, 1 - z, 1, x);
+                    case UPPER:
+                        return new AxisAlignedBB(z, 0, 0, 1 - z, y, x);
+                }
+                break;
             case NORTH:
-                return new AxisAlignedBB(z, 0, 1 - x, 1 - z, y, 1);
+                switch (state.getValue(HALF))
+                {
+                    case LOWER:
+                        return new AxisAlignedBB(z, 0, 1 - x, 1 - z, 1, 1);
+                    case UPPER:
+                        return new AxisAlignedBB(z, 0, 1 - x, 1 - z, y, 1);
+                }
+                break;
             case EAST:
-                return new AxisAlignedBB(0, 0, z, x, 1, y - z);
+                switch (state.getValue(HALF))
+                {
+                    case LOWER:
+                        return new AxisAlignedBB(0, 0, z, x, 1, 1 - z);
+                    case UPPER:
+                        return new AxisAlignedBB(0, 0, z, x, y, 1 - z);
+                }
         }
+        return Block.NULL_AABB;
     }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return getBoxXZ(state,2.0 / 16.0,1,14.0 / 16.0);
+        return getBoxXZ(state,2.0 / 16.0,5.0 / 16.0,12.0 / 16.0);
     }
 
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
-        return state.getValue(HALF) != EnumSignHalf.LOWER ? state : state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.getValue(HALF) != EnumSignHalf.LOWER ? state : state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
-        return mirrorIn == Mirror.NONE ? state : state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
+        return mirrorIn == Mirror.NONE ? state : state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
     }
 
     @Override

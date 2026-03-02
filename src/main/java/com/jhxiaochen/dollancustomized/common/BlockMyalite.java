@@ -170,7 +170,7 @@ public class BlockMyalite extends Block {
 
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return state != getDefaultState().withProperty(BlockMyalite.VARIANT, MyaliteType.CRYSTAL) ? true : super.canRenderInLayer(state, layer);
+        return state != getDefaultState().withProperty(BlockMyalite.VARIANT, MyaliteType.CRYSTAL) ? layer == BlockRenderLayer.SOLID : super.canRenderInLayer(state, layer);
     }
 
     @Override

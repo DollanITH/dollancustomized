@@ -5,10 +5,6 @@
   },
   "variants": {
     "inventory": [{}],
-    "half": {
-      "lower": {"model": "dollancustomized:station_edge_lower"},
-      "upper": {"model": "dollancustomized:station_edge_upper"}
-    },
     "facing": {
       "west": {"y": 90},
       "north": {"y": 180},

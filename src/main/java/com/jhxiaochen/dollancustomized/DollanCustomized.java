@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized;
 
 import com.jhxiaochen.dollancustomized.command.Command114514;
+import com.jhxiaochen.dollancustomized.command.CommandExtendedFill;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
@@ -47,7 +48,7 @@ public class DollanCustomized {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        System.out.println("Pre Init , thank you fucking mother");
+        System.out.println("Pre Init");
         MinecraftForge.EVENT_BUS.register(this);
         Remaper.registerFixable();
         registry.preInit(event);
@@ -59,20 +60,21 @@ public class DollanCustomized {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         registry.getElements().forEach(registry -> registry.init(event));
-        System.out.println("Init, thank you fucking mother");
+        System.out.println("Init");
         proxy.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        System.out.println("Post Init, thank you fucking mother");
+        System.out.println("Post Init");
         proxy.postInit();
     }
 
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Command114514());
-        System.out.println("Hey guys, you're welcome.");
+        event.registerServerCommand(new CommandExtendedFill());
+        System.out.println("Registered successfully.");
     }
 
 

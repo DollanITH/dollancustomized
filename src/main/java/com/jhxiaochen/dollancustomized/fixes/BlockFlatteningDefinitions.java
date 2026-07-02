@@ -45,6 +45,13 @@ public class BlockFlatteningDefinitions {
                     null
             ));
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
+                    "arrow_left_right_straight",
+                    facing.getHorizontalIndex(),
+                    DollanBlocks.arrow_left_right_straight,
+                    (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),
+                    null
+            ));
+            flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "arrow_left_right_staright_sl",
                     facing.getHorizontalIndex(),
                     DollanBlocks.arrow_left_right_straight,
@@ -53,6 +60,13 @@ public class BlockFlatteningDefinitions {
             ));
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "arrow_right_staright",
+                    facing.getHorizontalIndex(),
+                    DollanBlocks.arrow_right_straight,
+                    (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),
+                    null
+            ));
+            flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
+                    "arrow_right_straight",
                     facing.getHorizontalIndex(),
                     DollanBlocks.arrow_right_straight,
                     (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),
@@ -73,6 +87,13 @@ public class BlockFlatteningDefinitions {
                     null
             ));
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
+                    "arrow_straight",
+                    facing.getHorizontalIndex(),
+                    DollanBlocks.arrow_straight,
+                    (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),
+                    null
+            ));
+            flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "arrow_staright_sl",
                     facing.getHorizontalIndex(),
                     DollanBlocks.arrow_straight,
@@ -87,6 +108,13 @@ public class BlockFlatteningDefinitions {
                     null
             ));
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
+                    "arrow_straight_diaotou",
+                    facing.getHorizontalIndex(),
+                    DollanBlocks.arrow_straight_diaotou,
+                    (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),
+                    null
+            ));
+            flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "arrow_staright_diaotou_sl",
                     facing.getHorizontalIndex(),
                     DollanBlocks.arrow_straight_diaotou,
@@ -95,6 +123,13 @@ public class BlockFlatteningDefinitions {
             ));
             flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
                     "arrow_left_staright",
+                    facing.getHorizontalIndex(),
+                    DollanBlocks.arrow_left_straight,
+                    (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),
+                    null
+            ));
+            flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
+                    "arrow_left_straight",
                     facing.getHorizontalIndex(),
                     DollanBlocks.arrow_left_straight,
                     (block, tileEntityNBT) -> block.getDefaultState().withProperty(ArrowNew.TYPE, ArrowNew.MarkType.FULL).withProperty(ArrowNew.FACING, facing),

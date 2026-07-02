@@ -5,14 +5,10 @@ import com.jhxiaochen.dollancustomized.command.CommandExtendedFill;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
-import com.jhxiaochen.dollancustomized.model.Registry;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -23,15 +19,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.function.Supplier;
-
 @Mod(modid = Reference.MOD_ID, useMetadata = true, version = Reference.VERSION, dependencies = "after:sakura")
 public class DollanCustomized {
 
     @Mod.Instance(Reference.MOD_ID)
     public static DollanCustomized instance;
     public static Remaper remaper;
-    public Registry registry = new Registry();
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
@@ -51,15 +44,11 @@ public class DollanCustomized {
         System.out.println("Pre Init");
         MinecraftForge.EVENT_BUS.register(this);
         Remaper.registerFixable();
-        registry.preInit(event);
-        MinecraftForge.EVENT_BUS.register(registry);
-        registry.getElements().forEach(registry -> registry.preInit(event));
         proxy.preInit();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        registry.getElements().forEach(registry -> registry.init(event));
         System.out.println("Init");
         proxy.init();
     }
@@ -77,22 +66,11 @@ public class DollanCustomized {
         System.out.println("Registered successfully.");
     }
 
-
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
         DollanBlocks.registerModels();
         DollanItems.registerModels();
-        registry.getElements().forEach(modelRegistry -> modelRegistry.registerBlockItemModel(event));
     }
 
-    @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(registry.getBlocks().stream().map(Supplier::get).toArray(Block[]::new));
-    }
-
-    @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(registry.getItems().stream().map(Supplier::get).toArray(Item[]::new));
-    }
 }

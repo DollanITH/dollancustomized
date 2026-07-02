@@ -31,11 +31,16 @@ public class Remaper {
     private static final Set<String> ignoredMappings = new HashSet<>();
 
     static {
-        ignoredMappings.add("arrow_left_right_staright");
-        ignoredMappings.add("arrow_right_staright");
-        ignoredMappings.add("arrow_left_staright");
-        ignoredMappings.add("arrow_staright_diaotou");
-        ignoredMappings.add("arrow_staright");
+        blockRemappings.put("arrow_left_right_staright", "arrow_left_right_straight");
+        blockRemappings.put("arrow_right_staright", "arrow_right_straight");
+        blockRemappings.put("arrow_left_staright", "arrow_left_straight");
+        blockRemappings.put("arrow_staright_diaotou", "arrow_straight_diaotou");
+        blockRemappings.put("arrow_staright", "arrow_straight");
+        itemRemappings.put("arrow_left_right_staright", "arrow_left_right_straight");
+        itemRemappings.put("arrow_right_staright", "arrow_right_straight");
+        itemRemappings.put("arrow_left_staright", "arrow_left_straight");
+        itemRemappings.put("arrow_staright_diaotou", "arrow_straight_diaotou");
+        itemRemappings.put("arrow_staright", "arrow_straight");
 
         ignoredMappings.add("arrow_diaotou_sl");
         ignoredMappings.add("arrow_left_diaotou_sl");
@@ -50,9 +55,8 @@ public class Remaper {
         ignoredMappings.add("arrow_confluence_right_sl");
         ignoredMappings.add("arrow_confluence_left_sl");
 
-
         itemRemappings.put("dollancraft", "dollan");
-        blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
+        //blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
     }
 
     @SubscribeEvent
@@ -116,7 +120,7 @@ public class Remaper {
 
     public static void registerFixable() {
         CompoundDataFixer fixer = FMLCommonHandler.instance().getDataFixer();
-        ModFixs modFixs = fixer.init(Reference.MOD_ID,1340);
+        ModFixs modFixs = fixer.init(Reference.MOD_ID,1341);
         modFixs.registerFix(FixTypes.ITEM_INSTANCE, new ItemDataFixable());
         modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
         modFixs.registerFix(FixTypes.ITEM_INSTANCE, ItemFlatteningDefinitions.createItemFlattening());

@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.fixes;
 
 import com.google.common.collect.ImmutableList;
-import com.jhxiaochen.dollancustomized.common.BlockMyalite;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,21 +21,21 @@ public class ItemFlatteningDefinitions {
 
         flatteningDefinitions.add(new ItemFlattening.FlatteningDefinition(
                 "myalite",
-                BlockMyalite.MyaliteType.NORMAL.getMetadata(),
+                0,
                 Item.getItemFromBlock(DollanBlocks.myalite),
                 (item, oldMetadata, oldStackTagCompound) -> new ItemStack(item)
         ));
 
         flatteningDefinitions.add(new ItemFlattening.FlatteningDefinition(
                 "myalite",
-                BlockMyalite.MyaliteType.CRYSTAL.getMetadata(),
+                1,
                 Item.getItemFromBlock(DollanBlocks.myalite_crystal),
                 (item, oldMetadata, oldStackTagCompound) -> new ItemStack(item)
         ));
 
         flatteningDefinitions.add(new ItemFlattening.FlatteningDefinition(
                 "myalite",
-                BlockMyalite.MyaliteType.PAVEMENT.getMetadata(),
+                2,
                 Item.getItemFromBlock(DollanBlocks.myalite_pavement),
                 (item, oldMetadata, oldStackTagCompound) -> new ItemStack(item)
         ));

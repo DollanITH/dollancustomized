@@ -102,11 +102,12 @@ public class DiagonalStopLineBlock extends BlockAsphaltHorizontal
     @Override
     public int getMetaFromState(IBlockState state) {
         EnumVarient varient = state.getValue(VARIENT);
-        int v = 0x0;
-        if (varient == EnumVarient.WHITE_1) v = 0x8;
-        else if (varient == EnumVarient.YELLOW) v = 0x4;
-        else if (varient == EnumVarient.YELLOW_1) v = 0xc;
-        return state.getValue(FACING).getHorizontalIndex() | v;
+        int v = 0;
+        v = v | state.getValue(FACING).getHorizontalIndex();
+        if (varient == EnumVarient.WHITE_1) v |= 4;
+        else if (varient == EnumVarient.YELLOW) v |= 8;
+        else if (varient == EnumVarient.YELLOW_1) v |= 12;
+        return v;
     }
 
     @Override

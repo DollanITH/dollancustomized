@@ -96,8 +96,8 @@ public class BlockAsphalt extends BlockAsphaltBase {
         items.add(new ItemStack(this, 1, AsphaltType.BLACK.getMetadata()));
         items.add(new ItemStack(this, 1, AsphaltType.RED.getMetadata()));
         items.add(new ItemStack(this, 1, AsphaltType.CYAN.getMetadata()));
-        items.add(new ItemStack(this,1,AsphaltType.WHITE.getMetadata()));
         items.add(new ItemStack(this,1,AsphaltType.YELLOW.getMetadata()));
+        items.add(new ItemStack(this,1,AsphaltType.WHITE.getMetadata()));
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)

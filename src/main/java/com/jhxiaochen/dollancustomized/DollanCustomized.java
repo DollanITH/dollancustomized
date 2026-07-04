@@ -1,12 +1,16 @@
 package com.jhxiaochen.dollancustomized;
 
+import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.command.Command114514;
 import com.jhxiaochen.dollancustomized.command.CommandExtendedFill;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
+import com.jhxiaochen.dollancustomized.network.NetworkHandler;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +20,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,8 +29,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class DollanCustomized {
 
     @Mod.Instance(Reference.MOD_ID)
-    public static DollanCustomized instance;
-    public static Remaper remaper;
+    public static DollanCustomized     instance;
+    public static Remaper              remaper;
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
@@ -42,6 +48,11 @@ public class DollanCustomized {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("Pre Init");
+        NetworkHandler.registerMessages();
+        GameRegistry.registerTileEntity(
+                TileEntityRoadText.class,
+                new ResourceLocation(Reference.MOD_ID, "road_text") // ← 确保这个存在
+        );
         MinecraftForge.EVENT_BUS.register(this);
         Remaper.registerFixable();
         proxy.preInit();
@@ -50,6 +61,7 @@ public class DollanCustomized {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         System.out.println("Init");
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
         proxy.init();
     }
 

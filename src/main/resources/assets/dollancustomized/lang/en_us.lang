@@ -489,3 +489,5 @@ tile.platform_wall.name=站台墙方块
 tile.road_sign_one_way_straight.name=单行道标志
 tile.stop_line_right_1.name=停车线(右)
 tile.stop_line_right_1_slab.name=停车线(右)台阶
+
+tile.RoadTextMark.name=道路地面文字标识（自定义文字）

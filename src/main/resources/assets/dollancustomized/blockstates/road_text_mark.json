@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,type=full":  { "model": "dollancustomized:road_text_mark" },
+    "facing=south,type=full":  { "model": "dollancustomized:road_text_mark", "y": 180 },
+    "facing=east,type=full":   { "model": "dollancustomized:road_text_mark", "y": 90 },
+    "facing=west,type=full":   { "model": "dollancustomized:road_text_mark", "y": 270 },
+    "facing=north,type=slab":  { "model": "dollancustomized:road_text_mark" },
+    "facing=south,type=slab":  { "model": "dollancustomized:road_text_mark", "y": 180 },
+    "facing=east,type=slab":   { "model": "dollancustomized:road_text_mark", "y": 90 },
+    "facing=west,type=slab":   { "model": "dollancustomized:road_text_mark", "y": 270 }
+  }
+}

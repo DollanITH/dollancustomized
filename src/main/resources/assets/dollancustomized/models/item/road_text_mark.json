@@ -1,0 +1,6 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "wool": "dollancustomized:blocks/road_text_icon"
+  }
+}

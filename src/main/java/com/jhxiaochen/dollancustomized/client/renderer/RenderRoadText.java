@@ -60,37 +60,64 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
             topY = 0.0F; // 全砖时从方块底部开始
         }
 
-        // 首先平移到【碰撞箱的中心点】(因为方块本身是从 -0.25 到 1.25，中心即 x+0.5, z+0.5)
+        // 首先平移到【碰撞箱的中心点】
         GlStateManager.translate((float) x - 0.5F, (float) y + topY, (float) z - 0.5F);
-        // 旋转方向处理
+
+        // 旋转方向处理 - 先旋转Y轴
         float rotateY = 0.0F;
         switch (facing) {
-            case SOUTH:
+            case NORTH:
                 rotateY = 180.0F;
                 break;
-            case NORTH:
-                GlStateManager.translate((float) x - 0.5F, (float) 0, (float) z - 0.5F);
+            case SOUTH:
                 rotateY = 0.0F;
                 break;
-            case EAST:
-                GlStateManager.translate((float) x - 0.5F, (float) 0, (float) z - 0.5F);
-                rotateY = 90.0F;
-                break;
             case WEST:
-                GlStateManager.translate((float) x - 0.5F, (float) 0, (float) z - 0.5F);
                 rotateY = -90.0F;
+                break;
+            case EAST:
+                rotateY = 90.0F;
                 break;
             default:
                 break;
         }
 
-        // 绕Y轴旋转朝向
         GlStateManager.rotate(rotateY, 0.0F, 1.0F, 0.0F);
+
         // 绕X轴旋转90度，让文字平铺在地面
         GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
 
-        // 应用居中偏移（因为此时已经绕中心旋转完毕，直接偏移即可保证严丝合缝）
-        GlStateManager.translate(offsetX, offsetY, 0.0F);
+        // 根据旋转方向进行独立的偏移处理
+        float finalOffsetX = offsetX;
+        float finalOffsetZ = offsetY;
+
+        switch (facing) {
+            case NORTH:
+                // 北方向：文字向Z轴负方向偏移
+                finalOffsetX = offsetX;
+                finalOffsetZ = offsetY;
+                break;
+            case SOUTH:
+                // 南方向：文字向Z轴正方向偏移
+                finalOffsetX = offsetX;
+                finalOffsetZ = -offsetY;
+                break;
+            case WEST:
+                // 西方向：文字向X轴负方向偏移
+                finalOffsetX = offsetY;
+                finalOffsetZ = -offsetX;
+                break;
+            case EAST:
+                // 东方向：文字向X轴正方向偏移
+                finalOffsetX = -offsetY;
+                finalOffsetZ = -offsetX;
+                break;
+            default:
+                break;
+        }
+
+        // 应用居中偏移 - 在旋转后的坐标系中应用
+        GlStateManager.translate(finalOffsetX, finalOffsetZ, 0.0F);
 
         // 应用缩放
         GlStateManager.scale(scale, scale, scale);

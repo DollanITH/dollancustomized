@@ -60,46 +60,39 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
             topY = 0.0F; // 全砖时从方块底部开始
         }
 
-        // 首先平移到【碰撞箱的中心点】(因为方块本身是从 -0.25 到 1.25，中心即 x+0.5, z+0.5)
-        GlStateManager.translate((float) x - 0.5F, (float) y + topY, (float) z - 0.5F);
-        // 旋转方向处理
+        // 首先平移到【碰撞箱的中心点】
+        GlStateManager.translate((float) x + 0.5F, (float) y + topY, (float) z + 0.5F);
+
+        // 旋转方向处理 - 先旋转Y轴
         float rotateY = 0.0F;
         switch (facing) {
-            case SOUTH:
+            case NORTH:
                 rotateY = 180.0F;
                 break;
-            case NORTH:
-                GlStateManager.translate((float) x - 0.5F, (float) 0, (float) z - 0.5F);
+            case SOUTH:
                 rotateY = 0.0F;
                 break;
-            case EAST:
-                GlStateManager.translate((float) x - 0.5F, (float) 0, (float) z - 0.5F);
-                rotateY = 90.0F;
-                break;
             case WEST:
-                GlStateManager.translate((float) x - 0.5F, (float) 0, (float) z - 0.5F);
                 rotateY = -90.0F;
+                break;
+            case EAST:
+                rotateY = 90.0F;
                 break;
             default:
                 break;
         }
 
-        // 绕Y轴旋转朝向
         GlStateManager.rotate(rotateY, 0.0F, 1.0F, 0.0F);
-        // 绕X轴旋转90度，让文字平铺在地面
         GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
 
-        // 应用居中偏移（因为此时已经绕中心旋转完毕，直接偏移即可保证严丝合缝）
-        GlStateManager.translate(offsetX, offsetY, 0.0F);
+        // 应用居中偏移 - 在旋转后的坐标系中应用
+        GlStateManager.translate(offsetX + 1.0F, offsetY + 1.0F, 0.0F);
 
         // 应用缩放
         GlStateManager.scale(scale, scale, scale);
 
         // GL 状态设置
         GlStateManager.enableTexture2D();
-        GlStateManager.disableLighting();
-        GlStateManager.disableDepth();
-        GlStateManager.disableCull();
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(
                 GlStateManager.SourceFactor.SRC_ALPHA,

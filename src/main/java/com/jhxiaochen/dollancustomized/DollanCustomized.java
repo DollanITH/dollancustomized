@@ -8,6 +8,7 @@ import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.network.NetworkHandler;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -53,6 +54,7 @@ public class DollanCustomized {
                 TileEntityRoadText.class,
                 new ResourceLocation(Reference.MOD_ID, "road_text") // ← 确保这个存在
         );
+        GameRegistry.registerTileEntity(TileEntityArrow.class, "arrow");
         MinecraftForge.EVENT_BUS.register(this);
         Remaper.registerFixable();
         proxy.preInit();

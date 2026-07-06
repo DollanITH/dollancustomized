@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class BusLaneMarkSlab extends IronHorizontal
 {
-    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.25D, -0.5D, -0.25D, 1.25D, 0.1D, 1.25D);
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.25D, -0.5D, -0.25D, 1.25D, 0.15D, 1.25D);
 
     public static final PropertyEnum<EnumType>
             TYPE = PropertyEnum.create("type", EnumType.class);

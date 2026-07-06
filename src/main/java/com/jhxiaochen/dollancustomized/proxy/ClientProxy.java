@@ -3,7 +3,9 @@ package com.jhxiaochen.dollancustomized.proxy;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.client.font.CustomTTFFontRenderer;
 import com.jhxiaochen.dollancustomized.client.font.TTFFontLoader;
+import com.jhxiaochen.dollancustomized.client.renderer.RenderArrow;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderRoadText;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,6 +28,8 @@ public class ClientProxy implements CommonProxy {
         customFontRenderer = new CustomTTFFontRenderer(fontLoader);
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadText.class, new RenderRoadText());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArrow.class, new RenderArrow());
+
     }
 
     @Override

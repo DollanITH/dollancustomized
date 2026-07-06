@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "white_0": { "model": "dollancustomized:white_separate_diagonal_0_slab" },
+      "white_1": { "model": "dollancustomized:white_separate_diagonal_1_slab" },
+      "yellow_0": { "model": "dollancustomized:yellow_separate_diagonal_0_slab" },
+      "yellow_1": { "model": "dollancustomized:yellow_separate_diagonal_1_slab" }
+    },
+    "facing": {
+      "south": { "y": 0 },
+      "west":  { "y": 90 },
+      "north": { "y": 180 },
+      "east":  { "y": 270 }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockSlab;
@@ -12,6 +13,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -20,14 +22,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ArrowNew extends Block {
-    public static final     PropertyDirection                      FACING  = BlockHorizontal.FACING;
-    public static final PropertyEnum<MarkType>
-            TYPE = PropertyEnum.create("type", MarkType.class);
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyEnum<MarkType> TYPE = PropertyEnum.create("type", MarkType.class);
 
-    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.25D, 0.0D, -0.25D, 1.25D, 0.01D, 1.25D);
+    // 【修复1】：将 Y 轴高度从 0.01D 增加到 0.05D，修复玩家移动时因厚度过薄导致的渲染闪烁
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.25D, 0.0D, -0.25D, 1.25D, 0.05D, 1.25D);
     protected static final AxisAlignedBB AABB_BOTTOM_DOWN = new AxisAlignedBB(-0.25D, -0.5D, -0.25D, 1.25D, 0.1D, 1.25D);
 
     public ArrowNew(String name) {
@@ -49,54 +52,26 @@ public class ArrowNew extends Block {
             IBlockState downState = worldIn.getBlockState(pos.down());
             if (state.getValue(TYPE) == MarkType.FULL && SlabChange(downState)) {
                 worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.SLAB));
-            }
-            else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid()) {
+            } else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid()) {
                 worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.FULL));
             }
         }
     }
 
     public enum MarkType implements IStringSerializable {
-        FULL(0),
-        SLAB(1);
-
-        final                int                    metadata;
+        FULL(0), SLAB(1);
+        final int metadata;
         private static final MarkType[] METADATA_LOOKUP = new MarkType[values( ).length];
-
-        MarkType(int metadataIn) {
-            this.metadata = metadataIn;
-        }
-
-        public String toString() {
-            return this.name().toLowerCase();
-        }
-
-        public String getName() {
-            return this.toString();
-        }
-
-        public String getUnlocalizedName() {
-            return this.toString();
-        }
-
+        MarkType(int metadataIn) { this.metadata = metadataIn; }
+        public String toString() { return this.name().toLowerCase(); }
+        public String getName() { return this.toString(); }
+        public String getUnlocalizedName() { return this.toString(); }
         public static MarkType byMetadata(int metadata) {
-            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
-                metadata = 0;
-            }
-
+            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) { metadata = 0; }
             return METADATA_LOOKUP[metadata];
         }
-
-
-        public int getMetadata() {
-            return this.metadata;
-        }
-
-        static {
-            for (MarkType varient : values( )) {
-                METADATA_LOOKUP[varient.getMetadata( )] = varient;
-            }
-        }
+        public int getMetadata() { return this.metadata; }
+        static { for (MarkType varient : values( )) { METADATA_LOOKUP[varient.getMetadata( )] = varient; } }
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -108,9 +83,7 @@ public class ArrowNew extends Block {
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+    public BlockRenderLayer getBlockLayer() { return BlockRenderLayer.CUTOUT_MIPPED; }
 
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
@@ -118,13 +91,21 @@ public class ArrowNew extends Block {
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+    public boolean isOpaqueCube(IBlockState state) { return false; }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
+    public boolean isFullCube(IBlockState state) { return false; }
+
+    // 【修复2】：告知引擎该方块拥有 TileEntity，用于挂载 TESR 渲染器
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityArrow();
     }
 
     @Override
@@ -158,99 +139,68 @@ public class ArrowNew extends Block {
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
         state = state.withProperty(FACING, placer.getHorizontalFacing()).withProperty(TYPE, MarkType.FULL);
-        if  (SlabChange(world.getBlockState(pos.down())))
-        {
+        if (SlabChange(world.getBlockState(pos.down()))) {
             state = state.withProperty(TYPE, MarkType.SLAB);
         }
         return state;
     }
 
-    /*@Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        super.getPickBlock(state, target, world, pos, player);
-        return new ItemStack(this, 1 , (state.getValue(TYPE).getMetadata()));
-    }
-
-    @Override
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-        for (MarkType subtype : MarkType.values( )) {
-            items.add(new ItemStack(this, 1, subtype.getMetadata( )));
-        }
-    }*/
-
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return true;
     }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         this.checkForDrop(worldIn, pos, state);
     }
 
-    private boolean canPlaceOn(World worldIn, BlockPos pos)
-    {
+    private boolean canPlaceOn(World worldIn, BlockPos pos) {
         IBlockState state = worldIn.getBlockState(pos);
         return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
     }
 
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState downState = worldIn.getBlockState(pos.down());
         return SlabChange(downState) || downState.isTopSolid() || downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
     }
 
-    private boolean canPlaceAt(World worldIn, BlockPos pos, EnumFacing facing)
-    {
+    private boolean canPlaceAt(World worldIn, BlockPos pos, EnumFacing facing) {
         BlockPos blockpos = pos.offset(facing.getOpposite());
         IBlockState iblockstate = worldIn.getBlockState(blockpos);
         Block block = iblockstate.getBlock();
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, blockpos, facing);
         IBlockState downState = worldIn.getBlockState(pos.down());
-
         return SlabChange(downState) || downState.isTopSolid() || downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
     }
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         IBlockState downState = worldIn.getBlockState(pos.down());
-            if (state.getValue(TYPE) == MarkType.FULL && SlabChange(downState)) {
+        if (state.getValue(TYPE) == MarkType.FULL && SlabChange(downState)) {
             worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.SLAB));
-        }
-            else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID) {
+        } else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID) {
             worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.FULL));
-        }
-            else if (!SlabChange(downState) && !downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) != BlockFaceShape.SOLID)
-        {
+        } else if (!SlabChange(downState) && !downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) != BlockFaceShape.SOLID) {
             this.dropBlockAsItem(worldIn, pos, state, 0);
             worldIn.setBlockToAir(pos);
         }
     }
 
     public boolean SlabChange(IBlockState state){
-       return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && !state.getBlock().isTopSolid(state)) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
+        return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && !state.getBlock().isTopSolid(state)) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
     }
 
-    protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, (EnumFacing)state.getValue(FACING)))
-        {
+    protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
+        if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, (EnumFacing)state.getValue(FACING))) {
             return true;
-        }
-        else
-        {
-            if (worldIn.getBlockState(pos).getBlock() == this)
-            {
+        } else {
+            if (worldIn.getBlockState(pos).getBlock() == this) {
                 this.dropBlockAsItem(worldIn, pos, state, 0);
                 worldIn.setBlockToAir(pos);
             }
-
             return false;
         }
     }

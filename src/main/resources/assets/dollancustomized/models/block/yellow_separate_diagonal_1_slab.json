@@ -1,0 +1,25 @@
+{
+  "parent": "block/block",
+  "credit": "Made with Blockbench",
+  "textures": {
+    "0": "dollancustomized:blocks/roads/double_yellow",
+    "1": "dollancustomized:blocks/roads/road_block_dark",
+    "2": "dollancustomized:blocks/roads/yellow_separate_diagonal_1",
+    "3": "dollancustomized:blocks/roads/single_yellow_thin",
+    "particle": "dollancustomized:blocks/roads/road_block_dark"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "north"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "south"},
+        "west": {"uv": [0, 8, 16, 16], "texture": "#3", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "up"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "down"}
+      }
+    }
+  ]
+}

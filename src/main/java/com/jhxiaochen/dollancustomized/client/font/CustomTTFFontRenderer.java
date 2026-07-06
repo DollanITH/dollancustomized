@@ -28,11 +28,20 @@ public class CustomTTFFontRenderer {
         return width;
     }
 
+    // 【新增】绘制白色字体便捷方法
+    public void drawWhiteString(String text, float x, float y, boolean dropShadow) {
+        drawString(text, x, y, 0xFFFFFFFF, dropShadow);
+    }
+
+    // 【新增】绘制黄色字体便捷方法
+    public void drawYellowString(String text, float x, float y, boolean dropShadow) {
+        drawString(text, x, y, 0xFFFFFF00, dropShadow);
+    }
+
     public void drawString(String text, float x, float y, int color, boolean dropShadow) {
         if (ttfLoader == null || ttfLoader.getTextureLocation() == null || text == null || text.isEmpty()) return;
 
         if (color == 0) color = 0xFFFFFFFF;
-
         float a = (float) (color >> 24 & 255) / 255.0F;
         float r = (float) (color >> 16 & 255) / 255.0F;
         float g = (float) (color >> 8 & 255) / 255.0F;
@@ -41,22 +50,15 @@ public class CustomTTFFontRenderer {
         if (a <= 0) a = 1.0F;
 
         GlStateManager.pushMatrix();
-
-        // 外部平移，内部不再干涉
-        GlStateManager.translate(x, y, 0.001F); // 轻微抬高防止 Z-fighting
+        GlStateManager.translate(x, y, -0.015F);
         GlStateManager.scale(0.5F, 0.5F, 0.5F);
 
         GlStateManager.disableLighting();
-        GlStateManager.disableDepth();
+        GlStateManager.enableDepth();
+        GlStateManager.depthFunc(515);
         GlStateManager.disableCull();
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(
-                GlStateManager.SourceFactor.SRC_ALPHA,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ZERO
-        );
-
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         GlStateManager.color(r, g, b, a);
 
         ResourceLocation texture = ttfLoader.getTextureLocation();
@@ -83,12 +85,10 @@ public class CustomTTFFontRenderer {
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder buffer = tessellator.getBuffer();
             buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-
             buffer.pos(currentX, 0, 0).tex(u, v).color(r, g, b, a).endVertex();
             buffer.pos(currentX + width, 0, 0).tex(u2, v).color(r, g, b, a).endVertex();
             buffer.pos(currentX + width, height, 0).tex(u2, v2).color(r, g, b, a).endVertex();
             buffer.pos(currentX, height, 0).tex(u, v2).color(r, g, b, a).endVertex();
-
             tessellator.draw();
 
             currentX += width;
@@ -99,7 +99,6 @@ public class CustomTTFFontRenderer {
         GlStateManager.disableBlend();
         GlStateManager.enableDepth();
         GlStateManager.enableLighting();
-
         GlStateManager.popMatrix();
     }
 }

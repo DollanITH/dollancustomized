@@ -491,3 +491,8 @@ tile.stop_line_right_1.name=停车线(右)
 tile.stop_line_right_1_slab.name=停车线(右)台阶
 
 tile.RoadTextMark.name=道路地面文字标识（自定义文字）
+
+commands.extfill.usage=/extfill undo or /extfill <x1> <y1> <z1> <x2> <y2> <z2> <block> [dataValue|state] [oldBlockHandling] [dataTag]
+commands.extfill.undo.success=Undo successfully!
+commands.extfill.undo.nothing=Nothing undo.
+commands.extfill.undo.playerOnly=Only player can run the command!

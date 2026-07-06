@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -54,17 +55,24 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
     }
 
     @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityRoadText();
+    }
+
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-
-        if (!worldIn.isRemote) {
+        // 【关键修复】必须确保仅在客户端（worldIn.isRemote）打开 GUI！
+        if (worldIn.isRemote) {
             TileEntity te = worldIn.getTileEntity(pos);
-
             if (te instanceof TileEntityRoadText) {
+                // 在客户端打开 GUI，Minecraft 会自动正确处理鼠标指针的释放
                 Minecraft.getMinecraft().displayGuiScreen(new GuiRoadText((TileEntityRoadText) te));
             }
         }
+        // 返回 true 表示交互成功
         return true;
     }
+
 
     // --- 核心新增：右键打开 GUI ---
     /*
@@ -91,18 +99,6 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
             return new TileEntityRoadText();
-    }
-
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if(!worldIn.isRemote){
-            IBlockState downState = worldIn.getBlockState(pos.down());
-            if (state.getValue(TYPE) == MarkType.FULL && SlabChange(downState)) {
-                worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.SLAB));
-            } else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid()) {
-                worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.FULL));
-            }
-        }
     }
 
     public enum MarkType implements IStringSerializable {
@@ -174,8 +170,13 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) { return true; }
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) { this.checkForDrop(worldIn, pos, state); }
-    private boolean canPlaceOn(World worldIn, BlockPos pos) {
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        this.checkForDrop(worldIn,pos,state);        // 确保TileEntity存在
+        if (!worldIn.isRemote && worldIn.getTileEntity(pos) == null) {
+            worldIn.setTileEntity(pos, this.createNewTileEntity(worldIn, 0));
+        }
+    }    private boolean canPlaceOn(World worldIn, BlockPos pos) {
         IBlockState state = worldIn.getBlockState(pos);
         return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
     }
@@ -197,19 +198,80 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
         worldIn.removeTileEntity(pos);
     }
 
-    // 优化：邻里改变时同步检测
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (!worldIn.isRemote) {
+            IBlockState downState = worldIn.getBlockState(pos.down());
+            // 1. 保存TileEntity的NBT数据
+            NBTTagCompound nbt = new NBTTagCompound();
+            TileEntity te = worldIn.getTileEntity(pos);
+            if (te instanceof TileEntityRoadText) {
+                ((TileEntityRoadText) te).writeToNBT(nbt);
+            }
+
+            // 2. 改变方块状态
+            IBlockState newState;
+            if (state.getValue(TYPE) == MarkType.FULL && SlabChange(downState)) {
+                newState = state.withProperty(TYPE, MarkType.SLAB);
+            } else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid()) {
+                newState = state.withProperty(TYPE, MarkType.FULL);
+            } else {
+                return;
+            }
+
+            worldIn.setBlockState(pos, newState);
+
+            // 3. 重新设置TileEntity数据
+            te = worldIn.getTileEntity(pos);
+            if (te instanceof TileEntityRoadText) {
+                ((TileEntityRoadText) te).readFromNBT(nbt);
+                ((TileEntityRoadText) te).markDirty();
+            }
+
+            // 4. 通知客户端更新
+            worldIn.notifyBlockUpdate(pos, state, newState, 3);
+        }
+    }
+
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         IBlockState downState = worldIn.getBlockState(pos.down());
+        // 1. 保存TileEntity的NBT数据
+        NBTTagCompound nbt = new NBTTagCompound();
+        TileEntity te = worldIn.getTileEntity(pos);
+        if (te instanceof TileEntityRoadText) {
+            ((TileEntityRoadText) te).writeToNBT(nbt);
+        }
+
+        // 2. 改变方块状态
+        IBlockState newState;
         if (state.getValue(TYPE) == MarkType.FULL && SlabChange(downState)) {
-            worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.SLAB));
+            newState = state.withProperty(TYPE, MarkType.SLAB);
         } else if (state.getValue(TYPE) == MarkType.SLAB && !SlabChange(downState) && downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID) {
-            worldIn.setBlockState(pos, state.withProperty(TYPE, MarkType.FULL));
+            newState = state.withProperty(TYPE, MarkType.FULL);
         } else if (!SlabChange(downState) && !downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) != BlockFaceShape.SOLID) {
             this.dropBlockAsItem(worldIn, pos, state, 0);
             worldIn.setBlockToAir(pos);
+            worldIn.notifyBlockUpdate(pos, state, worldIn.getBlockState(pos), 3);
+            return;
+        } else {
+            return;
         }
+
+        worldIn.setBlockState(pos, newState);
+
+        // 3. 重新设置TileEntity数据
+        te = worldIn.getTileEntity(pos);
+        if (te instanceof TileEntityRoadText) {
+            ((TileEntityRoadText) te).readFromNBT(nbt);
+            ((TileEntityRoadText) te).markDirty();
+        }
+
+        // 4. 通知客户端更新
+        worldIn.notifyBlockUpdate(pos, state, newState, 3);
     }
+
+
 
     public boolean SlabChange(IBlockState state){
         return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && !state.getBlock().isTopSolid(state)) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;

@@ -15,29 +15,40 @@ import java.nio.charset.StandardCharsets;
 public class MessageRoadText implements IMessage {
     private BlockPos pos;
     private String text;
+    private int colorMode; // 【新增】颜色模式：0=白色，1=黄色
 
     public MessageRoadText() {}
 
-    public MessageRoadText(BlockPos pos, String text) {
+    // 【修改】构造函数增加 colorMode 参数
+    public MessageRoadText(BlockPos pos, String text, int colorMode) {
         this.pos = pos;
         this.text = text;
+        this.colorMode = colorMode;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         pos = BlockPos.fromLong(buf.readLong());
+
         int length = buf.readInt();
         // 【关键】使用 UTF-8 解码，支持中文
         text = buf.readBytes(length).toString(StandardCharsets.UTF_8);
+
+        // 【新增】读取颜色模式
+        colorMode = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
+
         // 【关键】使用 UTF-8 编码，支持中文
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         buf.writeInt(bytes.length);
         buf.writeBytes(bytes);
+
+        // 【新增】写入颜色模式
+        buf.writeInt(colorMode);
     }
 
     public static class Handler implements IMessageHandler<MessageRoadText, IMessage> {
@@ -49,6 +60,9 @@ public class MessageRoadText implements IMessage {
                 if (te instanceof TileEntityRoadText) {
                     TileEntityRoadText roadText = (TileEntityRoadText) te;
                     roadText.text = message.text;
+                    // 【新增】将客户端传来的颜色模式应用到 TileEntity
+                    roadText.colorMode = message.colorMode;
+
                     roadText.markDirty();
                     world.notifyBlockUpdate(message.pos, world.getBlockState(message.pos), world.getBlockState(message.pos), 3);
                 }

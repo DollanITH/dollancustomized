@@ -1,0 +1,18 @@
+{
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "dollancustomized:blocks/roads/arrow_no_diaotou",
+		"particle": "dollancustomized:blocks/roads/arrow_no_diaotou"
+	},
+	"elements": [
+		{
+			"from": [-8, 0, -8],
+			"to": [24, 0.01, 24],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

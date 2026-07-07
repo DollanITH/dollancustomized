@@ -1,0 +1,16 @@
+{
+	"parent": "dollancustomized:block/arrow_no_diaotou",
+	"textures": {
+		"0": "dollancustomized:blocks/roads/arrow_no_diaotou"
+	},
+	"elements": [
+		{
+			"from": [-1, 1, -1],
+			"to": [17, 1.02, 17],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#0"}
+			}
+		}
+	]
+}

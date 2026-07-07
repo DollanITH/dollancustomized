@@ -9,21 +9,19 @@ import net.minecraft.world.World;
 public class TileEntityArrow extends TileEntity {
 
     // 强制扩大渲染体积判定
-    private static final AxisAlignedBB RENDER_AABB = new AxisAlignedBB(-0.5D, -1.0D, -0.5D, 1.5D, 0.5D, 1.5D);
+    private static final AxisAlignedBB RENDER_AABB = new AxisAlignedBB(-0.75D, -1.0D, -0.75D, 1.5D, 0.75D, 1.75D);
 
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         BlockPos pos = this.getPos();
-        // 将包围盒扩展到包含你超出边界的模型部分
-        return new AxisAlignedBB(
-                pos.getX() + RENDER_AABB.minX, pos.getY() + RENDER_AABB.minY, pos.getZ() + RENDER_AABB.minZ,
-                pos.getX() + RENDER_AABB.maxX, pos.getY() + RENDER_AABB.maxY, pos.getZ() + RENDER_AABB.maxZ
-        );
+        return RENDER_AABB.offset(pos);
     }
+
 
     // 确保该 TE 的数据在客户端和客户端之间同步（如果需要的话）
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return oldState.getBlock() != newSate.getBlock();
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+        return oldState.getBlock() != newState.getBlock();
     }
+
 }

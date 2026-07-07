@@ -43,7 +43,6 @@ public class ArrowNew extends Block {
         this.setHardness(1.0F);
         this.setResistance(10F);
         this.setLightOpacity(0);
-        this.setTickRandomly(true);
     }
 
     @Override

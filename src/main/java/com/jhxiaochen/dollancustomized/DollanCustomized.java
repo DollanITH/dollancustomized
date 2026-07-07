@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized;
 
+import com.jhxiaochen.dollancustomized.client.font.TTFFontLoader;
 import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.command.Command114514;
 import com.jhxiaochen.dollancustomized.command.CommandExtendedFill;
@@ -32,6 +33,7 @@ public class DollanCustomized {
     @Mod.Instance(Reference.MOD_ID)
     public static DollanCustomized     instance;
     public static Remaper              remaper;
+    public static TTFFontLoader yourFontLoader;
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;

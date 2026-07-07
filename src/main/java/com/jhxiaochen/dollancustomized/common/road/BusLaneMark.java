@@ -1,24 +1,35 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BusLaneMark extends IronHorizontal
 {
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.375D, 0.0D, -0.375D, 1.375D, 0.15D, 1.375D);
+
     public static final PropertyEnum<EnumType>
             TYPE = PropertyEnum.create("type", EnumType.class);
     public enum EnumType implements IStringSerializable {
@@ -72,6 +83,21 @@ public class BusLaneMark extends IronHorizontal
     }
 
     @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityArrow();
+    }
+
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return AABB_BOTTOM_HALF;
+    }
+
+    @Override
     @Nonnull
     public IBlockState getStateFromMeta(int meta) {
         EnumType varient = EnumType.GONG;
@@ -89,6 +115,24 @@ public class BusLaneMark extends IronHorizontal
         else if (varient == EnumType.ZHUAN) v = 0x4;
         else if (varient == EnumType.YONG) v = 0xc;
         return state.getValue(FACING).getHorizontalIndex( ) | v;
+    }
+
+    public boolean SlabChange(IBlockState state){
+        return state.getBlock() instanceof BlockAsphaltSlab || (state.getBlock() instanceof BlockSlab && !state.getBlock().isTopSolid(state)) || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        IBlockState downState = worldIn.getBlockState(pos.down());
+        if (SlabChange(downState) && DollanBlocks.bus_lane_mark_slab != null) {
+            // 切换为 Slab 方块，保留方向和文字类型
+            worldIn.setBlockState(pos, DollanBlocks.bus_lane_mark_slab.getDefaultState()
+                    .withProperty(FACING, state.getValue(FACING))
+                    .withProperty(TYPE, state.getValue(TYPE)));
+        } else if (!downState.isTopSolid() && downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) != BlockFaceShape.SOLID) {
+            this.dropBlockAsItem(worldIn, pos, state, 0);
+            worldIn.setBlockToAir(pos);
+        }
     }
 
     @Override

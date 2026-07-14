@@ -8,42 +8,47 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import org.lwjgl.opengl.GL11;
 
 public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText> {
+
     @Override
     public void render(TileEntityRoadText te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        // 基本验证
         if (te.text == null || te.text.isEmpty()) {
             return;
         }
+
+        // 区块加载检查
+        if (te.getWorld() == null || !te.getWorld().isBlockLoaded(te.getPos(), false)) {
+            return;
+        }
+
         IBlockState state = te.getWorld().getBlockState(te.getPos());
         if (!state.getProperties().containsKey(BlockRoadText.FACING)) {
             return;
         }
+
         EnumFacing facing = state.getValue(BlockRoadText.FACING);
         CustomTTFFontRenderer fontRenderer = ClientProxy.customFontRenderer;
         if (fontRenderer == null) {
             return;
         }
 
-        // 获取字体原始宽高（此时已经是除以缩放倍率后的视觉像素宽高）
+        // 获取字体原始宽高
         float textWidth = fontRenderer.getStringWidth(te.text);
-        if (textWidth <= 0) {
-            textWidth = 10;
-        }
+        if (textWidth <= 0) textWidth = 10;
         float textHeight = fontRenderer.FONT_HEIGHT > 0 ? fontRenderer.FONT_HEIGHT : 8.0F;
 
-        // 设定文字在游戏中期望的最终宽度
+        // 设定文字在游戏中期望的最终宽高
         float desiredWidth = 2.2F;
-
-        // 【新增：设定文字在游戏中期望的最终高度】
-        // 注意：这个值需要根据游戏中"="的实际视觉高度进行微调，这里暂设为 2.0F
         float desiredHeight = 3.2F;
 
-        // 【修改：同时考虑宽度和高度，取较小的缩放比例，防止偏窄或偏高的字符过大】
+        // 计算缩放比例
         float scaleByWidth = desiredWidth / textWidth;
         float scaleByHeight = desiredHeight / textHeight;
         float externalScale = Math.min(scaleByWidth, scaleByHeight);
-
 
         // 计算渲染后的实际尺寸
         float renderWidth = textWidth * externalScale;
@@ -53,58 +58,141 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
         float offsetX = -renderWidth / 2.0F;
         float offsetY = -renderHeight / 2.0F;
 
+        // 使用基于位置的微小深度偏移
+        float microDepthOffset = getMicroDepthOffset(te.getPos());
+
         GlStateManager.pushMatrix();
 
-        float topY;
-        if (state.getValue(BlockRoadText.TYPE) == BlockRoadText.MarkType.SLAB) {
-            topY = -0.498F;
-        } else {
-            topY = 0.002F;
+        try {
+            // 设定文字垂直位置
+            float topY;
+            if (state.getValue(BlockRoadText.TYPE) == BlockRoadText.MarkType.SLAB) {
+                topY = -0.498F;
+            } else {
+                topY = 0.002F;
+            }
+
+            // 使用原始坐标，添加微小深度偏移
+            GlStateManager.translate((float) x + 0.5F, (float) y + topY + 0.002F + microDepthOffset, (float) z + 0.5F);
+
+            // 旋转逻辑
+            float rotateY = 0.0F;
+            switch (facing) {
+                case SOUTH: rotateY = 180.0F; break;
+                case WEST: rotateY = 90.0F; break;
+                case EAST: rotateY = -90.0F; break;
+                case NORTH: default: break;
+            }
+            GlStateManager.rotate(rotateY, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+
+            // 平移到字体中心
+            GlStateManager.translate(offsetX, offsetY, 0.0F);
+
+            // 应用缩放
+            GlStateManager.scale(externalScale, externalScale, externalScale);
+
+            // 【关键修复】修正面剔除方向，剔除朝向下的面
+            setupCorrectCulling();
+
+            // 渲染文字
+            if (te.colorMode == 1) {
+                fontRenderer.drawYellowString(te.text, 0, 0, false);
+            } else {
+                fontRenderer.drawWhiteString(te.text, 0, 0, false);
+            }
+
+        } catch (Exception e) {
+            // 静默处理异常
+        } finally {
+            // 安全的状态恢复
+            try {
+                restoreCorrectCulling();
+                GlStateManager.popMatrix();
+            } catch (Exception e) {
+                // 静默处理恢复异常
+            }
         }
+    }
 
-        GlStateManager.translate((float) x + 0.5F, (float) y + topY, (float) z + 0.5F);
+    /**
+     * 获取微小的深度偏移
+     */
+    private float getMicroDepthOffset(BlockPos pos) {
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
 
-        float rotateY = 0.0F;
-        switch (facing) {
-            case SOUTH: rotateY = 180.0F; break;
-            case WEST:  rotateY = 90.0F;  break;
-            case EAST:  rotateY = -90.0F; break;
-            case NORTH: default: break;
-        }
+        int hash = Math.abs((x * 31 + y) * 31 + z);
+        float offset = (hash % 10) / 100000.0f + 0.0001f;
 
-        GlStateManager.rotate(rotateY, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.translate(offsetX, offsetY, 0.0F);
+        return Math.max(0.0001f, Math.min(offset, 0.0002f));
+    }
 
-        // 应用缩放
-        GlStateManager.scale(externalScale, externalScale, externalScale);
-
-        // GL 状态设置
+    /**
+     * 【关键修复】修正面剔除方向，剔除朝向下的面
+     */
+    private void setupCorrectCulling() {
+        // 确保纹理和光照设置正确
         GlStateManager.enableTexture2D();
         GlStateManager.disableLighting();
+
+        // 使用多边形偏移解决Z-fighting
+        GlStateManager.enablePolygonOffset();
+        GlStateManager.doPolygonOffset(-1.0F, -10.0F);
+
+        // 深度测试设置
         GlStateManager.enableDepth();
-        GlStateManager.disableCull();
+        GlStateManager.depthMask(false);
+        GlStateManager.depthFunc(GL11.GL_LEQUAL);
+
+        // 混合设置
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(
                 GlStateManager.SourceFactor.SRC_ALPHA,
                 GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
                 GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ZERO
+                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
         );
+
+        // 确保颜色设置正确
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        // 调用渲染
-        if (te.colorMode == 1) {
-            fontRenderer.drawYellowString(te.text, 0, 0, false);
-        } else {
-            fontRenderer.drawWhiteString(te.text, 0, 0, false);
-        }
+        // 禁用雾气
+        GlStateManager.disableFog();
 
-        // 恢复 GL 状态
+        // 【关键修复】修正面剔除方向
+        // 对于躺着的文字，需要剔除正面来剔除朝向下的面
+        GlStateManager.enableCull();
+        GL11.glCullFace(GL11.GL_FRONT);
+    }
+
+    /**
+     * 【关键修复】恢复正确的面剔除状态
+     */
+    private void restoreCorrectCulling() {
+        // 恢复多边形偏移
+        GlStateManager.disablePolygonOffset();
+
+        // 恢复深度设置
+        GlStateManager.depthMask(true);
+        GlStateManager.enableDepth();
+
+        // 恢复其他状态
+        GlStateManager.enableFog();
         GlStateManager.disableBlend();
         GlStateManager.enableCull();
-        GlStateManager.enableDepth();
         GlStateManager.enableLighting();
-        GlStateManager.popMatrix();
+
+        // 恢复默认的背面剔除
+        GL11.glCullFace(GL11.GL_BACK);
+
+        // 重置颜色
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    @Override
+    public boolean isGlobalRenderer(TileEntityRoadText te) {
+        return true;
     }
 }

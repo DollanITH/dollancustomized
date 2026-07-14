@@ -493,5 +493,6 @@ tile.RoadTextMark.name=道路地面文字标识（自定义文字）
 
 commands.extfill.usage=/extfill undo 或 /extfill <x1> <y1> <z1> <x2> <y2> <z2> <方块名> [数据值|状态] [旧方块处理方式] [数据状态]
 commands.extfill.undo.success=已成功撤销上次填充操作!
-commands.extfill.undo.nothing=没有东西可以撤销.
-commands.extfill.undo.playerOnly=只有玩家可以执行该指令!
+commands.extfill.undo.nothing=先生,没有东西可以撤销.
+commands.extfill.undo.playerOnly=只有玩家可以执行该指令!tile.road_sign_height_limit_custom.name=自定义限高标志
+tile.road_sign_height_limit_custom.name=自定义限高标志

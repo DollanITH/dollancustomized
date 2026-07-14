@@ -8,7 +8,7 @@
 	},
 	"elements": [
 		{
-			"from": [-5, 0, -5],
+			"from": [-5, 0.001, -5],
 			"to": [21, 0.01, 21],
 			"faces": {
 				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#words"},

@@ -65,7 +65,7 @@ public class GuiRoadText extends GuiScreen {
 
     // 【新增】提取保存并关闭的逻辑为独立方法，方便键盘事件调用
     private void saveAndClose() {
-        NetworkHandler.INSTANCE.sendToServer(new MessageRoadText(this.tileEntity.getPos(), this.textField.getText(), this.currentColorMode));
+        NetworkHandler.DOLLAN_NETWORK.sendToServer(new MessageRoadText(this.tileEntity.getPos(), this.textField.getText(), this.currentColorMode));
         this.mc.displayGuiScreen(null);
     }
 

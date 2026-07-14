@@ -30,13 +30,13 @@ public class BlockRoadSign extends Block {
         this.setHardness(1.4F);
     }
 
-    private static final PropertyDirection FACING = BlockHorizontal.FACING;
-    private static final PropertyBool UP = PropertyBool.create("up");
-    private static final PropertyBool DOWN = PropertyBool.create("down");
-    private static final PropertyBool NORTH = PropertyBool.create("north");
-    private static final PropertyBool SOUTH = PropertyBool.create("south");
-    private static final PropertyBool EAST = PropertyBool.create("east");
-    private static final PropertyBool WEST = PropertyBool.create("west");
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyBool UP = PropertyBool.create("up");
+    public static final PropertyBool DOWN = PropertyBool.create("down");
+    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final PropertyBool WEST = PropertyBool.create("west");
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {

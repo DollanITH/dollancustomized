@@ -498,7 +498,18 @@ commands.extfill.undo.success=Undo successfully!
 commands.extfill.undo.nothing=Nothing undo.
 commands.extfill.undo.playerOnly=Only player can run the command!
 
-tile.separate_diagonal.white_0=双白一侧分离线
-tile.separate_diagonal.white_1=双白一侧分离线
-tile.separate_diagonal.yellow_0=双黄一侧分离线
-tile.separate_diagonal.yellow_1=双黄一侧分离线
+tile.separate_diagonal.white_0.name=双白一侧分离线
+tile.separate_diagonal.white_1.name=双白一侧分离线
+tile.separate_diagonal.yellow_0.name=双黄一侧分离线
+tile.separate_diagonal.yellow_1.name=双黄一侧分离线
+tile.separate_diagonal_slab.white_0.name=双白一侧分离线台阶
+tile.separate_diagonal_slab.white_1.name=双白一侧分离线台阶
+tile.separate_diagonal_slab.yellow_0.name=双黄一侧分离线台阶
+tile.separate_diagonal_slab.yellow_1.name=双黄一侧分离线台阶
+tile.road_sign_height_limit_3.height_1.name=限高3m标志
+tile.road_sign_height_limit_3.height_2.name=限高3.5m标志
+tile.road_sign_height_limit_4.height_1.name=限高4m标志
+tile.road_sign_height_limit_4.height_2.name=限高4.5m标志
+tile.road_sign_height_limit_5.height_1.name=限高5m标志
+tile.road_sign_height_limit_5.height_2.name=限高5.5m标志tile.road_sign_height_limit_custom.name=Custom Height Limit Sign
+tile.road_sign_height_limit_custom.name=Custom Height Limit Sign

@@ -150,6 +150,7 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
         if (type == MarkType.SLAB) v = 0x4;
         return state.getValue(FACING).getHorizontalIndex() | v;
     }
+
     @Override
     protected BlockStateContainer createBlockState() { return new BlockStateContainer(this, FACING, TYPE); }
 
@@ -168,7 +169,9 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) { return true; }
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) { return
+            side != EnumFacing.DOWN || super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
@@ -176,14 +179,18 @@ public class BlockRoadText extends Block implements ITileEntityProvider {
         if (!worldIn.isRemote && worldIn.getTileEntity(pos) == null) {
             worldIn.setTileEntity(pos, this.createNewTileEntity(worldIn, 0));
         }
-    }    private boolean canPlaceOn(World worldIn, BlockPos pos) {
+    }
+
+    private boolean canPlaceOn(World worldIn, BlockPos pos) {
         IBlockState state = worldIn.getBlockState(pos);
         return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
     }
+
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState downState = worldIn.getBlockState(pos.down());
         return SlabChange(downState) || downState.isTopSolid() || downState.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
     }
+
     private boolean canPlaceAt(World worldIn, BlockPos pos, EnumFacing facing) {
         BlockPos blockpos = pos.offset(facing.getOpposite());
         IBlockState iblockstate = worldIn.getBlockState(blockpos);

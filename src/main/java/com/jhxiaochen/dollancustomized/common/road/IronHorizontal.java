@@ -16,10 +16,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class IronHorizontal extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.25D, 0.0D, -0.25D, 1.25D, 0.05D, 1.25D);
+
+    // 【优化1】：稍微抬高一点方块的包围盒顶部，避免和下方方块顶面共面
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.5D, 0.0D, -0.5D, 1.5D, 0.06D, 1.5D);
 
     public IronHorizontal(String name) {
         super(Material.ROCK);
@@ -31,7 +35,6 @@ public class IronHorizontal extends Block {
         this.setHardness(1.2F);
         this.setResistance(10F);
         this.setLightOpacity(0);
-
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -42,32 +45,30 @@ public class IronHorizontal extends Block {
         return NULL_AABB;
     }
 
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
-
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return face != EnumFacing.UP && face != EnumFacing.DOWN ? BlockFaceShape.CENTER : BlockFaceShape.MIDDLE_POLE;
-
-    }
-
-    @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
-    @Override
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.CUTOUT || layer == BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return false;
+        return false; // 必须允许透明
     }
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return false;
+        return false; // 必须允许非实心
     }
+
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT; // 使用 cutout 渲染层
+    }
+
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return layer == BlockRenderLayer.CUTOUT; // 只在 cutout 层渲染
+    }
+
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
@@ -97,5 +98,11 @@ public class IronHorizontal extends Block {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
         state = state.withProperty(FACING, placer.getHorizontalFacing());
         return state;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -8,7 +9,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
-    public static final int ROAD_TEXT_GUI_ID = 1; // GUI 的唯一 ID    @Override
+    public static final int ROAD_TEXT_GUI_ID = 1; // GUI 的唯一 ID
+    public static final int HEIGHT_LIMIT_CUSTOM_GUI_ID = 2; // 自定义限高路牌 GUI ID    @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         System.out.println("4. [服务端] GuiHandler 被调用, ID: " + ID);
         return null;
@@ -21,6 +23,10 @@ public class GuiHandler implements IGuiHandler {
         if (ID == ROAD_TEXT_GUI_ID && te instanceof TileEntityRoadText) {
             System.out.println("6. [客户端] 返回 GuiRoadText 实例");
             return new GuiRoadText((TileEntityRoadText) te);
+        }
+        if (ID == HEIGHT_LIMIT_CUSTOM_GUI_ID && te instanceof TileEntityHeightLimitSignCustom) {
+            System.out.println("6. [客户端] 返回 GuiHeightLimitSignCustom 实例");
+            return new GuiHeightLimitSignCustom((TileEntityHeightLimitSignCustom) te);
         }
         System.out.println("6. [客户端] 返回了 NULL! TE 类型: " + (te != null ? te.getClass().getName() : "NULL"));
         return null;

@@ -1,19 +1,14 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
-import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -22,27 +17,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ArrowNew extends Block {
+public class ArrowNew extends IronHorizontal {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyEnum<MarkType> TYPE = PropertyEnum.create("type", MarkType.class);
 
-    // 【修复1】：将 Y 轴高度从 0.01D 增加到 0.05D，修复玩家移动时因厚度过薄导致的渲染闪烁
-    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.25D, 0.0D, -0.25D, 1.25D, 0.05D, 1.25D);
-    protected static final AxisAlignedBB AABB_BOTTOM_DOWN = new AxisAlignedBB(-0.25D, -0.5D, -0.25D, 1.25D, 0.1D, 1.25D);
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.5D, 0.001D, -0.5D, 1.5D, 0.05D, 1.5D);
+    protected static final AxisAlignedBB AABB_BOTTOM_DOWN = new AxisAlignedBB(-0.5D, -0.499D, -0.5D, 1.2D, 0.1D, 1.5D);
 
     public ArrowNew(String name) {
-        super(Material.IRON);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setRegistryName(name);
-        this.setSoundType(SoundType.METAL);
-        this.setUnlocalizedName(name);
-        this.setCreativeTab(DollanCustomized.ROAD_Signs);
-        this.setHardness(1.0F);
-        this.setResistance(10F);
-        this.setLightOpacity(0);
+        super(name);
     }
 
     @Override
@@ -77,39 +62,14 @@ public class ArrowNew extends Block {
         return state.getValue(TYPE) == MarkType.FULL ? AABB_BOTTOM_HALF : AABB_BOTTOM_DOWN;
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return NULL_AABB;
-    }
-
-    @Override
-    public BlockRenderLayer getBlockLayer() { return BlockRenderLayer.CUTOUT_MIPPED; }
-
-    @Override
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.CUTOUT || layer == BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state) { return false; }
-
-    @Override
-    public boolean isFullCube(IBlockState state) { return false; }
-
-    // 【修复2】：告知引擎该方块拥有 TileEntity，用于挂载 TESR 渲染器
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityArrow();
-    }
-
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
         return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return layer == BlockRenderLayer.CUTOUT;
     }
 
     @Override
@@ -193,7 +153,7 @@ public class ArrowNew extends Block {
     }
 
     protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
-        if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, (EnumFacing)state.getValue(FACING))) {
+        if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(FACING))) {
             return true;
         } else {
             if (worldIn.getBlockState(pos).getBlock() == this) {
@@ -203,4 +163,5 @@ public class ArrowNew extends Block {
             return false;
         }
     }
+
 }

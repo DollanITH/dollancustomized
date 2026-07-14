@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "front": "dollancustomized:blocks/road_sign_warn_11a",
-        "back": "dollancustomized:blocks/road_sign_back_triangle",
+        "front": "",
+        "back": "",
         "2": "dollancustomized:blocks/metal",
         "particle": "dollancustomized:blocks/metal"
     },

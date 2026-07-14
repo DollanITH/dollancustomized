@@ -4,6 +4,8 @@ import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.client.font.CustomTTFFontRenderer;
 import com.jhxiaochen.dollancustomized.client.font.TTFFontLoader;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderRoadText;
+import com.jhxiaochen.dollancustomized.client.renderer.TestRenderHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,7 +27,8 @@ public class ClientProxy implements CommonProxy {
         // 2. 实例化自定义渲染器
         customFontRenderer = new CustomTTFFontRenderer(fontLoader);
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadText.class, new RenderRoadText());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadText.class, new RenderRoadText());// 在你的主加载流程中注册一次即可
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeightLimitSignCustom.class, new TestRenderHeightLimitSignCustom());
     }
 
     @Override

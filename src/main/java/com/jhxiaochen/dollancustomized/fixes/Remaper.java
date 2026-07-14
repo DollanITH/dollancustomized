@@ -56,7 +56,7 @@ public class Remaper {
         ignoredMappings.add("arrow_confluence_left_sl");
 
         itemRemappings.put("dollancraft", "dollan");
-        //blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
+        blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
     }
 
     @SubscribeEvent

@@ -9,7 +9,7 @@ import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.network.NetworkHandler;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Reference.MOD_ID, useMetadata = true, version = Reference.VERSION, dependencies = "after:sakura")
+@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = "after:sakura")
 public class DollanCustomized {
 
     @Mod.Instance(Reference.MOD_ID)
@@ -56,7 +56,10 @@ public class DollanCustomized {
                 TileEntityRoadText.class,
                 new ResourceLocation(Reference.MOD_ID, "road_text") // ← 确保这个存在
         );
-        GameRegistry.registerTileEntity(TileEntityArrow.class, "arrow");
+        GameRegistry.registerTileEntity(
+                TileEntityHeightLimitSignCustom.class,
+                new ResourceLocation(Reference.MOD_ID, "height_limit_sign_custom")
+        );
         MinecraftForge.EVENT_BUS.register(this);
         Remaper.registerFixable();
         proxy.preInit();
@@ -79,7 +82,7 @@ public class DollanCustomized {
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Command114514());
         event.registerServerCommand(new CommandExtendedFill());
-        System.out.println("Registered successfully.");
+        System.out.println("Commands Registered successfully.");
     }
 
     @SubscribeEvent

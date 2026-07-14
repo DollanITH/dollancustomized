@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.road;
 
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityArrow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.PropertyEnum;
@@ -12,7 +11,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
@@ -24,87 +22,42 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class BusLaneMark extends IronHorizontal
-{
-    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.375D, 0.0D, -0.375D, 1.375D, 0.15D, 1.375D);
+public class BusLaneMark extends IronHorizontal {
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(-0.5D, 0.001D, -0.5D, 1.5D, 0.15D, 1.5D);
+    public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
 
-    public static final PropertyEnum<EnumType>
-            TYPE = PropertyEnum.create("type", EnumType.class);
     public enum EnumType implements IStringSerializable {
-        GONG(0),
-        JIAO(1),
-        ZHUAN(2),
-        YONG(3);
-
-        final                int        metadata;
-        private static final EnumType[] METADATA_LOOKUP = new EnumType[values( ).length];
-
-        EnumType(int metadataIn) {
-            this.metadata = metadataIn;
-        }
-
-        public String toString() {
-            return this.name().toLowerCase();
-        }
-
-        public String getName() {
-            return this.toString();
-        }
-
-        public String getUnlocalizedName() {
-            return this.toString();
-        }
-
+        GONG(0), JIAO(1), ZHUAN(2), YONG(3);
+        final int metadata;
+        private static final EnumType[] METADATA_LOOKUP = new EnumType[values().length];
+        EnumType(int metadataIn) { this.metadata = metadataIn; }
+        public String toString() { return this.name().toLowerCase(); }
+        public String getName() { return this.toString(); }
+        public String getUnlocalizedName() { return this.toString(); }
         public static EnumType byMetadata(int metadata) {
-            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
-                metadata = 0;
-            }
-
+            if (metadata < 0 || metadata >= METADATA_LOOKUP.length) { metadata = 0; }
             return METADATA_LOOKUP[metadata];
         }
-
-
-        public int getMetadata() {
-            return this.metadata;
-        }
-
-        static {
-            for (EnumType varient : values( )) {
-                METADATA_LOOKUP[varient.getMetadata( )] = varient;
-            }
-        }
-
+        public int getMetadata() { return this.metadata; }
+        static { for (EnumType varient : values()) { METADATA_LOOKUP[varient.getMetadata()] = varient; } }
     }
-    
+
     public BusLaneMark() {
         super("bus_lane_mark");
-    }
-
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityArrow();
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return AABB_BOTTOM_HALF;
     }
 
-    @Override
-    @Nonnull
+    @Override @Nonnull
     public IBlockState getStateFromMeta(int meta) {
         EnumType varient = EnumType.GONG;
-        if (meta >= 4 && meta <= 7) varient = EnumType.JIAO;
-        else if (meta >= 8 && meta <= 11) varient = EnumType.ZHUAN;
+        if (meta >= 4 && meta <= 7) varient = EnumType.ZHUAN;
+        else if (meta >= 8 && meta <= 11) varient = EnumType.JIAO;
         else if (meta >= 12 && meta <= 15) varient = EnumType.YONG;
-        return getDefaultState( ).withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, varient);
+        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, varient);
     }
 
     @Override
@@ -114,7 +67,7 @@ public class BusLaneMark extends IronHorizontal
         if (varient == EnumType.JIAO) v = 0x8;
         else if (varient == EnumType.ZHUAN) v = 0x4;
         else if (varient == EnumType.YONG) v = 0xc;
-        return state.getValue(FACING).getHorizontalIndex( ) | v;
+        return state.getValue(FACING).getHorizontalIndex() | v;
     }
 
     public boolean SlabChange(IBlockState state){
@@ -125,7 +78,6 @@ public class BusLaneMark extends IronHorizontal
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         IBlockState downState = worldIn.getBlockState(pos.down());
         if (SlabChange(downState) && DollanBlocks.bus_lane_mark_slab != null) {
-            // 切换为 Slab 方块，保留方向和文字类型
             worldIn.setBlockState(pos, DollanBlocks.bus_lane_mark_slab.getDefaultState()
                     .withProperty(FACING, state.getValue(FACING))
                     .withProperty(TYPE, state.getValue(TYPE)));
@@ -140,8 +92,7 @@ public class BusLaneMark extends IronHorizontal
         return new BlockStateContainer(this, FACING, TYPE);
     }
 
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return ((state.getValue(TYPE)).getMetadata());
     }
 
@@ -165,4 +116,5 @@ public class BusLaneMark extends IronHorizontal
             items.add(new ItemStack(this,1,subtype.getMetadata()));
         }
     }
+
 }

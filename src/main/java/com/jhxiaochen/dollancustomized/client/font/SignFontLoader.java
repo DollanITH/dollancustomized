@@ -5,12 +5,14 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TTFFontLoader {
+public class SignFontLoader {
     private Font rawFont;
     private final ResourceLocation fontLocation;
     private ResourceLocation textureLocation;
@@ -25,7 +27,7 @@ public class TTFFontLoader {
     private int currentX = 0;
     private int currentY = 0;
 
-    public TTFFontLoader(ResourceLocation fontLocation, float fontSize, float renderScale) {
+    public SignFontLoader(ResourceLocation fontLocation, float fontSize, float renderScale) {
         this.fontLocation = fontLocation;
         this.fontSize = fontSize;
         this.renderScale = renderScale;
@@ -33,9 +35,12 @@ public class TTFFontLoader {
         createTexture();
     }
 
-    public TTFFontLoader(ResourceLocation fontLocation, float fontSize) {
-        this(fontLocation, fontSize, 2.0f);
+    public SignFontLoader(ResourceLocation fontLocation, float fontSize) {
+        this(fontLocation, fontSize, 1.0f);
     }
+
+    // 用于边缘抗锯齿的临时缓冲区
+    private static final int EDGE_SCALE = 4; // 边缘抗锯齿放大倍数
 
     private void loadFont() {
         try {
@@ -57,12 +62,18 @@ public class TTFFontLoader {
         this.graphics2D.setFont(this.rawFont);
         this.graphics2D.setColor(Color.WHITE);
 
-        // 彻底关闭抗锯齿
+        // 彻底关闭抗锯齿（用于基础纹理生成）
         this.graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
         this.graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         this.graphics2D.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
 
         this.textureLocation = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation("road_text_font_dynamic", dynamicTexture);
+
+        // 预加载数字字符和常见符号
+        String preloadChars = "0123456789.";
+        for (char c : preloadChars.toCharArray()) {
+            drawCharToTexture(c);
+        }
     }
 
     public float[] getCharData(char c) {
@@ -70,8 +81,11 @@ public class TTFFontLoader {
     }
 
     public void drawCharToTexture(char c) {
-        if (this.graphics2D == null || this.rawFont == null) return;
+        if (this.graphics2D == null || this.rawFont == null) {
+            return;
+        }
 
+        
         FontMetrics fm = this.graphics2D.getFontMetrics();
         int charWidth = fm.charWidth(c);
         int charHeight = fm.getHeight();
@@ -86,25 +100,55 @@ public class TTFFontLoader {
         }
 
         if (currentY + charHeight > textureHeight) {
-            System.err.println("[DollanCustomized] 字体纹理空间不足！");
             return;
         }
 
-        // 【关键修改：确保该区域完全透明】
-        // 创建一个透明的矩形区域
-        BufferedImage charImage = new BufferedImage(charWidth, charHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D charGraphics = charImage.createGraphics();
-        charGraphics.setFont(this.rawFont);
-        charGraphics.setColor(Color.WHITE);
-        charGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-        charGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        // 创建放大的临时图像
+        int scaledWidth = charWidth * EDGE_SCALE;
+        int scaledHeight = charHeight * EDGE_SCALE;
 
-        // 绘制字符到透明背景上
-        charGraphics.drawString(String.valueOf(c), 0, fm.getAscent());
-        charGraphics.dispose();
+        BufferedImage scaledImage = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D scaledGraphics = scaledImage.createGraphics();
 
-        // 将字符图像绘制到主纹理上
-        this.graphics2D.drawImage(charImage, currentX, currentY, null);
+        // 设置字体和颜色
+        scaledGraphics.setFont(this.rawFont);
+        scaledGraphics.setColor(Color.WHITE);
+
+        // 启用抗锯齿以实现平滑过渡
+        scaledGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        scaledGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        scaledGraphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
+
+        // 在放大后的图像上绘制抗锯齿字符
+        FontRenderContext frc = scaledGraphics.getFontRenderContext();
+        TextLayout layout = new TextLayout(String.valueOf(c), this.rawFont, frc);
+        int baseline = (int) - layout.getAscent() * EDGE_SCALE;
+        scaledGraphics.drawString(String.valueOf(c), 0, baseline);
+
+        // 应用边缘羽化效果（Alpha渐变）
+        int centerY = scaledHeight / 2;
+        for (int y = 0; y < scaledHeight; y++) {
+            for (int x = 0; x < scaledWidth; x++) {
+                int centerX = scaledWidth / 2;
+                double distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+                double maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+
+                int alpha = (int) (255 * (1 - distance / maxDistance));
+                alpha = Math.max(0, Math.min(255, alpha));
+
+                int pixel = scaledImage.getRGB(x, y);
+                int currentAlpha = pixel >> 24 & 0xFF;
+                int newAlpha = (currentAlpha * alpha) / 255;
+
+                pixel = (pixel & 0x00FFFFFF) | (newAlpha << 24);
+                scaledImage.setRGB(x, y, pixel);
+            }
+        }
+
+        // 将放大的抗锯齿字符缩小到原始尺寸并绘制到主纹理
+        this.graphics2D.drawImage(scaledImage, currentX, currentY, charWidth, charHeight, null);
+
+        scaledGraphics.dispose();
 
         image.getRGB(0, 0, textureWidth, textureHeight, dynamicTexture.getTextureData(), 0, textureWidth);
         dynamicTexture.updateDynamicTexture();
@@ -116,6 +160,7 @@ public class TTFFontLoader {
         float[] data = new float[]{u, v, widthUV, heightUV};
         charDataMap.put(c, data);
 
+        
         currentX += charWidth;
     }
 

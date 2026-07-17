@@ -511,5 +511,5 @@ tile.road_sign_height_limit_3.height_2.name=限高3.5m标志
 tile.road_sign_height_limit_4.height_1.name=限高4m标志
 tile.road_sign_height_limit_4.height_2.name=限高4.5m标志
 tile.road_sign_height_limit_5.height_1.name=限高5m标志
-tile.road_sign_height_limit_5.height_2.name=限高5.5m标志tile.road_sign_height_limit_custom.name=Custom Height Limit Sign
+tile.road_sign_height_limit_5.height_2.name=限高5.5m标志
 tile.road_sign_height_limit_custom.name=Custom Height Limit Sign

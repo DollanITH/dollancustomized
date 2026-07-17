@@ -10,8 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import java.nio.charset.StandardCharsets;
-
 public class MessageHeightLimitSignCustom implements IMessage {
     private BlockPos pos;
     private String heightValue;
@@ -28,16 +26,16 @@ public class MessageHeightLimitSignCustom implements IMessage {
         pos = BlockPos.fromLong(buf.readLong());
 
         int length = buf.readInt();
-        // 【关键】使用 UTF-8 解码，支持中文和特殊字符
-        heightValue = buf.readBytes(length).toString(StandardCharsets.UTF_8);
+        // 使用 UTF-8 解码，支持中文和特殊字符
+        heightValue = buf.readBytes(length).toString(java.nio.charset.StandardCharsets.UTF_8);
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
 
-        // 【关键】使用 UTF-8 编码，支持中文和特殊字符
-        byte[] bytes = heightValue.getBytes(StandardCharsets.UTF_8);
+        // 使用 UTF-8 编码，支持中文和特殊字符
+        byte[] bytes = heightValue.getBytes(java.nio.charset.StandardCharsets.UTF_8);
         buf.writeInt(bytes.length);
         buf.writeBytes(bytes);
     }
@@ -50,10 +48,35 @@ public class MessageHeightLimitSignCustom implements IMessage {
                 TileEntity te = world.getTileEntity(message.pos);
                 if (te instanceof TileEntityHeightLimitSignCustom) {
                     TileEntityHeightLimitSignCustom heightSign = (TileEntityHeightLimitSignCustom) te;
-                    heightSign.heightValue = message.heightValue;
+
+                    // 解析字符串格式为整数和小数部分
+                    try {
+                        if (message.heightValue != null && !message.heightValue.isEmpty()) {
+                            if (message.heightValue.contains(".")) {
+                                String[] parts = message.heightValue.split("\\.");
+                                if (parts.length >= 1) {
+                                    heightSign.setIntegerPart(Integer.parseInt(parts[0]));
+                                }
+                                if (parts.length >= 2) {
+                                    heightSign.setDecimalPart(Integer.parseInt(parts[1]));
+                                } else {
+                                    heightSign.setDecimalPart(0);
+                                }
+                            } else {
+                                // 只有整数部分
+                                heightSign.setIntegerPart(Integer.parseInt(message.heightValue));
+                                heightSign.setDecimalPart(0);
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        // 解析失败，使用默认值4.8
+                        heightSign.setIntegerPart(4);
+                        heightSign.setDecimalPart(8);
+                    }
 
                     heightSign.markDirty();
-                    world.notifyBlockUpdate(message.pos, world.getBlockState(message.pos), world.getBlockState(message.pos), 3);
+                    world.notifyBlockUpdate(message.pos, world.getBlockState(message.pos),
+                        world.getBlockState(message.pos), 3);
                 }
             });
             return null;

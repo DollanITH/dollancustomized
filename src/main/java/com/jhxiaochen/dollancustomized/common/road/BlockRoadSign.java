@@ -74,7 +74,7 @@ public class BlockRoadSign extends Block {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return getBoxByXYZ(state, 0.35, 1.0, 0.75);
+        return getBoxByXYZ(state, 0.35, 0.9, 0.75);
     }
 
     @Override

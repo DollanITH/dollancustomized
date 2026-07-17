@@ -7,11 +7,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
+import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
 
 public class GuiHeightLimitSignCustom extends GuiScreen {
-    private GuiTextField textField;
+    private GuiTextField integerField;   // 整数部分输入 (1-99)
+    private GuiTextField decimalField;   // 小数部分输入 (0-9)
     private final TileEntityHeightLimitSignCustom tileEntity;
     private GuiButton doneButton;
     private GuiButton cancelButton;
@@ -31,12 +34,25 @@ public class GuiHeightLimitSignCustom extends GuiScreen {
 
         if (this.fontRenderer == null) return;
 
-        this.textField = new GuiTextField(0, this.fontRenderer, this.width / 2 - 100, this.height / 2 - 10, 200, 20);
-        this.textField.setMaxStringLength(10);
-        this.textField.setText(this.tileEntity.heightValue != null ? this.tileEntity.heightValue : "3.0");
+        int centerX = this.width / 2;
+        int centerY = this.height / 2;
 
-        this.doneButton = this.addButton(new GuiButton(1, this.width / 2 - 4 - 100, this.height / 2 + 20, 100, 20, I18n.format("gui.done")));
-        this.cancelButton = this.addButton(new GuiButton(2, this.width / 2 + 4, this.height / 2 + 20, 100, 20, I18n.format("gui.cancel")));
+        // 整数部分输入框
+        this.integerField = new GuiTextField(0, this.fontRenderer,
+            centerX - 60, centerY - 15, 40, 20);
+        this.integerField.setMaxStringLength(2);
+        this.integerField.setText(String.valueOf(tileEntity.getIntegerPart()));
+        this.integerField.setFocused(true);
+
+        // 小数部分输入框
+        this.decimalField = new GuiTextField(1, this.fontRenderer,
+            centerX + 20, centerY - 15, 30, 20);
+        this.decimalField.setMaxStringLength(1);
+        this.decimalField.setText(String.valueOf(tileEntity.getDecimalPart()));
+
+        // 按钮
+        this.doneButton = this.addButton(new GuiButton(1, centerX - 4 - 100, centerY + 20, 100, 20, I18n.format("gui.done")));
+        this.cancelButton = this.addButton(new GuiButton(2, centerX + 4, centerY + 20, 100, 20, I18n.format("gui.cancel")));
     }
 
     @Override
@@ -48,65 +64,92 @@ public class GuiHeightLimitSignCustom extends GuiScreen {
         }
     }
 
-    // 【新增】提取保存并关闭的逻辑为独立方法，方便键盘事件调用
     private void saveAndClose() {
-        String input = this.textField.getText();
-        // 验证输入：只允许数字和小数点
-        if (input == null || input.isEmpty() || !input.matches("^[0-9]+(\\.[0-9]*)?$")) {
-            // 如果输入无效，使用默认值
-            input = "3.0";
+        try {
+            int integer = Integer.parseInt(this.integerField.getText());
+            int decimal = Integer.parseInt(this.decimalField.getText());
+
+            // 验证输入范围
+            integer = Math.max(0, Math.min(99, integer));
+            decimal = Math.max(0, Math.min(9, decimal));
+
+            // 发送到服务器
+            NetworkHandler.DOLLAN_NETWORK.sendToServer(new MessageHeightLimitSignCustom(this.tileEntity.getPos(),
+                String.format("%d.%d", integer, decimal)));
+        } catch (NumberFormatException e) {
+            // 输入无效，恢复默认值4.8
+            this.integerField.setText("4");
+            this.decimalField.setText("8");
         }
-        NetworkHandler.DOLLAN_NETWORK.sendToServer(new MessageHeightLimitSignCustom(this.tileEntity.getPos(), input));
+
         this.mc.displayGuiScreen(null);
     }
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        // 1. 将键盘输入转发给文本框
-        this.textField.textboxKeyTyped(typedChar, keyCode);
+        // 处理整数部分
+        this.integerField.textboxKeyTyped(typedChar, keyCode);
 
-        // 2. 拦截 ESC 键 (keyCode == 1)
-        if (keyCode == 1) {
-            this.mc.displayGuiScreen(null);
-            return; // 直接退出，不调用 super，防止重复触发
+        // 处理小数部分
+        this.decimalField.textboxKeyTyped(typedChar, keyCode);
+
+        // Tab键切换焦点
+        if (keyCode == Keyboard.KEY_TAB) {
+            if (this.integerField.isFocused()) {
+                this.integerField.setFocused(false);
+                this.decimalField.setFocused(true);
+            } else {
+                this.decimalField.setFocused(false);
+                // 在 Minecraft 1.12.2 中，我们不手动调用按钮的 mouseClicked
+                // 只需要设置焦点，按钮会自动处理点击
+            }
+            return;
         }
 
-        // 3. 拦截 ENTER 键 (keyCode == 28)
+        // 拦截ESC键 (keyCode == 1)
+        if (keyCode == 1) {
+            this.mc.displayGuiScreen(null);
+            return;
+        }
+
+        // 拦截ENTER键 (keyCode == 28)
         if (keyCode == 28) {
             saveAndClose();
             return;
         }
 
-        // 4. 其他按键交给父类处理
+        // 其他按键交给父类处理
         super.keyTyped(typedChar, keyCode);
     }
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        this.textField.mouseClicked(mouseX, mouseY, mouseButton);
+        // 点击文本框（GuiTextField 需要传入 mouseButton 参数）
+        this.integerField.mouseClicked(mouseX, mouseY, mouseButton);
+        this.decimalField.mouseClicked(mouseX, mouseY, mouseButton);
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
     public void updateScreen() {
-        this.textField.updateCursorCounter();
+        this.integerField.updateCursorCounter();
+        this.decimalField.updateCursorCounter();
         super.updateScreen();
-    }
-
-    @Override
-    public void drawDefaultBackground() {
-        if (this.mc != null) {
-            super.drawDefaultBackground();
-        }
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
-        if (this.textField != null) {
-            this.textField.drawTextBox();
-        }
+
+        // 绘制标签（使用粗体和黄色以增强可见性）
+        String integerLabel = TextFormatting.YELLOW + TextFormatting.BOLD.toString() + "整数部分:";
+        String decimalLabel = TextFormatting.YELLOW + TextFormatting.BOLD.toString() + "小数部分:";
+        this.fontRenderer.drawString(integerLabel, this.width / 2 - 75, this.height / 2 - 30, 0xFFFFFF);
+        this.fontRenderer.drawString(decimalLabel, this.width / 2 + 5, this.height / 2 - 30, 0xFFFFFF);
+
+        this.integerField.drawTextBox();
+        this.decimalField.drawTextBox();
     }
 
     @Override

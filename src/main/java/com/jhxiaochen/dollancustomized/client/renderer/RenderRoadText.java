@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.renderer;
 
-import com.jhxiaochen.dollancustomized.client.font.CustomTTFFontRenderer;
+import com.jhxiaochen.dollancustomized.client.font.RoadFontRenderer;
 import com.jhxiaochen.dollancustomized.common.road.BlockRoadText;
 import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
@@ -31,7 +31,7 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
         }
 
         EnumFacing facing = state.getValue(BlockRoadText.FACING);
-        CustomTTFFontRenderer fontRenderer = ClientProxy.customFontRenderer;
+        RoadFontRenderer fontRenderer = ClientProxy.roadFontRenderer;
         if (fontRenderer == null) {
             return;
         }
@@ -97,9 +97,9 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
 
             // 渲染文字
             if (te.colorMode == 1) {
-                fontRenderer.drawYellowString(te.text, 0, 0, false);
+                fontRenderer.drawYellowString(te.text, 0, 0, true);
             } else {
-                fontRenderer.drawWhiteString(te.text, 0, 0, false);
+                fontRenderer.drawWhiteString(te.text, 0, 0, true);
             }
 
         } catch (Exception e) {

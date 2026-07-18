@@ -37,10 +37,10 @@ public class GuiHeightLimitSignCustom extends GuiScreen {
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        // 整数部分输入框
+        // 整数部分输入框（限制为个位数）
         this.integerField = new GuiTextField(0, this.fontRenderer,
             centerX - 60, centerY - 15, 40, 20);
-        this.integerField.setMaxStringLength(2);
+        this.integerField.setMaxStringLength(1);
         this.integerField.setText(String.valueOf(tileEntity.getIntegerPart()));
         this.integerField.setFocused(true);
 
@@ -69,8 +69,8 @@ public class GuiHeightLimitSignCustom extends GuiScreen {
             int integer = Integer.parseInt(this.integerField.getText());
             int decimal = Integer.parseInt(this.decimalField.getText());
 
-            // 验证输入范围
-            integer = Math.max(0, Math.min(99, integer));
+            // 验证输入范围（整数部分限制为0-9）
+            integer = Math.max(2, Math.min(6, integer));
             decimal = Math.max(0, Math.min(9, decimal));
 
             // 发送到服务器
@@ -143,8 +143,8 @@ public class GuiHeightLimitSignCustom extends GuiScreen {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         // 绘制标签（使用粗体和黄色以增强可见性）
-        String integerLabel = TextFormatting.YELLOW + TextFormatting.BOLD.toString() + "整数部分:";
-        String decimalLabel = TextFormatting.YELLOW + TextFormatting.BOLD.toString() + "小数部分:";
+        String integerLabel = TextFormatting.YELLOW + TextFormatting.BOLD.toString() + "整数部分(2-6):";
+        String decimalLabel = TextFormatting.YELLOW + TextFormatting.BOLD.toString() + "小数部分(0-9):";
         this.fontRenderer.drawString(integerLabel, this.width / 2 - 75, this.height / 2 - 30, 0xFFFFFF);
         this.fontRenderer.drawString(decimalLabel, this.width / 2 + 5, this.height / 2 - 30, 0xFFFFFF);
 

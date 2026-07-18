@@ -12,7 +12,6 @@ public class TileEntityHeightLimitSignCustom extends TileEntity {
 
     public TileEntityHeightLimitSignCustom() {
         super();
-        System.out.println("[TileEntityHeightLimit] 创建新实例，默认值: 整数=" + integerPart + ", 小数=" + decimalPart);
     }
 
     // 【核心修复1】解除 64 格距离限制
@@ -58,14 +57,14 @@ public class TileEntityHeightLimitSignCustom extends TileEntity {
                     if (heightValue.contains(".")) {
                         String[] parts = heightValue.split("\\.");
                         if (parts.length >= 1) {
-                            this.integerPart = Integer.parseInt(parts[0]);
+                            this.integerPart = Math.max(2, Math.min(6, Integer.parseInt(parts[0])));
                         }
                         if (parts.length >= 2) {
-                            this.decimalPart = Integer.parseInt(parts[1]);
+                            this.decimalPart = Math.max(0, Math.min(9, Integer.parseInt(parts[1])));
                         }
                     } else {
                         // 如果只有整数部分（如"3"）
-                        this.integerPart = Integer.parseInt(heightValue);
+                        this.integerPart = Math.max(2, Math.min(6, Integer.parseInt(heightValue)));
                         this.decimalPart = 0;
                     }
                 } catch (NumberFormatException e) {
@@ -76,10 +75,10 @@ public class TileEntityHeightLimitSignCustom extends TileEntity {
             }
         } else {
             // 新格式，直接读取
-            this.integerPart = compound.getInteger("integerPart");
-            this.decimalPart = compound.getInteger("decimalPart");
+            this.integerPart = Math.max(2, Math.min(6, compound.getInteger("integerPart")));
+            this.decimalPart = Math.max(0, Math.min(9, compound.getInteger("decimalPart")));
             // 默认值：4.8
-            if (this.integerPart == 0 && this.decimalPart == 0) {
+            if (this.integerPart == 2 && this.decimalPart == 0) {
                 this.integerPart = 4;
                 this.decimalPart = 8;
             }
@@ -132,10 +131,11 @@ public class TileEntityHeightLimitSignCustom extends TileEntity {
     }
 
     /**
-     * 设置整数部分
+     * 设置整数部分（限制为2-6之间）
      */
     public void setIntegerPart(int integerPart) {
-        this.integerPart = Math.max(0, Math.min(99, integerPart));
+        // 限制整数部分为2-6之间
+        this.integerPart = Math.max(2, Math.min(6, integerPart));
     }
 
     /**

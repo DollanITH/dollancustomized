@@ -1,0 +1,6 @@
+{
+    "parent": "block/fence_side",
+    "textures": {
+        "texture": "dollancustomized:blocks/jacaranda_planks"
+    }
+}

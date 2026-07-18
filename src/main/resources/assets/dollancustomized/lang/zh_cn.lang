@@ -1,111 +1,66 @@
+# Dollan Customized - 中文语言文件
+# 版本：1.0
+# 语言：中文
+
+# 地铁路线
 tile.line_3.name=§2§l东安轨道交通§r 3号线
 tile.line_9.name=§2§l东安轨道交通§r 9号线
-tile.yellowflatlamp.name=黄色扁平灯具
 tile.line_12.name=§2§l东安轨道交通§r 12号线
 tile.line_10.name=§2§l东安轨道交通§r 10号线
 tile.line_13.name=§2§l东安轨道交通§r 13号线
 tile.line_14.name=§2§l东安轨道交通§r 14号线
-tile.greenlight.name=原谅绿现代灯
-tile.station_end_door.name=站台首尾全高端门
-
-itemGroup.tabLight=东安自定义 | 灯具
-itemGroup.tabdollanMetro=东安自定义 | 东安轨道交通
-itemGroup.tabdollanTran=东安自定义 | 东安市域轨道交通
-itemGroup.tabMSMetro=东安自定义 | 鸣沙轨道交通
-itemGroup.tabRoad=东安自定义 | 道路
-itemGroup.tabRoadSigns=东安自定义 | 道路标志
-itemGroup.tabDollanBlocks=东安自定义 | 方块
-itemGroup.tabMetroBlocks=东安自定义 | 铁路
-
-tile.overhead_lines.name=柔性接触网线
-tile.overhead_lines_straighter.name=柔性接触网线吊弦
-tile.overhead_lines_slope.name=柔性接触网线(斜坡)
-tile.overhead_lines_slope_1.name=柔性接触网线(单线斜坡,过渡)
-tile.overhead_lines_slope_2.name=柔性接触网线(单线斜坡,过渡)
-tile.overhead_lines_diagonal.name=柔性接触网斜线
-tile.overhead_lines_diagonal_straighter.name=柔性接触网斜线吊弦
-tile.overhead_lines_support.name=柔性接触网线支架
-tile.overhead_lines_support_a1.name=加大版柔性接触网线支架组件1
-tile.overhead_lines_support_a2.name=加大版柔性接触网线支架组件2
-tile.overhead_lines_support_a3.name=加大版柔性接触网线支架组件3
-tile.overhead_lines_support_a4.name=加大版柔性接触网线支架组件4
-tile.overhead_lines_double_diagonal.name=柔性接触网岔线
-tile.overhead_lines_double_diagonal_1.name=柔性接触网岔线1
-tile.overhead_lines_double_wye.name=柔性接触网双Y线
-tile.road_give_way_mark.name=让行地面标志
-tile.road_slow_down_mark.name=减速地面标志
-
-tile.overhead_translation_0.name=刚柔接触网转换配件
-tile.overhead_translation_1.name=刚柔接触网转换配件1
-tile.overhead_translation_2.name=刚柔接触网转换配件2
-tile.overhead_translation_3.name=刚柔接触网转换配件3
-tile.overhead_translation_4.name=刚柔接触网转换配件4
-tile.overhead_translation_5.name=刚柔接触网转换配件5
-tile.overhead_translation_6.name=刚柔接触网转换配件6
-tile.overhead_translation_7.name=刚柔接触网转换配件7
-
-tile.overhead_steel.name=刚性接触网
-tile.overhead_steel_slope.name=刚性接触网(斜坡)
-tile.overhead_steel_diagonal.name=斜刚性接触网
-tile.overhead_steel_diagonal_support.name=斜刚性接触网支架
-tile.overhead_steel_diagonal_support_1.name=斜刚性接触网支架1
-tile.overhead_steel_support.name=刚性接触网线支架
-tile.overhead_steel_support_1.name=刚性接触网线支架1
-tile.overhead_steel_double_diagonal.name=刚性接触网岔线
-tile.overhead_steel_double_diagonal_1.name=刚性接触网岔线1
-tile.overhead_steel_double_wye.name=刚性接触网双Y线
-tile.overhead_steel_double_wye_1.name=刚性接触网双Y线1
-tile.overhead_steel_double.name=刚性双接触网
-tile.overhead_steel_double_support.name=刚性双接触网支架
-
-tile.overhead_post.name=接触网柱
-tile.overhead_post_1.name=接触网工字柱
-tile.overhead_steel_post_up.name=刚性接触网上方支柱
-tile.overhead_web_corner.name=接触网网格柱拐角
-tile.overhead_web_pillar.name=接触网网格桩
-tile.overhead_web_pillar_post.name=接触网网格桩（带接触网柱）
-tile.overhead_web_pillar_post_1.name=接触网网格桩（带接触网工字桩）
-tile.overhead_web_pillar_post_2.name=接触网网格桩（带接触网工字桩, Y旋转）
-
-tile.signal_post.name=信号灯柱
-tile.signal_none_one_light.name=单灯信号灯(灭灯)
-tile.signal_green_one_light.name=单灯信号灯(绿灯)
-tile.signal_yellow_one_light.name=单灯信号灯(黄灯)
-tile.signal_red_one_light.name=单灯信号灯(红灯)
-tile.signal_blue_one_light.name=单灯信号灯(蓝灯)
-tile.signal_white_one_light.name=单灯信号灯(白灯)
-
-tile.signal_none_two_lights.name=双灯信号灯(灭灯)
-tile.signal_green_two_lights.name=双灯信号灯(绿灯)
-tile.signal_yellow_two_lights.name=双灯信号灯(黄灯)
-tile.signal_red_two_lights.name=双灯信号灯(红灯)
-tile.signal_blue_two_lights.name=双灯信号灯(蓝灯)
-tile.signal_white_two_lights.name=双灯信号灯(白灯)
-
-tile.signal_none_three_lights.name=三灯信号灯(灭灯)
-tile.signal_green_three_lights.name=三灯信号灯(绿灯)
-tile.signal_white_three_lights.name=三灯信号灯(白灯)
-tile.signal_yellow_three_lights.name=三灯信号灯(黄灯)
-tile.signal_red_three_lights.name=三灯信号灯(红灯)
-tile.signal_blue_three_lights.name=三灯信号灯(蓝灯)
-
-tile.signal_none_four_lights.name=四灯信号灯(灭灯)
-tile.signal_green_four_lights.name=四灯信号灯(绿灯)
-tile.signal_yellow_four_lights.name=四灯信号灯(黄灯)
-tile.signal_red_four_lights.name=四灯信号灯(红灯)
-tile.signal_blue_four_lights.name=四灯信号灯(蓝灯)
-
 tile.line_6.name=§2§l东安轨道交通§r 6号线
 tile.line_7.name=§2§l东安轨道交通§r 7号线
 tile.line_2.name=§2§l东安轨道交通§r 2号线
-tile.white_flat_lamp.name=扁平灯具
 tile.line_5.name=§2§l东安轨道交通§r 5号线
 tile.line_1.name=§2§l东安轨道交通§r 1号线
 tile.line_8.name=§2§l东安轨道交通§r 8号线
 tile.line_4.name=§2§l东安轨道交通§r 4号线
-itemGroup.tabmetro=东安自定义 | 方块
 tile.line_11.name=§2§l东安轨道交通§r 11号线
 
+# 市域铁路路线
+tile.dollan_s1.name=§3§l东安轨道交通§r S1号线
+tile.dollan_s2.name=§3§l东安轨道交通§r S2号线
+tile.dollan_airport_line.name=§3§l东安轨道交通§r 东安机场线
+tile.dollan_line_1.name=§2§l东安轨道交通§r 1号线
+tile.dollan_line_2.name=§2§l东安轨道交通§r 2号线
+tile.dollan_line_3.name=§2§l东安轨道交通§r 3号线
+tile.dollan_line_4.name=§2§l东安轨道交通§r 4号线
+tile.dollan_line_5.name=§2§l东安轨道交通§r 5号线
+tile.dollan_line_6.name=§2§l东安轨道交通§r 6号线
+tile.dollan_line_7.name=§2§l东安轨道交通§r 7号线
+tile.dollan_line_8.name=§2§l东安轨道交通§r 8号线
+tile.dollan_line_9.name=§2§l东安轨道交通§r 9号线
+tile.dollan_line_10.name=§2§l东安轨道交通§r 10号线
+tile.dollan_line_11.name=§2§l东安轨道交通§r 11号线
+tile.dollan_line_12.name=§2§l东安轨道交通§r 12号线
+tile.dollan_line_13.name=§2§l东安轨道交通§r 13号线
+tile.dollan_line_14.name=§2§l东安轨道交通§r 14号线
+tile.dollan_line_15.name=§2§l东安轨道交通§r 15号线
+tile.dollan_line_16.name=§2§l东安轨道交通§r 16号线
+tile.dollan_line_17.name=§2§l东安轨道交通§r 17号线
+tile.dollan_line_18.name=§2§l东安轨道交通§r 18号线
+tile.dollan_line_19.name=§2§l东安轨道交通§r 19号线
+tile.dollan_line_20.name=§2§l东安轨道交通§r 20号线
+tile.dollan_line_21.name=§2§l东安轨道交通§r 21号线
+tile.dollan_line_22.name=§2§l东安轨道交通§r 22号线
+tile.dollan_loop_line.name=§2§l东安轨道交通§r 东安城市环线
+
+# 鸣沙轨道交通路线
+tile.mingsha_S1.name=§4§l鸣沙轨道交通§r S1号线
+tile.mingsha_S2.name=§4§l鸣沙轨道交通§r S2号线
+tile.mingsha_S3.name=§4§l鸣沙轨道交通§r S3号线
+tile.mingsha_S4.name=§4§l鸣沙轨道交通§r S4号线
+tile.mingsha_S5.name=§4§l鸣沙轨道交通§r S5号线
+tile.mingsha_S6.name=§4§l鸣沙轨道交通§r S6号线
+
+# 灯具
+tile.yellowflatlamp.name=黄色扁平灯具
+tile.white_flat_lamp.name=扁平灯具
+tile.greenlight.name=原谅绿现代灯
+tile.station_end_door.name=站台首尾全高端门
+
+# 现代灯具
 tile.lamp_tran.white.name=白色透明现代灯
 tile.lamp_tran.black.name=黑色透明现代灯
 tile.lamp_tran.yellow.name=黄色透明现代灯
@@ -140,6 +95,100 @@ tile.light.blue.name=蓝色现代灯
 tile.light.cyan.name=青色现代灯
 tile.light.purple.name=紫色现代灯
 
+# 特殊灯具
+tile.white_punctiform_lamp.name=点状现代灯
+tile.white_banding_lamp.name=条状现代灯
+
+# 接触网
+tile.overhead_lines.name=柔性接触网线
+tile.overhead_lines_straighter.name=柔性接触网线吊弦
+tile.overhead_lines_slope.name=柔性接触网线(斜坡)
+tile.overhead_lines_slope_1.name=柔性接触网线(单线斜坡,过渡)
+tile.overhead_lines_slope_2.name=柔性接触网线(单线斜坡,过渡)
+tile.overhead_lines_diagonal.name=柔性接触网斜线
+tile.overhead_lines_diagonal_straighter.name=柔性接触网斜线吊弦
+tile.overhead_lines_support.name=柔性接触网线支架
+tile.overhead_lines_support_a1.name=加大版柔性接触网线支架组件1
+tile.overhead_lines_support_a2.name=加大版柔性接触网线支架组件2
+tile.overhead_lines_support_a3.name=加大版柔性接触网线支架组件3
+tile.overhead_lines_support_a4.name=加大版柔性接触网线支架组件4
+tile.overhead_lines_double_diagonal.name=柔性接触网岔线
+tile.overhead_lines_double_diagonal_1.name=柔性接触网岔线1
+tile.overhead_lines_double_wye.name=柔性接触网双Y线
+tile.overhead_translation_0.name=刚柔接触网转换配件
+tile.overhead_translation_1.name=刚柔接触网转换配件1
+tile.overhead_translation_2.name=刚柔接触网转换配件2
+tile.overhead_translation_3.name=刚柔接触网转换配件3
+tile.overhead_translation_4.name=刚柔接触网转换配件4
+tile.overhead_translation_5.name=刚柔接触网转换配件5
+tile.overhead_translation_6.name=刚柔接触网转换配件6
+tile.overhead_translation_7.name=刚柔接触网转换配件7
+
+# 刚性接触网
+tile.overhead_steel.name=刚性接触网
+tile.overhead_steel_slope.name=刚性接触网(斜坡)
+tile.overhead_steel_diagonal.name=斜刚性接触网
+tile.overhead_steel_diagonal_support.name=斜刚性接触网支架
+tile.overhead_steel_diagonal_support_1.name=斜刚性接触网支架1
+tile.overhead_steel_support.name=刚性接触网线支架
+tile.overhead_steel_support_1.name=刚性接触网线支架1
+tile.overhead_steel_double_diagonal.name=刚性接触网岔线
+tile.overhead_steel_double_diagonal_1.name=刚性接触网岔线1
+tile.overhead_steel_double_wye.name=刚性接触网双Y线
+tile.overhead_steel_double_wye_1.name=刚性接触网双Y线1
+tile.overhead_steel_double.name=刚性双接触网
+tile.overhead_steel_double_support.name=刚性双接触网支架
+
+# 接触网支柱
+tile.overhead_post.name=接触网柱
+tile.overhead_post_1.name=接触网工字柱
+tile.overhead_steel_post_up.name=刚性接触网上方支柱
+tile.overhead_web_corner.name=接触网网格柱拐角
+tile.overhead_web_pillar.name=接触网网格桩
+tile.overhead_web_pillar_post.name=接触网网格桩（带接触网柱）
+tile.overhead_web_pillar_post_1.name=接触网网格桩（带接触网工字桩）
+tile.overhead_web_pillar_post_2.name=接触网网格桩（带接触网工字桩,Y旋转）
+
+# 信号灯柱
+tile.signal_post.name=信号灯柱
+tile.signal_none_one_light.name=单灯信号灯(灭灯)
+tile.signal_green_one_light.name=单灯信号灯(绿灯)
+tile.signal_yellow_one_light.name=单灯信号灯(黄灯)
+tile.signal_red_one_light.name=单灯信号灯(红灯)
+tile.signal_blue_one_light.name=单灯信号灯(蓝灯)
+tile.signal_white_one_light.name=单灯信号灯(白灯)
+
+tile.signal_none_two_lights.name=双灯信号灯(灭灯)
+tile.signal_green_two_lights.name=双灯信号灯(绿灯)
+tile.signal_yellow_two_lights.name=双灯信号灯(黄灯)
+tile.signal_red_two_lights.name=双灯信号灯(红灯)
+tile.signal_blue_two_lights.name=双灯信号灯(蓝灯)
+tile.signal_white_two_lights.name=双灯信号灯(白灯)
+
+tile.signal_none_three_lights.name=三灯信号灯(灭灯)
+tile.signal_green_three_lights.name=三灯信号灯(绿灯)
+tile.signal_white_three_lights.name=三灯信号灯(白灯)
+tile.signal_yellow_three_lights.name=三灯信号灯(黄灯)
+tile.signal_red_three_lights.name=三灯信号灯(红灯)
+tile.signal_blue_three_lights.name=三灯信号灯(蓝灯)
+
+tile.signal_none_four_lights.name=四灯信号灯(灭灯)
+tile.signal_green_four_lights.name=四灯信号灯(绿灯)
+tile.signal_yellow_four_lights.name=四灯信号灯(黄灯)
+tile.signal_red_four_lights.name=四灯信号灯(红灯)
+tile.signal_blue_four_lights.name=四灯信号灯(蓝灯)
+
+# 铁路标志
+tile.RailwaySignPost.name=铁路标志杆
+tile.PowerMethodChangeSign.name=授电方式转换标志
+tile.StationStopSign.name=列车停车位置标志
+tile.StationStopSign.hang_wall.name=列车停车位置标志(挂在墙上)
+tile.StationStopSign.wall.name=列车停车位置标志(与墙壁连接)
+tile.DeportStopSign.name=一度停车位置标志
+tile.StationEdgeSign.name=站界标志
+tile.empty_railway_sign.name=空白铁路牌
+
+# 道路标线
 tile.asphalt.black.name=黑色沥青方块
 tile.asphalt.cyan.name=青色沥青方块(自行车道)
 tile.asphalt.red.name=红色沥青方块(公交专用道)
@@ -159,15 +208,7 @@ tile.single_white_line.name=白线
 tile.crosswalk_slab.name=人行横道台阶
 tile.crosswalk.name=人行横道
 
-tile.RailwaySignPost.name=铁路标志杆
-tile.PowerMethodChangeSign.name=授电方式转换标志
-tile.StationStopSign.name=列车停车位置标志
-tile.StationStopSign.hang_wall.name=列车停车位置标志(挂在墙上)
-tile.StationStopSign.wall.name=列车停车位置标志(与墙壁连接)
-tile.DeportStopSign.name=一度停车位置标志
-tile.StationEdgeSign.name=站界标志
-tile.empty_railway_sign.name=空白铁路牌
-
+# 停车线
 tile.stop_line_cross.white.name=停车线(白线)斜线
 tile.stop_line_cross.white_1.name=停车线(白斜线)斜线
 tile.stop_line_cross.yellow.name=停车线(黄线)斜线
@@ -196,20 +237,26 @@ tile.stop_line_left_slab.name=停车线(左)台阶
 tile.stop_line_left.name=停车线(左)
 tile.stop_line_right_slab.name=停车线(右)(双线)台阶
 tile.stop_line_right.name=停车线(双线)(右)
+tile.stop_line_right_1.name=停车线(右)
+
+# 导流线
 tile.single_white_line_thick.name=粗白线
 tile.single_white_line_thick_slab.name=粗白线(台阶)
 tile.single_yellow_line_thick.name=粗黄线
 tile.single_yellow_line_thick_slab.name=粗黄线(台阶)
 tile.single_white_line_45.single_line.name=白斜线
-
 tile.single_white_line_45.name=白斜线
 tile.single_white_line_45.crosswalk.name=斑马线斜线
 tile.single_white_line_45.ts_line.name=粗白斜线
 tile.single_white_line_slab_45.name=白斜线(台阶)
 
-
 tile.single_yellow_line_45.name=黄斜线
 tile.single_yellow_line_slab_45.name=黄斜线(台阶)
+tile.thick_white_line_45.name=粗白斜线
+tile.thick_white_line_slab_45.name=粗白斜线(台阶)
+tile.thick_yellow_line_45.name=粗黄斜线
+tile.thick_yellow_line_slab_45.name=粗黄斜线(台阶)
+
 tile.road_excl_zone_line.name=导流线(直线)
 tile.road_excl_zone.name=导流区方块
 tile.road_excl_zone_slab.name=导流区台阶
@@ -226,18 +273,23 @@ tile.road_excl_zone_split_in_r.name=导流线(向右合并)
 tile.road_excl_zone_split_in_r_slab.name=导流线(向右合并)(台阶)
 tile.road_excl_zone_split_in_l.name=导流线(向左合并)
 tile.road_excl_zone_split_in_l_slab.name=导流线(向左合并)(台阶)
+
+tile.road_excl_zone_corner_in.name=导流拐角
+tile.road_excl_zone_corner_in_slab.name=导流拐角(台阶)
+tile.road_excl_zone_corner_out.name=导流拐角1
+tile.road_excl_zone_corner_out_slab.name=导流拐角1(台阶)
+
+# 半线
 tile.asphalt_cyan_black_half_line.name=半黑半青白线
 tile.asphalt_cyan_black_half_line_slab.name=半黑半青白线台阶
-tile.double_yellow_line_diagonal.name=双黄斜线
-tile.double_yellow_line_diagonal_slab.name=双黄斜线台阶
-tile.double_white_line_diagonal.name=双白斜线
-tile.double_white_line_diagonal_slab.name=双白斜线台阶
 tile.asphalt_red_black_half_slab.name=半黑半红台阶
 tile.asphalt_red_black_half.name=半黑半红沥青
 tile.asphalt_cyan_black_half.name=半青半黑沥青
 tile.asphalt_cyan_black_half_slab.name=半青半黑沥青台阶
 tile.asphalt_red_black_half_line.name=半黑半红线
 tile.asphalt_red_black_half_line_slab.name=半黑半红线台阶
+
+# 斜线半线
 tile.asphalt_cyan_black_half_line_diagonal.name=半青半黑斜线
 tile.asphalt_cyan_black_half_line_diagonal_slab.name=半青半黑斜线台阶
 tile.asphalt_red_black_half_line_diagonal_slab.name=半红半黑斜线台阶
@@ -246,6 +298,20 @@ tile.asphalt_cyan_black_half_line_diagonal_1.name=半黑半青斜线
 tile.asphalt_cyan_black_half_line_diagonal_1_slab.name=半黑半青斜线
 tile.asphalt_red_black_half_line_diagonal_1_slab.name=半红半黑斜线
 tile.asphalt_red_black_half_line_diagonal_1.name=半红半黑斜线
+
+# 斜线
+tile.double_yellow_line_diagonal.name=双黄斜线
+tile.double_yellow_line_diagonal_slab.name=双黄斜线台阶
+tile.double_white_line_diagonal.name=双白斜线
+tile.double_white_line_diagonal_slab.name=双白斜线台阶
+
+# 半双线
+tile.double_white_line_half.name=半双白线
+tile.double_white_line_half_slab.name=半双白线台阶
+tile.double_yellow_line_half.name=半双黄线
+tile.double_yellow_line_half_slab.name=半双黄线台阶
+
+# 箭头
 tile.arrow_diaotou.name=箭头-调头
 tile.arrow_left_diaotou.name=箭头-左转调头
 tile.arrow_left_right.name=箭头-左右转
@@ -255,7 +321,26 @@ tile.arrow_right_straight.name=箭头-右转直行
 tile.arrow_straight.name=箭头-直行
 tile.arrow_left.name=箭头-左转
 tile.arrow_right.name=箭头-右转
+tile.arrow_no_diaotou.name=禁止掉头箭头
 
+# 台阶箭头
+tile.arrow_confluence_left.name=箭头-向左合流
+tile.arrow_confluence_left_sl.name=箭头-向左合流(台阶上)
+tile.arrow_confluence_right.name=箭头-向右合流箭头
+tile.arrow_confluence_right_sl.name=箭头-向右合流(台阶上)
+tile.arrow_diaotou_sl.name=箭头-调头(台阶上)
+tile.arrow_left_diaotou_sl.name=箭头-左转调头(台阶上)
+tile.arrow_left_right_sl.name=箭头-左右转(台阶上)
+tile.arrow_left_right_straight_sl.name=箭头-三向(台阶上)
+tile.arrow_left_sl.name=箭头-左转(台阶上)
+tile.arrow_left_straight_sl.name=箭头-左转直行(台阶上)
+tile.arrow_right_sl.name=箭头-右转(台阶上)
+tile.arrow_right_straight_sl.name=箭头-右转直行(台阶上)
+tile.arrow_straight_diaotou.name=箭头-直行调头
+tile.arrow_straight_diaotou_sl.name=箭头-直行调头(台阶上)
+tile.arrow_straight_sl.name=箭头-直行(台阶上)
+
+# 道路标志
 tile.road_sign_go_left.name=靠左行驶标志
 tile.road_sign_go_right.name=靠右行驶标志
 tile.road_sign_go_both.name=两侧行驶标志
@@ -283,19 +368,36 @@ tile.road_sign_can_diaotou.name=调头标志
 tile.road_sign_left_warn.name=道路向左收窄标志
 tile.road_sign_right_warn.name=道路向右收窄标志
 tile.road_sign_left_right_warn.name=道路向左和向右收窄标志
+tile.road_sign_triangle_rang.name=让行标志
+tile.road_sign_triangle_slow.name=慢行标志
+tile.road_sign_triangle_shizi.name=十型路口标志
+tile.road_sign_triangle_t.name=T型路口标志
+tile.road_sign_triangle_t1.name=T型路口标志1
+tile.road_sign_triangle_t2.name=T型路口标志2
+tile.road_sign_triangle_y.name=Y型路口标志2
+tile.road_sign_triangle_warn.name=警告标志
 
+# 停车和交通标志
+tile.road_sign_dont_stop.name=禁止停车标志
+tile.road_sign_dont_stop_1.name=禁止长时停车标志
+tile.road_sign_highway_start.name=高速公路起始标志
+tile.road_sign_highway_end.name=高速公路结束标志
+tile.road_sign_park.name=停车场标志
+tile.road_sign_park_1.name=往右边停车标志
+tile.road_sign_one_way_straight.name=单行道标志
+
+# 车道标志
 tile.bike_words.name=自行车道标志
 tile.bus_lane_mark.name=公交专用标志
 
-tile.white_punctiform_lamp.name=点状现代灯
-tile.white_banding_lamp.name=条状现代灯
-
+# 红绿灯
 tile.road_traffic_light.name=红绿灯
 tile.road_traffic_light_red.name=常红红绿灯
 tile.road_traffic_light_green.name=常绿红绿灯
 tile.road_traffic_light_yellow.name=常黄红绿灯
 tile.road_pedestrian_traffic_light.name=人行横道灯
 
+# 直角线
 tile.single_white_90.name=白线直角
 tile.single_white_90_1.name=白线T字
 tile.single_white_all_line.name=白线十字
@@ -309,30 +411,43 @@ tile.single_yellow_90_slab.name=黄线直角台阶
 tile.single_yellow_90_1_slab.name=黄线T字台阶
 tile.single_yellow_all_line_slab.name=黄线十字台阶
 
-tile.road_sign_triangle_rang.name=让行标志
-tile.road_sign_triangle_slow.name=慢行标志
-tile.road_sign_triangle_shizi.name=十型路口标志
-tile.road_sign_triangle_t.name=T型路口标志
-tile.road_sign_triangle_t1.name=T型路口标志1
-tile.road_sign_triangle_t2.name=T型路口标志2
-tile.road_sign_triangle_y.name=Y型路口标志2
-tile.road_sign_triangle_warn.name=警告标志
+# 地面标线
+tile.separate_diagonal.white_0.name=双白一侧分离线
+tile.separate_diagonal.white_1.name=双白一侧分离线
+tile.separate_diagonal.yellow_0.name=双黄一侧分离线
+tile.separate_diagonal.yellow_1.name=双黄一侧分离线
+tile.separate_diagonal_slab.white_0.name=双白一侧分离线台阶
+tile.separate_diagonal_slab.white_1.name=双白一侧分离线台阶
+tile.separate_diagonal_slab.yellow_0.name=双黄一侧分离线台阶
+tile.separate_diagonal_slab.yellow_1.name=双黄一侧分离线台阶
 
-tile.road_sign_dont_stop.name=禁止停车标志
-tile.road_sign_dont_stop_1.name=禁止长时停车标志
-tile.road_sign_highway_start.name=高速公路起始标志
-tile.road_sign_highway_end.name=高速公路结束标志
-tile.road_sign_park.name=停车场标志
-tile.road_sign_park_1.name=往右边停车标志
+# 道路地面文字标识
+tile.RoadTextMark.name=道路地面文字标识（自定义文字）
 
-tile.asphalt_red_black_half_45.name=红黑斜沥青
-tile.asphalt_red_black_half_45_slab.name=红黑斜沥青台阶
-tile.asphalt_cyan_black_half_45.name=青黑斜沥青
-tile.asphalt_cyan_black_half_45_slab.name=青黑斜沥青台阶
+# 鸣沙轨道交通线
+tile.ms_lines.mergewhite.name=双白合并线
+tile.ms_lines.mergeyellow.name=双黄合并线
+tile.ms_lines.separatewhite.name=双白分离线
+tile.ms_lines.separateyellow.name=双黄分离线
 
+tile.ms_lines_slab.mergewhite.name=双白合并线(台阶)
+tile.ms_lines_slab.mergeyellow.name=双黄合并线(台阶)
+tile.ms_lines_slab.separatewhite.name=双白分离线(台阶)
+tile.ms_lines_slab.separateyellow.name=双黄分离线(台阶)
+
+# 斜向人行横道
+tile.crosswalk_diagonal.name=人行横道斜线
+tile.crosswalk_diagonal_slab.name=人行横道斜线(台阶)
+
+# 地面标志
+tile.road_give_way_mark.name=让行地面标志
+tile.road_slow_down_mark.name=减速地面标志
+
+# 路灯
 tile.road_lamp_1_bottom.name=路灯底部
 tile.road_lamp_1_up.name=路灯顶部
 
+# 护栏
 tile.metro_fence.name=地铁护栏
 tile.metro_fence.metro.name=地铁护栏
 tile.metro_fence.road_center.name=道路中心护栏
@@ -340,87 +455,23 @@ tile.metro_fence.road.name=道路护栏
 tile.metro_fence.metro2.name=市郊地铁护栏
 tile.platform_fence.name=站台护栏
 
-tile.dollan_s1.name=§3§l东安轨道交通§r S1号线
-tile.dollan_s2.name=§3§l东安轨道交通§r S2号线
-tile.dollan_airport_line.name=§3§l东安轨道交通§r 东安机场线
+# 限高标志
+tile.road_sign_height_limit_3.height_1.name=限高3m标志
+tile.road_sign_height_limit_3.height_2.name=限高3.5m标志
+tile.road_sign_height_limit_4.height_1.name=限高4m标志
+tile.road_sign_height_limit_4.height_2.name=限高4.5m标志
+tile.road_sign_height_limit_5.height_1.name=限高5m标志
+tile.road_sign_height_limit_5.height_2.name=限高5.5m标志
+tile.road_sign_height_limit_custom.name=自定义限高标志
 
-tile.dollan_line_1.name=§2§l东安轨道交通§r 1号线
-tile.dollan_line_2.name=§2§l东安轨道交通§r 2号线
-tile.dollan_line_3.name=§2§l东安轨道交通§r 3号线
-tile.dollan_line_4.name=§2§l东安轨道交通§r 4号线
-tile.dollan_line_5.name=§2§l东安轨道交通§r 5号线
-tile.dollan_line_6.name=§2§l东安轨道交通§r 6号线
-tile.dollan_line_7.name=§2§l东安轨道交通§r 7号线
-tile.dollan_line_8.name=§2§l东安轨道交通§r 8号线
-tile.dollan_line_9.name=§2§l东安轨道交通§r 9号线
-tile.dollan_line_10.name=§2§l东安轨道交通§r 10号线
-tile.dollan_line_11.name=§2§l东安轨道交通§r 11号线
-tile.dollan_line_12.name=§2§l东安轨道交通§r 12号线
-tile.dollan_line_13.name=§2§l东安轨道交通§r 13号线
-tile.dollan_line_14.name=§2§l东安轨道交通§r 14号线
-tile.dollan_line_15.name=§2§l东安轨道交通§r 15号线
-tile.dollan_line_16.name=§2§l东安轨道交通§r 16号线
-
-tile.mingsha_S1.name=§4§l鸣沙轨道交通§r S1号线
-tile.mingsha_S2.name=§4§l鸣沙轨道交通§r S2号线
-tile.mingsha_S3.name=§4§l鸣沙轨道交通§r S3号线
-tile.mingsha_S4.name=§4§l鸣沙轨道交通§r S4号线
-tile.mingsha_S5.name=§4§l鸣沙轨道交通§r S5号线
-tile.mingsha_S6.name=§4§l鸣沙轨道交通§r S6号线
-
-tile.road_excl_zone_corner_in.name=导流拐角
-tile.road_excl_zone_corner_in_slab.name=导流拐角(台阶)
-tile.road_excl_zone_corner_out.name=导流拐角1
-tile.road_excl_zone_corner_out_slab.name=导流拐角1(台阶)
-
-tile.thick_white_line_45.name=粗白斜线
-tile.thick_white_line_slab_45.name=粗白斜线(台阶)
-tile.thick_yellow_line_45.name=粗黄斜线
-tile.thick_yellow_line_slab_45.name=粗黄斜线(台阶)
-
-tile.ms_lines.mergewhite.name=双白合并线
-tile.ms_lines.mergeyellow.name=双黄合并线
-tile.ms_lines.separatewhite.name=双白分离线
-tile.ms_lines.separateyellow.name=双白分离线
-
-tile.ms_lines_slab.mergewhite.name=双白合并线(台阶)
-tile.ms_lines_slab.mergeyellow.name=双黄合并线(台阶)
-tile.ms_lines_slab.separatewhite.name=双白分离线(台阶)
-tile.ms_lines_slab.separateyellow.name=双白分离线(台阶)
-tile.crosswalk_diagonal.name=人行横道斜线
-tile.crosswalk_diagonal_slab.name=人行横道斜线(台阶)
-death.dollancraft.vallid=[新闻] 某位因吃了来源不明的食物而BBQ了
-item.leungcraft.name=可口的湖水
-item.dollancraft.name=可口的东安
-commands.114514.successful=经过114514次的尝试,恭喜您,您已经恶臭成功了!
-commands.114514.usage=/114514 --- 用法:用于恶臭自己
-death.dollancraft.heng=[新闻] 有人因为试图恶臭别人，把自己弄死了
-tile.arrow_confluence_left.name=箭头-向左合流
-tile.arrow_confluence_left_sl.name=箭头-向左合流(台阶上)
-tile.arrow_confluence_right.name=箭头-向右合流箭头
-tile.arrow_confluence_right_sl.name=箭头-向右合流(台阶上)
-tile.arrow_diaotou_sl.name=箭头-调头(台阶上)
-tile.arrow_left_diaotou_sl.name=箭头-左转调头(台阶上)
-tile.arrow_left_right_sl.name=箭头-左右转(台阶上)
-tile.arrow_left_right_straight_sl.name=箭头-三向(台阶上)
-tile.arrow_left_sl.name=箭头-左转(台阶上)
-tile.arrow_left_straight_sl.name=箭头-左转直行(台阶上)
-tile.arrow_right_sl.name=箭头-右转(台阶上)
-tile.arrow_right_straight_sl.name=箭头-右转直行(台阶上)
-tile.arrow_straight_diaotou.name=箭头-直行调头
-tile.arrow_straight_diaotou_sl.name=箭头-直行调头(台阶上)
-tile.arrow_straight_sl.name=箭头-直行(台阶上)
+# 建筑材料
 tile.calcite.name=粗糙新大理石
 tile.cherry_planks.name=樱花木板
 tile.cracked_deepslate.bricks.name=裂纹深板岩石砖
 tile.cracked_deepslate.tiles.name=裂纹深板岩瓦
-tile.dollan_line_17.name=§2§l东安轨道交通§r 17号线
-tile.dollan_line_18.name=§2§l东安轨道交通§r 18号线
-tile.dollan_line_19.name=§2§l东安轨道交通§r 19号线
-tile.dollan_line_20.name=§2§l东安轨道交通§r 20号线
-tile.dollan_line_21.name=§2§l东安轨道交通§r 21号线
-tile.dollan_line_22.name=§2§l东安轨道交通§r 22号线
-tile.dollan_loop_line.name=§2§l东安轨道交通§r 东安城市环线
+tile.mangrove_planks.name=红木板
+tile.marble_block.name=磨制夸克大理石
+tile.platform_wall.name=站台墙方块
 tile.dollancustomized.beautiful_marble.bricks.name=精美大理石砖
 tile.dollancustomized.beautiful_marble.cut.name=精美切割大理石
 tile.dollancustomized.beautiful_marble.litcut.name=精美切割小块大理石
@@ -479,20 +530,55 @@ tile.dollancustomized.rock_2.name=棕色地板石
 tile.dollancustomized.sandy_bricks.name=沙制砖
 tile.dollancustomized.teacherblock.name=女僵尸方块
 tile.dollancustomized.white_color_purple_block.name=白色紫珀块
-tile.double_white_line_half.name=半双白线
-tile.double_white_line_half_slab.name=半双白线台阶
-tile.double_yellow_line_half.name=半双黄线
-tile.double_yellow_line_half_slab.name=半双黄线台阶
-tile.mangrove_planks.name=红木板
-tile.marble_block.name=磨制夸克大理石
-tile.platform_wall.name=站台墙方块
-tile.road_sign_one_way_straight.name=单行道标志
-tile.stop_line_right_1.name=停车线(右)
 
-tile.RoadTextMark.name=道路地面文字标识（自定义文字）
+# 物品
+item.leungcraft.name=可口的湖水
+item.dollancraft.name=可口的东安
 
+# 死亡消息
+death.dollancraft.vallid=[新闻] 某位因吃了来源不明的食物而BBQ了
+death.dollancraft.heng=[新闻] 有人因为试图恶臭别人，把自己弄死了
+
+# 命令
+commands.114514.successful=经过114514次的尝试,恭喜您,您已经恶臭成功了!
+commands.114514.usage=/114514 --- 用法:用于恶臭自己
+
+# 命令消息 - 中文
 commands.extfill.usage=/extfill undo 或 /extfill <x1> <y1> <z1> <x2> <y2> <z2> <方块名> [数据值|状态] [旧方块处理方式] [数据状态]
 commands.extfill.undo.success=已成功撤销上次填充操作!
 commands.extfill.undo.nothing=先生,没有东西可以撤销.
 commands.extfill.undo.playerOnly=只有玩家可以执行该指令
-tile.road_sign_height_limit_custom.name=自定义限高标志
+commands.treekiller.usage=/treekiller <半径> <模式> (模式: logs, leaves, both)
+commands.treekiller.invalidRadius=半径必须是1-100之间的数字!
+commands.treekiller.success_both=已成功在半径%d范围内移除%d个原木并更新%d个树叶状态
+commands.treekiller.success_logs=已成功在半径%d范围内移除%d个原木
+commands.treekiller.success_leaves=已成功在半径%d范围内更新%d个树叶状态
+commands.treekiller.undo_saved=已保存%d个操作（包含%d个方块），使用 /treeundo 撤销操作
+commands.treeundo.usage=/treeundo [撤销数量] [类型] - 撤销最近的树杀手操作（类型: all, logs, leaves）
+commands.treeundo.usage_type=/treeundo [数量] [类型] - 类型必须是 all（默认）、logs 或 leaves
+commands.treeundo.no_records=没有可撤销的记录！
+commands.treeundo.no_records_all=没有可撤销的记录！
+commands.treeundo.no_records_logs=没有可撤销的原木记录！
+commands.treeundo.no_records_leaves=没有可撤销的树叶记录！
+commands.treeundo.invalid_count=撤销次数必须是1-%d之间的数字！
+commands.treeundo.success=已成功撤销%d个方块（剩余%d条记录）
+commands.treeundo.success_logs=已成功撤销%d个原木（剩余%d条记录）
+commands.treeundo.success_leaves=已成功撤销%d个树叶（剩余%d条记录）
+commands.treeundo.skipped=跳过了%d个方块（区块未加载或恢复失败）
+
+# 物品组
+itemGroup.tabLight=东安自定义 | 灯具
+itemGroup.tabdollanMetro=东安自定义 | 东安轨道交通
+itemGroup.tabdollanTran=东安自定义 | 东安市域轨道交通
+itemGroup.tabMSMetro=东安自定义 | 鸣沙轨道交通
+itemGroup.tabRoad=东安自定义 | 道路
+itemGroup.tabRoadSigns=东安自定义 | 道路标志
+itemGroup.tabDollanBlocks=东安自定义 | 方块
+itemGroup.tabMetroBlocks=东安自定义 | 铁路
+itemGroup.tabmetro=东安自定义 | 方块
+
+# Jacaranda Sign
+tile.jacaranda_sign.name=蓝花楹木告示牌
+gui.done=完成
+gui.sign.click_to_edit=点击编辑文本
+gui.sign.shift_click_for_colors=按住Shift点击打开编辑界面

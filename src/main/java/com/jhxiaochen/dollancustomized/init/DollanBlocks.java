@@ -272,9 +272,9 @@ public static Block elder_sea_lantern = new DollanBlock5("elder_sea_lantern").se
 public static Block modern_stone_tile = new DollanBlock2("modern_stone_tile");
 public static Block froglight = new BlockFrogLight();
 public static Block marble_tile = new BlockMarbleTile();
-public static Block dollan_line_17 = new BlockMetroBlock2("dollan_line_17");
-public static Block dollan_line_18 = new BlockMetroBlock2("dollan_line_18");
-public static Block dollan_line_19 = new BlockMetroBlock2("dollan_line_19");
+public static Block dollan_line_17 = new BlockMetroBlock("dollan_line_17");
+public static Block dollan_line_18 = new BlockMetroBlock("dollan_line_18");
+public static Block dollan_line_19 = new BlockMetroBlock("dollan_line_19");
 
 public static Block overhead_lines = new OverheadLines("overhead_lines");
 public static Block overhead_lines_straighter = new OverheadLines("overhead_lines_straighter");

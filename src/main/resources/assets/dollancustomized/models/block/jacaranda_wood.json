@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "dollancustomized:blocks/jacaranda_log",
+        "side": "dollancustomized:blocks/jacaranda_log"
+    }
+}

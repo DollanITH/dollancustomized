@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "dollancustomized:blocks/jacaranda_door_bottom",
+        "top": "dollancustomized:blocks/jacaranda_door_top"
+    }
+}

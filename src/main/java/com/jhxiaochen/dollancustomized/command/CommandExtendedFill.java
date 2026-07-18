@@ -163,39 +163,68 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
                 }
 
                 List<UndoData> data = stack.pop();
+
+                System.out.println("[DEBUG] ExtFill Starting undo operation. Player: " + player.getName() + ", Blocks to restore: " + data.size());
                 storage.markDirty(); // 标记数据已更改以保存到磁盘
 
                 World world = player.getEntityWorld();
                 List<BlockPos> updatedPositions = new ArrayList<>();
+                int restoredCount = 0;
 
-                // 第一步：快速恢复方块状态，使用 flags=18 (不更新邻居，不触发渲染光照立刻更新，防止卡顿)
+                // 第一步：恢复方块状态，参考 treekiller 的实现
                 for (UndoData d : data) {
-                    // 数据冲突校验：如果当前方块状态不是我们记录的中间状态，说明被其他玩家改过，跳过避免覆盖
-                    IBlockState currentState = world.getBlockState(d.pos);
-                    if (currentState.getBlock() != d.block || currentState.getBlock().getMetaFromState(currentState) != d.meta) {
-                        // 如果已经被其他人改动，跳过此方块的安全回滚
+                    // 检查位置是否在加载的区块内
+                    if (!world.isBlockLoaded(d.pos)) {
+                        System.out.println("[DEBUG] Skipped block at " + d.pos + " - chunk not loaded");
                         continue;
                     }
 
-                    IBlockState restoreState = d.block.getStateFromMeta(d.meta);
-                    world.setBlockState(d.pos, restoreState, 18);
-                    updatedPositions.add(d.pos);
+                    IBlockState currentState = world.getBlockState(d.pos);
+                    Block currentBlock = currentState.getBlock();
 
-                    // 恢复 NBT 数据
-                    if (d.nbt != null) {
-                        TileEntity te = world.getTileEntity(d.pos);
-                        if (te != null) {
-                            te.readFromNBT(d.nbt);
+                    // Debug logging
+                    String originalBlockName = d.block.getRegistryName() != null ?
+                        d.block.getRegistryName().toString() : "unknown";
+                    String currentBlockName = currentBlock.getRegistryName() != null ?
+                        currentBlock.getRegistryName().toString() : "unknown";
+
+                    System.out.println("[DEBUG] Attempting to restore block at " + d.pos +
+                        ", original: " + originalBlockName +
+                        ", current: " + currentBlockName);
+
+                    // 检查当前方块是否与要恢复的方块相同
+                    IBlockState restoreState = d.block.getStateFromMeta(d.meta);
+                    if (currentState.equals(restoreState)) {
+                        System.out.println("[DEBUG] Block at " + d.pos + " already has correct state, skipping");
+                        continue;
+                    }
+
+                    // 设置方块状态，使用 flags=3 (更新邻居和客户端同步)
+                    if (world.setBlockState(d.pos, restoreState, 3)) {
+                        updatedPositions.add(d.pos);
+                        restoredCount++;
+                        System.out.println("[DEBUG] Successfully restored block at " + d.pos);
+
+                        // 恢复 NBT 数据
+                        if (d.nbt != null) {
+                            TileEntity te = world.getTileEntity(d.pos);
+                            if (te != null) {
+                                // 创建 NBT 的副本，避免修改原始存储的数据
+                                NBTTagCompound nbtCopy = d.nbt.copy();
+                                te.readFromNBT(nbtCopy);
+                            }
                         }
+                    } else {
+                        System.out.println("[DEBUG] Failed to restore block at " + d.pos);
                     }
                 }
 
-                // 第二步：统一对周围环境进行邻居更新，大幅提高性能
+                // 第二步：统一对周围环境进行邻居更新
                 for (BlockPos pos : updatedPositions) {
-                    world.notifyNeighborsOfStateChange(pos, world.getBlockState(pos).getBlock(), true);
+                    world.notifyNeighborsRespectDebug(pos, world.getBlockState(pos).getBlock(), false);
                 }
 
-                notifyCommandListener(sender, this, "commands.extfill.undo.success", new Object[] {updatedPositions.size()});
+                notifyCommandListener(sender, this, "commands.extfill.undo.success", new Object[] {restoredCount});
             });
             return;
         }
@@ -235,7 +264,7 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
 
                 NBTTagCompound nbttagcompound = new NBTTagCompound();
                 boolean flag = false;
-                if (args.length >= 10 && block.hasTileEntity(iblockstate)) {
+                if (args.length >= 11 && block.hasTileEntity(iblockstate)) {
                     String s = buildString(args, 9);
                     try {
                         nbttagcompound = JsonToNBT.getTagFromJson(s);
@@ -262,15 +291,40 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
                                         if (!world.isAirBlock(blockpos4)) {
                                             continue;
                                         }
-                                    } else if ("replace".equals(args[8]) && !block.hasTileEntity(iblockstate) && args.length > 9) {
+                                    } else if ("replace".equals(args[8]) && args.length > 9) {
                                         Block block1 = CommandBase.getBlockByText(sender, args[9]);
-                                        if (world.getBlockState(blockpos4).getBlock() != block1 || args.length > 10 && !"-1".equals(args[10]) && !"*".equals(args[10]) && !CommandBase.convertArgToBlockStatePredicate(block1, args[10]).apply(world.getBlockState(blockpos4))) {
+                                        if (block1 == null) {
                                             continue;
+                                        }
+                                        if (args.length > 10) {
+                                            if ("-1".equals(args[10]) || "*".equals(args[10])) {
+                                                // 替换所有方块 - 记录所有被替换的方块
+                                                if (!world.isAirBlock(blockpos4)) {
+                                                    recordUndoData(world, blockpos4, undoList);
+                                                }
+                                            } else {
+                                                IBlockState targetState = CommandBase.convertArgToBlockState(block1, args[10]);
+                                                if (targetState == null || !targetState.equals(world.getBlockState(blockpos4))) {
+                                                    continue;
+                                                }
+                                                // 记录被替换的方块
+                                                recordUndoData(world, blockpos4, undoList);
+                                            }
+                                        } else {
+                                            // 只有目标方块名，没有数据值
+                                            if (world.getBlockState(blockpos4).getBlock() != block1) {
+                                                continue;
+                                            }
+                                            // 记录被替换的方块
+                                            recordUndoData(world, blockpos4, undoList);
                                         }
                                     }
                                 } else if (j1 != blockpos2.getX() && j1 != blockpos3.getX() && i1 != blockpos2.getY() && i1 != blockpos3.getY() && l != blockpos2.getZ() && l != blockpos3.getZ()) {
                                     if ("hollow".equals(args[8])) {
-                                        if (sender instanceof EntityPlayer) recordUndoData(world, blockpos4, undoList);
+                                        // hollow 模式需要记录所有被清空的方块
+                                        if (!world.isAirBlock(blockpos4)) {
+                                            recordUndoData(world, blockpos4, undoList);
+                                        }
                                         world.setBlockState(blockpos4, Blocks.AIR.getDefaultState(), 2);
                                         list.add(blockpos4);
                                     }
@@ -303,10 +357,16 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
                     }
                 }
 
-                if (sender instanceof EntityPlayer && !undoList.isEmpty()) {
-                    UndoStorage storage = UndoStorage.get(server);
-                    storage.getStack(((EntityPlayer) sender).getUniqueID()).push(undoList);
-                    storage.markDirty();
+                if (!undoList.isEmpty()) {
+                    // 如果是玩家，使用 UUID 存储；如果不是玩家，使用玩家名字存储（对于控制台命令等情况）
+                    if (sender instanceof EntityPlayer) {
+                        UndoStorage storage = UndoStorage.get(server);
+                        storage.getStack(((EntityPlayer) sender).getUniqueID()).push(undoList);
+                        storage.markDirty();
+                    } else {
+                        // 对于非玩家，创建一个临时的撤销栈（可选，取决于是否需要支持控制台撤销）
+                        // 目前只支持玩家撤销
+                    }
                 }
 
                 for (BlockPos blockpos5 : list) {
@@ -333,7 +393,12 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
         NBTTagCompound oldNbt = null;
         TileEntity te = world.getTileEntity(pos);
         if (te != null) {
-            oldNbt = te.writeToNBT(new NBTTagCompound());
+            try {
+                // 创建新的 NBT 标签，避免修改原始数据
+                oldNbt = te.writeToNBT(new NBTTagCompound());
+            } catch (Exception e) {
+                System.out.println("[DEBUG] Failed to write NBT for block at " + pos + ": " + e.getMessage());
+            }
         }
         undoList.add(new UndoData(pos.toImmutable(), oldBlock, meta, oldNbt));
     }
@@ -347,10 +412,12 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
             return getTabCompletionCoordinate(args, 4, targetPos);
         } else if (args.length == 8) {
             return getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys());
-        } else if (args.length == 10) {
+        } else if (args.length == 9) {
             return getListOfStringsMatchingLastWord(args, new String[] {"replace", "destroy", "keep", "hollow", "outline"});
+        } else if (args.length == 10 && "replace".equals(args[8])) {
+            return getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys());
         } else {
-            return args.length == 11 && "replace".equals(args[9]) ? getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys()) : Collections.emptyList();
+            return Collections.emptyList();
         }
     }
 }

@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"particle": "blocks/light_gray_stained_glass",
-		"glass": "blocks/light_gray_stained_glass"
+		"particle": "blocks/glass_silver",
+		"glass": "blocks/glass_silver"
 	},
 	"elements": [
 		{

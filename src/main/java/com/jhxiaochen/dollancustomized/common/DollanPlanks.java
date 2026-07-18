@@ -13,7 +13,7 @@ public class DollanPlanks extends net.minecraft.block.Block {
         super(Material.WOOD);
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
-        this.setCreativeTab(DollanCustomized.Blocks);
+        this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(1F);
         this.setResistance(3F);
         this.setLightLevel(0F);

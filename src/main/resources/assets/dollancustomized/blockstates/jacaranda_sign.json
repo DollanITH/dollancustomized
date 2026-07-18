@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:jacaranda_sign"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

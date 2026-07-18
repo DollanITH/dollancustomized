@@ -2,17 +2,24 @@
   "forge_marker": 1,
   "variants": {
     "type": {
-      "full" : {"model": "dollancustomized:arrow_no_diaotou"},
-      "slab" : {"model": "dollancustomized:arrow_no_diaotou_sl"}
+      "full": {
+        "model": "dollancustomized:arrow_no_diaotou"
+      },
+      "slab": {
+        "model": "dollancustomized:arrow_no_diaotou_sl"
+      }
     },
     "facing": {
       "west": {
-        "y": 90},
+        "y": 90
+      },
       "north": {
-        "y": 180},
+        "y": 180
+      },
       "south": {},
       "east": {
-        "y": 270}
+        "y": 270
+      }
     }
   }
 }

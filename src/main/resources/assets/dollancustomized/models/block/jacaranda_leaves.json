@@ -1,0 +1,6 @@
+{
+    "parent": "block/leaves",
+    "textures": {
+        "all": "dollancustomized:blocks/jacaranda_leaves"
+    }
+}

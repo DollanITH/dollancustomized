@@ -45,7 +45,7 @@ public class RoadFontRenderer {
 
         // 启用混合以支持透明度
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
         // 使用最近邻过滤，实现像素风格
         GlStateManager.glTexParameteri(3553, 10241, 9728); // GL_TEXTURE_MIN_FILTER = GL_NEAREST

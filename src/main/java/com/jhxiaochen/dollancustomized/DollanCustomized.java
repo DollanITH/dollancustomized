@@ -2,14 +2,15 @@ package com.jhxiaochen.dollancustomized;
 
 import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
-import com.jhxiaochen.dollancustomized.command.Command114514;
-import com.jhxiaochen.dollancustomized.command.CommandExtendedFill;
+import com.jhxiaochen.dollancustomized.command.*;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
-import com.jhxiaochen.dollancustomized.network.NetworkHandler;
+import com.jhxiaochen.dollancustomized.network.ClientPacketHandler;
+import com.jhxiaochen.dollancustomized.network.PacketHandler;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -46,12 +47,13 @@ public class DollanCustomized {
     public static final CreativeTabs ROAD_TAB = new TabRoad();
     public static final CreativeTabs ROAD_Signs = new TabRoadSigns();
     public static final CreativeTabs Blocks = new TabBlocks();
+    public static final CreativeTabs WOOD_TAB = new TabWood();
 
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("Pre Init");
-        NetworkHandler.registerMessages();
+        PacketHandler.init();
         GameRegistry.registerTileEntity(
                 TileEntityRoadText.class,
                 new ResourceLocation(Reference.MOD_ID, "road_text") // ← 确保这个存在
@@ -60,7 +62,15 @@ public class DollanCustomized {
                 TileEntityHeightLimitSignCustom.class,
                 new ResourceLocation(Reference.MOD_ID, "height_limit_sign_custom")
         );
+        GameRegistry.registerTileEntity(
+                TileEntityJacarandaSign.class,
+                new ResourceLocation(Reference.MOD_ID, "jacaranda_sign")
+        );
+
+        
         MinecraftForge.EVENT_BUS.register(this);
+        // 注册客户端网络包处理器
+        MinecraftForge.EVENT_BUS.register(new ClientPacketHandler());
         Remaper.registerFixable();
         proxy.preInit();
     }
@@ -82,6 +92,9 @@ public class DollanCustomized {
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Command114514());
         event.registerServerCommand(new CommandExtendedFill());
+        event.registerServerCommand(new CommandTreeKiller());
+        event.registerServerCommand(new CommandTreeUndo());
+        event.registerServerCommand(new CommandTreeUndoDebug());
         System.out.println("Commands Registered successfully.");
     }
 

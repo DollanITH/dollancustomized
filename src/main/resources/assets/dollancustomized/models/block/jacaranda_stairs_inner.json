@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "dollancustomized:blocks/jacaranda_planks",
+        "top": "dollancustomized:blocks/jacaranda_planks",
+        "side": "dollancustomized:blocks/jacaranda_planks"
+    }
+}

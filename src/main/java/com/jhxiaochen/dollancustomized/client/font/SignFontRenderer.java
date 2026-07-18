@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 /**
  * 限高牌专用字体渲染器
@@ -36,7 +35,7 @@ public class SignFontRenderer {
         }
 
         if (color == 0) {
-            color = 0xFF000000; // 默认白色
+            color = 0xFFFFFFFF; // 默认白色
         }
 
         float a = ((color >> 24) & 0xFF) / 255.0F;
@@ -52,7 +51,7 @@ public class SignFontRenderer {
 
         // 启用混合以支持透明度
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
         // 使用最近邻过滤保持像素清晰度
         GlStateManager.glTexParameteri(3553, 10241, 9729); // GL_TEXTURE_MIN_FILTER = GL_NEAREST
@@ -136,11 +135,11 @@ public class SignFontRenderer {
 
         // 启用混合以支持透明度
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
         // 使用线性过滤以获得平滑的抗锯齿效果
-        GlStateManager.glTexParameteri(3553, 10241, 9726); // GL_TEXTURE_MIN_FILTER = GL_LINEAR
-        GlStateManager.glTexParameteri(3553, 10240, 9726); // GL_TEXTURE_MAG_FILTER = GL_LINEAR
+        GlStateManager.glTexParameteri(3553, 10241, 9728); // GL_TEXTURE_MIN_FILTER = GL_LINEAR
+        GlStateManager.glTexParameteri(3553, 10240, 9728); // GL_TEXTURE_MAG_FILTER = GL_LINEAR
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, -0.015F);

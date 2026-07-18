@@ -1,0 +1,45 @@
+{
+  "parent": "block/block",
+  "credit": "Made with Blockbench",
+  "ambientocclusion": false,
+  "textures": {
+    "0": "dollancustomized:blocks/roads/arrow_confluence_left",
+    "particle": "dollancustomized:blocks/roads/arrow_confluence_left"
+  },
+  "elements": [
+    {
+      "from": [
+        -6,
+        3.99,
+        -6
+      ],
+      "to": [
+        22,
+        4,
+        22
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "rotation": 180,
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}

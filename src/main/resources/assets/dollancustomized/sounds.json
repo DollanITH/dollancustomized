@@ -14,5 +14,127 @@
   "block.deepslate.place":{
     "subtitle" :"subtitles.block.generic.place",
     "sounds":["dollancustomized:block/deepslate/place"]
+  },
+  "item.axe.strip": {
+    "sounds": [
+      "dollancustomized:item/axe/strip1",
+      "dollancustomized:item/axe/strip2",
+      "dollancustomized:item/axe/strip3",
+      "dollancustomized:item/axe/strip4"
+    ],
+    "subtitle": "subtitles.item.axe.strip"
+  },
+  "block.cherry_leaves.break": {
+    "sounds": [
+      "dollancustomized:block/cherry_leaves/break1",
+      "dollancustomized:block/cherry_leaves/break2",
+      "dollancustomized:block/cherry_leaves/break3",
+      "dollancustomized:block/cherry_leaves/break4",
+      "dollancustomized:block/cherry_leaves/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.cherry_leaves.step": {
+    "sounds": [
+      "dollancustomized:block/cherry_leaves/step1",
+      "dollancustomized:block/cherry_leaves/step2",
+      "dollancustomized:block/cherry_leaves/step3",
+      "dollancustomized:block/cherry_leaves/step4",
+      "dollancustomized:block/cherry_leaves/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.cherry_leaves.place": {
+    "sounds": [
+      "dollancustomized:block/cherry_leaves/break1",
+      "dollancustomized:block/cherry_leaves/break2",
+      "dollancustomized:block/cherry_leaves/break3",
+      "dollancustomized:block/cherry_leaves/break4",
+      "dollancustomized:block/cherry_leaves/break5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.cherry_leaves.hit": {
+    "sounds": [
+      "dollancustomized:block/cherry_leaves/step1",
+      "dollancustomized:block/cherry_leaves/step2",
+      "dollancustomized:block/cherry_leaves/step3",
+      "dollancustomized:block/cherry_leaves/step4",
+      "dollancustomized:block/cherry_leaves/step5"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.cherry_leaves.fall": {
+    "sounds": [
+      "dollancustomized:block/cherry_leaves/step1",
+      "dollancustomized:block/cherry_leaves/step2",
+      "dollancustomized:block/cherry_leaves/step3",
+      "dollancustomized:block/cherry_leaves/step4",
+      "dollancustomized:block/cherry_leaves/step5"
+    ]
+  },
+  "block.cherry_wood.break": {
+    "sounds": [
+      "dollancustomized:block/cherry_wood/break1",
+      "dollancustomized:block/cherry_wood/break2",
+      "dollancustomized:block/cherry_wood/break3",
+      "dollancustomized:block/cherry_wood/break4",
+      "dollancustomized:block/cherry_wood/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.cherry_wood.step": {
+    "sounds": [
+      "dollancustomized:block/cherry_wood/step1",
+      "dollancustomized:block/cherry_wood/step2",
+      "dollancustomized:block/cherry_wood/step3",
+      "dollancustomized:block/cherry_wood/step4",
+      "dollancustomized:block/cherry_wood/step5",
+      "dollancustomized:block/cherry_wood/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.cherry_wood.place": {
+    "sounds": [
+      "dollancustomized:block/cherry_wood/break1",
+      "dollancustomized:block/cherry_wood/break2",
+      "dollancustomized:block/cherry_wood/break3",
+      "dollancustomized:block/cherry_wood/break4",
+      "dollancustomized:block/cherry_wood/break5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.cherry_wood.hit": {
+    "sounds": [
+      "dollancustomized:block/cherry_wood/step1",
+      "dollancustomized:block/cherry_wood/step2",
+      "dollancustomized:block/cherry_wood/step3",
+      "dollancustomized:block/cherry_wood/step4",
+      "dollancustomized:block/cherry_wood/step5",
+      "dollancustomized:block/cherry_wood/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.cherry_wood.fall": {
+    "sounds": [
+      "dollancustomized:block/cherry_wood/step1",
+      "dollancustomized:block/cherry_wood/step2",
+      "dollancustomized:block/cherry_wood/step3",
+      "dollancustomized:block/cherry_wood/step4",
+      "dollancustomized:block/cherry_wood/step5",
+      "dollancustomized:block/cherry_wood/step6"
+    ]
+  },
+  "block.cherry_button.click": {
+    "sounds": [
+      "dollancustomized:block/cherry_button/cherry_button_click"
+    ],
+    "subtitle": "subtitles.block.button.click"
+  },
+  "block.cherry_button.restore": {
+    "sounds": [
+      "dollancustomized:block/cherry_button/cherry_button_restore"
+    ],
+    "subtitle": "subtitles.block.button.click"
   }
 }

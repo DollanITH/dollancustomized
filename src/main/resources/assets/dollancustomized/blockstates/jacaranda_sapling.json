@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "stage=0": { "model": "dollancustomized:jacaranda_sapling" },
+        "stage=1": { "model": "dollancustomized:jacaranda_sapling" }
+    }
+}

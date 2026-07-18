@@ -7,7 +7,9 @@ import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.font.SignFontRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderRoadText;
+import com.jhxiaochen.dollancustomized.client.renderer.tileentity.TileEntityJacarandaSignRenderer;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,8 +43,12 @@ public class ClientProxy implements CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadText.class, new RenderRoadText());
         // 使用点测试渲染器
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeightLimitSignCustom.class, new RenderHeightLimitSignCustom());
-    }
+        // 注册蓝花楹木告示牌渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJacarandaSign.class, new TileEntityJacarandaSignRenderer());
 
+            }
+
+    
     @Override
     public void postInit() {
 

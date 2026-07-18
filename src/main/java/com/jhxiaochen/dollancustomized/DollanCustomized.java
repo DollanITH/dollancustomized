@@ -4,6 +4,8 @@ import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.command.Command114514;
 import com.jhxiaochen.dollancustomized.command.CommandExtendedFill;
+import com.jhxiaochen.dollancustomized.command.CommandTreeKiller;
+import com.jhxiaochen.dollancustomized.command.CommandTreeKillerUndo;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
@@ -82,6 +84,8 @@ public class DollanCustomized {
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new Command114514());
         event.registerServerCommand(new CommandExtendedFill());
+        event.registerServerCommand(new CommandTreeKiller());
+        event.registerServerCommand(new CommandTreeKillerUndo());
         System.out.println("Commands Registered successfully.");
     }
 

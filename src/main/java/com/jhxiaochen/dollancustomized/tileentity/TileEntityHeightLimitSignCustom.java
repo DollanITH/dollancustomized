@@ -12,7 +12,6 @@ public class TileEntityHeightLimitSignCustom extends TileEntity {
 
     public TileEntityHeightLimitSignCustom() {
         super();
-        System.out.println("[TileEntityHeightLimit] 创建新实例，默认值: 整数=" + integerPart + ", 小数=" + decimalPart);
     }
 
     // 【核心修复1】解除 64 格距离限制
@@ -132,10 +131,11 @@ public class TileEntityHeightLimitSignCustom extends TileEntity {
     }
 
     /**
-     * 设置整数部分
+     * 设置整数部分（限制为个位数：0-9）
      */
     public void setIntegerPart(int integerPart) {
-        this.integerPart = Math.max(0, Math.min(99, integerPart));
+        // 限制整数部分为个位数（0-9）
+        this.integerPart = Math.max(0, Math.min(9, integerPart));
     }
 
     /**

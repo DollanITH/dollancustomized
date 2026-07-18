@@ -497,6 +497,16 @@ commands.extfill.usage=/extfill undo or /extfill <x1> <y1> <z1> <x2> <y2> <z2> <
 commands.extfill.undo.success=Undo successfully!
 commands.extfill.undo.nothing=Nothing undo.
 commands.extfill.undo.playerOnly=Only player can run the command!
+commands.treekiller.usage=/treekiller <radius> <mode> (mode: logs, leaves, both)
+commands.treekiller.invalidRadius=Radius must be a number between 1-100!
+commands.treekiller.success_both=Successfully removed %d logs and updated %d leaves within radius %d
+commands.treekiller.success_logs=Successfully removed %d logs within radius %d
+commands.treekiller.success_leaves=Successfully updated %d leaves within radius %d
+commands.treekiller.undo_saved=Saved %d undo records. Use /treeundo to revert operations
+commands.treeundo.usage=/treeundo [count] - Undo recent tree killer operations
+commands.treeundo.no_records=No undo records available!
+commands.treeundo.invalid_count=Undo count must be a number between 1-%d!
+commands.treeundo.success=Successfully restored %d blocks (%d records remaining)
 
 tile.separate_diagonal.white_0.name=双白一侧分离线
 tile.separate_diagonal.white_1.name=双白一侧分离线

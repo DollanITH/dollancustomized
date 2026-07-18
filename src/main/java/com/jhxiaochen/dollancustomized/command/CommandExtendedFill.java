@@ -170,9 +170,10 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
 
                 // 第一步：快速恢复方块状态，使用 flags=18 (不更新邻居，不触发渲染光照立刻更新，防止卡顿)
                 for (UndoData d : data) {
-                    // 数据冲突校验：如果当前方块状态不是我们记录的中间状态，说明被其他玩家改过，跳过避免覆盖
+                    // 数据冲突校验：如果当前方块状态不是我们记录的原始状态，说明被其他玩家改过，跳过避免覆盖
                     IBlockState currentState = world.getBlockState(d.pos);
-                    if (currentState.getBlock() != d.block || currentState.getBlock().getMetaFromState(currentState) != d.meta) {
+                    IBlockState expectedState = d.block.getStateFromMeta(d.meta);
+                    if (!currentState.equals(expectedState)) {
                         // 如果已经被其他人改动，跳过此方块的安全回滚
                         continue;
                     }
@@ -235,7 +236,7 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
 
                 NBTTagCompound nbttagcompound = new NBTTagCompound();
                 boolean flag = false;
-                if (args.length >= 10 && block.hasTileEntity(iblockstate)) {
+                if (args.length >= 11 && block.hasTileEntity(iblockstate)) {
                     String s = buildString(args, 9);
                     try {
                         nbttagcompound = JsonToNBT.getTagFromJson(s);
@@ -262,10 +263,25 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
                                         if (!world.isAirBlock(blockpos4)) {
                                             continue;
                                         }
-                                    } else if ("replace".equals(args[8]) && !block.hasTileEntity(iblockstate) && args.length > 9) {
+                                    } else if ("replace".equals(args[8]) && args.length > 9) {
                                         Block block1 = CommandBase.getBlockByText(sender, args[9]);
-                                        if (world.getBlockState(blockpos4).getBlock() != block1 || args.length > 10 && !"-1".equals(args[10]) && !"*".equals(args[10]) && !CommandBase.convertArgToBlockStatePredicate(block1, args[10]).apply(world.getBlockState(blockpos4))) {
+                                        if (block1 == null) {
                                             continue;
+                                        }
+                                        if (args.length > 10) {
+                                            if ("-1".equals(args[10]) || "*".equals(args[10])) {
+                                                // 替换所有方块
+                                            } else {
+                                                IBlockState targetState = CommandBase.convertArgToBlockState(block1, args[10]);
+                                                if (targetState == null || !targetState.equals(world.getBlockState(blockpos4))) {
+                                                    continue;
+                                                }
+                                            }
+                                        } else {
+                                            // 只有目标方块名，没有数据值
+                                            if (world.getBlockState(blockpos4).getBlock() != block1) {
+                                                continue;
+                                            }
                                         }
                                     }
                                 } else if (j1 != blockpos2.getX() && j1 != blockpos3.getX() && i1 != blockpos2.getY() && i1 != blockpos3.getY() && l != blockpos2.getZ() && l != blockpos3.getZ()) {
@@ -347,10 +363,12 @@ public class CommandExtendedFill extends CommandBase implements ICommand {
             return getTabCompletionCoordinate(args, 4, targetPos);
         } else if (args.length == 8) {
             return getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys());
-        } else if (args.length == 10) {
+        } else if (args.length == 9) {
             return getListOfStringsMatchingLastWord(args, new String[] {"replace", "destroy", "keep", "hollow", "outline"});
+        } else if (args.length == 10 && "replace".equals(args[8])) {
+            return getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys());
         } else {
-            return args.length == 11 && "replace".equals(args[9]) ? getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys()) : Collections.emptyList();
+            return Collections.emptyList();
         }
     }
 }

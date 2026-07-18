@@ -39,6 +39,22 @@ public class SignFontLoader {
         this(fontLocation, fontSize, 1.0f);
     }
 
+    /**
+     * 构造函数：分别设置整数部分和小数部分的缩放比例
+     * @param fontLocation 字体资源位置
+     * @param fontSize 字体大小
+     * @param integerPartScale 整数部分的缩放比例
+     * @param fractionalPartScale 小数部分的缩放比例
+     */
+    public SignFontLoader(ResourceLocation fontLocation, float fontSize,
+                         float integerPartScale, float fractionalPartScale) {
+        this.fontLocation = fontLocation;
+        this.fontSize = fontSize;
+        this.renderScale = integerPartScale; // 保持向后兼容
+        loadFont();
+        createTexture();
+    }
+
     // 用于边缘抗锯齿的临时缓冲区
     private static final int EDGE_SCALE = 4; // 边缘抗锯齿放大倍数
 
@@ -62,10 +78,11 @@ public class SignFontLoader {
         this.graphics2D.setFont(this.rawFont);
         this.graphics2D.setColor(Color.WHITE);
 
-        // 彻底关闭抗锯齿（用于基础纹理生成）
-        this.graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-        this.graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        // 启用适度抗锯齿，确保数字可见
+        this.graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        this.graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         this.graphics2D.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
+        this.graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
         this.textureLocation = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation("road_text_font_dynamic", dynamicTexture);
 
@@ -175,4 +192,5 @@ public class SignFontLoader {
     public float getRenderScale() {
         return renderScale;
     }
+
 }

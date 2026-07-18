@@ -6,10 +6,11 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 /**
  * 限高牌专用字体渲染器
- * 使用边缘抗锯齿渲染，视觉效果更好
+ * 使用精细的抗锯齿渲染，视觉效果更好
  */
 public class SignFontRenderer {
     private final SignFontLoader signFontLoader;
@@ -35,7 +36,7 @@ public class SignFontRenderer {
         }
 
         if (color == 0) {
-            color = 0xFFFFFFFF; // 默认白色
+            color = 0xFF000000; // 默认白色
         }
 
         float a = ((color >> 24) & 0xFF) / 255.0F;
@@ -49,52 +50,47 @@ public class SignFontRenderer {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(signFontLoader.getTextureLocation());
 
-        // 设置混合模式（参考原版FontRenderer）
+        // 启用混合以支持透明度
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(
-                GlStateManager.SourceFactor.SRC_ALPHA,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
-        );
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        // 禁用深度测试和写入（参考原版）
-        GlStateManager.disableDepth();
-        GlStateManager.depthMask(false);
+        // 使用最近邻过滤保持像素清晰度
+        GlStateManager.glTexParameteri(3553, 10241, 9729); // GL_TEXTURE_MIN_FILTER = GL_NEAREST
+        GlStateManager.glTexParameteri(3553, 10240, 9729); // GL_TEXTURE_MAG_FILTER = GL_NEAREST
 
-        // 禁用纹理过滤（参考原版）
-        GlStateManager.glTexParameteri(3553, 10241, 9728);
-        GlStateManager.glTexParameteri(3553, 10240, 9728);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, -0.015F);
 
         float scale = signFontLoader.getRenderScale();
-        float currentX = x;
-        float currentY = y;
+        float currentX = 0;
 
         for (char c : text.toCharArray()) {
             float[] data = signFontLoader.getCharData(c);
             if (data == null) {
-                System.err.println("[SignFontRenderer] No char data for: " + c);
-                continue;
+                signFontLoader.drawCharToTexture(c);
+                data = signFontLoader.getCharData(c);
             }
+            if (data == null) continue;
 
-            float u1 = data[0];
-            float v1 = data[1];
-            float widthUV = data[2];
-            float heightUV = data[3];
+            int texX = (int) (data[0] * signFontLoader.textureWidth);
+            int texY = (int) (data[1] * signFontLoader.textureHeight);
+            int texW = (int) (data[2] * signFontLoader.textureWidth);
+            int texH = (int) (data[3] * signFontLoader.textureHeight);
 
-            int renderW = MathHelper.floor(widthUV * signFontLoader.textureWidth / scale);
-            int renderH = MathHelper.floor(heightUV * signFontLoader.textureHeight / scale);
+            if (texW <= 0) texW = (int) signFontLoader.getRawFont().getSize();
+            if (texH <= 0) texH = (int) signFontLoader.getRawFont().getSize();
 
-            // UV坐标
-            u1 = MathHelper.clamp(u1, 0.0F, 1.0F);
-            v1 = MathHelper.clamp(v1, 0.0F, 1.0F);
-            float u2 = MathHelper.clamp(u1 + widthUV, 0.0F, 1.0F);
-            float v2 = MathHelper.clamp(v1 + heightUV, 0.0F, 1.0F);
+            int renderW = MathHelper.floor(texW / scale);
+            int renderH = MathHelper.floor(texH / scale);
+
+            float u1 = MathHelper.clamp((float) texX / (float) signFontLoader.textureWidth, 0.0F, 1.0F);
+            float v1 = MathHelper.clamp((float) texY / (float) signFontLoader.textureHeight, 0.0F, 1.0F);
+            float u2 = MathHelper.clamp((float) (texX + texW) / (float) signFontLoader.textureWidth, 0.0F, 1.0F);
+            float v2 = MathHelper.clamp((float) (texY + texH) / (float) signFontLoader.textureHeight, 0.0F, 1.0F);
 
             int drawX = MathHelper.floor(currentX);
-            int drawY = MathHelper.floor(currentY);
+            int drawY = 0;
 
-            // 绘制四边形
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder buffer = tessellator.getBuffer();
             buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
@@ -107,39 +103,117 @@ public class SignFontRenderer {
             currentX += renderW;
         }
 
-        // 恢复GL状态（参考原版）
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableCull();
         GlStateManager.enableDepth();
-        GlStateManager.depthMask(true);
         GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
     }
 
     /**
-     * 绘制白色文字
+     * 绘制带极精细抗锯齿的文字
+     * 使用最小范围的边缘处理，避免文字过粗
      */
-    public void drawWhiteString(String text, float x, float y) {
-        drawString(text, x, y, 0xFFFFFFFF);
+    public void drawStringWithOutline(String text, float x, float y, int color) {
+        if (signFontLoader == null || signFontLoader.getTextureLocation() == null || text == null || text.isEmpty()) {
+            return;
+        }
+
+        if (color == 0) {
+            color = 0xFF000000; // 默认黑色轮廓
+        }
+
+        float a = ((color >> 24) & 0xFF) / 255.0F;
+        float r = ((color >> 16) & 0xFF) / 255.0F;
+        float g = ((color >> 8) & 0xFF) / 255.0F;
+        float b = (color & 0xFF) / 255.0F;
+
+        if (a <= 0) {
+            a = 1.0F;
+        }
+
+        Minecraft.getMinecraft().getTextureManager().bindTexture(signFontLoader.getTextureLocation());
+
+        // 启用混合以支持透明度
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        // 使用线性过滤以获得平滑的抗锯齿效果
+        GlStateManager.glTexParameteri(3553, 10241, 9726); // GL_TEXTURE_MIN_FILTER = GL_LINEAR
+        GlStateManager.glTexParameteri(3553, 10240, 9726); // GL_TEXTURE_MAG_FILTER = GL_LINEAR
+
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, -0.015F);
+
+        float scale = signFontLoader.getRenderScale();
+        float currentX = 0;
+
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+
+        // 单次渲染：绘制主体文字
+        for (char c : text.toCharArray()) {
+            float[] data = signFontLoader.getCharData(c);
+            if (data == null) {
+                signFontLoader.drawCharToTexture(c);
+                data = signFontLoader.getCharData(c);
+            }
+            if (data == null) continue;
+
+            int texX = (int) (data[0] * signFontLoader.textureWidth);
+            int texY = (int) (data[1] * signFontLoader.textureHeight);
+            int texW = (int) (data[2] * signFontLoader.textureWidth);
+            int texH = (int) (data[3] * signFontLoader.textureHeight);
+
+            if (texW <= 0) texW = (int) signFontLoader.getRawFont().getSize();
+            if (texH <= 0) texH = (int) signFontLoader.getRawFont().getSize();
+
+            int renderW = MathHelper.floor(texW / scale);
+            int renderH = MathHelper.floor(texH / scale);
+
+            float u1 = MathHelper.clamp((float) texX / (float) signFontLoader.textureWidth, 0.0F, 1.0F);
+            float v1 = MathHelper.clamp((float) texY / (float) signFontLoader.textureHeight, 0.0F, 1.0F);
+            float u2 = MathHelper.clamp((float) (texX + texW) / (float) signFontLoader.textureWidth, 0.0F, 1.0F);
+            float v2 = MathHelper.clamp((float) (texY + texH) / (float) signFontLoader.textureHeight, 0.0F, 1.0F);
+
+            int drawX = MathHelper.floor(currentX);
+            int drawY = 0;
+
+            // 先绘制主体文字
+            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+            buffer.pos(drawX, drawY, 0).tex(u1, v1).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).color(r, g, b, a).endVertex();
+            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).color(r, g, b, a).endVertex();
+            tessellator.draw();
+
+            // 再绘制极精细的抗锯齿边缘（范围缩小到1/3）
+            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+
+            // 仅下边缘微小抗锯齿（最小范围）
+            buffer.pos(drawX + 0.2f, drawY + renderH - 0.2f, 0).tex(u1, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.08f).endVertex();
+            buffer.pos(drawX + renderW - 0.2f, drawY + renderH - 0.2f, 0).tex(u2, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.08f).endVertex();
+
+            // 四个角落的微弱抗锯齿（极小范围）
+            buffer.pos(drawX - 0.1f, drawY - 0.1f, 0).tex(u1, v1).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
+            buffer.pos(drawX + renderW + 0.1f, drawY - 0.1f, 0).tex(u2, v1).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
+            buffer.pos(drawX - 0.1f, drawY + renderH + 0.1f, 0).tex(u1, v2).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
+            buffer.pos(drawX + renderW + 0.1f, drawY + renderH + 0.1f, 0).tex(u2, v2).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
+
+            tessellator.draw();
+
+            currentX += renderW;
+        }
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.enableCull();
+        GlStateManager.enableDepth();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
     }
 
     /**
-     * 绘制黄色文字
-     */
-    public void drawYellowString(String text, float x, float y) {
-        drawString(text, x, y, 0xFFEBE84E);
-    }
-
-    /**
-     * 绘制文字（带透明度）
-     */
-    public void drawWithAlpha(String text, float x, float y, int color, float alpha) {
-        int originalColor = color;
-        color = (color & 0x00FFFFFF) | ((int) (alpha * 255) << 24);
-        drawString(text, x, y, color);
-    }
-
-    /**
-     * 绘制文字（别名，用于平滑边缘效果）
+     * 绘制平滑文字（带抗锯齿）
      */
     public void drawSmoothString(String text, float x, float y, int color) {
         drawString(text, x, y, color);

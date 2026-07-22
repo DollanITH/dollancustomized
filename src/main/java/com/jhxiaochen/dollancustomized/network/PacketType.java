@@ -33,4 +33,13 @@ public enum PacketType {
     public Side getTargetSide() {
         return targetSide;
     }
+
+    public static void validateIds() {
+        for (PacketType t1 : values()) {
+            for (PacketType t2 : values()) {
+                if (t1 != t2 && t1.id == t2.id)
+                    throw new IllegalStateException("Duplicate ID: " + t1.id);
+            }
+        }
+    }
 }

@@ -37,7 +37,7 @@ public class CommandTreeKillerUndo extends CommandBase {
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         String playerName = sender.getName();
-        List<CommandTreeKiller.BlockChangeRecord> records = undoManager.getRecords(playerName);
+        List<CommandTreeKiller.BlockChangeRecord> records = undoManager.getAllChanges(playerName);
 
         if (records.isEmpty()) {
             throw new CommandException("commands.treeundo.no_records");
@@ -72,14 +72,14 @@ public class CommandTreeKillerUndo extends CommandBase {
 
         // 通知执行结果
         notifyCommandListener(sender, this, "commands.treeundo.success",
-                new Object[]{restoredBlocks, undoManager.getUndoCount(playerName)});
+                new Object[]{restoredBlocks, undoManager.getTotalChangeCount(playerName)});
     }
 
     @Override
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
         if (args.length == 1) {
             String playerName = sender.getName();
-            List<CommandTreeKiller.BlockChangeRecord> records = undoManager.getRecords(playerName);
+            List<CommandTreeKiller.BlockChangeRecord> records = undoManager.getAllChanges(playerName);
 
             // 提供建议的撤销数量（1, 2, 3, 4）
             return getListOfStringsMatchingLastWord(args,

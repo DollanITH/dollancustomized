@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
-import com.jhxiaochen.dollancustomized.network.PacketHandler;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -13,7 +13,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
@@ -45,8 +44,7 @@ public class JacarandaSign extends BlockContainer {
                                         DollanSounds.BLOCK_CHERRY_WOOD_PLACE,
                                         DollanSounds.BLOCK_CHERRY_WOOD_HIT,
                                         DollanSounds.BLOCK_CHERRY_WOOD_FALL));
-        this.setUnlocalizedName("jacaranda_sign").setHardness(1.0F);
-        this.setRegistryName(Reference.MOD_ID, "jacaranda_sign");
+        this.setHardness(1.0F);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -114,8 +112,8 @@ public class JacarandaSign extends BlockContainer {
                 // 如果玩家按住Shift键，打开GUI
                 if (playerIn.isSneaking()) {
                     // 发送打开GUI的包
-                    if (PacketHandler.isServerPlayer(playerIn)) {
-                        PacketHandler.sendOpenJacarandaSignGuiPacket((net.minecraft.entity.player.EntityPlayerMP) playerIn, pos);
+                    if (NetworkManager.isServerPlayer(playerIn)) {
+                        NetworkManager.openSignGui((net.minecraft.entity.player.EntityPlayerMP) playerIn, pos);
                     }
                     return true;
                 } else {
@@ -154,12 +152,8 @@ public class JacarandaSign extends BlockContainer {
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
             event.getRegistry().register(
-                    jacaranda_sign = new JacarandaSign());
+                    jacaranda_sign = new JacarandaSign().setRegistryName(Reference.MOD_ID, "jacaranda_sign").setUnlocalizedName("jacaranda_sign"));
         }
 
-        @SubscribeEvent
-        public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(new ItemBlock(jacaranda_sign).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_sign").setRegistryName(jacaranda_sign.getRegistryName()));
-        }
     }
 }

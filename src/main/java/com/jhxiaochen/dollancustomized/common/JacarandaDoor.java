@@ -26,7 +26,7 @@ import java.util.Random;
 public class JacarandaDoor extends BlockDoor {
     public JacarandaDoor() {
         super(Material.WOOD);
-        this.setRegistryName(Reference.MOD_ID + "jacaranda_door");
+        this.setRegistryName(Reference.MOD_ID , "jacaranda_door");
         this.setSoundType(new SoundType(1.0F, 1.0F,
                                         DollanSounds.BLOCK_CHERRY_WOOD_BREAK,
                                         DollanSounds.BLOCK_CHERRY_WOOD_STEP,

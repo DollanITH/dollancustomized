@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
-import com.jhxiaochen.dollancustomized.network.MessageRoadText;
-import com.jhxiaochen.dollancustomized.network.NetworkHandler;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.network.packet.PacketRoadText;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -65,7 +65,9 @@ public class GuiRoadText extends GuiScreen {
 
     // 【新增】提取保存并关闭的逻辑为独立方法，方便键盘事件调用
     private void saveAndClose() {
-        NetworkHandler.DOLLAN_NETWORK.sendToServer(new MessageRoadText(this.tileEntity.getPos(), this.textField.getText(), this.currentColorMode));
+        // 创建并发送包到服务器
+        PacketRoadText packet = new PacketRoadText(this.tileEntity.getPos(), this.textField.getText(), this.currentColorMode);
+        NetworkManager.INSTANCE.sendToServer(packet);
         this.mc.displayGuiScreen(null);
     }
 

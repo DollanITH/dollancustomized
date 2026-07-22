@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
-import com.jhxiaochen.dollancustomized.network.MessageHeightLimitSignCustom;
-import com.jhxiaochen.dollancustomized.network.NetworkHandler;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.network.packet.PacketHeightLimitSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -73,9 +73,10 @@ public class GuiHeightLimitSignCustom extends GuiScreen {
             integer = Math.max(2, Math.min(6, integer));
             decimal = Math.max(0, Math.min(9, decimal));
 
-            // 发送到服务器
-            NetworkHandler.DOLLAN_NETWORK.sendToServer(new MessageHeightLimitSignCustom(this.tileEntity.getPos(),
-                String.format("%d.%d", integer, decimal)));
+            // 创建并发送包到服务器
+            PacketHeightLimitSign packet = new PacketHeightLimitSign(this.tileEntity.getPos(),
+                String.format("%d.%d", integer, decimal));
+            NetworkManager.INSTANCE.sendToServer(packet);
         } catch (NumberFormatException e) {
             // 输入无效，恢复默认值4.8
             this.integerField.setText("4");

@@ -1,22 +1,18 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
-import com.jhxiaochen.dollancustomized.network.BasePacket;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-/**
- * 限高路牌网络包（客户端 -> 服务端）
- */
 public class PacketHeightLimitSign extends BasePacket {
     public String heightValue;
 
     public PacketHeightLimitSign() {}
-
     public PacketHeightLimitSign(BlockPos pos, String heightValue) {
         super(pos);
         this.heightValue = heightValue;
@@ -36,38 +32,38 @@ public class PacketHeightLimitSign extends BasePacket {
 
     public static class Handler implements IMessageHandler<PacketHeightLimitSign, IMessage> {
         @Override
-        public IMessage onMessage(PacketHeightLimitSign message, MessageContext ctx) {
+        public IMessage onMessage(PacketHeightLimitSign msg, MessageContext ctx) {
+            if (!ctx.side.isServer()) return null;
             FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> {
-                World world = ctx.getServerHandler().player.world;
-                TileEntity te = world.getTileEntity(message.pos);
-                if (te instanceof TileEntityHeightLimitSignCustom) {
-                    TileEntityHeightLimitSignCustom heightSign = (TileEntityHeightLimitSignCustom) te;
+                try {
+                    World world = ctx.getServerHandler().player.world;
+                    if (world == null || msg.pos == null || msg.heightValue == null) return;
 
-                    try {
-                        if (message.heightValue != null && !message.heightValue.isEmpty()) {
-                            if (message.heightValue.contains(".")) {
-                                String[] parts = message.heightValue.split("\\.");
-                                if (parts.length >= 1) {
-                                    heightSign.setIntegerPart(Integer.parseInt(parts[0]));
-                                }
-                                if (parts.length >= 2) {
-                                    heightSign.setDecimalPart(Integer.parseInt(parts[1]));
-                                } else {
-                                    heightSign.setDecimalPart(0);
-                                }
+                    TileEntity te = world.getTileEntity(msg.pos);
+                    if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom) {
+                        com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom sign =
+                            (com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom) te;
+
+                        try {
+                            if (msg.heightValue.contains(".")) {
+                                String[] parts = msg.heightValue.split("\\.");
+                                sign.setIntegerPart(parts.length > 0 ? Integer.parseInt(parts[0]) : 0);
+                                sign.setDecimalPart(parts.length > 1 ? Integer.parseInt(parts[1]) : 0);
                             } else {
-                                heightSign.setIntegerPart(Integer.parseInt(message.heightValue));
-                                heightSign.setDecimalPart(0);
+                                sign.setIntegerPart(Integer.parseInt(msg.heightValue));
+                                sign.setDecimalPart(0);
                             }
+                        } catch (NumberFormatException e) {
+                            sign.setIntegerPart(4);
+                            sign.setDecimalPart(8);
                         }
-                    } catch (NumberFormatException e) {
-                        heightSign.setIntegerPart(4);
-                        heightSign.setDecimalPart(8);
-                    }
 
-                    heightSign.markDirty();
-                    world.notifyBlockUpdate(message.pos, world.getBlockState(message.pos),
-                        world.getBlockState(message.pos), 3);
+                        sign.markDirty();
+                        world.notifyBlockUpdate(msg.pos, world.getBlockState(msg.pos),
+                            world.getBlockState(msg.pos), 3);
+                    }
+                } catch (Exception e) {
+                    PacketUtils.error("PacketHeightLimitSign", e);
                 }
             });
             return null;

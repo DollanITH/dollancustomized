@@ -1,27 +1,26 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
-import com.jhxiaochen.dollancustomized.network.BasePacket;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-/**
- * 告示牌编辑状态更新（客户端 -> 服务端）
- */
 public class PacketEditState extends BasePacket {
     private int lineBeingEdited;
     public String[] textLines;
 
     public PacketEditState() {}
-
-    public PacketEditState(BlockPos pos, int lineBeingEdited, String[] textLines) {
+    public PacketEditState(BlockPos pos, int line, String[] lines) {
         super(pos);
-        this.lineBeingEdited = lineBeingEdited;
+        this.lineBeingEdited = line;
         this.textLines = new String[4];
-        System.arraycopy(textLines, 0, this.textLines, 0, 4);
+        if (lines != null) System.arraycopy(lines, 0, this.textLines, 0, Math.min(lines.length, 4));
     }
 
     @Override
@@ -40,33 +39,50 @@ public class PacketEditState extends BasePacket {
 
     public static class Handler implements IMessageHandler<PacketEditState, IMessage> {
         @Override
-        public IMessage onMessage(PacketEditState message, MessageContext ctx) {
-            if (ctx.side.isServer()) {
-                net.minecraftforge.fml.common.FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> {
+        public IMessage onMessage(PacketEditState msg, MessageContext ctx) {
+            if (!ctx.side.isServer()) return null;
+
+            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> {
+                try {
                     World world = ctx.getServerHandler().player.world;
-                    TileEntity te = world.getTileEntity(message.pos);
+                    if (world == null || msg.pos == null) return;
+
+                    TileEntity te = world.getTileEntity(msg.pos);
                     if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) {
                         com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign sign =
                             (com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) te;
 
-                        // 更新编辑状态
-                        sign.setLineBeingEdited(message.lineBeingEdited);
+                        // 使用NBT更新数据
+                        NBTTagCompound nbt = new NBTTagCompound();
 
-                        // 更新文本内容
+                        // 保存当前编辑行
+                        nbt.setInteger("EditingLine", msg.lineBeingEdited);
+
+                        // 保存文本行
                         for (int i = 0; i < 4; i++) {
-                            sign.setLineText(i,
-                                message.textLines[i].isEmpty()
-                                    ? new net.minecraft.util.text.TextComponentString("")
-                                    : new net.minecraft.util.text.TextComponentString(message.textLines[i])
-                            );
+                            String text = msg.textLines != null && msg.textLines[i] != null ?
+                                msg.textLines[i] : "";
+                            nbt.setString("Line" + i, text);
                         }
 
+                        // 应用更新
+                        sign.readFromNBT(nbt);
                         sign.markDirty();
-                        world.notifyBlockUpdate(message.pos, world.getBlockState(message.pos),
-                            world.getBlockState(message.pos), 3);
+
+                        // 通知更新
+                        world.notifyBlockUpdate(msg.pos, world.getBlockState(msg.pos),
+                            world.getBlockState(msg.pos), 3);
+
+                        // 同步到客户端
+                        if (ctx.getServerHandler().player != null) {
+                            NetworkManager.updateSignData(ctx.getServerHandler().player, msg.pos,
+                                                          NetworkManager.createSignNBT(sign));
+                        }
                     }
-                });
-            }
+                } catch (Exception e) {
+                    PacketUtils.error("PacketEditState", e);
+                }
+            });
             return null;
         }
     }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "biomesoplenty:item/jacaranda_hanging_sign"
+    "layer0": "dollancustomized:item/jacaranda_hanging_sign"
   }
 }

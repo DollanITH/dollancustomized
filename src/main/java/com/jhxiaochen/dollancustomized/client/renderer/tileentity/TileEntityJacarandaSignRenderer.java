@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.client.renderer.tileentity;
 
 import com.jhxiaochen.dollancustomized.common.JacarandaSign;
+import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.client.model.ModelSign;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJacarandaSign> {
 
     // 蓝花楹木告示牌的木纹纹理
-    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized:entity/jacaranda_sign");
+    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized:textures/entity/jacaranda_sign.png");
     private final ModelSign model = new ModelSign();
 
     @Override
@@ -27,7 +28,7 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
         // 设置渲染缩放（与原版告示牌保持一致）
         float scale = 0.6666667F;
 
-        if (block == JacarandaSign.Registry.jacaranda_sign) {
+        if (block == JacarandaStandingSign.Registry.jacaranda_standing_sign) {
             // 处理竖直告示牌
             GlStateManager.translate((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
 

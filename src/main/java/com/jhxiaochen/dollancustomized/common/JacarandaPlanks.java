@@ -31,15 +31,20 @@ public class JacarandaPlanks extends Block {
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
         public static Block jacaranda_planks =  null;
+        public static Block jacaranda_stairs =  null;
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
             event.getRegistry().register(jacaranda_planks = new JacarandaPlanks());
+            event.getRegistry().register(jacaranda_stairs = new JacarandaStairs(jacaranda_planks).setUnlocalizedName("jacaranda_stairs").setRegistryName(Reference.MOD_ID, "jacaranda_stairs"));
+
         }
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event){
             event.getRegistry().register(new ItemBlock(jacaranda_planks).setRegistryName(jacaranda_planks.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(jacaranda_stairs).setRegistryName(jacaranda_stairs.getRegistryName()));
+
         }
 
     }

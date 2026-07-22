@@ -1,12 +1,14 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import java.io.IOException;
@@ -16,10 +18,30 @@ public class GuiJacarandaSign extends GuiScreen {
     private final BlockPos pos;
     private final World world;
 
+    // 编辑状态
+    private int currentLine = 0;
+    private boolean isEditable = false;
+    private String[] tempLines = new String[4];
+
     public GuiJacarandaSign(TileEntityJacarandaSign sign, World world, BlockPos pos) {
         this.sign = sign;
         this.world = world;
         this.pos = pos;
+        loadCurrentText();
+    }
+
+    private void loadCurrentText() {
+        // 从NBT加载当前文本
+        NBTTagCompound nbt = new NBTTagCompound();
+        sign.writeToNBT(nbt);
+
+        // 加载所有行文本
+        for (int i = 0; i < 4; i++) {
+            tempLines[i] = nbt.getString("Line" + i);
+        }
+
+        // 加载当前编辑行
+        currentLine = nbt.getInteger("EditingLine");
     }
 
     @Override
@@ -29,11 +51,8 @@ public class GuiJacarandaSign extends GuiScreen {
         // 添加"完成"按钮
         this.buttonList.add(new GuiButtonSign(0, this.width / 2 - 100, this.height - 52, I18n.format("gui.done")));
 
-        // 设置当前编辑行为0（第一行）
-        sign.setLineBeingEdited(0);
-
-        // 将GUI设置为可编辑
-        sign.setEditable(true);
+        // 设置编辑状态
+        isEditable = true;
     }
 
     @Override
@@ -67,16 +86,16 @@ public class GuiJacarandaSign extends GuiScreen {
             int y = centerY + i * 20;
 
             // 高亮当前编辑行
-            if (i == sign.lineBeingEdited) {
+            if (i == currentLine) {
                 drawRect(centerX - 99, y - 1, centerX + 99, y + 18, 0x40808080);
             }
 
             // 绘制文本
-            String text = sign.getLineText(i) != null ? sign.getLineText(i).getFormattedText() : "";
+            String text = tempLines[i] != null ? tempLines[i] : "";
             String displayText = text.length() > 15 ? text.substring(0, 15) : text;
 
             // 如果是当前编辑行，添加光标
-            if (i == sign.lineBeingEdited) {
+            if (i == currentLine) {
                 long time = System.currentTimeMillis();
                 if (time % 2000 < 1000) {
                     displayText += "_";
@@ -96,28 +115,26 @@ public class GuiJacarandaSign extends GuiScreen {
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if (keyCode == 1 || this.gameSettings.keyBindInventory.isActiveAndMatches(keyCode)) {
+        if (keyCode == 1 || Minecraft.getMinecraft().gameSettings.keyBindInventory.isActiveAndMatches(keyCode)) {
             // 按ESC键或inventory键，关闭GUI
-            sign.setEditable(false);
-            sign.setLineBeingEdited(-1);
+            isEditable = false;
+            currentLine = -1;
             this.mc.displayGuiScreen(null);
         } else if (keyCode >= 2 && keyCode <= 11) {
             // 数字键2-11选择编辑行（0-9对应行1-10）
             int line = keyCode - 2;
             if (line < 4) {
-                sign.setLineBeingEdited(line);
+                currentLine = line;
             }
         } else if (keyCode == 200) {
             // 上箭头，切换到上一行
-            int currentLine = sign.lineBeingEdited;
             if (currentLine > 0) {
-                sign.setLineBeingEdited(currentLine - 1);
+                currentLine--;
             }
         } else if (keyCode == 208) {
             // 下箭头，切换到下一行
-            int currentLine = sign.lineBeingEdited;
             if (currentLine < 3) {
-                sign.setLineBeingEdited(currentLine + 1);
+                currentLine++;
             }
         } else {
             // 处理文本输入
@@ -126,43 +143,66 @@ public class GuiJacarandaSign extends GuiScreen {
     }
 
     private void handleTextInput(char typedChar, int keyCode) {
-        String currentText = sign.getLineText(sign.lineBeingEdited).getFormattedText();
+        String currentText = tempLines[currentLine] != null ? tempLines[currentLine] : "";
 
         if (keyCode == 14) {
             // Backspace键
             if (!currentText.isEmpty()) {
                 String newText = currentText.substring(0, currentText.length() - 1);
-                sign.setLineText(sign.lineBeingEdited, new TextComponentString(newText));
+                tempLines[currentLine] = newText;
             }
         } else if (keyCode == 28 || keyCode == 156) {
             // Enter键或Numpad Enter
             // 切换到下一行
-            int currentLine = sign.lineBeingEdited;
             if (currentLine < 3) {
-                sign.setLineBeingEdited(currentLine + 1);
+                currentLine++;
             }
         } else if (typedChar >= 32 && typedChar <= 126) {
             // 可打印字符
             String newText = currentText + typedChar;
-            sign.setLineText(sign.lineBeingEdited, new TextComponentString(newText));
+            tempLines[currentLine] = newText;
         }
 
         // 限制每行字符数
-        String text = sign.getLineText(sign.lineBeingEdited).getFormattedText();
-        if (text.length() > 15) {
-            sign.setLineText(sign.lineBeingEdited, new TextComponentString(text.substring(0, 15)));
+        if (tempLines[currentLine] != null && tempLines[currentLine].length() > 15) {
+            tempLines[currentLine] = tempLines[currentLine].substring(0, 15);
         }
     }
 
     @Override
     public void onGuiClosed() {
-        // GUI关闭时发送数据包更新服务器
-        if (world != null && !world.isRemote) {
-            // 标记TileEntity为需要更新
-            sign.markDirty();
+        // GUI关闭时保存文本并更新服务器
+        saveCurrentText();
+        sendUpdateToServer();
+    }
 
-            // 发送更新包给客户端
+    private void saveCurrentText() {
+        // 保存当前编辑的文本到TileEntity
+        NBTTagCompound nbt = new NBTTagCompound();
+        sign.writeToNBT(nbt);
+
+        // 保存所有行文本
+        for (int i = 0; i < 4; i++) {
+            nbt.setString("Line" + i, tempLines[i] != null ? tempLines[i] : "");
+        }
+
+        // 保存当前编辑行
+        nbt.setInteger("EditingLine", currentLine);
+
+        // 应用更新
+        sign.readFromNBT(nbt);
+    }
+
+    private void sendUpdateToServer() {
+        // 如果不是远程世界，直接更新
+        if (world != null && !world.isRemote) {
+            sign.markDirty();
             world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
+        } else {
+            // 如果是远程世界，发送更新包到服务器
+            com.jhxiaochen.dollancustomized.network.packet.PacketEditState packet =
+                new com.jhxiaochen.dollancustomized.network.packet.PacketEditState(pos, currentLine, tempLines);
+            NetworkManager.INSTANCE.sendToServer(packet);
         }
     }
 
@@ -180,12 +220,13 @@ public class GuiJacarandaSign extends GuiScreen {
         }
 
         @Override
-        public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+        public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+        {
             this.enabled = true;
             this.visible = true;
 
             if (this.visible) {
-                mc.getTextureManager().bindTexture(GuiButtonTextures.BUTTON_TEXTURES);
+                mc.getTextureManager().bindTexture(GuiButton.BUTTON_TEXTURES);
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
                 int i = this.getHoverState(this.hovered);
@@ -213,8 +254,8 @@ public class GuiJacarandaSign extends GuiScreen {
         public void mouseReleased(int mouseX, int mouseY) {
             if (this.enabled && this.visible && mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) {
                 // 点击"完成"按钮
-                sign.setEditable(false);
-                sign.setLineBeingEdited(-1);
+                isEditable = false;
+                currentLine = -1;
                 mc.displayGuiScreen(null);
             }
         }

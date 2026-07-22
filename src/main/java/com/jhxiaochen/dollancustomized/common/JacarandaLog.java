@@ -6,6 +6,8 @@ import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,9 +27,17 @@ import javax.annotation.Nullable;
 
 public class JacarandaLog extends BlockLog {
 
+    public static final PropertyEnum<EnumAxis> LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, LOG_AXIS);
+    }
+
     public JacarandaLog(@Nullable Block stripped) {
         super();
         this.stripped = stripped;
+        this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(2.0F).setResistance(5.0F);
         this.setSoundType(new SoundType(1.0F, 1.0F,
@@ -41,6 +51,7 @@ public class JacarandaLog extends BlockLog {
     public JacarandaLog() {
         super();
         this.stripped = null;
+        this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(2.0F).setResistance(5.0F);
         this.setSoundType(new SoundType(1.0F, 1.0F,
@@ -52,6 +63,55 @@ public class JacarandaLog extends BlockLog {
     }
 
     private final Block stripped;
+
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        IBlockState iblockstate = this.getDefaultState();
+
+        switch (meta)
+        {
+            case 0:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
+                break;
+            case 1:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
+                break;
+            case 2:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
+                break;
+            case 3:
+                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+                break;
+        }
+
+        return iblockstate;
+    }
+
+    @SuppressWarnings("incomplete-switch")
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        int i;
+
+        switch (state.getValue(LOG_AXIS))
+        {
+            case X:
+                i = 1;
+                break;
+            case Z:
+                i = 2;
+                break;
+            case NONE:
+                i = 3;
+                break;
+            case Y:
+            default:
+                i = 0;
+        }
+
+        return i;
+    }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -77,6 +137,7 @@ public class JacarandaLog extends BlockLog {
         return false;
     }
 
+    
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
         public static Block jacaranda_log;

@@ -6,8 +6,7 @@ import com.jhxiaochen.dollancustomized.command.*;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
-import com.jhxiaochen.dollancustomized.network.ClientPacketHandler;
-import com.jhxiaochen.dollancustomized.network.PacketHandler;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
@@ -53,10 +52,12 @@ public class DollanCustomized {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("Pre Init");
-        PacketHandler.init();
+        // 初始化网络系统
+        NetworkManager.init();
+
         GameRegistry.registerTileEntity(
                 TileEntityRoadText.class,
-                new ResourceLocation(Reference.MOD_ID, "road_text") // ← 确保这个存在
+                new ResourceLocation(Reference.MOD_ID, "road_text")
         );
         GameRegistry.registerTileEntity(
                 TileEntityHeightLimitSignCustom.class,
@@ -67,10 +68,7 @@ public class DollanCustomized {
                 new ResourceLocation(Reference.MOD_ID, "jacaranda_sign")
         );
 
-        
         MinecraftForge.EVENT_BUS.register(this);
-        // 注册客户端网络包处理器
-        MinecraftForge.EVENT_BUS.register(new ClientPacketHandler());
         Remaper.registerFixable();
         proxy.preInit();
     }

@@ -78,7 +78,7 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
         GlStateManager.popMatrix();
 
         // 渲染文本
-        this.renderSignText(te, x, y, z, scale, partialTicks, destroyStage, alpha);
+        this.renderSignText(te, scale, destroyStage, alpha);
 
         // 恢复渲染状态
         GlStateManager.depthMask(true);
@@ -96,44 +96,22 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
     /**
      * 渲染告示牌文本
      */
-    private void renderSignText(TileEntityJacarandaSign te, double x, double y, double z, float scale, float partialTicks, int destroyStage, float alpha) {
-        // 移动到文本渲染位置
-        GlStateManager.pushMatrix();
-        GlStateManager.translate((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
-
-        if (te.getBlockType() == JacarandaSign.Registry.jacaranda_sign) {
-            int meta = te.getBlockMetadata();
-            float rotation = (float)(meta * 360) / 16.0F;
-            GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
-        } else {
-            int meta = te.getBlockMetadata();
-            float rotation = 0.0F;
-
-            if (meta == 2) {
-                rotation = 180.0F;
-            } else if (meta == 4) {
-                rotation = 90.0F;
-            } else if (meta == 5) {
-                rotation = -90.0F;
-            }
-
-            GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
-        }
-
-        // 移动到告示牌板子位置
-        GlStateManager.translate(0.0F, 0.33333334F, 0.046666667F);
-
-        // 设置文本缩放
-        float textScale = 0.010416667F;
-        GlStateManager.scale(textScale, -textScale, textScale);
-        GlStateManager.glNormal3f(0.0F, 0.0F, -textScale);
-        GlStateManager.depthMask(false);
-
+    private void renderSignText(TileEntityJacarandaSign te, float scale, int destroyStage, float alpha) {
         // 获取字体渲染器
         net.minecraft.client.gui.FontRenderer fontrenderer = this.getFontRenderer();
 
         // 检查是否在编辑模式
         boolean isEditing = te.lineBeingEdited != -1;
+
+        // 设置文本缩放
+        float textScale = 0.010416667F;
+        GlStateManager.pushMatrix();
+
+        // 移动到文本渲染位置（使用已经变换好的坐标系）
+        GlStateManager.translate(0.0F, 0.33333334F, 0.046666667F);
+        GlStateManager.scale(textScale, -textScale, textScale);
+        GlStateManager.glNormal3f(0.0F, 0.0F, -textScale);
+        GlStateManager.depthMask(false);
 
         // 渲染每一行文本
         for (int line = 0; line < te.signText.length; line++) {

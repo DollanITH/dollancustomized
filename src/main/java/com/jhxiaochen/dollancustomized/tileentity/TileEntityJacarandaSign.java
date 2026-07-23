@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
@@ -20,8 +20,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityJacarandaSign extends TileEntity {
+public class TileEntityJacarandaSign extends TileEntitySign {
+    // 告示牌文本字段
     public final ITextComponent[] signText = new ITextComponent[] {new TextComponentString(""), new TextComponentString(""), new TextComponentString(""), new TextComponentString("")};
+
+    // 自定义字段
     public int lineBeingEdited = -1;
     private boolean isEditable = true;
     private EntityPlayer player;
@@ -217,5 +220,30 @@ public class TileEntityJacarandaSign extends TileEntity {
     public CommandResultStats getStats()
     {
         return this.stats;
+    }
+
+    /**
+     * 获取告示牌文本（通过NBT方式）
+     */
+    public String[] getTextLines()
+    {
+        String[] result = new String[4];
+        for (int i = 0; i < 4; i++) {
+            result[i] = this.signText[i].getUnformattedText();
+        }
+        return result;
+    }
+
+    /**
+     * 设置指定行的文本
+     */
+    public void setLine(int line, String text)
+    {
+        if (line >= 0 && line < 4 && text != null)
+        {
+            // 创建新的TextComponentString而不是修改final字段
+            ITextComponent newComponent = new TextComponentString(text);
+            this.signText[line] = newComponent;
+        }
     }
 }

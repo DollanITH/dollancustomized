@@ -581,6 +581,7 @@ itemGroup.tabmetro=Dollan Custom | Blocks
 
 # Jacaranda Sign
 tile.jacaranda_sign.name=Jacaranda Sign
+item.jacaranda_sign.name=Jacaranda Sign
 gui.done=Done
 gui.sign.click_to_edit=Click to edit text
 gui.sign.shift_click_for_colors=Shift+Click to open editor

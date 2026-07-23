@@ -86,6 +86,8 @@ public class JacarandaSign extends BlockContainer {
 
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
+        // 返回原版TileEntitySign以使用原版GUI系统
+        // 但我们的TileEntityJacarandaSign会继承自TileEntitySign，所以功能保持不变
         return new TileEntityJacarandaSign();
     }
 
@@ -109,12 +111,9 @@ public class JacarandaSign extends BlockContainer {
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof TileEntityJacarandaSign) {
-                // 如果玩家按住Shift键，打开GUI
+                // 如果玩家按住Shift键，打开编辑GUI（使用原版系统）
                 if (playerIn.isSneaking()) {
-                    // 发送打开GUI的包
-                    if (NetworkManager.isServerPlayer(playerIn)) {
-                        NetworkManager.openSignGui((net.minecraft.entity.player.EntityPlayerMP) playerIn, pos);
-                    }
+                    playerIn.openEditSign((TileEntitySign) tileentity);
                     return true;
                 } else {
                     // 否则执行命令

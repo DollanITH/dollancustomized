@@ -7,15 +7,22 @@ import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -50,6 +57,9 @@ public class ItemJacarandaSign extends Item {
                         worldIn.setBlockState(pos, JacarandaWallSign.Registry.jacaranda_wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, facing), 11);
                     }
 
+                    // 设置物品NBT到TileEntity
+                    ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack);
+
                     if (!player.capabilities.isCreativeMode) {
                         itemstack.shrink(1);
                     }
@@ -72,6 +82,11 @@ public class ItemJacarandaSign extends Item {
         public static void registerItem(RegistryEvent.Register<Item> event) {
             event.getRegistry().register(
                     jacaranda_sign = new ItemJacarandaSign());
+        }
+
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event) {
+            ModelLoader.setCustomModelResourceLocation(jacaranda_sign, 0, new ModelResourceLocation(jacaranda_sign.getRegistryName(), "inventory"));
         }
     }
 }

@@ -7,6 +7,7 @@ import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.particle.ParticleTextureRegister;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
@@ -77,7 +78,19 @@ public class DollanCustomized {
     public void init(FMLInitializationEvent event) {
         System.out.println("Init");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
+        // Register particle rendering
+        registerParticles();
+
         proxy.init();
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void registerParticles() {
+        // Jacaranda particles are spawned through ParticleManager
+        // No special registration needed as they use the standard particle system
+        // Preload particle textures
+        ParticleTextureRegister.preloadTextures();
     }
 
     @Mod.EventHandler
@@ -93,7 +106,8 @@ public class DollanCustomized {
         event.registerServerCommand(new CommandTreeKiller());
         event.registerServerCommand(new CommandTreeUndo());
         event.registerServerCommand(new CommandTreeUndoDebug());
-        System.out.println("Commands Registered successfully.");
+        event.registerServerCommand(new CommandTestParticle());
+                System.out.println("Commands Registered successfully.");
     }
 
     @SubscribeEvent

@@ -29,9 +29,7 @@ public class NetworkManager {
             PacketType.HEIGHT_LIMIT_SIGN.getId(), PacketType.HEIGHT_LIMIT_SIGN.getTargetSide());
         INSTANCE.registerMessage(PacketEditState.Handler.class, PacketEditState.class,
             PacketType.JACARANDA_SIGN_TEXT.getId(), PacketType.JACARANDA_SIGN_TEXT.getTargetSide());
-        INSTANCE.registerMessage(PacketJacarandaSignGui.Handler.class, PacketJacarandaSignGui.class,
-            PacketType.GUI_OPEN.getId(), PacketType.GUI_OPEN.getTargetSide());
-        INSTANCE.registerMessage(PacketJacarandaSignUpdate.Handler.class, PacketJacarandaSignUpdate.class,
+                INSTANCE.registerMessage(PacketJacarandaSignUpdate.Handler.class, PacketJacarandaSignUpdate.class,
             PacketType.UPDATE_SIGN_DATA.getId(), PacketType.UPDATE_SIGN_DATA.getTargetSide());
     }
 
@@ -48,10 +46,7 @@ public class NetworkManager {
         INSTANCE.sendTo(new PacketEditState(pos, line, lines), player);
     }
 
-    public static void openSignGui(EntityPlayerMP player, BlockPos pos) {
-        INSTANCE.sendTo(new PacketJacarandaSignGui(pos, new NBTTagCompound()), player);
-    }
-
+    
     public static void updateSignData(EntityPlayerMP player, BlockPos pos, NBTTagCompound nbt) {
         INSTANCE.sendTo(new PacketJacarandaSignUpdate(pos, nbt), player);
     }

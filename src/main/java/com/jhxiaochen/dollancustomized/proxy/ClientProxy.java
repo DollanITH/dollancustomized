@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.proxy;
 
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.client.event.ParticleTextureEventHandler;
 import com.jhxiaochen.dollancustomized.client.font.RoadFontLoader;
 import com.jhxiaochen.dollancustomized.client.font.RoadFontRenderer;
 import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
@@ -8,6 +9,8 @@ import com.jhxiaochen.dollancustomized.client.font.SignFontRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderRoadText;
 import com.jhxiaochen.dollancustomized.client.renderer.tileentity.TileEntityJacarandaSignRenderer;
+import com.jhxiaochen.dollancustomized.particle.JacarandaResourceLoader;
+import com.jhxiaochen.dollancustomized.particle.ParticleInit;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
@@ -26,11 +29,18 @@ public class ClientProxy implements CommonProxy {
     @Override
     public void preInit() {
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ParticleTextureEventHandler());
     }
 
     @Override
     public void init() {
         ResourceLocation ttfLocation = new ResourceLocation(Reference.MOD_ID, "fonts/road_text_fonts.ttf");
+
+        // 初始化粒子系统
+        ParticleInit.init(null);
+
+        // 预加载粒子纹理
+        JacarandaResourceLoader.preloadTextures();
 
         // RoadText 使用像素风格渲染器（高性能）
         RoadFontLoader roadFontLoader = new RoadFontLoader(ttfLocation, 32.0F);
@@ -45,8 +55,7 @@ public class ClientProxy implements CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeightLimitSignCustom.class, new RenderHeightLimitSignCustom());
         // 注册蓝花楹木告示牌渲染器
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJacarandaSign.class, new TileEntityJacarandaSignRenderer());
-
-            }
+    }
 
     
     @Override

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "dollancustomized:item/jacaranda_door"
+        "layer0": "dollancustomized:items/jacaranda_door"
     }
 }

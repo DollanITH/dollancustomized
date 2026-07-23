@@ -14,9 +14,7 @@ public enum PacketType {
     EDIT_STATE(3, Side.SERVER),
 
     // 服务端 -> 客户端
-    OPEN_GUI(10, Side.CLIENT),
-    UPDATE_SIGN_DATA(11, Side.CLIENT),
-    GUI_OPEN(12, Side.CLIENT);
+    UPDATE_SIGN_DATA(11, Side.CLIENT);
 
     private final int id;
     private final Side targetSide;

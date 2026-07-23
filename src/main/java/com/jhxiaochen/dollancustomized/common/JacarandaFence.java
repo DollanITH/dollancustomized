@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -10,6 +11,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -40,6 +42,11 @@ public class JacarandaFence extends BlockFence {
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
             event.getRegistry( ).register(new ItemBlock(jacaranda_fence).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(jacaranda_fence.getRegistryName( )));
+        }
+
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event){
+            DollanBlocks.SimpleBlock(jacaranda_fence);
         }
     }
 }

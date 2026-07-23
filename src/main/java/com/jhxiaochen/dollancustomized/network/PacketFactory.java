@@ -42,13 +42,7 @@ public class PacketFactory {
         return new PacketEditState(pos, lineBeingEdited, textLines);
     }
 
-    /**
-     * 创建告示牌GUI打开包
-     */
-    public static PacketJacarandaSignGui createSignGuiPacket(BlockPos pos) {
-        return new PacketJacarandaSignGui(pos, null);
-    }
-
+    
     /**
      * 创建告示牌数据更新包
      */

@@ -11,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
@@ -19,17 +20,18 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class JacarandaSlab extends BlockSlab {
+public abstract class JacarandaSlab extends BlockSlab {
     public static final PropertyEnum<EnumType>
-            VARIANT = PropertyEnum.create("variant", EnumType.class);
-    boolean isDouble;
-    public JacarandaSlab(boolean isDouble) {
+                                VARIANT = PropertyEnum.create("variant", EnumType.class);
+
+    public JacarandaSlab() {
         super(Material.WOOD);
-        this.isDouble = isDouble;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setSoundType(new SoundType(1.0F, 1.0F,
                                         DollanSounds.BLOCK_CHERRY_WOOD_BREAK,
@@ -61,11 +63,6 @@ public class JacarandaSlab extends BlockSlab {
     }
 
     @Override
-    public boolean isDouble() {
-        return isDouble;
-    }
-
-    @Override
     public IProperty<?> getVariantProperty() {
         return VARIANT;
     }
@@ -79,13 +76,13 @@ public class JacarandaSlab extends BlockSlab {
 
     @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        return new ItemStack(Item.getItemFromBlock(this));
+        return new ItemStack(jacaranda_slab_item);
     }
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
         drops.add(new ItemStack(
-                Item.getItemFromBlock(this),
+                jacaranda_slab_item,
                 this.isDouble() ? 2 : 1
         ));
     }
@@ -108,30 +105,36 @@ public class JacarandaSlab extends BlockSlab {
         }
     }
 
+    public static BlockSlab jacaranda_slab        = null;
+    public static Item      jacaranda_slab_item   = null;
+    public static BlockSlab jacaranda_double_slab = null;
+
     @Override
     protected BlockStateContainer createBlockState() {
-        return isDouble ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, VARIANT, HALF);
+        return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, VARIANT, HALF);
     }
 
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
-        public static BlockSlab jacaranda_slab = null;
-        public static BlockSlab jacaranda_double_slab = null;
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
             event.getRegistry( ).register(
                     jacaranda_slab =
-                            (BlockSlab) new JacarandaSlab(false).setUnlocalizedName("jacaranda_slab").setRegistryName(Reference.MOD_ID, "jacaranda_slab"));
+                            (BlockSlab) new JacarandaHalfSlab().setUnlocalizedName("jacaranda_slab").setRegistryName(Reference.MOD_ID, "jacaranda_slab"));
             event.getRegistry( ).register(
                     jacaranda_double_slab =
-                            (BlockSlab) new JacarandaSlab(false).setUnlocalizedName("jacaranda_double_slab").setRegistryName(Reference.MOD_ID, "jacaranda_double_slab"));
+                            (BlockSlab) new JacarandaDoubleSlab().setUnlocalizedName("jacaranda_double_slab").setRegistryName(Reference.MOD_ID, "jacaranda_double_slab"));
         }
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry( ).register(new ItemSlab(jacaranda_slab,jacaranda_slab,jacaranda_double_slab).setRegistryName(jacaranda_slab.getRegistryName( )));
+            event.getRegistry( ).register(jacaranda_slab_item = new ItemSlab(jacaranda_slab,jacaranda_slab,jacaranda_double_slab).setRegistryName(jacaranda_slab.getRegistryName( )));
         }
 
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(jacaranda_slab), 0, new ModelResourceLocation(jacaranda_slab.getRegistryName( ), "inventory"));
+        }
     }
 }

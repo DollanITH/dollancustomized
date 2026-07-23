@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
@@ -9,35 +10,33 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import javax.annotation.Nullable;
-
 public class JacarandaLog extends BlockLog {
 
-    public static final PropertyEnum<EnumAxis> LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
+    public static final PropertyEnum<EnumAxis> AXIS = PropertyEnum.create("axis", EnumAxis.class);
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, LOG_AXIS);
+        return new BlockStateContainer(this, AXIS);
     }
 
-    public JacarandaLog(@Nullable Block stripped) {
+    public JacarandaLog(Block stripped) {
         super();
         this.stripped = stripped;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumAxis.Y));
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(2.0F).setResistance(5.0F);
         this.setSoundType(new SoundType(1.0F, 1.0F,
@@ -51,7 +50,7 @@ public class JacarandaLog extends BlockLog {
     public JacarandaLog() {
         super();
         this.stripped = null;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumAxis.Y));
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(2.0F).setResistance(5.0F);
         this.setSoundType(new SoundType(1.0F, 1.0F,
@@ -72,16 +71,13 @@ public class JacarandaLog extends BlockLog {
         switch (meta)
         {
             case 0:
-                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
+                iblockstate = iblockstate.withProperty(AXIS, EnumAxis.Y);
                 break;
             case 1:
-                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
+                iblockstate = iblockstate.withProperty(AXIS, EnumAxis.X);
                 break;
             case 2:
-                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
-                break;
-            case 3:
-                iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+                iblockstate = iblockstate.withProperty(AXIS, EnumAxis.Z);
                 break;
         }
 
@@ -94,16 +90,13 @@ public class JacarandaLog extends BlockLog {
     {
         int i;
 
-        switch (state.getValue(LOG_AXIS))
+        switch (state.getValue(AXIS))
         {
             case X:
                 i = 1;
                 break;
             case Z:
                 i = 2;
-                break;
-            case NONE:
-                i = 3;
                 break;
             case Y:
             default:
@@ -135,6 +128,72 @@ public class JacarandaLog extends BlockLog {
         }
 
         return false;
+    }
+
+    public enum EnumAxis implements IStringSerializable
+    {
+        X("x"),
+        Y("y"),
+        Z("z");
+
+        private final String name;
+
+        EnumAxis(String name)
+        {
+            this.name = name;
+        }
+
+        public String toString()
+        {
+            return this.name;
+        }
+
+        public static EnumAxis fromFacingAxis(EnumFacing.Axis axis)
+        {
+            switch (axis)
+            {
+                case X:
+                    return X;
+                case Z:
+                    return Z;
+                case Y:
+                default:
+                    return Y;
+            }
+        }
+
+        public String getName()
+        {
+            return this.name;
+        }
+    }
+
+    public IBlockState withRotation(IBlockState state, Rotation rot)
+    {
+        switch (rot)
+        {
+            case COUNTERCLOCKWISE_90:
+            case CLOCKWISE_90:
+
+                switch (state.getValue(AXIS))
+                {
+                    case X:
+                        return state.withProperty(AXIS, EnumAxis.Z);
+                    case Z:
+                        return state.withProperty(AXIS, EnumAxis.X);
+                    default:
+                        return state;
+                }
+
+            default:
+                return state;
+        }
+    }
+
+
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.getStateFromMeta(meta).withProperty(AXIS, EnumAxis.fromFacingAxis(facing.getAxis()));
     }
 
     
@@ -170,6 +229,14 @@ public class JacarandaLog extends BlockLog {
             event.getRegistry().register(new ItemBlock(jacaranda_wood).setRegistryName(jacaranda_wood.getRegistryName()));
             event.getRegistry().register(new ItemBlock(stripped_jacaranda_log).setRegistryName(stripped_jacaranda_log.getRegistryName()));
             event.getRegistry().register(new ItemBlock(stripped_jacaranda_wood).setRegistryName(stripped_jacaranda_wood.getRegistryName()));
+        }
+
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event) {
+            DollanBlocks.SimpleBlock(jacaranda_log);
+            DollanBlocks.SimpleBlock(jacaranda_wood);
+            DollanBlocks.SimpleBlock(stripped_jacaranda_wood);
+            DollanBlocks.SimpleBlock(stripped_jacaranda_log);
         }
     }
 }

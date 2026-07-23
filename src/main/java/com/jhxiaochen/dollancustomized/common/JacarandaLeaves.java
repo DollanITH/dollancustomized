@@ -2,8 +2,9 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
-import com.jhxiaochen.dollancustomized.particles.JacarandaParticleHelper;
+import com.jhxiaochen.dollancustomized.particle.ParticleManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -12,6 +13,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -19,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -37,102 +39,20 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class JacarandaLeaves extends BlockLeaves {
+// 全局渲染模式设置
+
+
+    public class JacarandaLeaves extends BlockLeaves {
 
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        // 模仿高版本樱花树叶的粒子效果
-
-        // 基础花瓣飘落（较低概率）
-        if (rand.nextInt(200) == 0) {
-            generateJacarandaParticles(worldIn, pos, rand, 1);
+        // 只在客户端生成粒子
+        if (!worldIn.isRemote) {
+            return;
         }
 
-        // 风吹时的花瓣飘落（中等概率）
-        if (rand.nextInt(100) == 0) {
-            generateJacarandaParticles(worldIn, pos, rand, 2);
-        }
-
-        // 风暴时的花瓣飘落（高概率）
-        if (rand.nextInt(30) == 0) {
-            generateJacarandaParticles(worldIn, pos, rand, 3);
-        }
-
-        // 特殊事件：节日花瓣雨（极低概率）
-        if (rand.nextInt(1000) == 0) {
-            for (int i = 0; i < 5; i++) {
-                generateJacarandaParticles(worldIn, pos, rand, 4);
-            }
-        }
-    }
-
-    private void generateJacarandaParticles(World worldIn, BlockPos pos, Random rand, int intensity) {
-        int particleCount = 0;
-        double baseYSpeed = 0.0D;
-
-        switch (intensity) {
-            case 1: // 平缓飘落
-                particleCount = 1;
-                baseYSpeed = -0.01D;
-                break;
-            case 2: // 风吹效果
-                particleCount = 2;
-                baseYSpeed = -0.02D;
-                break;
-            case 3: // 暴风雨效果
-                particleCount = 3;
-                baseYSpeed = -0.03D;
-                break;
-            case 4: // 花瓣雨
-                particleCount = 4;
-                baseYSpeed = -0.015D;
-                break;
-        }
-
-        for (int i = 0; i < particleCount; i++) {
-            // 在树叶方块内生成粒子
-            double x = pos.getX() + 0.3D + rand.nextDouble() * 0.4D;
-            double y = pos.getY() + 0.1D + rand.nextDouble() * 0.8D;
-            double z = pos.getZ() + 0.3D + rand.nextDouble() * 0.4D;
-
-            // 根据强度调整粒子行为
-            double xSpeed = (rand.nextDouble() - 0.5D) * 0.02D * intensity;
-            double ySpeed = baseYSpeed - rand.nextDouble() * 0.01D * intensity;
-            double zSpeed = (rand.nextDouble() - 0.5D) * 0.02D * intensity;
-
-            // 添加随机性使粒子更自然
-            xSpeed += (rand.nextDouble() - 0.5D) * 0.005D;
-            zSpeed += (rand.nextDouble() - 0.5D) * 0.005D;
-
-            // 生成自定义粒子
-            if (worldIn.isRemote) {
-                // 使用自定义粒子系统
-                JacarandaParticleHelper.spawnJacarandaParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
-            } else {
-                // 服务端使用普通粒子作为备选
-                EnumParticleTypes particleType = getJacarandaParticleType(rand, intensity);
-                worldIn.spawnParticle(particleType, x, y, z, xSpeed, ySpeed, zSpeed);
-            }
-        }
-    }
-
-    private EnumParticleTypes getJacarandaParticleType(Random rand, int intensity) {
-        // 蓝花楹使用紫色系粒子
-        if (intensity == 1) {
-            // 平缓模式：使用淡紫色粒子
-            return rand.nextBoolean() ? EnumParticleTypes.TOWN_AURA : EnumParticleTypes.VILLAGER_HAPPY;
-        } else if (intensity == 4) {
-            // 花瓣雨：使用最美丽的粒子
-            return EnumParticleTypes.VILLAGER_HAPPY;
-        } else {
-            // 其他模式：混合使用
-            int choice = rand.nextInt(3);
-            switch (choice) {
-                case 0: return EnumParticleTypes.TOWN_AURA;
-                case 1: return EnumParticleTypes.VILLAGER_HAPPY;
-                default: return EnumParticleTypes.CRIT;
-            }
-        }
+        // 使用新的粒子管理系统生成蓝花楹花瓣
+        ParticleManager.spawnJacarandaParticles(worldIn, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 0.5, rand);
     }
 
     public JacarandaLeaves() {
@@ -176,7 +96,17 @@ public class JacarandaLeaves extends BlockLeaves {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return rand.nextFloat() < 6 ? null : Items.STICK;
+        // 高版本叶子掉落逻辑：6.25%概率获得树苗，87.5%概率获得木棍，6.25%无掉落
+        float chance = rand.nextFloat();
+        if (chance < 0.0625F) {
+            // 6.25% 概率获得树苗
+            return Item.getItemFromBlock(JacarandaSapling.jacaranda_sapling);
+        } else if (chance < 0.9375F) {
+            // 87.5% 概率获得木棍
+            return Items.STICK;
+        }
+        // 6.25% 概率无掉落
+        return null;
     }
 
     @Override
@@ -202,12 +132,22 @@ public class JacarandaLeaves extends BlockLeaves {
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+        @Override
+        @SideOnly(Side.CLIENT)
+        public BlockRenderLayer getBlockLayer(){
+            return Blocks.LEAVES.getBlockLayer();
+        }
 
+        @Override
+        public boolean isOpaqueCube(IBlockState state){
+            return Blocks.LEAVES.isOpaqueCube(state);
+        }
+
+        @SideOnly(Side.CLIENT)
+        @Override
+        public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side){
+            return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
+        }
 
     @Nonnull
     @Override
@@ -231,6 +171,8 @@ public class JacarandaLeaves extends BlockLeaves {
 
         @SubscribeEvent
         public static void registerModel(ModelRegistryEvent event){
+            DollanBlocks.SimpleBlock(jacaranda_leaves);
             ModelLoader.setCustomStateMapper(jacaranda_leaves, (new StateMap.Builder()).ignore(JacarandaLeaves.CHECK_DECAY, JacarandaLeaves.DECAYABLE).build());
-        }}
+        }
+    }
 }

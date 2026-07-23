@@ -55,14 +55,11 @@ public class PacketEditState extends BasePacket {
                         // 使用NBT更新数据
                         NBTTagCompound nbt = new NBTTagCompound();
 
-                        // 保存当前编辑行
-                        nbt.setInteger("EditingLine", msg.lineBeingEdited);
-
-                        // 保存文本行
+                        // 保存文本行 (使用与TileEntitySign相同的键名)
                         for (int i = 0; i < 4; i++) {
                             String text = msg.textLines != null && msg.textLines[i] != null ?
                                 msg.textLines[i] : "";
-                            nbt.setString("Line" + i, text);
+                            nbt.setString("Text" + (i + 1), text);
                         }
 
                         // 应用更新

@@ -2,12 +2,14 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -28,10 +30,11 @@ public class JacarandaPlanks extends Block {
                                         DollanSounds.BLOCK_CHERRY_WOOD_FALL));
     }
 
+    public static Block jacaranda_planks =  null;
+    public static Block jacaranda_stairs =  null;
+
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
-        public static Block jacaranda_planks =  null;
-        public static Block jacaranda_stairs =  null;
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
@@ -45,6 +48,13 @@ public class JacarandaPlanks extends Block {
             event.getRegistry().register(new ItemBlock(jacaranda_planks).setRegistryName(jacaranda_planks.getRegistryName()));
             event.getRegistry().register(new ItemBlock(jacaranda_stairs).setRegistryName(jacaranda_stairs.getRegistryName()));
 
+        }
+
+
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event) {
+            DollanBlocks.SimpleBlock(jacaranda_planks);
+            DollanBlocks.SimpleBlock(jacaranda_stairs);
         }
 
     }

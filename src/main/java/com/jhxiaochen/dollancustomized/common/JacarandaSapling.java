@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.world.gen.JacarandaTreeGenerator;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -69,37 +71,41 @@ public class JacarandaSapling extends BlockBush implements IGrowable {
         // 使用蓝花楹木生成器
         boolean isBigTree = rand.nextInt(10) == 0;
         WorldGenerator worldgenerator = JacarandaTreeGenerator.createGenerator(isBigTree, rand);
-        int i;
-        int j = 0;
+        int treeX = 0;
+        int treeZ = 0;
         boolean flag = false;
 
         // 检查是否需要双层的树（类似橡木树的逻辑）
-        for (i = 0; i >= -1; --i) {
-            for (j = 0; j >= -1; --j) {
+        for (int i = 0; i >= -1; --i) {
+            for (int j = 0; j >= -1; --j) {
                 if (this.isTwoByTwoOfType(worldIn, pos, i, j)) {
                     flag = true;
+                    treeX = i;
+                    treeZ = j;
                     break;
                 }
             }
+            if (flag) break;
         }
 
         IBlockState iblockstate2 = Blocks.AIR.getDefaultState();
+        BlockPos treePos = flag ? pos.add(treeX, 0, treeZ) : pos;
 
         if (flag) {
-            worldIn.setBlockState(pos.add(i, 0, j), iblockstate2, 4);
-            worldIn.setBlockState(pos.add(i + 1, 0, j), iblockstate2, 4);
-            worldIn.setBlockState(pos.add(i, 0, j + 1), iblockstate2, 4);
-            worldIn.setBlockState(pos.add(i + 1, 0, j + 1), iblockstate2, 4);
+            worldIn.setBlockState(pos.add(treeX, 0, treeZ), iblockstate2, 4);
+            worldIn.setBlockState(pos.add(treeX + 1, 0, treeZ), iblockstate2, 4);
+            worldIn.setBlockState(pos.add(treeX, 0, treeZ + 1), iblockstate2, 4);
+            worldIn.setBlockState(pos.add(treeX + 1, 0, treeZ + 1), iblockstate2, 4);
         } else {
             worldIn.setBlockState(pos, iblockstate2, 4);
         }
 
-        if (!worldgenerator.generate(worldIn, rand, pos.add(i, 0, j))) {
+        if (!worldgenerator.generate(worldIn, rand, treePos)) {
             if (flag) {
-                worldIn.setBlockState(pos.add(i, 0, j), state, 4);
-                worldIn.setBlockState(pos.add(i + 1, 0, j), state, 4);
-                worldIn.setBlockState(pos.add(i, 0, j + 1), state, 4);
-                worldIn.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
+                worldIn.setBlockState(pos.add(treeX, 0, treeZ), state, 4);
+                worldIn.setBlockState(pos.add(treeX + 1, 0, treeZ), state, 4);
+                worldIn.setBlockState(pos.add(treeX, 0, treeZ + 1), state, 4);
+                worldIn.setBlockState(pos.add(treeX + 1, 0, treeZ + 1), state, 4);
             } else {
                 worldIn.setBlockState(pos, state, 4);
             }
@@ -132,6 +138,7 @@ public class JacarandaSapling extends BlockBush implements IGrowable {
         i = i | state.getValue(STAGE) << 1;
         return i;
     }
+    public static Block jacaranda_sapling;
 
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, STAGE);
@@ -139,7 +146,7 @@ public class JacarandaSapling extends BlockBush implements IGrowable {
 
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
-        public static Block jacaranda_sapling = null;
+
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
@@ -149,6 +156,11 @@ public class JacarandaSapling extends BlockBush implements IGrowable {
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
             event.getRegistry().register(new ItemBlock(jacaranda_sapling).setRegistryName(jacaranda_sapling.getRegistryName()));
+        }
+
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event) {
+            DollanBlocks.SimpleBlock(jacaranda_sapling);
         }
     }
 }

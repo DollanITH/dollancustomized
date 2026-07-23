@@ -832,14 +832,14 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
 
     }
 
-    private static void SimpleBlock(Block block){
+    public static void SimpleBlock(Block block){
         RegistrationHandler.BLOCKS.add(block);
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             registerModel(block);
         }
     }
 
-    private static void BlockHasMeta(Block block, int meta, String name){
+    public static void BlockHasMeta(Block block, int meta, String name){
         if (meta == 0) {
             RegistrationHandler.BLOCKS.add(block);
         }

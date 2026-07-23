@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTrapDoor;
@@ -9,6 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -40,7 +42,13 @@ public class JacarandaTrapdoor extends BlockTrapDoor {
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry( ).register(new ItemBlock(jacaranda_trapdoor).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(jacaranda_trapdoor.getRegistryName( )));
+            event.getRegistry( ).register(new ItemBlock(jacaranda_trapdoor).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_trapdoor").setRegistryName(jacaranda_trapdoor.getRegistryName( )));
+        }
+
+
+        @SubscribeEvent
+        public static void registerModel(ModelRegistryEvent event) {
+            DollanBlocks.SimpleBlock(jacaranda_trapdoor);
         }
     }
 }

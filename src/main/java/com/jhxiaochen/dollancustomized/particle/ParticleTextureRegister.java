@@ -16,7 +16,7 @@ public class ParticleTextureRegister {
     static {
         // 注册所有粒子纹理
         for (int i = 0; i < 12; i++) {
-            ResourceLocation texture = new ResourceLocation("dollancustomized", "textures/particles/jacaranda_" + i);
+            ResourceLocation texture = new ResourceLocation("dollancustomized", "particles/jacaranda_" + i);
             PARTICLE_TEXTURES.add(texture);
         }
     }

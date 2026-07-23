@@ -69,9 +69,10 @@ public class JacarandaStandingSign extends JacarandaSign {
         return new BlockStateContainer(this, new IProperty[] {ROTATION});
     }
 
+    public static Block jacaranda_standing_sign = null;
+
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
-        public static Block jacaranda_standing_sign = null;
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {

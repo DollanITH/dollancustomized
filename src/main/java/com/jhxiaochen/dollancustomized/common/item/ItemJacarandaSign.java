@@ -2,16 +2,20 @@ package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.client.gui.GuiEditJacarandaSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -24,9 +28,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class ItemJacarandaSign extends ItemBlock {
-    public ItemJacarandaSign(Block block) {
-        super(block);
+public class ItemJacarandaSign extends Item {
+    public ItemJacarandaSign() {
+        super();
         this.maxStackSize = 16;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setUnlocalizedName("jacaranda_sign");
@@ -50,13 +54,19 @@ public class ItemJacarandaSign extends ItemBlock {
 
                     if (facing == EnumFacing.UP) {
                         int i = MathHelper.floor((double)((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
-                        worldIn.setBlockState(pos, JacarandaStandingSign.Registry.jacaranda_standing_sign.getDefaultState().withProperty(BlockStandingSign.ROTATION, Integer.valueOf(i)), 11);
+                        worldIn.setBlockState(pos, JacarandaStandingSign.jacaranda_standing_sign.getDefaultState().withProperty(BlockStandingSign.ROTATION, Integer.valueOf(i)), 11);
                     } else {
                         worldIn.setBlockState(pos, JacarandaWallSign.Registry.jacaranda_wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, facing), 11);
                     }
 
                     // 设置物品NBT到TileEntity
-                    ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack);
+                        TileEntity tileentity = worldIn.getTileEntity(pos);
+                        if (tileentity instanceof TileEntityJacarandaSign && !ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack)) {
+                            // 使用自定义的GUI来处理旋转
+                            Minecraft.getMinecraft().displayGuiScreen(new GuiEditJacarandaSign((TileEntityJacarandaSign) tileentity));
+                        } else {
+                            ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack);
+                        }
 
                     if (!player.capabilities.isCreativeMode) {
                         itemstack.shrink(1);
@@ -71,15 +81,14 @@ public class ItemJacarandaSign extends ItemBlock {
             return EnumActionResult.FAIL;
         }
     }
-
+        public static Item jacaranda_sign = null;
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
-        public static Item jacaranda_sign = null;
+
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            // 直接使用已经注册的方块，避免重复注册
-            jacaranda_sign = new ItemJacarandaSign(JacarandaSign.Registry.jacaranda_sign);
+            jacaranda_sign = new ItemJacarandaSign();
             event.getRegistry().register(jacaranda_sign);
         }
 

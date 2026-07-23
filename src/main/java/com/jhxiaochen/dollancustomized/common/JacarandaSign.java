@@ -2,8 +2,9 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.client.gui.GuiEditJacarandaSign;
+import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaSign;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
-import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -11,11 +12,11 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -91,25 +92,30 @@ public class JacarandaSign extends BlockContainer {
         return new TileEntityJacarandaSign();
     }
 
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return Item.getItemFromBlock(this);
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
     }
 
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return new ItemStack(this);
+        return ItemJacarandaSign.jacaranda_sign;
+    }
+
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(ItemJacarandaSign.jacaranda_sign);
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (!worldIn.isRemote)
+        // 只在客户端打开GUI，避免服务端警告
+        if (worldIn.isRemote)
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof TileEntitySign) {
-                // 直接打开编辑GUI（与原版告示牌行为一致）
-                playerIn.openEditSign((TileEntitySign) tileentity);
-                return true;
+            if (tileentity instanceof TileEntityJacarandaSign) {
+                // 使用自定义的GUI来处理旋转
+                Minecraft.getMinecraft().displayGuiScreen(new GuiEditJacarandaSign((TileEntityJacarandaSign) tileentity));
             }
         }
         return true;

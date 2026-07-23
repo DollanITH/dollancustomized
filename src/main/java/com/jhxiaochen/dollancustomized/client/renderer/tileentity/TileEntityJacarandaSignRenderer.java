@@ -28,7 +28,7 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
         // 设置渲染缩放（与原版告示牌保持一致）
         float scale = 0.6666667F;
 
-        if (block == JacarandaStandingSign.Registry.jacaranda_standing_sign) {
+        if (block == JacarandaStandingSign.jacaranda_standing_sign) {
             // 处理竖直告示牌
             GlStateManager.translate((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
 

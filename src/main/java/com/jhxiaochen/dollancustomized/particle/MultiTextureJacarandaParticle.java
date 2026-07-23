@@ -7,14 +7,11 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Arrays;
 
 @SideOnly(Side.CLIENT)
 public class MultiTextureJacarandaParticle extends Particle {
@@ -24,7 +21,7 @@ public class MultiTextureJacarandaParticle extends Particle {
     static {
         // 初始化12个纹理位置
         for (int i = 0; i < 12; i++) {
-            TEXTURE_LOCATIONS[i] = new ResourceLocation("dollancustomized", "textures/particles/jacaranda_" + i);
+            TEXTURE_LOCATIONS[i] = new ResourceLocation("dollancustomized", "particles/jacaranda_" + i);
         }
 
         // 预加载纹理

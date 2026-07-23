@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.common;
+package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.init.DollanDamageSource;
 import net.minecraft.creativetab.CreativeTabs;

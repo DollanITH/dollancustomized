@@ -13,7 +13,7 @@ public class DollanDamageSource extends DamageSource {
     public static final DollanDamageSource HENG   = new DollanDamageSource("heng");
 
     static {
-        VALLID.setDamageBypassesArmor();
+        VALLID.setDamageAllowedInCreativeMode();
         HENG.setDamageAllowedInCreativeMode();
     }
 

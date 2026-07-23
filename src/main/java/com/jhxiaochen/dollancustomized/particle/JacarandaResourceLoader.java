@@ -21,7 +21,7 @@ public class JacarandaResourceLoader {
         // 确保所有纹理都已注册到材质图集中
         List<ResourceLocation> textures = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            textures.add(new ResourceLocation("dollancustomized", "textures/particles/jacaranda_" + i));
+            textures.add(new ResourceLocation("dollancustomized", "particles/jacaranda_" + i));
         }
 
         // 强制加载纹理

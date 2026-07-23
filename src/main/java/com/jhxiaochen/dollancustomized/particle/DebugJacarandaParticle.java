@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -16,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class DebugJacarandaParticle extends Particle {
-    private static final ResourceLocation DEBUG_TEXTURE = new ResourceLocation("dollancustomized", "textures/particles/jacaranda_0");
+    private static final ResourceLocation DEBUG_TEXTURE = new ResourceLocation("dollancustomized", "particles/jacaranda_0");
     private final int textureIndex;
 
     public DebugJacarandaParticle(World world, double x, double y, double z, double motionX, double motionY, double motionZ) {

@@ -9,12 +9,9 @@ import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -27,8 +24,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class ItemJacarandaSign extends Item {
-    public ItemJacarandaSign() {
+public class ItemJacarandaSign extends ItemBlock {
+    public ItemJacarandaSign(Block block) {
+        super(block);
         this.maxStackSize = 16;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setUnlocalizedName("jacaranda_sign");
@@ -80,8 +78,9 @@ public class ItemJacarandaSign extends Item {
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(
-                    jacaranda_sign = new ItemJacarandaSign());
+            // 直接使用已经注册的方块，避免重复注册
+            jacaranda_sign = new ItemJacarandaSign(JacarandaSign.Registry.jacaranda_sign);
+            event.getRegistry().register(jacaranda_sign);
         }
 
         @SubscribeEvent

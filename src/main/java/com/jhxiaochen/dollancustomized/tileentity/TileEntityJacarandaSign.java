@@ -21,8 +21,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityJacarandaSign extends TileEntitySign {
-    // 告示牌文本字段
-    public final ITextComponent[] signText = new ITextComponent[] {new TextComponentString(""), new TextComponentString(""), new TextComponentString(""), new TextComponentString("")};
+    // 告示牌文本字段（继承自父类，无需重复定义）
+    // public final ITextComponent[] signText = new ITextComponent[] {new TextComponentString(""), new TextComponentString(""), new TextComponentString(""), new TextComponentString("")};
 
     // 自定义字段
     public int lineBeingEdited = -1;

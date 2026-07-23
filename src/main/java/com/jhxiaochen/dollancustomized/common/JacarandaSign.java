@@ -93,45 +93,26 @@ public class JacarandaSign extends BlockContainer {
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return com.jhxiaochen.dollancustomized.common.item.ItemJacarandaSign.Registry.jacaranda_sign;
+        return Item.getItemFromBlock(this);
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(com.jhxiaochen.dollancustomized.common.item.ItemJacarandaSign.Registry.jacaranda_sign);
+        return new ItemStack(this);
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (worldIn.isRemote)
-        {
-            return true;
-        }
-        else
+        if (!worldIn.isRemote)
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof TileEntityJacarandaSign) {
-                // 如果玩家按住Shift键，打开编辑GUI（使用原版系统）
-                if (playerIn.isSneaking()) {
-                    playerIn.openEditSign((TileEntitySign) tileentity);
-                    return true;
-                } else {
-                    // 否则执行命令
-                    return ((TileEntityJacarandaSign)tileentity).executeCommand(playerIn);
-                }
-            }
-            // 兼容性检查，如果是普通的TileEntitySign，也支持命令执行
             if (tileentity instanceof TileEntitySign) {
-                // 将调用转给原版TileEntitySign的executeCommand方法
-                try {
-                    java.lang.reflect.Method executeCommand = tileentity.getClass().getMethod("executeCommand", EntityPlayer.class);
-                    return (Boolean) executeCommand.invoke(tileentity, playerIn);
-                } catch (Exception e) {
-                    return false;
-                }
+                // 直接打开编辑GUI（与原版告示牌行为一致）
+                playerIn.openEditSign((TileEntitySign) tileentity);
+                return true;
             }
-            return false;
         }
+        return true;
     }
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)

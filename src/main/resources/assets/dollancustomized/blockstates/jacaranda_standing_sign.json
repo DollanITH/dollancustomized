@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "rotation=0": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=1": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=2": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=3": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=4": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=5": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=6": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=7": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=8": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=9": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=10": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=11": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=12": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=13": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=14": { "model": "dollancustomized:jacaranda_standing_sign" },
+    "rotation=15": { "model": "dollancustomized:jacaranda_standing_sign" }
+  }
+}

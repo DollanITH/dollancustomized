@@ -2,7 +2,6 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.client.gui.GuiEditJacarandaSign;
 import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaSign;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
@@ -12,8 +11,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -109,13 +108,12 @@ public class JacarandaSign extends BlockContainer {
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        // 只在客户端打开GUI，避免服务端警告
-        if (worldIn.isRemote)
+        // 在服务端发送包，让客户端打开GUI
+        if (!worldIn.isRemote && playerIn != null)
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof TileEntityJacarandaSign) {
-                // 使用自定义的GUI来处理旋转
-                Minecraft.getMinecraft().displayGuiScreen(new GuiEditJacarandaSign((TileEntityJacarandaSign) tileentity));
+                ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) playerIn, pos, tileentity);
             }
         }
         return true;

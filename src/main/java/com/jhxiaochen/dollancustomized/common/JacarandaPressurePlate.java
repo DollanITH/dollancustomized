@@ -57,7 +57,7 @@ public class JacarandaPressurePlate extends BlockPressurePlate {
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry( ).register(new ItemBlock(jacaranda_pressure_plate).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(jacaranda_pressure_plate.getRegistryName( )));
+            event.getRegistry( ).register(new ItemBlock(jacaranda_pressure_plate).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName("jacaranda_pressure_plate").setRegistryName(jacaranda_pressure_plate.getRegistryName( )));
         }
 
         @SubscribeEvent

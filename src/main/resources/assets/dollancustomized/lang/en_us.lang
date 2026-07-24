@@ -543,6 +543,7 @@ death.dollancraft.heng=[News] Someone tried to be evil to others and died as a r
 
 # Commands
 commands.114514.successful=After 114514 attempts, congratulations, you have successfully become stinky!
+commands.114514.fail=How shameless! someone try to stink others, shit!
 commands.114514.usage=/114514 --- Usage: Stink yourself up
 
 # Command Messages - English

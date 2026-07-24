@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.client.renderer.tileentity.TileEntityJacarandaSignRenderer;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
@@ -7,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.network.play.client.CPacketUpdateSign;
 import net.minecraft.util.ChatAllowedCharacters;
@@ -26,6 +26,8 @@ public class GuiEditJacarandaSign extends GuiScreen {
     private GuiButton doneBtn;
 
     public GuiEditJacarandaSign(TileEntityJacarandaSign teSign) {
+        // 确保告示牌是可编辑的
+        teSign.setEditable(true);
         this.tileSign = teSign;
     }
 
@@ -96,10 +98,6 @@ public class GuiEditJacarandaSign extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        // 强制释放鼠标焦点，确保指针显示
-        if (this.mc != null && this.mc.inGameHasFocus) {
-            this.mc.setIngameNotInFocus();
-        }
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, I18n.format("sign.edit"), this.width / 2, 40, 16777215);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -145,14 +143,14 @@ public class GuiEditJacarandaSign extends GuiScreen {
                 GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate(0.0F, -1.0625F, 0.0F);
             }
-            // 如果是墙上告示牌，不需要特殊处理，因为原版已经正确处理了方向
         }
 
         if (this.updateCounter / 6 % 2 == 0) {
             this.tileSign.lineBeingEdited = this.editLine;
         }
 
-        TileEntityRendererDispatcher.instance.render(this.tileSign, -0.5D, -0.75D, -0.5D, 0.0F);
+        // 使用自定义渲染器渲染蓝花楹木告示牌
+        TileEntityJacarandaSignRenderer.instance.render(this.tileSign, -0.5D, -0.75D, -0.5D, 0.0F, -1, 1.0F);
         this.tileSign.lineBeingEdited = -1;
         GlStateManager.popMatrix();
         super.drawScreen(mouseX, mouseY, partialTicks);

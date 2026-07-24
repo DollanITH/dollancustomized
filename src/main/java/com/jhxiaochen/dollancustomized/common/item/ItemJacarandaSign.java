@@ -2,16 +2,16 @@ package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.client.gui.GuiEditJacarandaSign;
+import com.jhxiaochen.dollancustomized.common.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -48,8 +48,10 @@ public class ItemJacarandaSign extends Item {
 
             if (player.canPlayerEdit(pos, facing, itemstack)) {
                 if (worldIn.isRemote) {
+                    // 客户端：直接返回成功
                     return EnumActionResult.SUCCESS;
                 } else {
+                    // 服务端：放置方块
                     pos = flag ? pos.down() : pos;
 
                     if (facing == EnumFacing.UP) {
@@ -59,14 +61,11 @@ public class ItemJacarandaSign extends Item {
                         worldIn.setBlockState(pos, JacarandaWallSign.Registry.jacaranda_wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, facing), 11);
                     }
 
-                    // 设置物品NBT到TileEntity
-                        TileEntity tileentity = worldIn.getTileEntity(pos);
-                        if (tileentity instanceof TileEntityJacarandaSign && !ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack)) {
-                            // 使用自定义的GUI来处理旋转
-                            Minecraft.getMinecraft().displayGuiScreen(new GuiEditJacarandaSign((TileEntityJacarandaSign) tileentity));
-                        } else {
-                            ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack);
-                        }
+                    TileEntity tileentity = worldIn.getTileEntity(pos);
+                    if (tileentity instanceof TileEntityJacarandaSign && !ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack )) {
+                        // 模仿原版openEditSign方法，但使用自定义网络包
+                        ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, pos, tileentity);
+                    }
 
                     if (!player.capabilities.isCreativeMode) {
                         itemstack.shrink(1);

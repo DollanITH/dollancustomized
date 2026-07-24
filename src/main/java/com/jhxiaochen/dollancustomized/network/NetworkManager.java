@@ -31,6 +31,8 @@ public class NetworkManager {
             PacketType.JACARANDA_SIGN_TEXT.getId(), PacketType.JACARANDA_SIGN_TEXT.getTargetSide());
                 INSTANCE.registerMessage(PacketJacarandaSignUpdate.Handler.class, PacketJacarandaSignUpdate.class,
             PacketType.UPDATE_SIGN_DATA.getId(), PacketType.UPDATE_SIGN_DATA.getTargetSide());
+        INSTANCE.registerMessage(PacketJacarandaSignGui.Handler.class, PacketJacarandaSignGui.class,
+            PacketType.OPEN_JACARANDA_SIGN_GUI.getId(), PacketType.OPEN_JACARANDA_SIGN_GUI.getTargetSide());
     }
 
     // 发送方法
@@ -49,6 +51,10 @@ public class NetworkManager {
     
     public static void updateSignData(EntityPlayerMP player, BlockPos pos, NBTTagCompound nbt) {
         INSTANCE.sendTo(new PacketJacarandaSignUpdate(pos, nbt), player);
+    }
+
+    public static void openJacarandaSignGui(EntityPlayerMP player, BlockPos pos) {
+        INSTANCE.sendTo(new PacketJacarandaSignGui(pos), player);
     }
 
     

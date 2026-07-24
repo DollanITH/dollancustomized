@@ -541,6 +541,7 @@ death.dollancraft.heng=[新闻] 有人因为试图恶臭别人，把自己弄死
 
 # 命令
 commands.114514.successful=经过114514次的尝试,恭喜您,您已经恶臭成功了!
+commands.114514.fail=缺德死了,怎么会有人想恶臭别人!
 commands.114514.usage=/114514 --- 用法:用于恶臭自己
 
 # 命令消息 - 中文

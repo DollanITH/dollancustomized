@@ -18,6 +18,13 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
     private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized:textures/entity/jacaranda_sign.png");
     private final ModelSign model = new ModelSign();
 
+    // 静态实例
+    public static TileEntityJacarandaSignRenderer instance;
+
+    public TileEntityJacarandaSignRenderer() {
+        instance = this;
+    }
+
     @Override
     public void render(TileEntityJacarandaSign te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         BlockPos blockpos = te.getPos();

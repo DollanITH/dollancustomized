@@ -8,9 +8,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -40,12 +42,14 @@ public class JacarandaFenceGate extends BlockFenceGate {
 
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry( ).register(new ItemBlock(jacaranda_fence_gate).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(jacaranda_fence_gate.getRegistryName( )));
+            event.getRegistry( ).register(new ItemBlock(jacaranda_fence_gate).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName("jacaranda_fence_gate").setRegistryName(jacaranda_fence_gate.getRegistryName( )));
         }
 
         @SubscribeEvent
         public static void registerModel(ModelRegistryEvent event){
             DollanBlocks.SimpleBlock(jacaranda_fence_gate);
+            ModelLoader.setCustomStateMapper(jacaranda_fence_gate, new StateMap.Builder().ignore(JacarandaFenceGate.POWERED).build());
+
         }
     }
 }

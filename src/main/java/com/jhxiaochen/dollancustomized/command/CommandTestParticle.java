@@ -30,7 +30,7 @@ public class CommandTestParticle extends CommandBase {
             EntityPlayer player = (EntityPlayer) sender;
             World world = player.world;
 
-            if (!world.isRemote) {
+            if (world.isRemote) {
                 sender.sendMessage(new TextComponentString("请在客户端运行此命令来查看粒子效果"));
                 return;
             }

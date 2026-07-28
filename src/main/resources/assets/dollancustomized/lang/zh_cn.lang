@@ -584,3 +584,7 @@ item.jacaranda_sign.name=蓝花楹木告示牌
 gui.done=完成
 gui.sign.click_to_edit=点击编辑文本
 gui.sign.shift_click_for_colors=按住Shift点击打开编辑界面
+sign.edit=编辑告示牌
+sign.back=背面
+sign.isFront=正面
+sign.isBack=背面

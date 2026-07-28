@@ -586,3 +586,7 @@ item.jacaranda_sign.name=Jacaranda Sign
 gui.done=Done
 gui.sign.click_to_edit=Click to edit text
 gui.sign.shift_click_for_colors=Shift+Click to open editor
+sign.edit=Edit Sign
+sign.back=Back Side
+sign.isFront=Front Side
+sign.isBack=Back Side

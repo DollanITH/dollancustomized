@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -13,12 +14,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketEditState extends BasePacket {
     private int lineBeingEdited;
+    private int slot; // 0 = 正面, 1 = 背面
     public String[] textLines;
 
     public PacketEditState() {}
-    public PacketEditState(BlockPos pos, int line, String[] lines) {
+    public PacketEditState(BlockPos pos, int line, int slot, String[] lines) {
         super(pos);
         this.lineBeingEdited = line;
+        this.slot = slot;
         this.textLines = new String[4];
         if (lines != null) System.arraycopy(lines, 0, this.textLines, 0, Math.min(lines.length, 4));
     }
@@ -27,6 +30,7 @@ public class PacketEditState extends BasePacket {
     public void fromBytes(ByteBuf buf) {
         pos = readBlockPos(buf);
         lineBeingEdited = buf.readInt();
+        slot = buf.readInt();
         textLines = readStringArray(buf, 4);
     }
 
@@ -34,6 +38,7 @@ public class PacketEditState extends BasePacket {
     public void toBytes(ByteBuf buf) {
         writeBlockPos(buf, pos);
         buf.writeInt(lineBeingEdited);
+        buf.writeInt(slot);
         writeStringArray(buf, textLines);
     }
 
@@ -62,8 +67,20 @@ public class PacketEditState extends BasePacket {
                             nbt.setString("Text" + (i + 1), text);
                         }
 
+                        // 临时保存当前的背面文本
+                        ITextComponent[] tempBackText = null;
+                        if (msg.slot == 1) {
+                            tempBackText = sign.backText.clone();
+                        }
+
                         // 应用更新
                         sign.readFromNBT(nbt);
+
+                        // 如果是更新背面，恢复背面文本
+                        if (msg.slot == 1 && tempBackText != null) {
+                            System.arraycopy(tempBackText, 0, sign.backText, 0, 4);
+                        }
+
                         sign.markDirty();
 
                         // 通知更新

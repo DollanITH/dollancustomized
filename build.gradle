@@ -3,6 +3,8 @@ buildscript {
         maven { url = 'https://maven.minecraftforge.net/' }
         mavenCentral()
         flatDir { dirs 'libs' }
+        maven { url 'https://libraries.minecraft.net/' } // 其他依赖
+        maven { url 'https://maven.modrepo.de/' } // 可能包含JEI的仓
         mavenLocal()
     }
     dependencies {

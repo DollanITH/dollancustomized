@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -29,11 +30,11 @@ public class NetworkManager {
             PacketType.HEIGHT_LIMIT_SIGN.getId(), PacketType.HEIGHT_LIMIT_SIGN.getTargetSide());
         INSTANCE.registerMessage(PacketEditState.Handler.class, PacketEditState.class,
             PacketType.JACARANDA_SIGN_TEXT.getId(), PacketType.JACARANDA_SIGN_TEXT.getTargetSide());
-                INSTANCE.registerMessage(PacketJacarandaSignUpdate.Handler.class, PacketJacarandaSignUpdate.class,
-            PacketType.UPDATE_SIGN_DATA.getId(), PacketType.UPDATE_SIGN_DATA.getTargetSide());
         INSTANCE.registerMessage(PacketJacarandaSignGui.Handler.class, PacketJacarandaSignGui.class,
             PacketType.OPEN_JACARANDA_SIGN_GUI.getId(), PacketType.OPEN_JACARANDA_SIGN_GUI.getTargetSide());
-    }
+        INSTANCE.registerMessage(PacketUpdateSignToServer.Handler.class, PacketUpdateSignToServer.class,
+            PacketType.UPDATE_SIGN_TO_SERVER.getId(), PacketType.UPDATE_SIGN_TO_SERVER.getTargetSide());
+            }
 
     // 发送方法
     public static void sendRoadText(EntityPlayerMP player, BlockPos pos, String text, int color) {
@@ -45,16 +46,68 @@ public class NetworkManager {
     }
 
     public static void sendEditState(EntityPlayerMP player, BlockPos pos, int line, String[] lines) {
-        INSTANCE.sendTo(new PacketEditState(pos, line, lines), player);
+        INSTANCE.sendTo(new PacketEditState(pos, line, 0, lines), player);
+    }
+
+    public static void sendEditState(EntityPlayerMP player, BlockPos pos, int line, int slot, String[] lines) {
+        INSTANCE.sendTo(new PacketEditState(pos, line, slot, lines), player);
+    }
+
+    public static void sendSignTextUpdate(EntityPlayerMP player, BlockPos pos, int slot, ITextComponent[] text, boolean isLocking) {
+        // 创建NBT数据
+        NBTTagCompound nbt = new NBTTagCompound();
+        for (int i = 0; i < 4; i++) {
+            if (text != null && i < text.length) {
+                nbt.setString("Text" + (i + 1), ITextComponent.Serializer.componentToJson(text[i]));
+            }
+        }
+        nbt.setInteger("EditSlot", slot);
+        nbt.setBoolean("IsLocking", isLocking);
+
+        INSTANCE.sendTo(new PacketUpdateSignToServer(pos, nbt), player);
     }
 
     
     public static void updateSignData(EntityPlayerMP player, BlockPos pos, NBTTagCompound nbt) {
-        INSTANCE.sendTo(new PacketJacarandaSignUpdate(pos, nbt), player);
+        INSTANCE.sendTo(new PacketUpdateSignToServer(pos, nbt), player);
+    }
+
+    public static void updateSignData(BlockPos pos, NBTTagCompound nbt) {
+        // Send to server without specific player (server will determine who needs it)
+        // This is called from client, will be received on server
+        PacketUpdateSignToServer packet = new PacketUpdateSignToServer(pos, nbt);
+        INSTANCE.sendToServer(packet);
+    }
+
+    public static void sendUpdateSignToServer(BlockPos pos, NBTTagCompound nbt) {
+        // 使用新的包类型发送更新到服务器
+        PacketUpdateSignToServer packet = new PacketUpdateSignToServer(pos, nbt);
+        INSTANCE.sendToServer(packet);
     }
 
     public static void openJacarandaSignGui(EntityPlayerMP player, BlockPos pos) {
         INSTANCE.sendTo(new PacketJacarandaSignGui(pos), player);
+    }
+
+    public static void openJacarandaSignGui(EntityPlayerMP player, BlockPos pos, int slot) {
+        INSTANCE.sendTo(new PacketJacarandaSignGui(pos, slot), player);
+    }
+
+    // 发送文本更新到所有玩家
+    public static void sendSignTextUpdateToAll(BlockPos pos, int slot, ITextComponent[] text, boolean isLocking, int dimension, double x, double y, double z, double range) {
+        // 创建NBT数据
+        NBTTagCompound nbt = new NBTTagCompound();
+        for (int i = 0; i < 4; i++) {
+            if (text != null && i < text.length) {
+                nbt.setString("Text" + (i + 1), ITextComponent.Serializer.componentToJson(text[i]));
+            }
+        }
+        nbt.setInteger("EditSlot", slot);
+        nbt.setBoolean("IsLocking", isLocking);
+
+        // 使用优化后的包发送更新到所有玩家
+        INSTANCE.sendToAllAround(new PacketUpdateSignToServer(pos, nbt),
+            new NetworkRegistry.TargetPoint(dimension, x, y, z, range));
     }
 
     

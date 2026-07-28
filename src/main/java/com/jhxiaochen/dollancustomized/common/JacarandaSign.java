@@ -1,30 +1,22 @@
 package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaSign;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -86,8 +78,6 @@ public class JacarandaSign extends BlockContainer {
 
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
-        // 返回原版TileEntitySign以使用原版GUI系统
-        // 但我们的TileEntityJacarandaSign会继承自TileEntitySign，所以功能保持不变
         return new TileEntityJacarandaSign();
     }
 
@@ -106,19 +96,6 @@ public class JacarandaSign extends BlockContainer {
         return new ItemStack(ItemJacarandaSign.jacaranda_sign);
     }
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        // 在服务端发送包，让客户端打开GUI
-        if (!worldIn.isRemote && playerIn != null)
-        {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof TileEntityJacarandaSign) {
-                ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) playerIn, pos, tileentity);
-            }
-        }
-        return true;
-    }
-
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return !this.hasInvalidNeighbor(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos);
@@ -129,15 +106,4 @@ public class JacarandaSign extends BlockContainer {
         return BlockFaceShape.UNDEFINED;
     }
 
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-        public static Block jacaranda_sign = null;
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(
-                    jacaranda_sign = new JacarandaSign().setRegistryName(Reference.MOD_ID, "jacaranda_sign").setUnlocalizedName("jacaranda_sign"));
-        }
-
-    }
 }

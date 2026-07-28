@@ -1,6 +1,9 @@
 package com.jhxiaochen.dollancustomized.network;
 
-import com.jhxiaochen.dollancustomized.network.packet.*;
+import com.jhxiaochen.dollancustomized.network.packet.PacketEditState;
+import com.jhxiaochen.dollancustomized.network.packet.PacketHeightLimitSign;
+import com.jhxiaochen.dollancustomized.network.packet.PacketRoadText;
+import com.jhxiaochen.dollancustomized.network.packet.PacketUpdateSignToServer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -39,15 +42,15 @@ public class PacketFactory {
         if (textLines == null || textLines.length != 4) {
             throw new IllegalArgumentException("Text lines must be array of size 4");
         }
-        return new PacketEditState(pos, lineBeingEdited, textLines);
+        return new PacketEditState( );
     }
 
     
     /**
      * 创建告示牌数据更新包
      */
-    public static PacketJacarandaSignUpdate createSignUpdatePacket(BlockPos pos, NBTTagCompound nbtData) {
-        return new PacketJacarandaSignUpdate(pos, nbtData);
+    public static PacketUpdateSignToServer createSignUpdatePacket(BlockPos pos, NBTTagCompound nbtData) {
+        return new PacketUpdateSignToServer(pos, nbtData);
     }
 
     /**

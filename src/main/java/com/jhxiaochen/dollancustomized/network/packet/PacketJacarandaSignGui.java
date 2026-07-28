@@ -16,9 +16,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PacketJacarandaSignGui implements IMessage {
 
     private BlockPos pos;
+    private int slot; // 0 = 正面, 1 = 背面
 
     public BlockPos getPos() {
         return pos;
+    }
+
+    public int getSlot() {
+        return slot;
     }
 
     @SuppressWarnings("unused")
@@ -26,7 +31,12 @@ public class PacketJacarandaSignGui implements IMessage {
     }
 
     public PacketJacarandaSignGui(BlockPos pos) {
+        this(pos, 0);
+    }
+
+    public PacketJacarandaSignGui(BlockPos pos, int slot) {
         this.pos = pos;
+        this.slot = slot;
     }
 
     @Override
@@ -34,6 +44,7 @@ public class PacketJacarandaSignGui implements IMessage {
         PacketBuffer packetBuf = new PacketBuffer(buf);
 
         this.pos = packetBuf.readBlockPos();
+        this.slot = packetBuf.readInt();
     }
 
     @Override
@@ -41,6 +52,7 @@ public class PacketJacarandaSignGui implements IMessage {
         PacketBuffer packetBuf = new PacketBuffer(buf);
 
         packetBuf.writeBlockPos(pos);
+        packetBuf.writeInt(slot);
     }
 
 
@@ -64,6 +76,8 @@ public class PacketJacarandaSignGui implements IMessage {
                     }
 
                     TileEntityJacarandaSign jacarandaSign = (TileEntityJacarandaSign) tileEntity;
+                    // 设置编辑的槽位
+                    jacarandaSign.setEditedSlot(message.getSlot());
                     minecraft.displayGuiScreen(new GuiEditJacarandaSign(jacarandaSign));
                 });
             }

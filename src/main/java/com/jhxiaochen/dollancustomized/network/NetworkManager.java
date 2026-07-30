@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.network;
 
 import com.jhxiaochen.dollancustomized.network.packet.*;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +35,8 @@ public class NetworkManager {
             PacketType.OPEN_JACARANDA_SIGN_GUI.getId(), PacketType.OPEN_JACARANDA_SIGN_GUI.getTargetSide());
         INSTANCE.registerMessage(PacketUpdateSignToServer.Handler.class, PacketUpdateSignToServer.class,
             PacketType.UPDATE_SIGN_TO_SERVER.getId(), PacketType.UPDATE_SIGN_TO_SERVER.getTargetSide());
+        INSTANCE.registerMessage(PacketItemUpdate.Handler.class, PacketItemUpdate.class,
+            PacketType.ITEM_UPDATE.getId(), PacketType.ITEM_UPDATE.getTargetSide());
             }
 
     // 发送方法
@@ -107,6 +110,12 @@ public class NetworkManager {
 
         // 使用优化后的包发送更新到所有玩家
         INSTANCE.sendToAllAround(new PacketUpdateSignToServer(pos, nbt),
+            new NetworkRegistry.TargetPoint(dimension, x, y, z, range));
+    }
+
+    // 发送物品更新到所有玩家
+    public static void sendSignItemUpdateToAll(BlockPos pos, int slot, ItemStack stack, int dimension, double x, double y, double z, double range) {
+        INSTANCE.sendToAllAround(new PacketItemUpdate(pos, slot, stack),
             new NetworkRegistry.TargetPoint(dimension, x, y, z, range));
     }
 

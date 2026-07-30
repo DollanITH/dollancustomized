@@ -42,17 +42,16 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
         float textHeight = fontRenderer.FONT_HEIGHT > 0 ? fontRenderer.FONT_HEIGHT : 8.0F;
 
         // 设定文字在游戏中期望的最终宽高
-        float desiredWidth = 2.2F;
-        float desiredHeight = 3.2F;
+        float desiredHeight = (float) (47.0 / 16.0);
+        float desiredWidth = (float) (39.0 / 16.0);
 
-        // 计算缩放比例
-        float scaleByWidth = desiredWidth / textWidth;
-        float scaleByHeight = desiredHeight / textHeight;
-        float externalScale = Math.min(scaleByWidth, scaleByHeight);
+        // 计算宽度和高度的独立缩放比例（分别控制宽高比）
+        float scaleX = desiredWidth / textWidth;
+        float scaleY = desiredHeight / textHeight;
 
-        // 计算渲染后的实际尺寸
-        float renderWidth = textWidth * externalScale;
-        float renderHeight = textHeight * externalScale;
+        // 计算渲染后的实际尺寸（应用不同的缩放）
+        float renderWidth = textWidth * scaleX;
+        float renderHeight = textHeight * scaleY;
 
         // 计算将字体几何中心平移到原点的偏移量
         float offsetX = -renderWidth / 2.0F;
@@ -89,8 +88,8 @@ public class RenderRoadText extends TileEntitySpecialRenderer<TileEntityRoadText
             // 平移到字体中心
             GlStateManager.translate(offsetX, offsetY, 0.0F);
 
-            // 应用缩放
-            GlStateManager.scale(externalScale, externalScale, externalScale);
+            // 应用扁平缩放（宽高比不同）
+            GlStateManager.scale(scaleX, scaleY, 1.0F);
 
             // 【关键修复】修正面剔除方向，剔除朝向下的面
             setupCorrectCulling();

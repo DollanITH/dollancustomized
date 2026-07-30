@@ -95,11 +95,11 @@ public class RenderHeightLimitSignCustom extends TileEntitySpecialRenderer<TileE
 
             // 动态缩放整数部分，使其宽度与小数部分一致（限制缩放范围：0.8~1.2）
             scale = decimalWidth / integerWidth;
-            scale = Math.max(0.8F, Math.min(1.0F, scale)); // 防止过度放大
+            scale = Math.max(0.9375F, Math.min(1.0F, scale)); // 防止过度放大
             GlStateManager.scale(scale, scale, scale);
 
             // 重新计算总宽度（缩放后的）
-            totalWidth = fontRenderer.getStringWidth(integerPart) * 0.008F * 0.9375F * scale;
+            totalWidth = fontRenderer.getStringWidth(integerPart) * 0.008F * 1.1625F * scale;
         }
 
         // 调整 startX，使整数部分更远离小数点（增加负向偏移）
@@ -109,7 +109,6 @@ public class RenderHeightLimitSignCustom extends TileEntitySpecialRenderer<TileE
             // 计算整数和小数部分的最终宽度（缩放后）
             float integerWidth = fontRenderer.getStringWidth(integerPart) * 0.008F * 0.9375F * scale;
             float decimalWidth = fontRenderer.getStringWidth(String.valueOf(decimal)) * 0.008F * 0.9375F;
-
             // 增加偏移量，使整数部分更远离小数点
             float extraOffset = (integerWidth - decimalWidth) / 2; // 原 /8，现改为 /2（增加偏移）
             startX = -totalWidth / 4 - 4.5F - extraOffset; // 原 2.0F，现改为 4.5F（增加负向偏移）
@@ -132,13 +131,16 @@ public class RenderHeightLimitSignCustom extends TileEntitySpecialRenderer<TileE
 
             // **关键优化：调整小数部分的缩放比例，使其大小与整数部分一致**
             float decimalScale = 1.0F / scale * 1.375F; // 小数部分的缩放比例（与整数部分相反）
-            decimalScale = Math.max(0.9375F, Math.max(1.2F, decimalScale)); // 限制缩放范围（0.8~1.2）
+            decimalScale = Math.max(0.9375F, Math.max(1.1625F, decimalScale)); // 限制缩放范围（0.8~1.2）
             GlStateManager.scale(decimalScale, decimalScale, decimalScale);
 
-            float decimalX = currentX / 2.0F + (fontRenderer.getStringWidth(".") * 1.2F);
-            decimalX = Math.max(decimalX, 0.0F); // 限制小数部分坐标不小于 0
-
-            fontRenderer.drawStringWithOutline(String.valueOf(decimal), decimalX, 6, 0xFF000000);
+            float decimalX = currentX / 2.0F + (fontRenderer.getStringWidth(".") * 1.25F);
+            decimalX = Math.max(decimalX, 0.05F); // 限制小数部分坐标不小于 0
+            float startY = 6;
+            if (String.valueOf(decimal).equals("1")) {
+                startY = 7;
+            }
+            fontRenderer.drawStringWithOutline(String.valueOf(decimal), decimalX, startY, 0xFF000000);
             GlStateManager.translate(1.375F, 0.0F, 0.0F);
             GlStateManager.popMatrix();
         }

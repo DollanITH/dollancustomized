@@ -1,12 +1,13 @@
 {
+  "format_version": "1.9.0",
   "ambientocclusion": false,
   "textures": {
     "particle": "dollancustomized:blocks/white"
   },
   "elements": [
     {
-      "from": [-8, -7.999, -8],
-      "to": [24, -7.99, 24],
+      "from": [-10, -7.999, -14],
+      "to": [26, -7.99, 30],
       "rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 0]},
       "faces": {
         "up": {"uv": [0, 0, 16, 16], "texture": "#mark"}

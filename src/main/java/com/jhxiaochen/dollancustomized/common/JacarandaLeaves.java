@@ -12,6 +12,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -132,27 +133,34 @@ import java.util.Random;
         }
     }
 
-        @Override
-        @SideOnly(Side.CLIENT)
-        public BlockRenderLayer getBlockLayer(){
-            return Blocks.LEAVES.getBlockLayer();
-        }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer(){
+        return Blocks.LEAVES.getBlockLayer();
+    }
 
-        @Override
-        public boolean isOpaqueCube(IBlockState state){
-            return Blocks.LEAVES.isOpaqueCube(state);
-        }
+    @Override
+    public boolean isOpaqueCube(IBlockState state){
+        return Blocks.LEAVES.isOpaqueCube(state);
+    }
 
-        @SideOnly(Side.CLIENT)
-        @Override
-        public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side){
-            return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
-        }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side){
+        return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
+    }
 
     @Nonnull
     @Override
     public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         return NonNullList.withSize(1, new ItemStack(this));
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        world.setBlockState(pos, state
+                .withProperty(DECAYABLE, false)
+                .withProperty(CHECK_DECAY, false));
     }
 
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)

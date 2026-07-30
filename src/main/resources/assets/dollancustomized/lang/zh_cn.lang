@@ -578,7 +578,49 @@ itemGroup.tabDollanBlocks=东安自定义 | 方块
 itemGroup.tabMetroBlocks=东安自定义 | 铁路
 itemGroup.tabmetro=东安自定义 | 方块
 
-# Jacaranda Sign
+# 蓝花楹木
+tile.jacaranda_log.name=蓝花楹木原木
+tile.jacaranda_wood.name=蓝花楹木
+tile.stripped_jacaranda_log.name=去皮蓝花楹木原木
+tile.stripped_jacaranda_wood.name=去皮蓝花楹木
+
+# 蓝花楹木板
+tile.jacaranda_planks.name=蓝花楹木木板
+
+# 蓝花楹树叶
+tile.jacaranda_leaves.name=蓝花楹花簇
+
+# 蓝花楹树苗
+tile.jacaranda_sapling.name=蓝花楹树树苗
+
+# 蓝花楹按钮
+tile.jacaranda_button.name=蓝花楹木按钮
+
+# 蓝花楹门
+item.dollancustomized_jacaranda_door.name=蓝花楹木门
+
+# 蓝花楹半砖
+tile.jacaranda_slab.name=蓝花楹木半砖
+
+# 蓝花楹栅栏
+tile.jacaranda_fence.name=蓝花楹木栅栏
+
+# 蓝花楹栅栏门
+tile.jacaranda_fence_gate.name=蓝花楹木栅栏门
+
+# 蓝花楹吊式告示牌
+item.jacaranda_hanging_sign.name=悬挂式蓝花楹木告示牌
+
+# 蓝花楹压力板
+tile.jacaranda_pressure_plate.name=蓝花楹木压力板
+
+# 蓝花楹台阶
+tile.jacaranda_stairs.name=蓝花楹木台阶
+
+# 蓝花楹活板门
+tile.jacaranda_trapdoor.name=蓝花楹木活板门
+
+# 蓝花楹告示牌
 tile.jacaranda_sign.name=蓝花楹木告示牌
 item.jacaranda_sign.name=蓝花楹木告示牌
 gui.done=完成

@@ -2,14 +2,18 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -29,9 +33,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class JacarandaHangingSignAttached extends Block {
+public class JacarandaHangingSignAttached extends BlockContainer {
 
-    public static final PropertyInteger AXIS = PropertyInteger.create("axis", 0, 15);
+    public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
     protected static final AxisAlignedBB BOX = new AxisAlignedBB(0.1875D, 0.0, 0.1875D, 0.8125D, 1.0, 0.8125D);
     protected static final AxisAlignedBB X_BOX = new AxisAlignedBB(0.0625D, 0.0, 0.4375D, 0.9375D, 0.625D, 0.5625D);
@@ -52,22 +56,22 @@ public class JacarandaHangingSignAttached extends Block {
         this.setLightOpacity(0);
         this.setUnlocalizedName("jacaranda_hanging_sign_attached");
         this.setRegistryName(Reference.MOD_ID, "jacaranda_hanging_sign_attached");
-        this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, 0));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATION, 0));
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, AXIS);
+        return new BlockStateContainer(this, ROTATION);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(AXIS, meta);
+        return this.getDefaultState().withProperty(ROTATION, meta);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(AXIS);
+        return state.getValue(ROTATION);
     }
 
     @Override
@@ -87,7 +91,7 @@ public class JacarandaHangingSignAttached extends Block {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        int axis = state.getValue(AXIS);
+        int axis = state.getValue(ROTATION);
         if (axis == 0 || axis == 8)
             return X_BOX;
         if (axis == 4 || axis == 12)
@@ -114,23 +118,49 @@ public class JacarandaHangingSignAttached extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new net.minecraft.tileentity.TileEntitySign();
+        return new TileEntityJacarandaHangingSign();
     }
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(this);
+        if (GuiScreen.isCtrlKeyDown()) return new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign);
+
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity instanceof TileEntityJacarandaHangingSign) {
+            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
+            int hasItemSide = tile.getDisplayedSides();
+            ItemStack itemStack = new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign);
+
+            if (hasItemSide == 0 || hasItemSide == 1) {
+                itemStack = tile.getDisplayItem(hasItemSide);
+            } else if (hasItemSide == 2) {
+                itemStack = tile.getDisplayItem(tile.getAndToggleLastPickedSide());
+            }
+            return itemStack;
+        }
+        return new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign);
     }
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(this));
+        drops.add(new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign));
+        TileEntity tileentity = world.getTileEntity(pos);
+        if (tileentity instanceof TileEntityJacarandaHangingSign) {
+            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
+            drops.add(tile.getItemHandler().getStackInSlot(0));
+            drops.add(tile.getItemHandler().getStackInSlot(1));
+        }
     }
 
     @Override
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
         if (!player.capabilities.isCreativeMode) {
-            this.spawnAsEntity(world, pos, new ItemStack(this));
+            Block.spawnAsEntity(world, pos, new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign));
+        }
+        if (te instanceof TileEntityJacarandaHangingSign) {
+            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) te;
+            Block.spawnAsEntity(world, pos, tile.getItemHandler().getStackInSlot(0));
+            Block.spawnAsEntity(world, pos, tile.getItemHandler().getStackInSlot(1));
         }
     }
 
@@ -156,20 +186,117 @@ public class JacarandaHangingSignAttached extends Block {
             return;
         }
 
-        this.spawnAsEntity(world, pos, new ItemStack(this));
+        this.spawnAsEntity(world, pos, new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign));
         world.setBlockToAir(pos);
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.isRemote) {
-            return true;
-        } else {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
-            return tileentity instanceof net.minecraft.tileentity.TileEntitySign ?
-                   ((net.minecraft.tileentity.TileEntitySign)tileentity).executeCommand(playerIn) : false;
+        // 点击 上/下方
+        if (facing == EnumFacing.UP || facing == EnumFacing.DOWN) return false;
+
+        // 为蹲下
+        if (playerIn.isSneaking()) return false;
+
+        // 获取点击面
+        int slot = getSlotFromFacing(state, facing, playerIn);
+        if (slot == -1) return false;
+
+        // 获取存储物品的 TileEntity
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity instanceof TileEntityJacarandaHangingSign) {
+            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
+
+            // 检查是否涂蜡
+            if (tile.isWaxed(slot)) {
+                playerIn.sendMessage(new net.minecraft.util.text.TextComponentString("这一面已经被涂蜡，无法编辑"));
+                return false;
+            }
+
+            // 如果这一面有物品，移除展示的物品
+            if (tile.hasDisplayItems(slot)) {
+                return tile.removeDisplayItems(worldIn, pos, state, playerIn, slot);
+            }
+
+            // 获取手持物
+            ItemStack heldItem = playerIn.getHeldItem(hand);
+
+            // 空手点击
+            if (heldItem.isEmpty()) {
+                // 编辑文字
+                return tile.editText(slot, playerIn);
+            }
+            // 这一面什么都没有
+            else if (!tile.hasAny(slot)) {
+                // 展示物品
+                return tile.displayItems(worldIn, pos, state, playerIn, heldItem, slot);
+            }
+
+            // 尝试打蜡
+            if (tile.tryWaxed(slot, heldItem)) {
+                // 减少物品栏物品
+                if (!playerIn.capabilities.isCreativeMode) heldItem.shrink(1);
+                return true;
+            }
         }
+        return false;
+    }
+
+    // 获取槽位
+    private int getSlotFromFacing(IBlockState state, EnumFacing facing, EntityPlayer player) {
+        int axis = state.getValue(JacarandaHangingSignAttached.ROTATION);
+
+        // 处理正方向 (0, 8, 12)
+        if (axis == 0 || axis == 8 || axis == 12) {
+            boolean isNorthSouth = (axis == 0 || axis == 8);
+            if (isNorthSouth) {
+                if (facing == EnumFacing.SOUTH) return 0;
+                if (facing == EnumFacing.NORTH) return 1;
+            } else {
+                if (facing == EnumFacing.EAST) return 0;
+                if (facing == EnumFacing.WEST) return 1;
+            }
+        }
+
+        // 处理非正方向 - 使用玩家朝向
+        float yaw = player.rotationYaw;
+        yaw = (yaw % 360 + 360) % 360; // 规范化到0-360
+        float adjustedYaw = (yaw + 180) % 360; // 转换为北向0度
+
+        if (axis >= 1 && axis <= 3) {        // 东北方向组
+            if (adjustedYaw >= 0 && adjustedYaw < 90) {
+                return 0; // 面朝东北看正面
+            } else if (adjustedYaw >= 180 && adjustedYaw < 270) {
+                return 1; // 面朝西南看背面
+            }
+        } else if (axis >= 5 && axis <= 7) { // 东南方向组
+            if (adjustedYaw >= 90 && adjustedYaw < 180) {
+                return 0; // 面朝东南看正面
+            } else if (adjustedYaw >= 270) {
+                return 1; // 面朝西北看背面
+            }
+        } else if (axis >= 9 && axis <= 11) { // 西南方向组
+            if (adjustedYaw >= 180 && adjustedYaw < 270) {
+                return 0; // 面朝西南看正面
+            } else if (adjustedYaw >= 0 && adjustedYaw < 90) {
+                return 1; // 面朝东北看背面
+            }
+        } else if (axis >= 13 && axis <= 15) { // 西北方向组
+            if (adjustedYaw >= 270) {
+                return 0; // 面朝西北看正面
+            } else if (adjustedYaw >= 90 && adjustedYaw < 180) {
+                return 1; // 面朝东南看背面
+            }
+        }
+
+        return -1; // 不在有效角度范围内
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityJacarandaHangingSign();
     }
 
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)

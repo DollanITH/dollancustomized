@@ -1,6 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
+import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
@@ -53,7 +55,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
         this.buttonList.clear();
 
         // 添加4个按钮
-        int buttonY = this.height - 40;
+        int buttonY = this.height - 50;
         int halfScreen = this.width / 2;
 
         this.buttonList.add(new GuiButton(BTN_CLEAR, halfScreen - 100, buttonY, 98, 20, "×"));
@@ -85,7 +87,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
             float f1 = (float)(tile.getBlockMetadata() * 360) / 16.0F;
             GlStateManager.rotate(f1, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
-        } else {
+        } else if (block instanceof JacarandaWallSign) {
             int i = tile.getBlockMetadata();
             float f2 = 0.0F;
 
@@ -98,6 +100,20 @@ public class GuiEditJacarandaSign extends GuiScreen {
             }
 
             GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
+            GlStateManager.translate(0.0F, -1.0625F, 0.0F);
+        } else if (block instanceof JacarandaHangingSign) {
+            int meta = tile.getBlockMetadata();
+            float rotation = 0.0F;
+
+            if (meta == 2) {
+                rotation = 180.0F;
+            } else if (meta == 4) {
+                rotation = 90.0F;
+            } else if (meta == 5) {
+                rotation = -90.0F;
+            }
+
+            GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
         }
 

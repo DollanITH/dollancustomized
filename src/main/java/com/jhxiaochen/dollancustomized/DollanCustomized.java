@@ -106,7 +106,6 @@ public class DollanCustomized {
         event.registerServerCommand(new CommandTreeKiller());
         event.registerServerCommand(new CommandTreeUndo());
         event.registerServerCommand(new CommandTreeUndoDebug());
-        event.registerServerCommand(new CommandTestParticle());
                 System.out.println("Commands Registered successfully.");
     }
 

@@ -34,7 +34,7 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
     private static final int[] TOTAL_SLOTS = new int[]{0, 1};
 
     // 蓝花楹木告示牌纹理
-    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized:textures/entity/jacaranda_sign.png");
+    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/jacaranda_sign.png");
     private static final float SIGN_SCALE = 0.6666667F;
 
     // 模型实例

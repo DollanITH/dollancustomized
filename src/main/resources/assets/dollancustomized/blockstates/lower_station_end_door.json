@@ -109,8 +109,8 @@
     "facing=north,hinge=right,open=false": {
       "model": "forge:multi-layer",
       "custom": {
-        "base": "dollancustomized:lower_station_end_door#right",
-        "Cutout": "dollancustomized:lower_station_end_door#right",
+        "base": "dollancustomized:lower_station_end_door#right_1",
+        "Cutout": "dollancustomized:lower_station_end_door#right_1",
         "Translucent": "dollancustomized:lower_station_end_door#tran"},
       "y": 270 },
     "left": [{

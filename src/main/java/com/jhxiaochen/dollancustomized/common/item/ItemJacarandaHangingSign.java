@@ -5,18 +5,23 @@ import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -141,6 +146,62 @@ public class ItemJacarandaHangingSign extends Item {
         return EnumActionResult.FAIL;
     }
 
+    // 添加自定义的交互方法（通过右键点击告示牌来编辑）
+    public static boolean onBlockActivatedHangingSign(World world, BlockPos pos, EntityPlayer player, EnumHand hand) {
+        if (world.isRemote) {
+            return true;
+        }
+
+        TileEntity tileentity = world.getTileEntity(pos);
+        if (tileentity instanceof TileEntityJacarandaHangingSign) {
+            TileEntityJacarandaHangingSign signTile = (TileEntityJacarandaHangingSign) tileentity;
+
+            // 获取点击面
+            EnumFacing facing = player.getHorizontalFacing();
+
+            // 获取槽位
+            int slot = -1;
+            if (facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH) {
+                slot = 0; // 正面
+            } else if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
+                slot = 1; // 背面
+            }
+
+            if (slot == -1) return false;
+
+            // 检查是否涂蜡
+            if (signTile.isWaxed(slot)) {
+                player.sendMessage(new net.minecraft.util.text.TextComponentString("这一面已经被涂蜡，无法编辑"));
+                return false;
+            }
+
+            // 检查是否正在编辑
+            if (signTile.isUsing) {
+                player.sendMessage(new net.minecraft.util.text.TextComponentString("告示牌正在编辑中"));
+                return false;
+            }
+
+            // 获取手持物品
+            ItemStack heldItem = player.getHeldItem(hand);
+
+            // 空手或涂蜡工具 -> 编辑文本
+            if (heldItem.isEmpty()) {
+                return signTile.editText(slot, player);
+            }
+            // 检查是否是涂蜡工具
+            else if (signTile.tryWaxed(slot, heldItem)) {
+                player.getHeldItem(hand).shrink(1);
+                return true;
+            }
+            // 尝试执行命令（原版功能）
+            else {
+                return tileentity instanceof net.minecraft.tileentity.TileEntitySign ?
+                       ((net.minecraft.tileentity.TileEntitySign)tileentity).executeCommand(player) : false;
+            }
+        }
+        return false;
+    }
+
     // 放置方块
     public void placeBlock(EntityPlayer player, World world, BlockPos pos, EnumHand hand, Block block, int meta) {
         this.placeBlock(player, world, pos, hand, block.getStateFromMeta(meta));
@@ -204,6 +265,11 @@ public class ItemJacarandaHangingSign extends Item {
                         JacarandaHangingSign.Registry.jacaranda_hanging_sign_wall,
                         JacarandaHangingSignAttached.Registry.jacaranda_hanging_sign_attached
                     ));
+        }
+
+        @SubscribeEvent
+        public static void registerModels(ModelRegistryEvent event) {
+            ModelLoader.setCustomModelResourceLocation(jacaranda_hanging_sign, 0, new ModelResourceLocation(jacaranda_hanging_sign.getRegistryName(), "inventory"));
         }
     }
 }

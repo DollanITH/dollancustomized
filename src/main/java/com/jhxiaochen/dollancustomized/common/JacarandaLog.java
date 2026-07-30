@@ -10,8 +10,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBlock;
@@ -111,17 +113,28 @@ public class JacarandaLog extends BlockLog {
         ItemStack stack = player.getHeldItem(hand);
 
         // 检查是否是斧头
-        if (stack.getItem() instanceof ItemAxe) {
+        if (stack.getItem() instanceof ItemAxe && hand == EnumHand.MAIN_HAND) {
             // 如果是原木（不是去皮的），可以去皮
-            if (stripped != null && !world.isRemote) {
+            if (stripped != null) {
                 // 替换方块为去皮原木
-                world.setBlockState(pos, stripped.getDefaultState(), 3);
+                world.setBlockState(pos, stripped.getDefaultState().withProperty(AXIS, state.getValue(AXIS)), 3);
 
                 // 添加声音效果
                 world.playSound(null, pos, DollanSounds.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                // 损耗斧头
-                stack.damageItem(1, player);
+                int efficiencyLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, stack);
+
+                boolean damage = true;
+                if (efficiencyLevel > 0) {
+                    if (Math.random() * 10 < efficiencyLevel) {
+                        damage = false;
+                    }
+                }
+
+                if (damage) {
+                    stack.damageItem(1, player);
+                }
+
 
                 return true;
             }
@@ -206,13 +219,6 @@ public class JacarandaLog extends BlockLog {
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
-            // 注册蓝花楹木原木
-            jacaranda_log = new JacarandaLog(stripped_jacaranda_log);
-            event.getRegistry().register(jacaranda_log.setUnlocalizedName("jacaranda_log").setRegistryName(Reference.MOD_ID, "jacaranda_log"));
-
-            // 注册蓝花楹木
-            jacaranda_wood = new JacarandaLog(stripped_jacaranda_wood);
-            event.getRegistry().register(jacaranda_wood.setUnlocalizedName("jacaranda_wood").setRegistryName(Reference.MOD_ID, "jacaranda_wood"));
 
             // 注册去皮蓝花楹木原木
             stripped_jacaranda_log = new JacarandaLog();
@@ -221,6 +227,15 @@ public class JacarandaLog extends BlockLog {
             // 注册去皮蓝花楹木
             stripped_jacaranda_wood = new JacarandaLog();
             event.getRegistry().register(stripped_jacaranda_wood.setUnlocalizedName("stripped_jacaranda_wood").setRegistryName(Reference.MOD_ID, "stripped_jacaranda_wood"));
+
+            // 注册蓝花楹木原木
+            jacaranda_log = new JacarandaLog(stripped_jacaranda_log);
+            event.getRegistry().register(jacaranda_log.setUnlocalizedName("jacaranda_log").setRegistryName(Reference.MOD_ID, "jacaranda_log"));
+
+            // 注册蓝花楹木
+            jacaranda_wood = new JacarandaLog(stripped_jacaranda_wood);
+            event.getRegistry().register(jacaranda_wood.setUnlocalizedName("jacaranda_wood").setRegistryName(Reference.MOD_ID, "jacaranda_wood"));
+
         }
 
         @SubscribeEvent

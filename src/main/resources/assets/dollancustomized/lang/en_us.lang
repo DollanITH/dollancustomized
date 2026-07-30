@@ -580,6 +580,48 @@ itemGroup.tabDollanBlocks=Dollan Custom | Blocks
 itemGroup.tabMetroBlocks=Dollan Custom | Railway
 itemGroup.tabmetro=Dollan Custom | Blocks
 
+# Jacaranda Log
+tile.jacaranda_log.name=Jacaranda Log
+tile.jacaranda_wood.name=Jacaranda Planks
+tile.stripped_jacaranda_log.name=Stripped Jacaranda Log
+tile.stripped_jacaranda_wood.name=Stripped Jacaranda Planks
+
+# Jacaranda Planks
+tile.jacaranda_planks.name=Jacaranda Planks
+
+# Jacaranda Leaves
+tile.jacaranda_leaves.name=Jacaranda Leaves
+
+# Jacaranda Sapling
+tile.jacaranda_sapling.name=Jacaranda Sapling
+
+# Jacaranda Button
+tile.jacaranda_button.name=Jacaranda Button
+
+# Jacaranda Door
+item.dollancustomized_jacaranda_door.name=Jacaranda Door
+
+# Jacaranda Fence
+tile.jacaranda_fence.name=Jacaranda Fence
+
+# Jacaranda Fence Gate
+tile.jacaranda_fence_gate.name=Jacaranda Fence Gate
+
+# Jacaranda Hanging Sign
+item.jacaranda_hanging_sign.name=Jacaranda Hanging Sign
+
+# Jacaranda Pressure Plate
+tile.jacaranda_pressure_plate.name=Jacaranda Pressure Plate
+
+# Jacaranda Slab
+tile.jacaranda_slab.name=Jacaranda Slab
+
+# Jacaranda Stairs
+tile.jacaranda_stairs.name=Jacaranda Stairs
+
+# Jacaranda Trapdoor
+tile.jacaranda_trapdoor.name=Jacaranda Trapdoor
+
 # Jacaranda Sign
 tile.jacaranda_sign.name=Jacaranda Sign
 item.jacaranda_sign.name=Jacaranda Sign

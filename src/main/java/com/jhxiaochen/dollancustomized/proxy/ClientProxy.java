@@ -8,8 +8,8 @@ import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.font.SignFontRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderRoadText;
+import com.jhxiaochen.dollancustomized.client.renderer.tileentity.TileEntityJacarandaHangingSignRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.tileentity.TileEntityJacarandaSignRenderer;
-import com.jhxiaochen.dollancustomized.particle.JacarandaResourceLoader;
 import com.jhxiaochen.dollancustomized.particle.ParticleInit;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
@@ -39,9 +39,6 @@ public class ClientProxy implements CommonProxy {
         // 初始化粒子系统
         ParticleInit.init(null);
 
-        // 预加载粒子纹理
-        JacarandaResourceLoader.preloadTextures();
-
         // RoadText 使用像素风格渲染器（高性能）
         RoadFontLoader roadFontLoader = new RoadFontLoader(ttfLocation, 32.0F);
         roadFontRenderer = new RoadFontRenderer(roadFontLoader);
@@ -55,6 +52,8 @@ public class ClientProxy implements CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeightLimitSignCustom.class, new RenderHeightLimitSignCustom());
         // 注册蓝花楹木告示牌渲染器
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJacarandaSign.class, new TileEntityJacarandaSignRenderer());
+        // 注册悬挂式蓝花楹木告示牌渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign.class, new TileEntityJacarandaHangingSignRenderer());
     }
 
     

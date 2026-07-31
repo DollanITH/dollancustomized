@@ -456,6 +456,7 @@ tile.platform_fence.name=Platform Fence
 
 # Other Road Elements
 tile.stop_line_right_1.name=Stop Line (Right)
+tile.stop_line_right_1_slab.name=Stop Line (Right) Slab
 
 # Height Limit Signs
 tile.road_sign_height_limit_3.height_1.name=Height Limit 3m Sign

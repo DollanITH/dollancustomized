@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
 import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.common.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
@@ -22,14 +23,14 @@ import java.util.Arrays;
 import java.util.Deque;
 
 public class GuiEditJacarandaSign extends GuiScreen {
-    private int updateCounter;
-    private int editingSlot;
-    private String titleText;
-    private final TileEntityJacarandaSign tile;
-    private int editLine = 0;
-    private Deque<String[]> undoStack = new ArrayDeque<>();
-    private long lastCheckTime = 0;
-    private static final double MAX_DISTANCE_SQ = 5.0 * 5.0;
+    private              int                     updateCounter;
+    private              int                     editingSlot;
+    private              String                  titleText;
+    private final        TileEntityJacarandaSign tile;
+    private              int                     editLine = 0;
+    private              Deque<String[]>         undoStack = new ArrayDeque<>();
+    private              long                    lastCheckTime = 0;
+    private static final double                  MAX_DISTANCE_SQ = 5.0 * 5.0;
     private boolean needSave = true;
     private boolean isClosing = false;
 
@@ -79,11 +80,11 @@ public class GuiEditJacarandaSign extends GuiScreen {
         GlStateManager.translate((float)(this.width / 2), 0.0F, 50.0F);
         float f = 93.75F;
         GlStateManager.scale(-f, -f, -f);
-        GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+        //GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 
         Block block = tile.getBlockType();
 
-        if (block instanceof JacarandaStandingSign) {
+        if (block instanceof JacarandaStandingSign || block instanceof JacarandaHangingSignAttached) {
             float f1 = (float)(tile.getBlockMetadata() * 360) / 16.0F;
             GlStateManager.rotate(f1, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
@@ -248,23 +249,21 @@ public class GuiEditJacarandaSign extends GuiScreen {
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
 
-        if (this.isClosing) {
-            tile.unlock();
-            tile.setEditable(true);
-            return;
-        }
-
         // 保存当前编辑的文本
         ITextComponent[] newText = this.tile.getTextForSlot(editingSlot);
 
-        if (this.needSave) {
-            NBTTagCompound nbt = tile.createSignNBT();
-            com.jhxiaochen.dollancustomized.network.NetworkManager.sendUpdateSignToServer(tile.getPos(), nbt);
-            tile.updateText(editingSlot, newText, false);
-        } else {
-            tile.unlock();
+        if (this.isClosing) {
+            if (this.needSave) {
+                NBTTagCompound nbt = tile.createSignNBT();
+                com.jhxiaochen.dollancustomized.network.NetworkManager.sendUpdateSignToServer(tile.getPos(), nbt);
+                tile.updateText(editingSlot, newText, false);
+            } else {
+                tile.unlock();
+            }
+            tile.setEditable(true);
         }
 
-        tile.setEditable(true);
+        this.isClosing = false;
+        this.needSave = true;
     }
 }

@@ -15,13 +15,23 @@ public interface IAxis {
         if (validOrientations.contains(axis)) {
             // 处理正方向
             boolean isNorthSouth = getBlockFacing(axis);
-
-            if (isNorthSouth) {
-                if (clickFacing == EnumFacing.SOUTH) return 0;
-                if (clickFacing == EnumFacing.NORTH) return 1;
-            } else {
-                if (clickFacing == EnumFacing.EAST) return 0;
-                if (clickFacing == EnumFacing.WEST) return 1;
+            if (axis == 0 || axis == 4) {
+                if (isNorthSouth) {
+                    if (clickFacing == EnumFacing.SOUTH) return 0;
+                    if (clickFacing == EnumFacing.NORTH) return 1;
+                } else {
+                    if (clickFacing == EnumFacing.EAST) return 0;
+                    if (clickFacing == EnumFacing.WEST) return 1;
+                }
+            }
+            if (axis == 8 || axis == 12) {
+                if (isNorthSouth) {
+                    if (clickFacing == EnumFacing.SOUTH) return 1;
+                    if (clickFacing == EnumFacing.NORTH) return 0;
+                } else {
+                    if (clickFacing == EnumFacing.EAST) return 1;
+                    if (clickFacing == EnumFacing.WEST) return 0;
+                }
             }
         }
 

@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.common.access.IAxis;
 import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
@@ -33,7 +34,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class JacarandaHangingSignAttached extends BlockContainer {
+public class JacarandaHangingSignAttached extends BlockContainer implements IAxis {
 
     public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
@@ -200,7 +201,7 @@ public class JacarandaHangingSignAttached extends BlockContainer {
         if (playerIn.isSneaking()) return false;
 
         // 获取点击面
-        int slot = getSlotFromFacing(state, facing, playerIn);
+        int slot = this.getSlotFromFacings(state.getValue(ROTATION), facing, playerIn);
         if (slot == -1) return false;
 
         // 获取存储物品的 TileEntity
@@ -241,56 +242,6 @@ public class JacarandaHangingSignAttached extends BlockContainer {
             }
         }
         return false;
-    }
-
-    // 获取槽位
-    private int getSlotFromFacing(IBlockState state, EnumFacing facing, EntityPlayer player) {
-        int axis = state.getValue(JacarandaHangingSignAttached.ROTATION);
-
-        // 处理正方向 (0, 8, 12)
-        if (axis == 0 || axis == 8 || axis == 12) {
-            boolean isNorthSouth = (axis == 0 || axis == 8);
-            if (isNorthSouth) {
-                if (facing == EnumFacing.SOUTH) return 0;
-                if (facing == EnumFacing.NORTH) return 1;
-            } else {
-                if (facing == EnumFacing.EAST) return 0;
-                if (facing == EnumFacing.WEST) return 1;
-            }
-        }
-
-        // 处理非正方向 - 使用玩家朝向
-        float yaw = player.rotationYaw;
-        yaw = (yaw % 360 + 360) % 360; // 规范化到0-360
-        float adjustedYaw = (yaw + 180) % 360; // 转换为北向0度
-
-        if (axis >= 1 && axis <= 3) {        // 东北方向组
-            if (adjustedYaw >= 0 && adjustedYaw < 90) {
-                return 0; // 面朝东北看正面
-            } else if (adjustedYaw >= 180 && adjustedYaw < 270) {
-                return 1; // 面朝西南看背面
-            }
-        } else if (axis >= 5 && axis <= 7) { // 东南方向组
-            if (adjustedYaw >= 90 && adjustedYaw < 180) {
-                return 0; // 面朝东南看正面
-            } else if (adjustedYaw >= 270) {
-                return 1; // 面朝西北看背面
-            }
-        } else if (axis >= 9 && axis <= 11) { // 西南方向组
-            if (adjustedYaw >= 180 && adjustedYaw < 270) {
-                return 0; // 面朝西南看正面
-            } else if (adjustedYaw >= 0 && adjustedYaw < 90) {
-                return 1; // 面朝东北看背面
-            }
-        } else if (axis >= 13 && axis <= 15) { // 西北方向组
-            if (adjustedYaw >= 270) {
-                return 0; // 面朝西北看正面
-            } else if (adjustedYaw >= 90 && adjustedYaw < 180) {
-                return 1; // 面朝东南看背面
-            }
-        }
-
-        return -1; // 不在有效角度范围内
     }
 
     @Nullable

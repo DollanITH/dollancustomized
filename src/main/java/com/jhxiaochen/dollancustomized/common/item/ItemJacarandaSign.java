@@ -2,9 +2,9 @@ package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.common.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
+import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
@@ -64,7 +64,9 @@ public class ItemJacarandaSign extends Item {
                     TileEntity tileentity = worldIn.getTileEntity(pos);
                     if (tileentity instanceof TileEntityJacarandaSign && !ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack )) {
                         // 模仿原版openEditSign方法，但使用自定义网络包
-                        ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, pos, tileentity);
+                        if (player instanceof EntityPlayerMP) {
+                            ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, pos, tileentity);
+                        }
                     }
 
                     if (!player.capabilities.isCreativeMode) {

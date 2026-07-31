@@ -4,14 +4,17 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaHangingSignAttached;
+import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -80,7 +83,13 @@ public class ItemJacarandaHangingSign extends Item {
                     // 双锁链悬挂告示牌 放置
 
                     // 获取新的元数据放置
-                    placeBlock(player, world, placePos, hand, this.block, playerFacing.getIndex());
+                    placeBlock(player, world, placePos, hand, this.block, playerFacing.getIndex());            TileEntity tileentity = world.getTileEntity(placePos);
+                    if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                        // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
+                        if (!world.isRemote && player instanceof EntityPlayerMP) {
+                            ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
+                        }
+                    }
                     return EnumActionResult.SUCCESS;
                 }
 
@@ -98,7 +107,13 @@ public class ItemJacarandaHangingSign extends Item {
                    )
                 {
                     // 锁链汇聚于一点 悬挂告示牌
-                    placeBlock(player, world, placePos, hand, this.blockAttached, meta);
+                    placeBlock(player, world, placePos, hand, this.blockAttached, meta);            TileEntity tileentity = world.getTileEntity(placePos);
+                    if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                        // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
+                        if (!world.isRemote && player instanceof EntityPlayerMP) {
+                            ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
+                        }
+                    }
                     return EnumActionResult.SUCCESS;
                 }
 
@@ -107,13 +122,25 @@ public class ItemJacarandaHangingSign extends Item {
                     // 不在精确方向列表
                     if (!getValidOrientations().contains(meta)) {
                         // 非正东南西北, 放置 旋转的 锁链汇聚于一点 悬挂告示牌
-                        placeBlock(player, world, placePos, hand, this.blockAttached, meta);
+                        placeBlock(player, world, placePos, hand, this.blockAttached, meta);            TileEntity tileentity = world.getTileEntity(placePos);
+                        if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                            // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
+                            if (!world.isRemote && player instanceof EntityPlayerMP) {
+                                ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
+                            }
+                        }
                         return EnumActionResult.SUCCESS;
                     }
                     // 双锁链悬挂 告示牌放置
 
                     // 获取新的元数据放置
-                    placeBlock(player, world, placePos, hand, this.block, playerFacing.getIndex());
+                    placeBlock(player, world, placePos, hand, this.block, playerFacing.getIndex());            TileEntity tileentity = world.getTileEntity(placePos);
+                    if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                        // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
+                        if (!world.isRemote && player instanceof EntityPlayerMP) {
+                            ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
+                        }
+                    }
                     return EnumActionResult.SUCCESS;
                 }
             }
@@ -140,66 +167,17 @@ public class ItemJacarandaHangingSign extends Item {
 
             // 墙上的悬挂告示牌
             placeBlock(player, world, placePos, hand, signState);
+            TileEntity tileentity = world.getTileEntity(placePos);
+            if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
+                if (!world.isRemote && player instanceof EntityPlayerMP) {
+                    ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
+                }
+            }
             return EnumActionResult.SUCCESS;
         }
 
         return EnumActionResult.FAIL;
-    }
-
-    // 添加自定义的交互方法（通过右键点击告示牌来编辑）
-    public static boolean onBlockActivatedHangingSign(World world, BlockPos pos, EntityPlayer player, EnumHand hand) {
-        if (world.isRemote) {
-            return true;
-        }
-
-        TileEntity tileentity = world.getTileEntity(pos);
-        if (tileentity instanceof TileEntityJacarandaHangingSign) {
-            TileEntityJacarandaHangingSign signTile = (TileEntityJacarandaHangingSign) tileentity;
-
-            // 获取点击面
-            EnumFacing facing = player.getHorizontalFacing();
-
-            // 获取槽位
-            int slot = -1;
-            if (facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH) {
-                slot = 0; // 正面
-            } else if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
-                slot = 1; // 背面
-            }
-
-            if (slot == -1) return false;
-
-            // 检查是否涂蜡
-            if (signTile.isWaxed(slot)) {
-                player.sendMessage(new net.minecraft.util.text.TextComponentString("这一面已经被涂蜡，无法编辑"));
-                return false;
-            }
-
-            // 检查是否正在编辑
-            if (signTile.isUsing) {
-                player.sendMessage(new net.minecraft.util.text.TextComponentString("告示牌正在编辑中"));
-                return false;
-            }
-
-            // 获取手持物品
-            ItemStack heldItem = player.getHeldItem(hand);
-
-            // 空手或涂蜡工具 -> 编辑文本
-            if (heldItem.isEmpty()) {
-                return signTile.editText(slot, player);
-            }
-            // 检查是否是涂蜡工具
-            else if (signTile.tryWaxed(slot, heldItem)) {
-                player.getHeldItem(hand).shrink(1);
-                return true;
-            }
-            // 尝试执行命令（原版功能）
-            else {
-                return tileentity instanceof net.minecraft.tileentity.TileEntitySign ?
-                       ((net.minecraft.tileentity.TileEntitySign)tileentity).executeCommand(player) : false;
-            }
-        }
-        return false;
     }
 
     // 放置方块

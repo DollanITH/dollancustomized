@@ -238,6 +238,7 @@ tile.stop_line_left.name=停车线(左)
 tile.stop_line_right_slab.name=停车线(右)(双线)台阶
 tile.stop_line_right.name=停车线(双线)(右)
 tile.stop_line_right_1.name=停车线(右)
+tile.stop_line_right_1_slab.name=停车线(右)台阶
 
 # 导流线
 tile.single_white_line_thick.name=粗白线

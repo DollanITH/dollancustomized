@@ -120,8 +120,8 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
 
                 tile.getTextRenderPosition(slot);
 
-                // 判断是否高亮
-                boolean isHighlighted = tile.isUsing && tile.getEditedSlot() == slot;
+                // 判断是否高亮：原版使用 lineBeingEdited 来显示光标
+                boolean isHighlighted = (tile.lineBeingEdited != -1);
                 // 判断是否 slot 1（需要旋转180°）
                 boolean isSlot1 = (slot == 1);
                 this.renderText(tile, isSlot1, isHighlighted);
@@ -158,18 +158,9 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
 
         this.applyTransforms(tile, isSlot1);
 
-        if (isHighlighted) {
-            this.renderHighlightedBackground();
-        }
-
-        this.drawText(lines);
+        this.drawText(lines, tile.lineBeingEdited);
         GlStateManager.popMatrix();
 
-        // 恢复默认状态
-        if (isHighlighted) {
-            GlStateManager.enableDepth();
-            GlStateManager.disableAlpha();
-        }
     }
 
     private void applyTransforms(TileEntityJacarandaSign tile, boolean isSlot1) {
@@ -189,7 +180,7 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
     }
 
-    private void drawText(ITextComponent[] lines) {
+    private void drawText(ITextComponent[] lines, int lineBeingEdited) {
         FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 
         for (int i = 0; i < lines.length; i++) {
@@ -197,13 +188,25 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
 
             String text = this.formatText(lines[i], fr);
             int yPos = i * 10 - lines.length * 5;
-            fr.drawString(text, -fr.getStringWidth(text)/2, yPos, 0); // 黑色文字
+
+            // 如果是当前编辑的行，绘制高亮背景
+            if (i == lineBeingEdited) {
+                int textWidth = fr.getStringWidth(text);
+                int textCenterX = -textWidth / 2;
+
+                // 绘制光标（白色闪烁）
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                fr.drawString("|", textCenterX + textWidth, yPos, 0xFFFFFF);
+            }
+
+            // 绘制文字（黑色）
+            fr.drawString(text, -fr.getStringWidth(text)/2, yPos, 0);
         }
     }
 
     private void renderHighlightedBackground() {
         // 绘制高亮背景
-        int highlightWidth = 100;
+        int highlightWidth = 40;
         int highlightHeight = 40;
 
         GlStateManager.color(0.2F, 0.6F, 1.0F, 0.3F); // 蓝色高亮

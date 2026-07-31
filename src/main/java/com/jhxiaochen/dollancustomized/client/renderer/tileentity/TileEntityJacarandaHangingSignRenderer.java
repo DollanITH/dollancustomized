@@ -1,17 +1,21 @@
 package com.jhxiaochen.dollancustomized.client.renderer.tileentity;
 
-import com.jhxiaochen.dollancustomized.client.model.HangingSignModel;
-import com.jhxiaochen.dollancustomized.client.model.HangingSignTopFullModel;
+import com.jhxiaochen.dollancustomized.client.model.JacarandaHangingSignModel;
 import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.common.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -27,47 +31,69 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
     private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/jacaranda_hanging_sign.png");
 
     // 模型实例
-    private HangingSignModel        model;
-    private HangingSignTopFullModel model_full;
+    private JacarandaHangingSignModel jacarandaSignModel;
 
     // 物品渲染器
     private ItemRenderer itemRenderer;
 
     private static final int[] TOTAL_SLOTS = new int[]{0, 1};
-    private static final float MODEL_RENDER_SCALE = 1.0F;
-    private static final float TEXT_RENDER_SCALE = 0.9F;
+
+    // 文本偏移
     private static final float TEXT_OFFSET_Y = -0.32F;
     private static final float TEXT_OFFSET_Z = 0.073F;
 
+    // 渲染缩放
+    private static final float MODEL_RENDER_SCALE = 1.0F;
+    private static final float TEXT_SCALE = 0.009216667F;
     @Override
     public void render(TileEntityJacarandaHangingSign tileEntity, double x, double y, double z, float partialTicks, int destroyStage,
             float alpha) {
         if (tileEntity == null) return;
 
         Block block = tileEntity.getBlockType();
+        boolean isSideModel = block instanceof JacarandaHangingSign;
+        boolean isSideModelWall = block instanceof JacarandaHangingSign && ((JacarandaHangingSign) block).isInWall();
 
         GlStateManager.pushMatrix();
 
-        // 获取方块类型和旋转角度
-        boolean isSideModel = block instanceof JacarandaHangingSign;
+        // 计算旋转角度
         int rotation = 0;
-
         if (isSideModel) {
-            int k = tileEntity.getBlockMetadata();
-            if (k == 2) rotation = 180;
-            else if (k == 4) rotation = 90;
-            else if (k == 5) rotation = -90;
+            int metadata = tileEntity.getBlockMetadata();
+            if (metadata == 2) rotation = 180;
+            else if (metadata == 4) rotation = 90;
+            else if (metadata == 5) rotation = -90;
         } else {
+            // 顶部悬挂式使用 16 方向
             rotation = (tileEntity.getBlockMetadata() * 360) / 16;
         }
 
-        // 平移到中心点
-        GlStateManager.translate((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-        GlStateManager.translate(0, 0.125, 0);
-        // 旋转
+        // 平移到中心点并应用变换
+        GlStateManager.translate((float) x + 0.5F, (float) y + 0.9375F, (float) z + 0.5F);
         GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
-        // 垂直平移
-        //GlStateManager.translate(0.0F, -0.3125F, 0.0F);
+        GlStateManager.translate(0.0F, -0.3125F, 0.0F);
+
+        // 初始化模型
+        if (jacarandaSignModel == null) {
+            jacarandaSignModel = new JacarandaHangingSignModel();
+        }
+
+        // 更新可见部分（1.12.2中没有BlockState，直接判断metadata）
+        // 顶部悬挂式使用metadata值来判断
+        boolean attached = false;
+        if (!isSideModel) {
+            // 1.12.2中没有ATTACHED属性，根据metadata判断
+            // 假设偶数是attached=true，奇数是attached=false，或者根据具体需求调整
+            attached = !(tileEntity.getBlockMetadata() == 0 || tileEntity.getBlockMetadata() == 4 || tileEntity.getBlockMetadata() == 8 || tileEntity.getBlockMetadata() == 12);
+        }
+        if (isSideModelWall || block instanceof JacarandaHangingSignAttached) {
+            jacarandaSignModel.evaluateVisibleParts(isSideModel, attached);
+        } else {
+            jacarandaSignModel.evaluateVisibleParts(false, false);
+        }
+
+        // 设置模型缩放
+        GlStateManager.scale(MODEL_RENDER_SCALE, -MODEL_RENDER_SCALE, -MODEL_RENDER_SCALE);
 
         // 绑定材质
         if (destroyStage >= 0) {
@@ -81,30 +107,12 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
             this.bindTexture(JACARANDA_SIGN_TEXTURE);
         }
 
-        // 渲染模型
+        // 渲染告示牌模型
         GlStateManager.enableRescaleNormal();
         GlStateManager.pushMatrix();
-
-        // 设置模型缩放
-        GlStateManager.scale(MODEL_RENDER_SCALE, -MODEL_RENDER_SCALE, -MODEL_RENDER_SCALE);
-
-        if (model == null) {
-            model = new HangingSignModel();
-        }
-        if (model_full == null) {
-            model_full = new HangingSignTopFullModel();
-        }
-
-        if (isSideModel)
-        {
-            this.model.renderSign();
-            this.model.renderStick();
-        }
-        else
-        {
-            this.model_full.renderSign();
-            this.model_full.renderConnector();
-        }
+        GlStateManager.disableCull();
+        // 直接调用render方法，模型内部会根据visible属性决定显示什么
+        jacarandaSignModel.render();
 
         GlStateManager.popMatrix();
 
@@ -125,8 +133,6 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
     }
 
     private void renderSignText(TileEntityJacarandaHangingSign tileEntity, int destroyStage) {
-        if (destroyStage >= 0) return;
-
         FontRenderer fontrenderer = this.getFontRenderer();
         int textSides = tileEntity.getTextSides();
 
@@ -135,27 +141,23 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
             for (int slot : TOTAL_SLOTS) {
                 if (!shouldRenderSide(textSides, slot)) continue;
 
+                // 获取渲染位置（会自动缓存）
+                com.jhxiaochen.dollancustomized.data.AxisPosition renderPos = tileEntity.getTextRenderPosition(slot);
                 ITextComponent[] lines = tileEntity.getTextForSlot(slot);
+
+                // 获取当前正在编辑的行
+                int lineBeingEdited = tileEntity.lineBeingEdited;
+                boolean isHighlighted = (lineBeingEdited != -1);
 
                 GlStateManager.pushMatrix();
 
-                // Slot 1 需要额外的旋转
-                if (slot == 1) {
-                    GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-                }
-
+                // 应用渲染位置
+                GlStateManager.translate((float) renderPos.getX() - 0.3125, 0.2995, (float) renderPos.getZ() - 0.3125);
                 // 应用文本变换
-                applyTextTransforms(lines);
+                GlStateManager.scale(-TEXT_SCALE, TEXT_SCALE, -TEXT_SCALE);
 
-                // 绘制文本
-                for (int i = 0; i < lines.length; i++) {
-                    if (lines[i] == null) continue;
-
-                    String text = formatText(lines[i], fontrenderer);
-                    int yPos = i * 10 - lines.length * 5;
-                    fontrenderer.drawString(text, -fontrenderer.getStringWidth(text) / 2, yPos, 0);
-                }
-
+                // 绘制文本（包含高亮背景和光标）
+                drawText(lines, lineBeingEdited, fontrenderer);
                 GlStateManager.popMatrix();
             }
         }
@@ -165,13 +167,51 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
         return textSides == 2 || textSides == slot;
     }
 
-    private void applyTextTransforms(ITextComponent[] lines) {
-        // 应用文本缩放
-        GlStateManager.scale(TEXT_RENDER_SCALE, -TEXT_RENDER_SCALE, TEXT_RENDER_SCALE);
-        GlStateManager.glNormal3f(0.0F, 0.0F, -TEXT_RENDER_SCALE);
+    private void renderHighlightedBackground() {
+        // 绘制高亮背景
+        int highlightWidth = 100;
+        int highlightHeight = 40;
 
-        // 应用文本偏移
-        GlStateManager.translate(0.0F, TEXT_OFFSET_Y, TEXT_OFFSET_Z);
+        GlStateManager.color(0.2F, 0.6F, 1.0F, 0.3F); // 蓝色高亮
+        drawTexturedQuadFit(-highlightWidth/2, -highlightHeight/2, highlightWidth, highlightHeight);
+
+        // 设置文字颜色（黑色）
+        GlStateManager.color(0.0F, 0.0F, 0.0F, 1.0F);
+    }
+
+    private void drawText(ITextComponent[] lines, int lineBeingEdited, FontRenderer fr) {
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i] == null) continue;
+
+            String text = this.formatText(lines[i], fr);
+            int yPos = i * 10 - lines.length * 5;
+
+            // 如果是当前编辑的行，绘制高亮背景和光标
+            if (i == lineBeingEdited) {
+                int textWidth = fr.getStringWidth(text);
+                int textCenterX = -textWidth / 2;
+
+                // 绘制光标（白色闪烁）
+                fr.drawString("|", textCenterX + textWidth, yPos, 0xFFFFFF);
+            }
+
+            // 绘制文字（黑色）
+            fr.drawString(text, -fr.getStringWidth(text)/2, yPos, 0);
+
+            // 重置颜色
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        }
+    }
+
+    private void drawTexturedQuadFit(double x, double y, double width, double height) {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+        buffer.begin(7, DefaultVertexFormats.POSITION);
+        buffer.pos(x, y, 0.0).endVertex();
+        buffer.pos(x + width, y, 0.0).endVertex();
+        buffer.pos(x + width, y + height, 0.0).endVertex();
+        buffer.pos(x, y + height, 0.0).endVertex();
+        tessellator.draw();
     }
 
     private String formatText(ITextComponent component, FontRenderer fr) {
@@ -200,10 +240,6 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
             ItemStack stack = tileEntity.getDisplayItem(slot);
             if (stack.isEmpty()) continue;
 
-            if (slot == 1) {
-                GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-            }
-
             GlStateManager.pushMatrix();
 
             // 获取物品的渲染位置
@@ -217,7 +253,7 @@ public class TileEntityJacarandaHangingSignRenderer extends TileEntitySpecialRen
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
             // 使用 RenderItem 渲染物品
-            itemRenderer.renderItem(null, stack, net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType.GUI);
+            Minecraft.getMinecraft( ).getRenderItem( ).renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
 
             GlStateManager.disableBlend();
             GlStateManager.disableLighting();

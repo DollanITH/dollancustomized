@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.common;
+package com.jhxiaochen.dollancustomized.common.interaction;
 
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import net.minecraft.entity.player.EntityPlayerMP;

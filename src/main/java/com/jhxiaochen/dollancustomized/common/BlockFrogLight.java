@@ -3,6 +3,7 @@ package com.jhxiaochen.dollancustomized.common;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -69,6 +70,7 @@ public class BlockFrogLight extends Block {
         this.setRegistryName("froglight");
         this.setUnlocalizedName(Reference.MOD_ID + "." + "froglight");
         this.setCreativeTab(DollanCustomized.Blocks);
+        this.setSoundType(SoundType.GLASS);
         this.setHardness(1.2F);
         this.setResistance(12F);
         this.setLightLevel(1.0F);

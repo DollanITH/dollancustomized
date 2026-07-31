@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.common.access.ICardinal;
 import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
@@ -30,11 +31,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import suike.suikecherry.tileentity.HangingSignTileEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class JacarandaHangingSign extends BlockContainer {
+public class JacarandaHangingSign extends BlockContainer implements ICardinal {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
@@ -124,23 +126,21 @@ public class JacarandaHangingSign extends BlockContainer {
     @Override
     public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox,
                                       List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean isActualState) {
-        AxisAlignedBB box = null;
         switch ((EnumFacing) state.getValue(FACING)) {
             case NORTH:
-                box = X_IN_WALL_BOX;
+            default:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, X_IN_WALL_BOX.union(X_BOX));
                 break;
             case SOUTH:
-                box = X_IN_WALL_BOX;
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, X_IN_WALL_BOX.union(X_BOX));
                 break;
             case WEST:
-                box = Z_IN_WALL_BOX;
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, Z_IN_WALL_BOX.union(Z_BOX));
                 break;
             case EAST:
-            default:
-                box = Z_IN_WALL_BOX;
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, Z_IN_WALL_BOX.union(Z_BOX));
                 break;
         }
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, box);
     }
 
     @Override
@@ -233,12 +233,33 @@ public class JacarandaHangingSign extends BlockContainer {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+        if (!this.inWall) {
+            IBlockState upBlockState = world.getBlockState(pos.up());
+            Block upBlock = upBlockState.getBlock();
+            if (upBlock instanceof JacarandaHangingSign) {
+                return;
+            }
+            if (upBlock.getRegistryName().toString().contains("hanging")) {
+                int meta = upBlock.getMetaFromState(upBlockState);
+                if (meta != 0 && meta != 4 && meta != 8 && meta != 12) {
+                    HangingSignTileEntity tile = (HangingSignTileEntity) world.getTileEntity(pos);
+                    if (tile != null) {
+                        Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(0));
+                        Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(1));
+                    }
+                    world.destroyBlock(pos, true);
+                }
+            }
+            else if (!upBlockState.isSideSolid(world, pos.up(), EnumFacing.DOWN)) {
 
-        if (!world.getBlockState(pos.offset(enumfacing.getOpposite())).isNormalCube()) {
-            this.spawnAsEntity(world, pos, new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign));
-            world.setBlockToAir(pos);
+                HangingSignTileEntity tile = (HangingSignTileEntity) world.getTileEntity(pos);
+                if (tile != null) {
+                    Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(0));
+                    Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(1));
+                }
+                world.destroyBlock(pos, true);
+            }
         }
     }
 
@@ -252,7 +273,7 @@ public class JacarandaHangingSign extends BlockContainer {
         if (playerIn.isSneaking()) return false;
 
         // 获取点击面
-        int slot = getSlotFromFacing(facing);
+        int slot = this.getSlotFromFacings(state.getValue(FACING), facing);
         if (slot == -1) return false;
 
         // 获取存储物品的 TileEntity
@@ -293,22 +314,6 @@ public class JacarandaHangingSign extends BlockContainer {
             }
         }
         return false;
-    }
-
-    // 获取槽位
-    private int getSlotFromFacing(EnumFacing facing) {
-        // 对于悬挂式告示牌，点击上方或下方不可编辑
-        if (facing == EnumFacing.UP || facing == EnumFacing.DOWN) {
-            return -1;
-        }
-        // 玩家正面
-        if (facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH) {
-            return 0; // 正面
-        }
-        if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
-            return 1; // 背面
-        }
-        return -1;
     }
 
     @Nullable

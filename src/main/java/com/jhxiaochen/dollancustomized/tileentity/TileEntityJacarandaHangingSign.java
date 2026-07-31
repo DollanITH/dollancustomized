@@ -26,7 +26,7 @@ import java.util.Map;
  * 悬挂式蓝花楹木告示牌 TileEntity
  * 支持双面文本显示（正面和背面）
  */
-public class TileEntityJacarandaHangingSign extends TileEntitySign {
+public class TileEntityJacarandaHangingSign extends TileEntityJacarandaSign {
 
     // 背面文本
     public final ITextComponent[] backText = new ITextComponent[] {
@@ -468,14 +468,8 @@ public class TileEntityJacarandaHangingSign extends TileEntitySign {
     // 存储 & 读取
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        // 读取 signText 字段
-        for (int i = 0; i < 4; i++) {
-            if (compound.hasKey("Text" + (i + 1))) {
-                this.signText[i] = ITextComponent.Serializer.jsonToComponent(compound.getString("Text" + (i + 1)));
-            } else {
-                this.signText[i] = new TextComponentString("");
-            }
-        }
+        // 先调用父类读取 TileEntitySign 和 TileEntityJacarandaSign 的数据
+        super.readFromNBT(compound);
 
         // 读取背面文本
         if (compound.hasKey("BackText")) {
@@ -506,11 +500,8 @@ public class TileEntityJacarandaHangingSign extends TileEntitySign {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        // 保存 signText 字段
-        for (int i = 0; i < 4; i++) {
-            String s = ITextComponent.Serializer.componentToJson(this.signText[i]);
-            compound.setString("Text" + (i + 1), s);
-        }
+        // 先调用父类保存 TileEntitySign 和 TileEntityJacarandaSign 的数据
+        compound = super.writeToNBT(compound);
 
         // 保存背面文本
         NBTTagCompound backTextTag = new NBTTagCompound();
@@ -530,16 +521,6 @@ public class TileEntityJacarandaHangingSign extends TileEntitySign {
 
         // 保存物品存储
         compound.setTag("Items", this.itemHandler.serializeNBT());
-
-        // 保存 isEditable 和 stats 字段（使用反射）
-        try {
-            initReflection();
-            if (isEditableField != null) {
-                isEditableField.setBoolean(this, this.getIsEditable());
-            }
-        } catch (Exception e) {
-            // 忽略错误
-        }
 
         return compound;
     }
@@ -591,8 +572,8 @@ public class TileEntityJacarandaHangingSign extends TileEntitySign {
         if (block instanceof JacarandaHangingSign || block instanceof JacarandaHangingSignAttached) {
             // 正方向悬挂告示牌
             boolean isNorthSouth = (block instanceof JacarandaHangingSign)
-                ? isNorthSouth(state.getValue(JacarandaHangingSign.FACING).getIndex())
-                : isNorthSouth(state.getValue(JacarandaHangingSignAttached.ROTATION));
+                ? ((JacarandaHangingSign) block).isNorthSouth(state.getValue(JacarandaHangingSign.FACING))
+                : ((JacarandaHangingSignAttached) block).isNorthSouth(state.getValue(JacarandaHangingSignAttached.ROTATION));
 
             if (isNorthSouth) {
                 if (slot == 0) {
@@ -628,22 +609,22 @@ public class TileEntityJacarandaHangingSign extends TileEntitySign {
     // 渲染位置映射
     private static final Map<Integer, AxisPosition> JACARANDA_HANGING_SIGN_ROTATION_MAP = Collections.unmodifiableMap(
         new HashMap<Integer, AxisPosition>() {{
-            put(0, new AxisPosition(0.5, 0.5408, 0f));
-            put(1, new AxisPosition(0.4844, 0.5377, -22.5f));
-            put(2, new AxisPosition(0.4711, 0.5289, -45f));
-            put(3, new AxisPosition(0.4617, 0.5146, -67.5f));
-            put(4, new AxisPosition(0.4592, 0.5, 270f));
-            put(5, new AxisPosition(0.4617, 0.4854, 247.5f));
-            put(6, new AxisPosition(0.4711, 0.4711, 225f));
-            put(7, new AxisPosition(0.4844, 0.4623, 202.5f));
-            put(8, new AxisPosition(0.5, 0.4592, 180f));
-            put(9, new AxisPosition(0.5156, 0.4623, 157.5f));
-            put(10, new AxisPosition(0.5289, 0.4711, 135f));
-            put(11, new AxisPosition(0.5383, 0.4854, 112.5f));
-            put(12, new AxisPosition(0.5408, 0.5, 90f));
-            put(13, new AxisPosition(0.5383, 0.5146, 67.5f));
-            put(14, new AxisPosition(0.5289, 0.5289, 45f));
-            put(15, new AxisPosition(0.5156, 0.5377, 22.5f));
+        put(0, new AxisPosition(0.5, 0.5781, 180f));
+        put(1, new AxisPosition(0.4701, 0.5722, 157.5f));
+        put(2, new AxisPosition(0.4448, 0.5552, 135f));
+        put(3, new AxisPosition(0.4278, 0.5299, 112.5f));
+        put(4, new AxisPosition(0.4219, 0.5, 90f));
+        put(5, new AxisPosition(0.4278, 0.4701, 67.5f));
+        put(6, new AxisPosition(0.4448, 0.4448, 45f));
+        put(7, new AxisPosition(0.4701, 0.4278, 22.5f));
+        put(8, new AxisPosition(0.5, 0.4219, 0f));
+        put(9, new AxisPosition(0.5299, 0.4278, -22.5f));
+        put(10, new AxisPosition(0.5552, 0.4448, -45f));
+        put(11, new AxisPosition(0.5722, 0.4701, -67.5f));
+        put(12, new AxisPosition(0.5781, 0.5, 270f));
+        put(13, new AxisPosition(0.5722, 0.5299, -112.5f));
+        put(14, new AxisPosition(0.5552, 0.5552, -135f));
+        put(15, new AxisPosition(0.5299, 0.5722, -157.5f));
         }}
     );
 

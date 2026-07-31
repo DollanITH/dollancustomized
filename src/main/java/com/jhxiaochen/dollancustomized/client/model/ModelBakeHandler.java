@@ -1,6 +1,5 @@
 package com.jhxiaochen.dollancustomized.client.model;
 
-import com.jhxiaochen.dollancustomized.common.road.BlockHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.common.road.IronHorizontal;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -21,8 +20,7 @@ import java.util.Set;
 public class ModelBakeHandler {
 
     private static final Set<Class<?>> TARGET_BLOCK_CLASSES = new HashSet<>(Arrays.asList(
-            IronHorizontal.class,
-            BlockHeightLimitSignCustom.class
+            IronHorizontal.class
     ));
 
     @SubscribeEvent

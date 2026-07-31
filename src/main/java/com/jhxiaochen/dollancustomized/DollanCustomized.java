@@ -10,6 +10,7 @@ import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.particle.ParticleTextureRegister;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.creativetab.CreativeTabs;
@@ -67,6 +68,11 @@ public class DollanCustomized {
         GameRegistry.registerTileEntity(
                 TileEntityJacarandaSign.class,
                 new ResourceLocation(Reference.MOD_ID, "jacaranda_sign")
+        );
+
+        GameRegistry.registerTileEntity(
+                TileEntityJacarandaHangingSign.class,
+                new ResourceLocation(Reference.MOD_ID, "jacaranda_hanging_sign")
         );
 
         MinecraftForge.EVENT_BUS.register(this);

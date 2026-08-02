@@ -1,0 +1,173 @@
+package com.jhxiaochen.dollancustomized.common.block.metro;
+
+import com.jhxiaochen.dollancustomized.DollanCustomized;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.List;
+
+public class OverheadLineTran6 extends OverheadSteelHorzional {
+    private static final PropertyBool UP = PropertyBool.create("up");
+    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1D, 1.0D);
+    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1D, 0.625D);
+
+    private static final AxisAlignedBB NORTH_1 = new AxisAlignedBB(0, 0, 0.20270381313759323, 0.6039322304658027, 1, 0.23395381313759323);
+    private static final AxisAlignedBB NORTH_2 = new AxisAlignedBB(0, 0, 0.2541554392112171, 0.6418570609361389, 1, 0.2854054392112171);
+    private static final AxisAlignedBB NORTH_3 = new AxisAlignedBB(0, 0, 0.20270381313759323, 0.6039322304658027, 1, 0.23395381313759323);
+    private static final AxisAlignedBB NORTH_4 = new AxisAlignedBB(0, 0, 0.2541554392112171, 0.6418570609361389, 1, 0.2854054392112171);
+    private static final AxisAlignedBB NORTH_5 = new AxisAlignedBB(0, 0, 0.515625, 0.010937500000000044, 1, 0.546875);
+    private static final AxisAlignedBB NORTH_6 = new AxisAlignedBB(0, 0, 0.515625, 0.010937500000000044, 1, 0.546875);
+    private static final AxisAlignedBB NORTH_7 = new AxisAlignedBB(0.515625, 0, 0, 0.546875, 1, 0.010937500000000044);
+    private static final AxisAlignedBB NORTH_8 = new AxisAlignedBB(0.515625, 0, 0, 0.546875, 1, 0.010937500000000044);
+
+    private static final AxisAlignedBB SOUTH_1 = new AxisAlignedBB(0.3960677695341973, 0, 0.7660461868624068, 1, 1, 0.7972961868624068);
+    private static final AxisAlignedBB SOUTH_2 = new AxisAlignedBB(0.3581429390638611, 0, 0.7145945607887829, 1, 1, 0.7458445607887829);
+    private static final AxisAlignedBB SOUTH_3 = new AxisAlignedBB(0.3960677695341973, 0, 0.7660461868624068, 1, 1, 0.7972961868624068);
+    private static final AxisAlignedBB SOUTH_4 = new AxisAlignedBB(0.3581429390638611, 0, 0.7145945607887829, 1, 1, 0.7458445607887829);
+    private static final AxisAlignedBB SOUTH_5 = new AxisAlignedBB(0.9890625, 0, 0.453125, 1, 1, 0.484375);
+    private static final AxisAlignedBB SOUTH_6 = new AxisAlignedBB(0.9890625, 0, 0.453125, 1, 1, 0.484375);
+    private static final AxisAlignedBB SOUTH_7 = new AxisAlignedBB(0.453125, 0, 0.9890625, 0.484375, 1, 1);
+    private static final AxisAlignedBB SOUTH_8 = new AxisAlignedBB(0.453125, 0, 0.9890625, 0.484375, 1, 1);
+
+    private static final AxisAlignedBB EAST_1 = new AxisAlignedBB(0, 0, 0.776473125, 0.581263125, 1, 0.807723125);
+    private static final AxisAlignedBB EAST_2 = new AxisAlignedBB(0, 0, 0.714463125, 0.629053125, 1, 0.745713125);
+    private static final AxisAlignedBB EAST_3 = new AxisAlignedBB(0, 0, 0.776473125, 0.581263125, 1, 0.807723125);
+    private static final AxisAlignedBB EAST_4 = new AxisAlignedBB(0, 0, 0.714463125, 0.629053125, 1, 0.745713125);
+    private static final AxisAlignedBB EAST_5 = new AxisAlignedBB(0, 0, 0.453125, 0.0109375, 1, 0.484375);
+    private static final AxisAlignedBB EAST_6 = new AxisAlignedBB(0, 0, 0.453125, 0.0109375, 1, 0.484375);
+    private static final AxisAlignedBB EAST_7 = new AxisAlignedBB(0.515625, 0, 0.9890625, 0.546875, 1, 1);
+    private static final AxisAlignedBB EAST_8 = new AxisAlignedBB(0.515625, 0, 0.9890625, 0.546875, 1, 1);
+
+    private static final AxisAlignedBB WEST_1 = new AxisAlignedBB(0.3960677695341973, 0, 0.20270381313759323, 1.0, 1, 0.23395381313759323);
+    private static final AxisAlignedBB WEST_2 = new AxisAlignedBB(0.3581429390638611, 0, 0.2541554392112171, 1.0, 1, 0.2854054392112171);
+    private static final AxisAlignedBB WEST_3 = new AxisAlignedBB(0.3960677695341973, 0, 0.20270381313759323, 1.0, 1, 0.23395381313759323);
+    private static final AxisAlignedBB WEST_4 = new AxisAlignedBB(0.3581429390638611, 0, 0.2541554392112171, 1.0, 1, 0.2854054392112171);
+    private static final AxisAlignedBB WEST_5 = new AxisAlignedBB(0.9890625, 0, 0.515625, 1, 1, 0.546875);
+    private static final AxisAlignedBB WEST_6 = new AxisAlignedBB(0.9890625, 0, 0.515625, 1, 1, 0.546875);
+    private static final AxisAlignedBB WEST_7 = new AxisAlignedBB(0.453125, 0, 0, 0.484375, 1, 0.010937500000000044);
+    private static final AxisAlignedBB WEST_8 = new AxisAlignedBB(0.453125, 0, 0, 0.484375, 1, 0.010937500000000044);
+
+    public OverheadLineTran6(String name) {
+        this.setRegistryName(name);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setUnlocalizedName(name);
+        this.setHardness(2.5F);
+        this.setResistance(5.0F);
+        this.setSoundType(SoundType.METAL);
+        this.setCreativeTab(DollanCustomized.METRO_TAB);
+        this.setLightOpacity(0);
+    }
+
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
+    {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
+
+        Block block = iblockstate.getBlock();
+        return block instanceof BlockSlab && blockfaceshape != BlockFaceShape.SOLID;
+    }
+
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return state.withProperty(UP, canFenceConnectTo(worldIn, pos, EnumFacing.UP));
+    }
+
+    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        BlockPos other = pos.offset(facing);
+        Block block = world.getBlockState(other).getBlock();
+        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+    }
+
+    @Override
+    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    {
+        return canConnectTo(world, pos.offset(facing), facing.getOpposite());
+    }
+
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        switch (state.getValue(FACING)){
+            case WEST:
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1D, 0.625D);
+            case SOUTH:
+            default:
+                return new AxisAlignedBB(0.375D, 0.0D, 0.0D, 1.0D, 1D, 1.0D);
+            case NORTH:
+                return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.625D, 1D, 1.0D);
+            case EAST:
+                return new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1D, 1.0D);
+        }
+    }
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState) {
+        EnumFacing facing = state.getValue(FACING);
+        switch(facing) {
+            case SOUTH:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, X_AABB);
+                break;
+            case NORTH:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, X_AABB);
+                break;
+            case WEST:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, Z_AABB);
+                break;
+            case EAST:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_1);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_2);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_3);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_4);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_5);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_6);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_7);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_8);
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, Z_AABB);
+                break;
+            default:
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, NULL_AABB);
+                break;
+        }
+    }
+
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[]{FACING, UP});
+    }
+}

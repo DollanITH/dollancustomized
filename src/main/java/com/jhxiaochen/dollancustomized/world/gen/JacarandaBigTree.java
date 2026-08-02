@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.world.gen;
 
-import com.jhxiaochen.dollancustomized.common.JacarandaLeaves;
-import com.jhxiaochen.dollancustomized.common.JacarandaLog;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaLeaves;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -76,17 +76,17 @@ public class JacarandaBigTree extends WorldGenAbstractTree {
         // 主干
         for (int y = 0; y < height; ++y) {
             setBlockAndNotifyAdequately(worldIn, base.up(y),
-                JacarandaLog.Registry.jacaranda_log.getDefaultState());
+                                        JacarandaLog.jacaranda_log.getDefaultState());
         }
 
         // 双层树干
         if (trunkSize == 2) {
             setBlockAndNotifyAdequately(worldIn, base.east(),
-                JacarandaLog.Registry.jacaranda_log.getDefaultState());
+                                        JacarandaLog.jacaranda_log.getDefaultState());
             setBlockAndNotifyAdequately(worldIn, base.east().south(),
-                JacarandaLog.Registry.jacaranda_log.getDefaultState());
+                                        JacarandaLog.jacaranda_log.getDefaultState());
             setBlockAndNotifyAdequately(worldIn, base.south(),
-                JacarandaLog.Registry.jacaranda_log.getDefaultState());
+                                        JacarandaLog.jacaranda_log.getDefaultState());
         }
     }
 

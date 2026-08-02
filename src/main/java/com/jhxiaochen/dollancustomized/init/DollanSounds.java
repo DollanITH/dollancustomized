@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.init;
 
 import com.jhxiaochen.dollancustomized.Reference;
+import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -42,6 +43,18 @@ public class DollanSounds {
             BLOCK_CHERRY_LEAVES_HIT = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.cherry_leaves.hit"));
     public static SoundEvent
             ITEM_AXE_STRIP = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "item.axe.strip"));
+    public static SoundType CHERRY_WOOD = new SoundType(1.0F, 1.0F,
+                                          DollanSounds.BLOCK_CHERRY_WOOD_BREAK,
+                                          DollanSounds.BLOCK_CHERRY_WOOD_STEP,
+                                          DollanSounds.BLOCK_CHERRY_WOOD_PLACE,
+                                          DollanSounds.BLOCK_CHERRY_WOOD_HIT,
+                                          DollanSounds.BLOCK_CHERRY_WOOD_FALL);
+    public static SoundType CHERRY_LEAVES = new SoundType(1.0F, 1.0F,
+                                          DollanSounds.BLOCK_CHERRY_LEAVES_BREAK,
+                                          DollanSounds.BLOCK_CHERRY_LEAVES_STEP,
+                                          DollanSounds.BLOCK_CHERRY_LEAVES_PLACE,
+                                          DollanSounds.BLOCK_CHERRY_LEAVES_HIT,
+                                          DollanSounds.BLOCK_CHERRY_LEAVES_FALL);
 
     @SubscribeEvent
     public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {

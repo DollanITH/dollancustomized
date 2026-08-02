@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.renderer;
 
 import com.jhxiaochen.dollancustomized.client.model.JacarandaHangingSignModel;
-import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
-import com.jhxiaochen.dollancustomized.common.JacarandaHangingSignAttached;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

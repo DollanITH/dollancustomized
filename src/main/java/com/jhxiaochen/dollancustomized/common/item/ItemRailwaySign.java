@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.common.rail.base.TwoBlocksSignBase;
+import com.jhxiaochen.dollancustomized.common.block.rail.base.TwoBlocksSignBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;

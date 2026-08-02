@@ -1,9 +1,9 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
-import com.jhxiaochen.dollancustomized.common.JacarandaHangingSign;
-import com.jhxiaochen.dollancustomized.common.JacarandaHangingSignAttached;
-import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
-import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaHangingSignAttached;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaStandingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaWallSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;

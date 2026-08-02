@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.fixes;
 
 import com.google.common.collect.ImmutableList;
-import com.jhxiaochen.dollancustomized.common.road.ArrowNew;
+import com.jhxiaochen.dollancustomized.common.block.road.ArrowNew;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import net.minecraft.util.EnumFacing;
 

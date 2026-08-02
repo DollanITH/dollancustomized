@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
-import com.jhxiaochen.dollancustomized.common.road.ArrowNew;
+import com.jhxiaochen.dollancustomized.common.block.road.ArrowNew;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;

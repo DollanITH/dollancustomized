@@ -2,14 +2,15 @@ package com.jhxiaochen.dollancustomized.init;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.common.*;
-import com.jhxiaochen.dollancustomized.common.metro.*;
-import com.jhxiaochen.dollancustomized.common.rail.EmptySignBlock;
-import com.jhxiaochen.dollancustomized.common.rail.RailwaySignPost;
-import com.jhxiaochen.dollancustomized.common.rail.StationStopSign;
-import com.jhxiaochen.dollancustomized.common.rail.StationStopWallSign;
-import com.jhxiaochen.dollancustomized.common.rail.base.TwoBlocksSignBase;
-import com.jhxiaochen.dollancustomized.common.road.*;
+import com.jhxiaochen.dollancustomized.common.block.*;
+import com.jhxiaochen.dollancustomized.common.block.light.*;
+import com.jhxiaochen.dollancustomized.common.block.metro.*;
+import com.jhxiaochen.dollancustomized.common.block.rail.EmptySignBlock;
+import com.jhxiaochen.dollancustomized.common.block.rail.RailwaySignPost;
+import com.jhxiaochen.dollancustomized.common.block.rail.StationStopSign;
+import com.jhxiaochen.dollancustomized.common.block.rail.StationStopWallSign;
+import com.jhxiaochen.dollancustomized.common.block.rail.base.TwoBlocksSignBase;
+import com.jhxiaochen.dollancustomized.common.block.road.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
@@ -21,6 +22,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -432,8 +434,8 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(road_sign_go_both);
         BlockHasMeta(bus_lane_mark);
         BlockHasMeta(bus_lane_mark_slab);
-        for (BusLaneMark.EnumType subtype : BusLaneMark.EnumType.values()) {
-            registerModel(bus_lane_mark, subtype.getMetadata(), "bus_lane_" + subtype.getName());
+        for (BusLaneMark.EnumType subtype : BusLaneMark.EnumType.values( )) {
+            registerModel(bus_lane_mark, subtype.getMetadata( ), "bus_lane_" + subtype.getName( ));
         }
         SimpleBlock(road_sign_do_not_enter);
         SimpleBlock(road_traffic_light);
@@ -442,9 +444,9 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(road_traffic_light_yellow);
         SimpleBlock(road_pedestrian_traffic_light);
         BlockHasMeta(metro_fence);
-        registerModel(metro_fence, BlockMetroFence.FenceType.METRO.getMetadata(), "metro_fence");
-        registerModel(metro_fence, BlockMetroFence.FenceType.ROAD_CENTER.getMetadata(), "road_center_fence");
-        registerModel(metro_fence, BlockMetroFence.FenceType.ROAD.getMetadata(), "road_fence");
+        registerModel(metro_fence, BlockMetroFence.FenceType.METRO.getMetadata( ), "metro_fence");
+        registerModel(metro_fence, BlockMetroFence.FenceType.ROAD_CENTER.getMetadata( ), "road_center_fence");
+        registerModel(metro_fence, BlockMetroFence.FenceType.ROAD.getMetadata( ), "road_fence");
         SimpleBlock(road_sign_post);
         SimpleBlock(double_yellow_line_diagonal);
         SimpleBlock(double_yellow_line_diagonal_slab);
@@ -515,15 +517,15 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(white_punctiform_lamp);
         SimpleBlock(white_banding_lamp);
         BlockHasMeta(asphalt);
-        registerModel(asphalt, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt");
-        registerModel(asphalt, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt");
-        registerModel(asphalt, BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt");
-        registerModel(asphalt, BlockAsphalt.AsphaltType.WHITE.getMetadata(), "white_asphalt");
-        registerModel(asphalt, BlockAsphalt.AsphaltType.YELLOW.getMetadata(), "yellow_asphalt");
+        registerModel(asphalt, BlockAsphalt.AsphaltType.BLACK.getMetadata( ), "black_asphalt");
+        registerModel(asphalt, BlockAsphalt.AsphaltType.CYAN.getMetadata( ), "cyan_asphalt");
+        registerModel(asphalt, BlockAsphalt.AsphaltType.RED.getMetadata( ), "red_asphalt");
+        registerModel(asphalt, BlockAsphalt.AsphaltType.WHITE.getMetadata( ), "white_asphalt");
+        registerModel(asphalt, BlockAsphalt.AsphaltType.YELLOW.getMetadata( ), "yellow_asphalt");
         BlockHasMeta(asphalt_slab);
-        registerModel(asphalt_slab, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt_slab");
-        registerModel(asphalt_slab, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt_slab");
-        registerModel(asphalt_slab, BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt_slab");
+        registerModel(asphalt_slab, BlockAsphalt.AsphaltType.BLACK.getMetadata( ), "black_asphalt_slab");
+        registerModel(asphalt_slab, BlockAsphalt.AsphaltType.CYAN.getMetadata( ), "cyan_asphalt_slab");
+        registerModel(asphalt_slab, BlockAsphalt.AsphaltType.RED.getMetadata( ), "red_asphalt_slab");
         SimpleBlock(dollan_line_1);
         SimpleBlock(dollan_line_2);
         SimpleBlock(dollan_line_3);
@@ -548,39 +550,39 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(dollan_line_22);
 
         BlockHasMeta(lamp_tran);
-        registerModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(), "lamp_tran_0");
-        registerModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(), "lamp_tran_1");
-        registerModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(), "lamp_tran_2");
-        registerModel(lamp_tran, EnumDyeColor.RED.getMetadata(), "lamp_tran_3");
-        registerModel(lamp_tran, EnumDyeColor.GREEN.getMetadata(), "lamp_tran_4");
-        registerModel(lamp_tran, EnumDyeColor.BLUE.getMetadata(), "lamp_tran_blue");
-        registerModel(lamp_tran, EnumDyeColor.BROWN.getMetadata(), "lamp_tran_brown");
-        registerModel(lamp_tran, EnumDyeColor.GRAY.getMetadata(), "lamp_tran_gray");
-        registerModel(lamp_tran, EnumDyeColor.LIGHT_BLUE.getMetadata(), "lamp_tran_light_blue");
-        registerModel(lamp_tran, EnumDyeColor.LIME.getMetadata(), "lamp_tran_lime");
-        registerModel(lamp_tran, EnumDyeColor.SILVER.getMetadata(), "lamp_tran_silver");
-        registerModel(lamp_tran, EnumDyeColor.MAGENTA.getMetadata(), "lamp_tran_magenta");
-        registerModel(lamp_tran, EnumDyeColor.PURPLE.getMetadata(), "lamp_tran_purple");
-        registerModel(lamp_tran, EnumDyeColor.ORANGE.getMetadata(), "lamp_tran_orange");
-        registerModel(lamp_tran, EnumDyeColor.PINK.getMetadata(), "lamp_tran_pink");
-        registerModel(lamp_tran, EnumDyeColor.CYAN.getMetadata(), "lamp_tran_cyan");
+        registerModel(lamp_tran, EnumDyeColor.WHITE.getMetadata( ), "lamp_tran_0");
+        registerModel(lamp_tran, EnumDyeColor.BLACK.getMetadata( ), "lamp_tran_1");
+        registerModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata( ), "lamp_tran_2");
+        registerModel(lamp_tran, EnumDyeColor.RED.getMetadata( ), "lamp_tran_3");
+        registerModel(lamp_tran, EnumDyeColor.GREEN.getMetadata( ), "lamp_tran_4");
+        registerModel(lamp_tran, EnumDyeColor.BLUE.getMetadata( ), "lamp_tran_blue");
+        registerModel(lamp_tran, EnumDyeColor.BROWN.getMetadata( ), "lamp_tran_brown");
+        registerModel(lamp_tran, EnumDyeColor.GRAY.getMetadata( ), "lamp_tran_gray");
+        registerModel(lamp_tran, EnumDyeColor.LIGHT_BLUE.getMetadata( ), "lamp_tran_light_blue");
+        registerModel(lamp_tran, EnumDyeColor.LIME.getMetadata( ), "lamp_tran_lime");
+        registerModel(lamp_tran, EnumDyeColor.SILVER.getMetadata( ), "lamp_tran_silver");
+        registerModel(lamp_tran, EnumDyeColor.MAGENTA.getMetadata( ), "lamp_tran_magenta");
+        registerModel(lamp_tran, EnumDyeColor.PURPLE.getMetadata( ), "lamp_tran_purple");
+        registerModel(lamp_tran, EnumDyeColor.ORANGE.getMetadata( ), "lamp_tran_orange");
+        registerModel(lamp_tran, EnumDyeColor.PINK.getMetadata( ), "lamp_tran_pink");
+        registerModel(lamp_tran, EnumDyeColor.CYAN.getMetadata( ), "lamp_tran_cyan");
         BlockHasMeta(light);
-        registerModel(light, EnumDyeColor.WHITE.getMetadata(), "lamp_white");
-        registerModel(light, EnumDyeColor.BLACK.getMetadata(), "lamp_black");
-        registerModel(light, EnumDyeColor.YELLOW.getMetadata(), "lamp_yellow");
-        registerModel(light, EnumDyeColor.RED.getMetadata(), "lamp_red");
-        registerModel(light, EnumDyeColor.GREEN.getMetadata(), "lamp_green");
-        registerModel(light, EnumDyeColor.BLUE.getMetadata(), "lamp_blue");
-        registerModel(light, EnumDyeColor.BROWN.getMetadata(), "lamp_brown");
-        registerModel(light, EnumDyeColor.GRAY.getMetadata(), "lamp_gray");
-        registerModel(light, EnumDyeColor.LIGHT_BLUE.getMetadata(), "lamp_light_blue");
-        registerModel(light, EnumDyeColor.LIME.getMetadata(), "lamp_lime");
-        registerModel(light, EnumDyeColor.SILVER.getMetadata(), "lamp_silver");
-        registerModel(light, EnumDyeColor.MAGENTA.getMetadata(), "lamp_magenta");
-        registerModel(light, EnumDyeColor.PURPLE.getMetadata(), "lamp_purple");
-        registerModel(light, EnumDyeColor.ORANGE.getMetadata(), "lamp_orange");
-        registerModel(light, EnumDyeColor.PINK.getMetadata(), "lamp_pink");
-        registerModel(light, EnumDyeColor.CYAN.getMetadata(), "lamp_cyan");
+        registerModel(light, EnumDyeColor.WHITE.getMetadata( ), "lamp_white");
+        registerModel(light, EnumDyeColor.BLACK.getMetadata( ), "lamp_black");
+        registerModel(light, EnumDyeColor.YELLOW.getMetadata( ), "lamp_yellow");
+        registerModel(light, EnumDyeColor.RED.getMetadata( ), "lamp_red");
+        registerModel(light, EnumDyeColor.GREEN.getMetadata( ), "lamp_green");
+        registerModel(light, EnumDyeColor.BLUE.getMetadata( ), "lamp_blue");
+        registerModel(light, EnumDyeColor.BROWN.getMetadata( ), "lamp_brown");
+        registerModel(light, EnumDyeColor.GRAY.getMetadata( ), "lamp_gray");
+        registerModel(light, EnumDyeColor.LIGHT_BLUE.getMetadata( ), "lamp_light_blue");
+        registerModel(light, EnumDyeColor.LIME.getMetadata( ), "lamp_lime");
+        registerModel(light, EnumDyeColor.SILVER.getMetadata( ), "lamp_silver");
+        registerModel(light, EnumDyeColor.MAGENTA.getMetadata( ), "lamp_magenta");
+        registerModel(light, EnumDyeColor.PURPLE.getMetadata( ), "lamp_purple");
+        registerModel(light, EnumDyeColor.ORANGE.getMetadata( ), "lamp_orange");
+        registerModel(light, EnumDyeColor.PINK.getMetadata( ), "lamp_pink");
+        registerModel(light, EnumDyeColor.CYAN.getMetadata( ), "lamp_cyan");
         SimpleBlock(asphalt_cyan_black_half_line);
         SimpleBlock(asphalt_cyan_black_half_line_slab);
         SimpleBlock(asphalt_cyan_black_half);
@@ -627,16 +629,16 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         SimpleBlock(road_sign_can_diaotou);
 
         BlockHasMeta(ms_lines);
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(), "merge_line");
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(), "merge_line_yellow");
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(), "separate_line");
-        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(), "separate_line_yellow");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata( ), "merge_line");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata( ), "merge_line_yellow");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata( ), "separate_line");
+        registerModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata( ), "separate_line_yellow");
 
         BlockHasMeta(ms_lines_slab);
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(), "merge_line_slab");
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(), "merge_line_yellow_slab");
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(), "separate_line_slab");
-        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(), "separate_line_yellow_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata( ), "merge_line_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata( ), "merge_line_yellow_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata( ), "separate_line_slab");
+        registerModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata( ), "separate_line_yellow_slab");
 
         SimpleBlock(arrow_straight_diaotou);
         SimpleBlock(platform_wall);
@@ -650,12 +652,14 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         registerModel(beautiful_marble, 2, "cut_marble");
         registerModel(beautiful_marble, 3, "litcut_marble");
         registerModel(beautiful_marble, 4, "smooth_marble");
+        if (!Loader.isModLoaded("depthsupdate")) {
         BlockHasMeta(cracked_deepslate, 0, "bricks_cracked_deepslate");
         registerModel(cracked_deepslate, 1, "tiles_cracked_deepslate");
         SimpleBlock(calcite);
         BlockHasMeta(deepslate, 0, "deepslate");
         registerModel(deepslate, 1, "deepslate_bricks");
         registerModel(deepslate, 2, "deepslate_tiles");
+        }
         BlockHasMeta(elder_prismarine, 0, BlockElderPrismarine.PrismarineType.NORMAL.getName());
         BlockHasMeta(elder_prismarine, 1, BlockElderPrismarine.PrismarineType.BRICKS.getName());
         BlockHasMeta(elder_prismarine, 2, BlockElderPrismarine.PrismarineType.SMOOTH.getName());
@@ -679,7 +683,7 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
         registerModel(polished_blackstone, 0, BlockPolishedBlackStone.BlackStoneType.NORMAL.getName());
         registerModel(polished_blackstone, 1, BlockPolishedBlackStone.BlackStoneType.BRICKS.getName());
         SimpleBlock(polished_limestone);
-        SimpleBlock(polished_deepslate);
+        if (!Loader.isModLoaded("depthsupdate")) SimpleBlock(polished_deepslate);
         SimpleBlock(polished_marble);
         SimpleBlock(polished_myalite);
         SimpleBlock(quartz_bricks);
@@ -796,10 +800,12 @@ public static Block station_end_door = new BlockStationEndDoor("station_end_door
     public static void RegStateMapper(){
         ModelLoader.setCustomStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.cracked_deepslate,
-                new StateMap.Builder().withSuffix("_cracked_deepslate").withName(BlockCrackedDeepSlate.VARIANT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.deepslate,
-                new StateMap.Builder().withName(BlockDeepSlate.VARIANT).build());
+        if (!Loader.isModLoaded("depthsupdate")) {
+            ModelLoader.setCustomStateMapper(DollanBlocks.cracked_deepslate,
+                                             new StateMap.Builder( ).withSuffix("_cracked_deepslate").withName(BlockCrackedDeepSlate.VARIANT).build( ));
+            ModelLoader.setCustomStateMapper(DollanBlocks.deepslate,
+                                             new StateMap.Builder( ).withName(BlockDeepSlate.VARIANT).build( ));
+        }
         ModelLoader.setCustomStateMapper(DollanBlocks.elder_prismarine,
                 new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
         ModelLoader.setCustomStateMapper(DollanBlocks.limestone,

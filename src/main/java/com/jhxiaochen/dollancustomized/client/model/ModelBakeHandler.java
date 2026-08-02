@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.model;
 
-import com.jhxiaochen.dollancustomized.common.road.IronHorizontal;
+import com.jhxiaochen.dollancustomized.common.block.road.IronHorizontal;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

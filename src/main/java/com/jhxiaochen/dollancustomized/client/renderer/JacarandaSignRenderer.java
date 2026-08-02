@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.renderer;
 
-import com.jhxiaochen.dollancustomized.common.JacarandaSign;
-import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
-import com.jhxiaochen.dollancustomized.common.JacarandaWallSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaStandingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaWallSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

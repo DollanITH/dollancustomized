@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.common.metro.BlockStationEndDoor;
+import com.jhxiaochen.dollancustomized.common.block.metro.BlockStationEndDoor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;

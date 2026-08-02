@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
-import com.jhxiaochen.dollancustomized.common.metro.OverheadSteelDiagonalSupport;
+import com.jhxiaochen.dollancustomized.common.block.metro.OverheadSteelDiagonalSupport;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;

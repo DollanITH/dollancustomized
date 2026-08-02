@@ -190,14 +190,14 @@ public class SignFontRenderer {
             buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
 
             // 仅下边缘微小抗锯齿（最小范围）
-            buffer.pos(drawX + 0.2f, drawY + renderH - 0.2f, 0).tex(u1, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.08f).endVertex();
-            buffer.pos(drawX + renderW - 0.2f, drawY + renderH - 0.2f, 0).tex(u2, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.08f).endVertex();
+            buffer.pos(drawX + 0.1f, drawY + renderH - 0.1f, 0).tex(u1, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.04f).endVertex();
+            buffer.pos(drawX + renderW - 0.1f, drawY + renderH - 0.1f, 0).tex(u2, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.04f).endVertex();
 
             // 四个角落的微弱抗锯齿（极小范围）
-            buffer.pos(drawX - 0.1f, drawY - 0.1f, 0).tex(u1, v1).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
-            buffer.pos(drawX + renderW + 0.1f, drawY - 0.1f, 0).tex(u2, v1).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
-            buffer.pos(drawX - 0.1f, drawY + renderH + 0.1f, 0).tex(u1, v2).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
-            buffer.pos(drawX + renderW + 0.1f, drawY + renderH + 0.1f, 0).tex(u2, v2).color(r * 0.2f, g * 0.2f, b * 0.2f, 0.05f).endVertex();
+            buffer.pos(drawX - 0.05f, drawY - 0.05f, 0).tex(u1, v1).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX + renderW + 0.05f, drawY - 0.05f, 0).tex(u2, v1).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX - 0.05f, drawY + renderH + 0.05f, 0).tex(u1, v2).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX + renderW + 0.05f, drawY + renderH + 0.05f, 0).tex(u2, v2).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
 
             tessellator.draw();
 

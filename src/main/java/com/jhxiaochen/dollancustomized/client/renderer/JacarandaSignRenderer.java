@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.client.renderer.tileentity;
+package com.jhxiaochen.dollancustomized.client.renderer;
 
 import com.jhxiaochen.dollancustomized.common.JacarandaSign;
 import com.jhxiaochen.dollancustomized.common.JacarandaStandingSign;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJacarandaSign> {
+public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJacarandaSign> {
 
     private static final double FIXED_Y = 0.8343;
     private static final double IN_WALL_FIXED_Y = 0.5218;
@@ -118,7 +118,7 @@ public class TileEntityJacarandaSignRenderer extends TileEntitySpecialRenderer<T
                 // 跳过不需要渲染的面
                 if (!this.shouldRenderSide(textSides, slot)) continue;
 
-                tile.getTextRenderPosition(slot);
+                //tile.getTextRenderPosition(slot);
 
                 // 判断是否高亮：原版使用 lineBeingEdited 来显示光标
                 boolean isHighlighted = (tile.lineBeingEdited != -1);

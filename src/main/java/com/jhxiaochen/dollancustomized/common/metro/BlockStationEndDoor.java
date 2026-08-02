@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.metro;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.init.DollanItems;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -37,12 +38,12 @@ public class BlockStationEndDoor extends BlockDoor {
 
     private int getOpenSound()
     {
-        return 1006;
+        return 1005;
     }
 
     private int getCloseSound()
     {
-        return 1012;
+        return 1011;
     }
 
     @Override
@@ -68,12 +69,12 @@ public class BlockStationEndDoor extends BlockDoor {
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(this);
+        return new ItemStack(DollanItems.station_end_door);
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : new ItemStack(this).getItem( );
+        return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : DollanItems.station_end_door;
     }
 
     @Override

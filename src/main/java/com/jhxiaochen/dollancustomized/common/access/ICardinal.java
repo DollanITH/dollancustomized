@@ -6,12 +6,12 @@ public interface ICardinal {
     default int getSlotFromFacings(EnumFacing blockFacing, EnumFacing clickFacing) {
         if (isNorthSouth(blockFacing)) {
             // 方块南北朝向，南北面编辑
-            if (clickFacing == EnumFacing.SOUTH) return 0;
-            if (clickFacing == EnumFacing.NORTH) return 1;
+            if (clickFacing == EnumFacing.SOUTH) return blockFacing == EnumFacing.NORTH ? 0 : 1;
+            if (clickFacing == EnumFacing.NORTH) return blockFacing == EnumFacing.NORTH ? 1 : 0;
         } else {
             // 方块东西朝向，东西面编辑
-            if (clickFacing == EnumFacing.EAST) return 0;
-            if (clickFacing == EnumFacing.WEST) return 1;
+            if (clickFacing == EnumFacing.EAST) return blockFacing == EnumFacing.WEST ? 0 : 1;
+            if (clickFacing == EnumFacing.WEST) return blockFacing == EnumFacing.WEST ? 1 : 0;
         }
 
         return -1;

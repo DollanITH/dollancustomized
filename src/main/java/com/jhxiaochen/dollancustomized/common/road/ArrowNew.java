@@ -110,7 +110,7 @@ public class ArrowNew extends IronHorizontal {
 
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return side == EnumFacing.UP || super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return side == EnumFacing.UP;
     }
 
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {

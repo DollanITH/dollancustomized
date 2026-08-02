@@ -20,8 +20,8 @@ public interface IAxis {
                     if (clickFacing == EnumFacing.SOUTH) return 0;
                     if (clickFacing == EnumFacing.NORTH) return 1;
                 } else {
-                    if (clickFacing == EnumFacing.EAST) return 0;
-                    if (clickFacing == EnumFacing.WEST) return 1;
+                    if (clickFacing == EnumFacing.EAST) return 1;
+                    if (clickFacing == EnumFacing.WEST) return 0;
                 }
             }
             if (axis == 8 || axis == 12) {
@@ -29,8 +29,8 @@ public interface IAxis {
                     if (clickFacing == EnumFacing.SOUTH) return 1;
                     if (clickFacing == EnumFacing.NORTH) return 0;
                 } else {
-                    if (clickFacing == EnumFacing.EAST) return 1;
-                    if (clickFacing == EnumFacing.WEST) return 0;
+                    if (clickFacing == EnumFacing.EAST) return 0;
+                    if (clickFacing == EnumFacing.WEST) return 1;
                 }
             }
         }

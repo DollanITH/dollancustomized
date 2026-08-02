@@ -103,6 +103,6 @@ public class IronHorizontal extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return true;
+        return side == EnumFacing.UP;
     }
 }

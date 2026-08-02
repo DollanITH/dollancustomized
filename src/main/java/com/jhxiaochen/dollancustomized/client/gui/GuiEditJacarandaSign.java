@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import org.lwjgl.input.Keyboard;
@@ -31,7 +32,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
     private              Deque<String[]>         undoStack = new ArrayDeque<>();
     private              long                    lastCheckTime = 0;
     private static final double                  MAX_DISTANCE_SQ = 5.0 * 5.0;
-    private boolean needSave = true;
+    private boolean needSave;
     private boolean isClosing = false;
 
     // 按钮ID
@@ -80,7 +81,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
         GlStateManager.translate((float)(this.width / 2), 0.0F, 50.0F);
         float f = 93.75F;
         GlStateManager.scale(-f, -f, -f);
-        //GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 
         Block block = tile.getBlockType();
 
@@ -104,17 +105,17 @@ public class GuiEditJacarandaSign extends GuiScreen {
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
         } else if (block instanceof JacarandaHangingSign) {
             int meta = tile.getBlockMetadata();
-            float rotation = 0.0F;
+            float rotation = 180.0F;
 
             if (meta == 2) {
-                rotation = 180.0F;
+                rotation = 0.0F;
             } else if (meta == 4) {
                 rotation = 90.0F;
             } else if (meta == 5) {
                 rotation = -90.0F;
             }
 
-            GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
         }
 
@@ -160,26 +161,27 @@ public class GuiEditJacarandaSign extends GuiScreen {
             textArray = new ITextComponent[4];
         }
 
-        String currentText = textArray[editLine].getUnformattedText();
+        String currentText = textArray[editLine].getUnformattedText( );
 
-        if (keyCode == 14 && !currentText.isEmpty()) {  // BACKSPACE
-            this.backupText();
-            currentText = currentText.substring(0, currentText.length() - 1);
+        if (keyCode == 14 && !currentText.isEmpty( )) {  // BACKSPACE
+            this.backupText( );
+            currentText = currentText.substring(0, currentText.length( ) - 1);
             textArray[editLine] = new TextComponentString(currentText);
             this.tile.updateText(editingSlot, textArray, false);
             return;
         }
 
-        // 处理输入字符
-        if (typedChar >= 32 && typedChar <= 126) {  // 只接受可打印ASCII字符
-            if (net.minecraft.util.ChatAllowedCharacters.isAllowedCharacter(typedChar) &&
-                currentText.length() < 15) {
-                this.backupText();
+        // 处理输入字符 - 移除 ASCII 限制，支持中文输入
+        if (ChatAllowedCharacters.isAllowedCharacter(typedChar) && this.fontRenderer.getStringWidth(currentText + typedChar) <= 90)
+        {
+            if (currentText.length( ) < 15) {
+                this.backupText( );
                 currentText = currentText + typedChar;
                 textArray[editLine] = new TextComponentString(currentText);
                 this.tile.updateText(editingSlot, textArray, false);
             }
         }
+        // 返回后，让父类处理键盘重复事件和输入法编辑器（IME）
     }
 
     private void backupText() {
@@ -254,7 +256,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
 
         if (this.isClosing) {
             if (this.needSave) {
-                NBTTagCompound nbt = tile.createSignNBT();
+                NBTTagCompound nbt = tile.createSignNBT(editingSlot);
                 com.jhxiaochen.dollancustomized.network.NetworkManager.sendUpdateSignToServer(tile.getPos(), nbt);
                 tile.updateText(editingSlot, newText, false);
             } else {

@@ -22,6 +22,7 @@ import java.util.List;
 public class DollanItems{
         public static Item leungcraft;
         public static Item dollan;
+        public static Item station_end_door;
 
         public static void register()
         {
@@ -31,7 +32,7 @@ public class DollanItems{
             registerItem(dollan = new ItemDollanCraft(5, 1.2F, false)
                     .setAlwaysEdible()
                     .setUnlocalizedName("dollancraft").setRegistryName("dollan"));
-            registerItemBlock(DollanBlocks.station_end_door, new ItemStationEndDoor(DollanBlocks.station_end_door));
+            registerItem(station_end_door = new ItemStationEndDoor(DollanBlocks.station_end_door));
             registerItemBlock(DollanBlocks.power_method_change_sign, new ItemRailwaySign(DollanBlocks.power_method_change_sign));
             registerItemBlock(DollanBlocks.deport_stop_sign, new ItemRailwaySign(DollanBlocks.deport_stop_sign));
             registerItemBlock(DollanBlocks.empty_railway_sign);
@@ -456,6 +457,7 @@ public class DollanItems{
             registerModel(leungcraft);
             registerModel(dollan, 0, "dollancraft");
             registerModel(dollan, 1, "dollancraft");
+            registerModel(station_end_door);
 
         }
 

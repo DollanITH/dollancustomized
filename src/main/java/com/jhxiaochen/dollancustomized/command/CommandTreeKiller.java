@@ -8,7 +8,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -318,7 +317,7 @@ public class CommandTreeKiller extends CommandBase {
      */
     private boolean isLogBlock(Block block) {
         // 检查是否是已知的原木方块
-        return block == Blocks.LOG || block == Blocks.LOG2 || block instanceof BlockLog;
+        return block instanceof BlockLog;
     }
 
     /**
@@ -326,7 +325,7 @@ public class CommandTreeKiller extends CommandBase {
      */
     private boolean isLeafBlock(Block block) {
         // 检查是否是已知的树叶方块
-        return block == Blocks.LEAVES || block == Blocks.LEAVES2 || block instanceof BlockLeaves;
+        return block instanceof BlockLeaves;
     }
 
     /**

@@ -13,6 +13,7 @@ public enum PacketType {
     JACARANDA_SIGN_TEXT(2, Side.SERVER),
     EDIT_STATE(3, Side.SERVER),
     UPDATE_SIGN_TO_SERVER(4, Side.SERVER),
+    STATION_NAME_BOARD(5, Side.SERVER),
 
     // 服务端 -> 客户端
     UPDATE_SIGN_DATA(11, Side.CLIENT),

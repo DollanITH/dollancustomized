@@ -631,3 +631,9 @@ sign.edit=编辑告示牌
 sign.back=背面
 sign.isFront=正面
 sign.isBack=背面
+
+# 创造模式物品栏
+itemGroup.tabWood=东安自定义 | 木材
+
+# 站名牌
+tile.StationNameBoard.name=地铁车站大字壁

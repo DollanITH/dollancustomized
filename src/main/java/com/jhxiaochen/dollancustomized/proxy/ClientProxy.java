@@ -2,18 +2,17 @@ package com.jhxiaochen.dollancustomized.proxy;
 
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.client.event.ParticleTextureEventHandler;
-import com.jhxiaochen.dollancustomized.client.font.RoadFontLoader;
-import com.jhxiaochen.dollancustomized.client.font.RoadFontRenderer;
-import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
-import com.jhxiaochen.dollancustomized.client.font.SignFontRenderer;
-import com.jhxiaochen.dollancustomized.client.renderer.JacarandaHangingSignRenderer;
-import com.jhxiaochen.dollancustomized.client.renderer.JacarandaSignRenderer;
+import com.jhxiaochen.dollancustomized.client.font.*;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.RenderRoadText;
+import com.jhxiaochen.dollancustomized.client.renderer.sign.JacarandaHangingSignRenderer;
+import com.jhxiaochen.dollancustomized.client.renderer.sign.JacarandaSignRenderer;
+import com.jhxiaochen.dollancustomized.client.renderer.station.StationNameBoardRenderer;
 import com.jhxiaochen.dollancustomized.particle.ParticleInit;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityStationNameBoard;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -21,7 +20,9 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 public class ClientProxy implements CommonProxy {
 
     public static RoadFontRenderer roadFontRenderer; // RoadText专用渲染器
-    public static SignFontRenderer signFontRenderer;  // 限高牌专用渲染器
+    public static SignFontRenderer    signFontRenderer;  // 限高牌专用渲染器
+    public static ChineseFontRenderer chineseFontRenderer;  // 限高牌专用渲染器
+    public static EnglishFontRenderer englishFontRenderer;  // 限高牌专用渲染器
     // 保留customFontRenderer以兼容现有代码，但内部会路由到对应的渲染器
     @Deprecated
     public static SignFontRenderer customFontRenderer = signFontRenderer;
@@ -35,6 +36,8 @@ public class ClientProxy implements CommonProxy {
     @Override
     public void init() {
         ResourceLocation ttfLocation = new ResourceLocation(Reference.MOD_ID, "fonts/road_text_fonts.ttf");
+        ResourceLocation ttfLocation1 = new ResourceLocation(Reference.MOD_ID, "fonts/source-sans-pro-bold-2.otf");
+        ResourceLocation ttfLocation2 = new ResourceLocation(Reference.MOD_ID, "fonts/sourcehansanscn-bold.otf");
 
         // 初始化粒子系统
         ParticleInit.init(null);
@@ -46,6 +49,12 @@ public class ClientProxy implements CommonProxy {
         // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
         SignFontLoader signFontLoader = new SignFontLoader(ttfLocation, 32.0F);
         signFontRenderer = new SignFontRenderer(signFontLoader);
+        // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
+        ChineseFontLoader chineseFontLoader = new ChineseFontLoader(ttfLocation2, 32.0F);
+        chineseFontRenderer = new ChineseFontRenderer(chineseFontLoader);
+        // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
+        EnglishFontLoader englishFontLoader = new EnglishFontLoader(ttfLocation1, 32.0F);
+        englishFontRenderer = new EnglishFontRenderer(englishFontLoader);
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadText.class, new RenderRoadText());
         // 使用点测试渲染器
@@ -54,6 +63,9 @@ public class ClientProxy implements CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJacarandaSign.class, new JacarandaSignRenderer());
         // 注册悬挂式蓝花楹木告示牌渲染器
         ClientRegistry.bindTileEntitySpecialRenderer(com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign.class, new JacarandaHangingSignRenderer());
+
+        // 注册车站大字壁渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStationNameBoard.class, new StationNameBoardRenderer());
     }
 
     

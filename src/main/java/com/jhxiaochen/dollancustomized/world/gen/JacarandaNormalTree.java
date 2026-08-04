@@ -1,19 +1,19 @@
 package com.jhxiaochen.dollancustomized.world.gen;
 
-import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaLeaves;
-import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaLog;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanLog;
+import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaLeaves;
 
 /**
- * 蓝花楹普通树生成器
- * 使用蓝花楹木的原木和树叶，支持藤蔓生长
+ * 枫木普通树生成器
+ * 使用枫木的原木和树叶，支持藤蔓生长
  */
 public class JacarandaNormalTree extends net.minecraft.world.gen.feature.WorldGenTrees {
 
     public JacarandaNormalTree(int minTreeHeight) {
-        // 使用5参数构造函数，传入蓝花楹木
+        // 使用5参数构造函数，传入枫木
         super(false, minTreeHeight,
-              JacarandaLog.jacaranda_log.getDefaultState(),
-              JacarandaLeaves.Registry.jacaranda_leaves.getDefaultState()
+              DollanLog.jacaranda_log.getDefaultState(),
+              JacarandaLeaves.jacaranda_leaves.getDefaultState()
                         .withProperty(net.minecraft.block.BlockLeaves.CHECK_DECAY, false),
               false);
     }

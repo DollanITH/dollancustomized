@@ -1,0 +1,6 @@
+{
+  "parent": "dollancustomized:item/bus_lane_mark",
+  "textures": {
+    "mark": "dollancustomized:blocks/station_name_board"
+  }
+}

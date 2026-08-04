@@ -37,7 +37,9 @@ public class NetworkManager {
             PacketType.UPDATE_SIGN_TO_SERVER.getId(), PacketType.UPDATE_SIGN_TO_SERVER.getTargetSide());
         INSTANCE.registerMessage(PacketItemUpdate.Handler.class, PacketItemUpdate.class,
             PacketType.ITEM_UPDATE.getId(), PacketType.ITEM_UPDATE.getTargetSide());
-            }
+        INSTANCE.registerMessage(PacketStationNameBoard.Handler.class, PacketStationNameBoard.class,
+            PacketType.STATION_NAME_BOARD.getId(), PacketType.STATION_NAME_BOARD.getTargetSide());
+    }
 
     // 发送方法
     public static void sendRoadText(EntityPlayerMP player, BlockPos pos, String text, int color) {

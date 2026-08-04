@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north":  { "model": "dollancustomized:station_name_board" },
+    "facing=south":  { "model": "dollancustomized:station_name_board", "y": 180 },
+    "facing=east":   { "model": "dollancustomized:station_name_board", "y": 90 },
+    "facing=west":   { "model": "dollancustomized:station_name_board", "y": 270 }
+  }
+}

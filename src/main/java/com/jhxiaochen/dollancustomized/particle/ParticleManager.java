@@ -21,23 +21,23 @@ public class ParticleManager {
     public static void spawnJacarandaParticles(World world, double x, double y, double z, Random rand) {
         // 基础粒子生成 (150分之1概率 - 大幅减少)
         if (rand.nextInt(150) == 0) {
-            spawnJacarandaLeafParticles(world, x, y, z, 1);
+            spawnDollanLeafParticles(world, x, y, z, 1);
         }
 
         // 微风效果 (80分之1概率 - 减少一半)
         if (rand.nextInt(80) == 0) {
-            spawnJacarandaLeafParticles(world, x, y, z, 1);
+            spawnDollanLeafParticles(world, x, y, z, 1);
         }
 
         // 强风效果 (60分之1概率 - 减少一半)
         if (rand.nextInt(60) == 0) {
-            spawnJacarandaLeafParticles(world, x, y, z, 1);
+            spawnDollanLeafParticles(world, x, y, z, 1);
             spawnWindBlownParticles(world, x, y, z, 0.5);
         }
 
         // 自然消散粒子 (300分之1概率 - 减少到三倍)
         if (rand.nextInt(300) == 0) {
-            spawnJacarandaLeafParticles(world, x, y, z, 1);
+            spawnDollanLeafParticles(world, x, y, z, 1);
         }
     }
 
@@ -50,7 +50,7 @@ public class ParticleManager {
      * @param count 粒子数量
      */
     @SideOnly(Side.CLIENT)
-    public static void spawnJacarandaLeafParticles(World world, double x, double y, double z, int count) {
+    public static void spawnDollanLeafParticles(World world, double x, double y, double z, int count) {
         for (int i = 0; i < count; i++) {
             double offsetX = x + (RAND.nextDouble() - 0.5) * 0.2; // 减少散布范围
             double offsetY = y + (RAND.nextDouble() - 0.5) * 0.2; // 减少散布范围
@@ -93,7 +93,7 @@ public class ParticleManager {
         if (!world.isRemote) return;
 
         // 使用新的蓝花楹花瓣粒子
-        JacarandaPetalParticle petalParticle = new JacarandaPetalParticle(world, x, y, z, motionX, motionY, motionZ);
+        JacarandaParticle petalParticle = new JacarandaParticle(world, x, y, z, motionX, motionY, motionZ);
         Minecraft.getMinecraft().effectRenderer.addEffect(petalParticle);
     }
 

@@ -571,15 +571,15 @@ commands.treeundo.success_leaves=Successfully restored %d leaves (%d records rem
 commands.treeundo.skipped=Skipped %d blocks (chunk not loaded or restore failed)
 
 # Item Groups
-itemGroup.tabLight=Dollan Custom | Lighting
-itemGroup.tabdollanMetro=Dollan Custom | Dollan Metro
-itemGroup.tabdollanTran=Dollan Custom | Dollan Regional Metro
-itemGroup.tabMSMetro=Dollan Custom | Mingsha Metro
-itemGroup.tabRoad=Dollan Custom | Road
-itemGroup.tabRoadSigns=Dollan Custom | Road Signs
-itemGroup.tabDollanBlocks=Dollan Custom | Blocks
-itemGroup.tabMetroBlocks=Dollan Custom | Railway
-itemGroup.tabmetro=Dollan Custom | Blocks
+itemGroup.tabLight=DollanCustomized | Lighting
+itemGroup.tabdollanMetro=DollanCustomized | Dollan Metro
+itemGroup.tabdollanTran=DollanCustomized | Dollan Regional Metro
+itemGroup.tabMSMetro=DollanCustomized | Mingsha Metro
+itemGroup.tabRoad=DollanCustomized | Road
+itemGroup.tabRoadSigns=DollanCustomized | Road Signs
+itemGroup.tabDollanBlocks=DollanCustomized | Blocks
+itemGroup.tabMetroBlocks=DollanCustomized | Railway
+itemGroup.tabmetro=DollanCustomized | Blocks
 
 # Jacaranda Log
 tile.jacaranda_log.name=Jacaranda Log
@@ -633,3 +633,9 @@ sign.edit=Edit Sign
 sign.back=Back Side
 sign.isFront=Front Side
 sign.isBack=Back Side
+
+# Creative Tabs
+itemGroup.tabWood=DollanCustomized | Wood
+
+# Station Name Board
+tile.StationNameBoard.name=Station Name Board

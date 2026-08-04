@@ -2,8 +2,8 @@ package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaHangingSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.JacarandaHangingSignAttached;
+import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;

@@ -23,7 +23,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
-import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJacarandaSign> {
@@ -268,36 +267,4 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
         return split.isEmpty() ? "" : split.get(0).getFormattedText();
     }
 
-    // 渲染位置
-    public static final Map<Integer, com.jhxiaochen.dollancustomized.data.AxisPosition> SIGN_ROTATION_MAP =
-        java.util.Collections.unmodifiableMap(
-            new java.util.HashMap<Integer, com.jhxiaochen.dollancustomized.data.AxisPosition>() {{
-                put(0, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5, 0.5408, 0f));
-                put(1, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4844, 0.5377, -22.5f));
-                put(2, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4711, 0.5289, -45f));
-                put(3, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4617, 0.5146, -67.5f));
-                put(4, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4592, 0.5, 270f));
-                put(5, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4617, 0.4854, 247.5f));
-                put(6, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4711, 0.4711, 225f));
-                put(7, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.4844, 0.4623, 202.5f));
-                put(8, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5, 0.4592, 180f));
-                put(9, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5156, 0.4623, 157.5f));
-                put(10, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5289, 0.4711, 135f));
-                put(11, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5383, 0.4854, 112.5f));
-                put(12, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5408, 0.5, 90f));
-                put(13, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5383, 0.5146, 67.5f));
-                put(14, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5289, 0.5289, 45f));
-                put(15, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5156, 0.5377, 22.5f));
-            }}
-        );
-
-    public static final Map<Integer, com.jhxiaochen.dollancustomized.data.AxisPosition> SIGN_ROTATION_WALL_MAP =
-        java.util.Collections.unmodifiableMap(
-            new java.util.HashMap<Integer, com.jhxiaochen.dollancustomized.data.AxisPosition>() {{
-                put(0, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5, 0.1035, 0f));
-                put(1, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.8965, 0.5, 270f));
-                put(2, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.5, 0.8965, 180f));
-                put(3, new com.jhxiaochen.dollancustomized.data.AxisPosition(0.1035, 0.5, 90f));
-            }}
-        );
 }

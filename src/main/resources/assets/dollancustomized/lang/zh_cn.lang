@@ -48,6 +48,16 @@ tile.dollan_loop_line.name=§2§l东安轨道交通§r 东安城市环线
 
 # 鸣沙轨道交通路线
 tile.mingsha_S1.name=§4§l鸣沙轨道交通§r S1号线
+
+# 路牌
+tile.road_signpost.name=路牌
+tile.road_signpost_half.name=半路牌
+tile.road_signpost_on_the_pole.name=杆上路牌
+tile.road_signpost_pole.name=路牌杆
+tile.road_signpost_pole_double.name=双路牌杆
+tile.road_signpost_pole_horizontal.name=横向路牌杆
+tile.road_signpost_pole_left.name=左路牌杆
+tile.road_signpost_pole_right.name=右路牌杆
 tile.mingsha_S2.name=§4§l鸣沙轨道交通§r S2号线
 tile.mingsha_S3.name=§4§l鸣沙轨道交通§r S3号线
 tile.mingsha_S4.name=§4§l鸣沙轨道交通§r S4号线

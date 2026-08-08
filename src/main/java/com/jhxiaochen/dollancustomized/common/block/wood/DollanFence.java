@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class DollanFence extends BlockFence {
     public DollanFence() {
         super(Material.WOOD, MapColor.WOOD);
+        this.setCreativeTab(DollanCustomized.WOOD_TAB);
     }
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
@@ -34,7 +35,6 @@ public class DollanFence extends BlockFence {
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
             event.getRegistry().register(new ItemBlock(jacaranda_fence)
-                    .setCreativeTab(DollanCustomized.WOOD_TAB)
                     .setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_fence")
                     .setRegistryName(jacaranda_fence.getRegistryName()));
         }

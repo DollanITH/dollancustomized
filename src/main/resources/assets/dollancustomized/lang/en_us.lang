@@ -48,6 +48,16 @@ tile.dollan_loop_line.name=§2§lDollan Metro§r Urban Loop Line
 
 # Mingsha Metro Lines
 tile.mingsha_S1.name=§4§lMingsha Metro§r Line S1
+
+# Road Signs
+tile.road_signpost.name=Road Signpost
+tile.road_signpost_half.name=Half Road Signpost
+tile.road_signpost_on_the_pole.name=Road Signpost on Pole
+tile.road_signpost_pole.name=Road Signpost Pole
+tile.road_signpost_pole_double.name=Double Road Signpost Pole
+tile.road_signpost_pole_horizontal.name=Horizontal Road Signpost Pole
+tile.road_signpost_pole_left.name=Left Road Signpost Pole
+tile.road_signpost_pole_right.name=Right Road Signpost Pole
 tile.mingsha_S2.name=§4§lMingsha Metro§r Line S2
 tile.mingsha_S3.name=§4§lMingsha Metro§r Line S3
 tile.mingsha_S4.name=§4§lMingsha Metro§r Line S4

@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class DollanFenceGate extends BlockFenceGate {
     public DollanFenceGate() {
         super(BlockPlanks.EnumType.OAK);
+        this.setCreativeTab(DollanCustomized.WOOD_TAB);
     }
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
@@ -35,7 +36,6 @@ public class DollanFenceGate extends BlockFenceGate {
         @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
             event.getRegistry().register(new ItemBlock(jacaranda_fence_gate)
-                    .setCreativeTab(DollanCustomized.WOOD_TAB)
                     .setUnlocalizedName("jacaranda_fence_gate")
                     .setRegistryName(jacaranda_fence_gate.getRegistryName()));
         }

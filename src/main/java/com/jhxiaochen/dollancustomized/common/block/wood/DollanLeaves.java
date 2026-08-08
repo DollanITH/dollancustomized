@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
+import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaLeaves;
 import com.jhxiaochen.dollancustomized.init.DollanBlocks;
@@ -47,6 +48,7 @@ public class DollanLeaves extends BlockLeaves {
         this.setDefaultState(this.getDefaultState()
                                      .withProperty(CHECK_DECAY, Boolean.TRUE)
                                      .withProperty(DECAYABLE, Boolean.TRUE));
+        this.setCreativeTab(DollanCustomized.WOOD_TAB);
     }
 
     @Override

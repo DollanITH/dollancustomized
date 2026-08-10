@@ -102,15 +102,23 @@ public class RoadSignpost extends BlockHorizontal {
     public static class Registry {
         public static Block road_signpost = null;
         public static Block road_signpost_half = null;
-        public static Block road_signpost_on_the_pale = null;
-        public static Block road_signpost_pale = null;
+        public static Block road_signpost_on_the_pole = null;
+        public static Block road_signpost_pole = null;
+        public static Block road_signpost_pole_double = null;
+        public static Block road_signpost_pole_horizontal = null;
+        public static Block road_signpost_pole_left = null;
+        public static Block road_signpost_pole_right = null;
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
             event.getRegistry().register(road_signpost = new RoadSignpost());
             event.getRegistry().register(road_signpost_half = new RoadSignpostHalf());
-            event.getRegistry().register(road_signpost_on_the_pale = new RoadSignpostOnThePole());
-            event.getRegistry().register(road_signpost_pale = new RoadSignpostPole());
+            event.getRegistry().register(road_signpost_on_the_pole = new RoadSignpostOnThePole());
+            event.getRegistry().register(road_signpost_pole = new RoadSignpostPole());
+            event.getRegistry().register(road_signpost_pole_double = new RoadSignpostPoleDouble());
+            event.getRegistry().register(road_signpost_pole_horizontal = new RoadSignpostPoleHorizontal());
+            event.getRegistry().register(road_signpost_pole_left = new RoadSignpostPoleLeft());
+            event.getRegistry().register(road_signpost_pole_right = new RoadSignpostPoleRight());
         }
 
         @SubscribeEvent
@@ -119,18 +127,30 @@ public class RoadSignpost extends BlockHorizontal {
                     .setRegistryName(road_signpost.getRegistryName()));
             event.getRegistry().register(new ItemBlock(road_signpost_half)
                     .setRegistryName(road_signpost_half.getRegistryName()));
-            event.getRegistry().register(new ItemBlock(road_signpost_on_the_pale)
-                    .setRegistryName(road_signpost_on_the_pale.getRegistryName()));
-            event.getRegistry().register(new ItemBlock(road_signpost_pale)
-                    .setRegistryName(road_signpost_pale.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(road_signpost_on_the_pole)
+                    .setRegistryName(road_signpost_on_the_pole.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(road_signpost_pole)
+                    .setRegistryName(road_signpost_pole.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(road_signpost_pole_double)
+                    .setRegistryName(road_signpost_pole_double.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(road_signpost_pole_horizontal)
+                    .setRegistryName(road_signpost_pole_horizontal.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(road_signpost_pole_left)
+                    .setRegistryName(road_signpost_pole_left.getRegistryName()));
+            event.getRegistry().register(new ItemBlock(road_signpost_pole_right)
+                    .setRegistryName(road_signpost_pole_right.getRegistryName()));
         }
 
         @SubscribeEvent
         public static void registerModel(ModelRegistryEvent event){
             DollanBlocks.SimpleBlock(road_signpost);
             DollanBlocks.SimpleBlock(road_signpost_half);
-            DollanBlocks.SimpleBlock(road_signpost_on_the_pale);
-            DollanBlocks.SimpleBlock(road_signpost_pale);
+            DollanBlocks.SimpleBlock(road_signpost_on_the_pole);
+            DollanBlocks.SimpleBlock(road_signpost_pole);
+            DollanBlocks.SimpleBlock(road_signpost_pole_double);
+            DollanBlocks.SimpleBlock(road_signpost_pole_horizontal);
+            DollanBlocks.SimpleBlock(road_signpost_pole_left);
+            DollanBlocks.SimpleBlock(road_signpost_pole_right);
         }
     }
 }

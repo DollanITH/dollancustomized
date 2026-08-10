@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.sign;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,7 +30,7 @@ public class RoadSignpostPoleRight extends BlockHorizontal {
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setLightOpacity(0);
-        this.setRegistryName("road_signpost_pole_right");
+        this.setRegistryName(Reference.MOD_ID, "road_signpost_pole_right");
         this.setUnlocalizedName("road_signpost_pole_right");
     }
 

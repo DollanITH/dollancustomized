@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dollancustomized:road_signpost",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "dollancustomized:road_signpost",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dollancustomized:road_signpost",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dollancustomized:road_signpost",
+      "y": 0
+    }
+  }
+}

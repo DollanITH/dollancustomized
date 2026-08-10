@@ -1,6 +1,6 @@
 {
   "variants": {
-    "variant=normal": {
+    "variant=jacaranda": {
       "model": "dollancustomized:jacaranda_planks"
     }
   }

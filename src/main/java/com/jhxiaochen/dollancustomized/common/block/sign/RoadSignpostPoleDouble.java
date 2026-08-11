@@ -7,6 +7,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -16,10 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class RoadSignpostPoleDouble extends BlockHorizontal {
 
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(1/16.0, 0, 7/16.0, 3/16.0, 24/16.0, 9/16.0);
-
+    
     public RoadSignpostPoleDouble() {
         super(Material.ROCK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
@@ -34,7 +37,20 @@ public class RoadSignpostPoleDouble extends BlockHorizontal {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return AABB;
+        EnumFacing facing = state.getValue(FACING);
+        return RoadSignpostPoleDoubleBoundingBox.getDisplayBoundingBox(facing);
+    }
+
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+        EnumFacing facing = state.getValue(FACING);
+
+        // 添加所有碰撞箱
+        AxisAlignedBB[] collisionBoxes = RoadSignpostPoleDoubleBoundingBox.getAllCollisionBoxes(facing);
+        for (AxisAlignedBB box : collisionBoxes) {
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, box);
+        }
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -77,7 +93,7 @@ public class RoadSignpostPoleDouble extends BlockHorizontal {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-        state = state.withProperty(FACING, placer.getHorizontalFacing());
+        state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         return state;
     }
 }

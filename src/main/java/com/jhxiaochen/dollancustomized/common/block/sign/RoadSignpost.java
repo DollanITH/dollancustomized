@@ -26,11 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RoadSignpost extends BlockHorizontal {
 
-    private static final AxisAlignedBB AABB_NORTH = new AxisAlignedBB(0.5/16.0, 0, -8/16.0, 1.25/16.0, 24/16.0, 24/16.0);
-    private static final AxisAlignedBB AABB_SOUTH = new AxisAlignedBB(0.5/16.0, 0, -24/16.0, 1.25/16.0, 24/16.0, 8/16.0);
-    private static final AxisAlignedBB AABB_WEST = new AxisAlignedBB(-8/16.0, 0, 0.5/16.0, 24/16.0, 24/16.0, 1.25/16.0);
-    private static final AxisAlignedBB AABB_EAST = new AxisAlignedBB(-24/16.0, 0, 0.5/16.0, 8/16.0, 24/16.0, 1.25/16.0);
-
+    
     public RoadSignpost() {
         super(Material.IRON);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
@@ -46,12 +42,7 @@ public class RoadSignpost extends BlockHorizontal {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         EnumFacing facing = state.getValue(FACING);
-        switch (facing) {
-            case NORTH: return AABB_NORTH;
-            case SOUTH: return AABB_SOUTH;
-            case WEST: return AABB_WEST;
-            default: return AABB_EAST;
-        }
+        return RoadSignpostBoundingBox.getDisplayBoundingBox(facing);
     }
 
     @SideOnly(Side.CLIENT)
@@ -94,15 +85,28 @@ public class RoadSignpost extends BlockHorizontal {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-        state = state.withProperty(FACING, placer.getHorizontalFacing());
+        state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         return state;
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
+        if (side == EnumFacing.UP) {
+            return false;
+        }
+        return super.canPlaceBlockOnSide(world, pos, side);
+    }
+
+    @Override
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
     }
 
     @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class Registry {
         public static Block road_signpost = null;
         public static Block road_signpost_half = null;
-        public static Block road_signpost_on_the_pole = null;
         public static Block road_signpost_pole = null;
         public static Block road_signpost_pole_double = null;
         public static Block road_signpost_pole_horizontal = null;
@@ -113,7 +117,6 @@ public class RoadSignpost extends BlockHorizontal {
         public static void registerBlock(RegistryEvent.Register<Block> event) {
             event.getRegistry().register(road_signpost = new RoadSignpost());
             event.getRegistry().register(road_signpost_half = new RoadSignpostHalf());
-            event.getRegistry().register(road_signpost_on_the_pole = new RoadSignpostOnThePole());
             event.getRegistry().register(road_signpost_pole = new RoadSignpostPole());
             event.getRegistry().register(road_signpost_pole_double = new RoadSignpostPoleDouble());
             event.getRegistry().register(road_signpost_pole_horizontal = new RoadSignpostPoleHorizontal());
@@ -127,8 +130,6 @@ public class RoadSignpost extends BlockHorizontal {
                     .setRegistryName(road_signpost.getRegistryName()));
             event.getRegistry().register(new ItemBlock(road_signpost_half)
                     .setRegistryName(road_signpost_half.getRegistryName()));
-            event.getRegistry().register(new ItemBlock(road_signpost_on_the_pole)
-                    .setRegistryName(road_signpost_on_the_pole.getRegistryName()));
             event.getRegistry().register(new ItemBlock(road_signpost_pole)
                     .setRegistryName(road_signpost_pole.getRegistryName()));
             event.getRegistry().register(new ItemBlock(road_signpost_pole_double)
@@ -145,7 +146,6 @@ public class RoadSignpost extends BlockHorizontal {
         public static void registerModel(ModelRegistryEvent event){
             DollanBlocks.SimpleBlock(road_signpost);
             DollanBlocks.SimpleBlock(road_signpost_half);
-            DollanBlocks.SimpleBlock(road_signpost_on_the_pole);
             DollanBlocks.SimpleBlock(road_signpost_pole);
             DollanBlocks.SimpleBlock(road_signpost_pole_double);
             DollanBlocks.SimpleBlock(road_signpost_pole_horizontal);

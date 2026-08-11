@@ -18,8 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RoadSignpostPole extends BlockHorizontal {
 
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(1/16.0, 0, 7/16.0, 3/16.0, 16/16.0, 9/16.0);
-
+    
     public RoadSignpostPole() {
         super(Material.ROCK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
@@ -34,7 +33,8 @@ public class RoadSignpostPole extends BlockHorizontal {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return AABB;
+        EnumFacing facing = state.getValue(FACING);
+        return RoadSignpostPoleBoundingBox.getDisplayBoundingBox(facing);
     }
 
     @SideOnly(Side.CLIENT)
@@ -77,7 +77,7 @@ public class RoadSignpostPole extends BlockHorizontal {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-        state = state.withProperty(FACING, placer.getHorizontalFacing());
+        state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         return state;
     }
 }

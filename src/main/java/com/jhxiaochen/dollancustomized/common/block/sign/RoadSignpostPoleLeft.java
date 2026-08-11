@@ -7,6 +7,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -16,12 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class RoadSignpostPoleLeft extends BlockHorizontal {
 
-    private static final AxisAlignedBB AABB_NORTH_SOUTH = new AxisAlignedBB(1.25/16.0, 3.25/16.0, 0, 2.75/16.0, 4.75/16.0, 12/16.0);
-    private static final AxisAlignedBB AABB_WEST = new AxisAlignedBB(1.25/16.0, 3.25/16.0, 0, 2.75/16.0, 4.75/16.0, 12/16.0);
-    private static final AxisAlignedBB AABB_EAST = new AxisAlignedBB(1.25/16.0, 19.25/16.0, 0, 2.75/16.0, 20.75/16.0, 12/16.0);
-
+    
     public RoadSignpostPoleLeft() {
         super(Material.IRON);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
@@ -37,15 +38,19 @@ public class RoadSignpostPoleLeft extends BlockHorizontal {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         EnumFacing facing = state.getValue(FACING);
-        switch (facing) {
-            case NORTH:
-            case SOUTH:
-                return AABB_NORTH_SOUTH;
-            case WEST:
-                return AABB_WEST;
-            default:
-                return AABB_EAST;
+        return RoadSignpostPoleLeftBoundingBox.getDisplayBoundingBox(facing);
+    }
+
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+        EnumFacing facing = state.getValue(FACING);
+
+        // 添加所有碰撞箱
+        AxisAlignedBB[] collisionBoxes = RoadSignpostPoleLeftBoundingBox.getAllCollisionBoxes(facing);
+        for (AxisAlignedBB box : collisionBoxes) {
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, box);
         }
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -88,7 +93,7 @@ public class RoadSignpostPoleLeft extends BlockHorizontal {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-        state = state.withProperty(FACING, placer.getHorizontalFacing());
+        state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         return state;
     }
 }

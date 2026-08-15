@@ -6,7 +6,7 @@
     },
     "facing=south": {
       "model": "dollancustomized:road_signpost_pole_right",
-      "y": 270
+      "y": 90
     },
     "facing=west": {
       "model": "dollancustomized:road_signpost_pole_right",
@@ -14,7 +14,7 @@
     },
     "facing=north": {
       "model": "dollancustomized:road_signpost_pole_right",
-      "y": 90
+      "y": 270
     }
   }
 }

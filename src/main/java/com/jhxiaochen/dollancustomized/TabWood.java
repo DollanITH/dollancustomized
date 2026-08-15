@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized;
 
-import com.jhxiaochen.dollancustomized.common.block.wood.DollanLog;
+import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -14,7 +14,7 @@ public class TabWood extends CreativeTabs {
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(DollanLog.jacaranda_log);
+        return new ItemStack(WoodBlocks.jacaranda_log);
     }
 
 }

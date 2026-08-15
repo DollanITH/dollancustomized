@@ -1,26 +1,17 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaSapling;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
-import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
 
@@ -80,32 +71,13 @@ public class DollanSapling extends BlockBush implements IGrowable {
         i = i | state.getValue(STAGE) << 1;
         return i;
     }
-    public static Block jacaranda_sapling;
 
+    @Override
+    public Block setSoundType(SoundType sound) {
+        return super.setSoundType(sound);
+    }
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, STAGE);
     }
 
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(jacaranda_sapling = new JacarandaSapling()
-                    .setSoundType(DollanSounds.CHERRY_LEAVES)
-                    .setUnlocalizedName("jacaranda_sapling")
-                    .setRegistryName(Reference.MOD_ID, "jacaranda_sapling"));
-        }
-
-        @SubscribeEvent
-        public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(new ItemBlock(jacaranda_sapling).setRegistryName(jacaranda_sapling.getRegistryName()));
-        }
-
-        @SubscribeEvent
-        public static void registerModel(ModelRegistryEvent event) {
-            DollanBlocks.SimpleBlock(jacaranda_sapling);
-        }
-    }
 }

@@ -2,12 +2,18 @@ package com.jhxiaochen.dollancustomized.common.block.sign;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.common.block.sign.boundingbox.RoadSignpostPoleBoundingBox;
+import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -79,5 +85,19 @@ public class RoadSignpostPole extends BlockHorizontal {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
         state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         return state;
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        Block block = DollanBlocks.road_signpost_half;
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        if (heldItem.getItem() == Item.getItemFromBlock(block)) {
+            if (worldIn.getBlockState(pos).getBlock() == this) {
+                worldIn.setBlockState(pos, block.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RoadSignpostHalf.TYPE, RoadSignpostHalf.EnumSignpostType.ON_POLE),2);
+                worldIn.playSound(null, pos, SoundType.METAL.getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.common.block.rail.StationStopWallSign;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
+import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;

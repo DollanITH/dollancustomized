@@ -18,9 +18,6 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class JacarandaStandingSign extends JacarandaSign implements IAxis {
     public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
@@ -104,16 +101,4 @@ public class JacarandaStandingSign extends JacarandaSign implements IAxis {
         return new BlockStateContainer(this, new IProperty[] {ROTATION});
     }
 
-    public static Block jacaranda_standing_sign = null;
-
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(
-                    jacaranda_standing_sign = new JacarandaStandingSign());
-        }
-
-    }
 }

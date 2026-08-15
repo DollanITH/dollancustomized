@@ -2,7 +2,7 @@ package com.jhxiaochen.dollancustomized.world.gen;
 
 import com.google.common.collect.Lists;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanLog;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaLeaves;
+import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -151,7 +151,7 @@ public class JacarandaBigTree extends WorldGenAbstractTree
     {
         for (int i = 0; i < this.leafDistanceLimit; ++i)
         {
-            this.crosSection(pos.up(i), this.leafSize(i), JacarandaLeaves.jacaranda_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false)));
+            this.crosSection(pos.up(i), this.leafSize(i), WoodBlocks.jacaranda_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false)));
         }
     }
 
@@ -171,7 +171,7 @@ public class JacarandaBigTree extends WorldGenAbstractTree
             // 对于很短的分支（长度为2），使用jacaranda_wood
             if (i <= 2)
             {
-                this.setBlockAndNotifyAdequately(this.world, blockpos1, DollanLog.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, dollanlog$enumaxis));
+                this.setBlockAndNotifyAdequately(this.world, blockpos1, WoodBlocks.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, dollanlog$enumaxis));
             }
             else
             {
@@ -244,15 +244,15 @@ public class JacarandaBigTree extends WorldGenAbstractTree
     {
         BlockPos blockpos = this.basePos;
         BlockPos blockpos1 = this.basePos.up(this.height);
-        DollanLog block = (DollanLog) DollanLog.jacaranda_log;
+        DollanLog block = (DollanLog) WoodBlocks.jacaranda_log;
         this.limb(blockpos, blockpos1, block);
 
         if (this.trunkSize == 2)
         {
             // 使用jacaranda_wood来创建双层树干的连接部分
-            this.setBlockAndNotifyAdequately(this.world, blockpos.east(), DollanLog.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, DollanLog.EnumAxis.Y));
-            this.setBlockAndNotifyAdequately(this.world, blockpos.east().south(), DollanLog.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, DollanLog.EnumAxis.Y));
-            this.setBlockAndNotifyAdequately(this.world, blockpos.south(), DollanLog.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, DollanLog.EnumAxis.Y));
+            this.setBlockAndNotifyAdequately(this.world, blockpos.east(), WoodBlocks.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, DollanLog.EnumAxis.Y));
+            this.setBlockAndNotifyAdequately(this.world, blockpos.east().south(), WoodBlocks.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, DollanLog.EnumAxis.Y));
+            this.setBlockAndNotifyAdequately(this.world, blockpos.south(), WoodBlocks.jacaranda_wood.getDefaultState().withProperty(DollanLog.AXIS, DollanLog.EnumAxis.Y));
 
             // 使用limb方法生成双层树干的主干
             this.limb(blockpos.east(), blockpos1.east(), block);
@@ -270,7 +270,7 @@ public class JacarandaBigTree extends WorldGenAbstractTree
 
             if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY()))
             {
-                this.limb(blockpos, worldgenbigtree$foliagecoordinates, (DollanLog) DollanLog.jacaranda_log);
+                this.limb(blockpos, worldgenbigtree$foliagecoordinates, (DollanLog) WoodBlocks.jacaranda_log);
             }
         }
     }

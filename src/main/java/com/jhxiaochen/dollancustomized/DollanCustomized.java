@@ -3,17 +3,21 @@ package com.jhxiaochen.dollancustomized;
 import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.command.*;
+import com.jhxiaochen.dollancustomized.common.block.road.HeightLimitSign;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanItems;
+import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
+import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.particle.ParticleTextureRegister;
 import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
 import com.jhxiaochen.dollancustomized.tileentity.*;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -46,7 +50,6 @@ public class DollanCustomized {
     public static final CreativeTabs ROAD_Signs = new TabRoadSigns();
     public static final CreativeTabs Blocks = new TabBlocks();
     public static final CreativeTabs WOOD_TAB = new TabWood();
-
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -119,8 +122,25 @@ public class DollanCustomized {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
-        DollanBlocks.registerModels();
-        DollanItems.registerModels();
+        DollanBlocks.registerBlockAndModels();
+        DollanBlocks.RegStateMapper();
+        WoodBlocks.register();
+        DollanItems.registerModel();
+        HeightLimitSign.registerModel(event);
     }
 
+    @SubscribeEvent
+    public static void registerBlock(final RegistryEvent.Register<net.minecraft.block.Block> event) {
+        DollanBlocks.registerBlockAndModels();
+        WoodBlocks.register();
+        HeightLimitSign.registerBlock(event);
+        DollanBlocks.BLOCKS.forEach(block -> event.getRegistry().register(block));
+    }
+
+    @SubscribeEvent
+    public static void registerItems(final RegistryEvent.Register<Item> event) {
+        DollanItems.register();
+        HeightLimitSign.registerItem(event);
+        DollanItems.ITEMS.stream().forEach(item -> event.getRegistry().register(item));
+    }
 }

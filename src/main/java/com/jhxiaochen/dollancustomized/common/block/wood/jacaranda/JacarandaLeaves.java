@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
 
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanLeaves;
-import com.jhxiaochen.dollancustomized.common.block.wood.DollanSapling;
+import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import com.jhxiaochen.dollancustomized.particle.ParticleManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +11,7 @@ import java.util.Random;
 
     public class JacarandaLeaves extends DollanLeaves {
         public JacarandaLeaves() {
-            super(DollanSapling.jacaranda_sapling);
+            super(WoodBlocks.jacaranda_sapling);
         }
 
     @Override

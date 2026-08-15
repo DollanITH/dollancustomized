@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.common.block.sign;
+package com.jhxiaochen.dollancustomized.common.block.sign.boundingbox;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;

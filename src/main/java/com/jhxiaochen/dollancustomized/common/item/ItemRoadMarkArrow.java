@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;
 
-public class ItemArrow extends ItemMultiTexture {
-    public ItemArrow(Block block) {
+public class ItemRoadMarkArrow extends ItemMultiTexture {
+    public ItemRoadMarkArrow(Block block) {
         super(block, block, var1 -> ArrowNew.MarkType.byMetadata(var1.getMetadata()).getUnlocalizedName());
     }
 

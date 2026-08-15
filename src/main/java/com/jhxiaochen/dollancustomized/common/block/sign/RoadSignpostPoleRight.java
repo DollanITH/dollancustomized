@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.common.block.sign;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.common.block.sign.boundingbox.RoadSignpostPoleRightBoundingBox;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

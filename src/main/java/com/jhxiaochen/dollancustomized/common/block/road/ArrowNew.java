@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
+import com.jhxiaochen.dollancustomized.common.access.IArrow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockSlab;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class ArrowNew extends IronHorizontal {
+public class ArrowNew extends IronHorizontal implements IArrow {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyEnum<MarkType> TYPE = PropertyEnum.create("type", MarkType.class);
 
@@ -65,11 +66,6 @@ public class ArrowNew extends IronHorizontal {
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
         return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.CUTOUT;
     }
 
     @Override

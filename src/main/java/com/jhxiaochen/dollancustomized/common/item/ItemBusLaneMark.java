@@ -1,9 +1,9 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
-import com.jhxiaochen.dollancustomized.common.block.road.*;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
+import com.jhxiaochen.dollancustomized.common.access.IArrow;
+import com.jhxiaochen.dollancustomized.common.block.road.BusLaneMark;
+import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +16,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemBusLaneMark extends ItemMultiTexture {
+public class ItemBusLaneMark extends ItemMultiTexture implements IArrow {
     public ItemBusLaneMark() {
         super(DollanBlocks.bus_lane_mark, DollanBlocks.bus_lane_mark_slab, var1 -> BusLaneMark.EnumType.byMetadata(var1.getMetadata()).getUnlocalizedName());
     }
@@ -25,10 +25,6 @@ public class ItemBusLaneMark extends ItemMultiTexture {
     public String getUnlocalizedName(ItemStack stack)
     {
         return this.block.getUnlocalizedName();
-    }
-
-    public boolean SlabChange(IBlockState state){
-        return state.getBlock() instanceof BlockAsphaltSlab || state.getBlock() instanceof BlockSlab || state.getBlock() instanceof BlockAsphaltSlab1 || state.getBlock() instanceof BlockAsphaltSlabHorizontal || state.getBlock() instanceof BlockAsphaltSlabHorizontal2;
     }
 
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)

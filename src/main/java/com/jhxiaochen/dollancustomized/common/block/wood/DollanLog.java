@@ -1,11 +1,10 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -13,25 +12,17 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import javax.annotation.Nonnull;
 
 public class DollanLog extends BlockLog {
 
     public static final PropertyEnum<EnumAxis> AXIS = PropertyEnum.create("axis", EnumAxis.class);
-    public static Block jacaranda_log;
-    public static Block jacaranda_wood;
-    public static Block stripped_jacaranda_log;
-    public static Block stripped_jacaranda_wood;
 
     @Override
     protected BlockStateContainer createBlockState()
@@ -201,53 +192,11 @@ public class DollanLog extends BlockLog {
         return this.getStateFromMeta(meta).withProperty(AXIS, EnumAxis.fromFacingAxis(facing.getAxis()));
     }
 
-    
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-
-            // 注册去皮蓝花楹木原木
-            event.getRegistry().register(stripped_jacaranda_log = new DollanLog()
-                    .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("stripped_jacaranda_log")
-                    .setRegistryName(Reference.MOD_ID, "stripped_jacaranda_log"));
-
-            // 注册去皮蓝花楹木
-            event.getRegistry().register(stripped_jacaranda_wood = new DollanLog()
-                    .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("stripped_jacaranda_wood")
-                    .setRegistryName(Reference.MOD_ID, "stripped_jacaranda_wood"));
-
-            // 注册蓝花楹木原木
-            event.getRegistry().register(jacaranda_log = new DollanLog(stripped_jacaranda_log)
-                    .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("jacaranda_log")
-                    .setRegistryName(Reference.MOD_ID, "jacaranda_log"));
-
-            // 注册蓝花楹木
-            event.getRegistry().register(jacaranda_wood = new DollanLog(stripped_jacaranda_wood)
-                    .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("jacaranda_wood")
-                    .setRegistryName(Reference.MOD_ID, "jacaranda_wood"));
-
-        }
-
-        @SubscribeEvent
-        public static void registerItem(RegistryEvent.Register<Item> event){
-            event.getRegistry().register(new ItemBlock(jacaranda_log).setRegistryName(jacaranda_log.getRegistryName()));
-            event.getRegistry().register(new ItemBlock(jacaranda_wood).setRegistryName(jacaranda_wood.getRegistryName()));
-            event.getRegistry().register(new ItemBlock(stripped_jacaranda_log).setRegistryName(stripped_jacaranda_log.getRegistryName()));
-            event.getRegistry().register(new ItemBlock(stripped_jacaranda_wood).setRegistryName(stripped_jacaranda_wood.getRegistryName()));
-        }
-
-        @SubscribeEvent
-        public static void registerModel(ModelRegistryEvent event) {
-            DollanBlocks.SimpleBlock(jacaranda_log);
-            DollanBlocks.SimpleBlock(jacaranda_wood);
-            DollanBlocks.SimpleBlock(stripped_jacaranda_wood);
-            DollanBlocks.SimpleBlock(stripped_jacaranda_log);
-        }
+    @Nonnull
+    @Override
+    public Block setSoundType(@Nonnull SoundType sound) {
+        this.blockSoundType = sound;
+        return this;
     }
+
 }

@@ -1,26 +1,22 @@
-package com.jhxiaochen.dollancustomized.common.block.sign;
+package com.jhxiaochen.dollancustomized.common.block.sign.boundingbox;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class RoadSignpostBoundingBox {
+public class RoadSignpostPoleHorizontalBoundingBox {
 
-    // 西向碰撞箱（基础方向，所有其他方向基于此旋转）
-    protected static final AxisAlignedBB WEST_AABB_MAIN_POLE = new AxisAlignedBB(1.0/16.0, 0, 7.0/16.0, 3.0/16.0, 24.0/16.0, 9.0/16.0);
+    // 水平电线杆碰撞箱（西向基础）
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.25/16.0, 3.25/16.0, 0, 2.75/16.0, 4.75/16.0, 16.0/16.0);
     protected static final AxisAlignedBB WEST_ABB_SIGN_1 = new AxisAlignedBB(1.25/16.0, 3.25/16.0, 0, 2.75/16.0, 4.75/16.0, 16.0/16.0);
     protected static final AxisAlignedBB WEST_ABB_SIGN_2 = new AxisAlignedBB(1.25/16.0, 11.25/16.0, 0, 2.75/16.0, 12.75/16.0, 16.0/16.0);
     protected static final AxisAlignedBB WEST_ABB_SIGN_3 = new AxisAlignedBB(1.25/16.0, 19.25/16.0, 0, 2.75/16.0, 20.75/16.0, 16.0/16.0);
 
-    // 标志牌（小部件）
-    protected static final AxisAlignedBB WEST_ABB_SIGN_1_RIGHT = new AxisAlignedBB(1.0/16.0, 3.0/16.0, 10.0/16.0, 3.0/16.0, 5.0/16.0, 11.0/16.0);
-    protected static final AxisAlignedBB WEST_ABB_SIGN_1_LEFT = new AxisAlignedBB(1.0/16.0, 3.0/16.0, 5.0/16.0, 3.0/16.0, 5.0/16.0, 6.0/16.0);
-    protected static final AxisAlignedBB WEST_ABB_SIGN_2_RIGHT = new AxisAlignedBB(1.0/16.0, 11.0/16.0, 10.0/16.0, 3.0/16.0, 13.0/16.0, 11.0/16.0);
-    protected static final AxisAlignedBB WEST_ABB_SIGN_2_LEFT = new AxisAlignedBB(1.0/16.0, 11.0/16.0, 5.0/16.0, 3.0/16.0, 13.0/16.0, 6.0/16.0);
-    protected static final AxisAlignedBB WEST_ABB_SIGN_3_RIGHT = new AxisAlignedBB(1.0/16.0, 19.0/16.0, 10.0/16.0, 3.0/16.0, 21.0/16.0, 11.0/16.0);
-    protected static final AxisAlignedBB WEST_ABB_SIGN_3_LEFT = new AxisAlignedBB(1.0/16.0, 19.0/16.0, 5.0/16.0, 3.0/16.0, 21.0/16.0, 6.0/16.0);
+    // 不同高度的变体（根据模型文件中的多个元素）
+    protected static final AxisAlignedBB WEST_AABB_HIGH = new AxisAlignedBB(1.25/16.0, 11.25/16.0, 0, 2.75/16.0, 12.75/16.0, 16.0/16.0);
+    protected static final AxisAlignedBB WEST_AABB_HIGHER = new AxisAlignedBB(1.25/16.0, 19.25/16.0, 0, 2.75/16.0, 20.75/16.0, 16.0/16.0);
 
-    // 总体选择碰撞箱（包含所有部件的包容性边界）
-    protected static final AxisAlignedBB SELECTING_AABB = new AxisAlignedBB(0.5/16.0, 0, -0.5, 2.0/16.0, 24.0/16.0, 1.5);
+    // 总体选择碰撞箱
+    protected static final AxisAlignedBB SELECTING_AABB = new AxisAlignedBB(1.25/16.0, 3.25/16.0, 0, 2.75/16.0, 20.75/16.0, 16.0/16.0);
 
     private static AxisAlignedBB rotateAABB(AxisAlignedBB aabb, EnumFacing facing) {
         double minX = aabb.minX;
@@ -43,6 +39,21 @@ public class RoadSignpostBoundingBox {
             default: // WEST
                 return aabb;
         }
+    }
+
+    // 根据方向获取所有碰撞箱
+    public static AxisAlignedBB[] getAllCollisionBoxes(EnumFacing facing) {
+        AxisAlignedBB[] boxes = new AxisAlignedBB[3];
+
+        AxisAlignedBB rotatedMain = rotateAABB(WEST_ABB_SIGN_1, facing);
+        AxisAlignedBB rotatedHigh = rotateAABB(WEST_ABB_SIGN_2, facing);
+        AxisAlignedBB rotatedHigher = rotateAABB(WEST_ABB_SIGN_3, facing);
+
+        boxes[0] = rotatedMain;
+        boxes[1] = rotatedHigh;
+        boxes[2] = rotatedHigher;
+
+        return boxes;
     }
 
     // 根据方向获取显示边界框

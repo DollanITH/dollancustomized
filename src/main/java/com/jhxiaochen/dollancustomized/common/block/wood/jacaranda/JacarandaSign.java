@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaSign;
+import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.BlockContainer;
@@ -82,12 +82,12 @@ public class JacarandaSign extends BlockContainer {
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return ItemJacarandaSign.jacaranda_sign;
+        return DollanItems.jacaranda_sign;
     }
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(ItemJacarandaSign.jacaranda_sign);
+        return new ItemStack(DollanItems.jacaranda_sign);
     }
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)

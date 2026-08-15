@@ -21,9 +21,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class JacarandaWallSign extends JacarandaSign implements ICardinal {
 
@@ -130,17 +127,5 @@ public class JacarandaWallSign extends JacarandaSign implements ICardinal {
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {FACING});
-    }
-
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-        public static Block jacaranda_wall_sign = null;
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(
-                    jacaranda_wall_sign = new JacarandaWallSign());
-        }
-
     }
 }

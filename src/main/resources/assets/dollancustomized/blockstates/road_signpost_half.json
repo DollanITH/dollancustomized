@@ -1,20 +1,41 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:road_signpost_half"
+  },
   "variants": {
-    "facing=east": {
-      "model": "dollancustomized:road_signpost_half",
-      "y": 180
+    "inventory": [{}],
+    "facing": {
+      "north": {
+        "y": 270
+      },
+      "south": {
+        "y": 90
+      },
+      "west": {},
+      "east": {
+        "y": 180
+      }
     },
-    "facing=south": {
-      "model": "dollancustomized:road_signpost_half",
-      "y": 90
-    },
-    "facing=west": {
-      "model": "dollancustomized:road_signpost_half",
-      "y": 0
-    },
-    "facing=north": {
-      "model": "dollancustomized:road_signpost_half",
-      "y": 270
+    "type": {
+      "none": {
+      },
+      "on_pole_horizontal": {
+        "submodel": {
+          "pole": {
+            "model": "dollancustomized:road_signpost_pole_horizontal",
+            "uvlock": true
+          }
+        }
+      },
+      "on_pole": {
+        "submodel": {
+          "pole": {
+            "model": "dollancustomized:road_signpost_pole",
+            "uvlock": true
+          }
+        }
+      }
     }
   }
 }

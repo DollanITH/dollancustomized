@@ -1,37 +1,25 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaLeaves;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
-import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -91,6 +79,13 @@ public class DollanLeaves extends BlockLeaves {
         return null;
     }
 
+    @Nonnull
+    @Override
+    public Block setSoundType(@Nonnull SoundType sound) {
+        this.blockSoundType = sound;
+        return this;
+    }
+
     @Override
     public BlockPlanks.EnumType getWoodType(int meta) {
         return BlockPlanks.EnumType.OAK;
@@ -137,37 +132,4 @@ public class DollanLeaves extends BlockLeaves {
         return NonNullList.withSize(1, new ItemStack(this));
     }
 
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState()
-                .withProperty(CHECK_DECAY, false)
-                .withProperty(DECAYABLE, false);
-    }
-
-    public static Block jacaranda_leaves = null;
-
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(jacaranda_leaves = new JacarandaLeaves()
-                    .setSoundType(DollanSounds.CHERRY_LEAVES)
-                    .setUnlocalizedName("jacaranda_leaves")
-                    .setRegistryName(Reference.MOD_ID, "jacaranda_leaves"));
-        }
-
-        @SubscribeEvent
-        public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(new ItemBlock(jacaranda_leaves)
-                                                 .setRegistryName(jacaranda_leaves.getRegistryName()));
-        }
-
-        @SubscribeEvent
-        public static void registerModel(ModelRegistryEvent event){
-            DollanBlocks.SimpleBlock(jacaranda_leaves);
-            ModelLoader.setCustomStateMapper(jacaranda_leaves, (new StateMap.Builder()).ignore(JacarandaLeaves.CHECK_DECAY, JacarandaLeaves.DECAYABLE).build());
-        }
-    }
 }

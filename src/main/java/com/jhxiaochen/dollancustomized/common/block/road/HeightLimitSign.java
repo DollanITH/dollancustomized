@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
 import com.google.common.collect.Maps;
-import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -25,8 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Map;
 
@@ -113,63 +110,58 @@ public class HeightLimitSign extends BlockRoadSign {
         }
     }
 
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-        public static Block block;
-        public static Block block1;
-        public static Block block2;
+        public static Block height_limit_3;
+        public static Block height_limit_4;
+        public static Block height_limit_5;
 
-        @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(block = new HeightLimitSign("road_sign_height_limit_3"));
-            event.getRegistry().register(block1 = new HeightLimitSign("road_sign_height_limit_4"));
-            event.getRegistry().register(block2 = new HeightLimitSign("road_sign_height_limit_5"));
+            event.getRegistry().register(height_limit_3 = new HeightLimitSign("road_sign_height_limit_3"));
+            event.getRegistry().register(height_limit_4 = new HeightLimitSign("road_sign_height_limit_4"));
+            event.getRegistry().register(height_limit_5 = new HeightLimitSign("road_sign_height_limit_5"));
         }
 
-        @SubscribeEvent
         public static void registerItem(RegistryEvent.Register<Item> event) {
-            ItemMultiTexture item = new ItemMultiTexture(block, block, stack -> {
+            ItemMultiTexture item = new ItemMultiTexture(height_limit_3, height_limit_3, stack -> {
                 EnumHeight type = EnumHeight.byMetadata(stack.getMetadata());
                 return type.getUnlocalizedName();
             });
 
-            item.setRegistryName(block.getRegistryName());
-            ItemMultiTexture item1 = new ItemMultiTexture(block1, block1, stack -> {
+            item.setRegistryName(height_limit_3.getRegistryName());
+            ItemMultiTexture item1 = new ItemMultiTexture(height_limit_4, height_limit_4, stack -> {
                 EnumHeight type = EnumHeight.byMetadata(stack.getMetadata());
                 return type.getUnlocalizedName();
             });
 
-            item1.setRegistryName(block1.getRegistryName());
-            ItemMultiTexture item2 = new ItemMultiTexture(block2, block2, stack -> {
+            item1.setRegistryName(height_limit_4.getRegistryName());
+            ItemMultiTexture item2 = new ItemMultiTexture(height_limit_5, height_limit_5, stack -> {
                 EnumHeight type = EnumHeight.byMetadata(stack.getMetadata());
                 return type.getUnlocalizedName();
             });
 
-            item2.setRegistryName(block2.getRegistryName());
+            item2.setRegistryName(height_limit_5.getRegistryName());
             event.getRegistry().register(item);
             event.getRegistry().register(item1);
             event.getRegistry().register(item2);
         }
 
-        @SubscribeEvent
         public static void registerModel(ModelRegistryEvent event) {
-            Item item = Item.getItemFromBlock(block);
-            Item item1 = Item.getItemFromBlock(block1);
-            Item item2 = Item.getItemFromBlock(block2);
+            Item item = Item.getItemFromBlock(height_limit_3);
+            Item item1 = Item.getItemFromBlock(height_limit_4);
+            Item item2 = Item.getItemFromBlock(height_limit_5);
 
             for (EnumHeight height : EnumHeight.values()) {
                 int meta = height.getMetadata();
                 String suffix = height.getName();
                 ModelResourceLocation location = new ModelResourceLocation(
-                        block.getRegistryName() + "_" + suffix,
+                        height_limit_3.getRegistryName() + "_" + suffix,
                         "inventory"
                 );
                 ModelResourceLocation location1 = new ModelResourceLocation(
-                        block1.getRegistryName() + "_" + suffix,
+                        height_limit_4.getRegistryName() + "_" + suffix,
                         "inventory"
                 );
                 ModelResourceLocation location2 = new ModelResourceLocation(
-                        block2.getRegistryName() + "_" + suffix,
+                        height_limit_5.getRegistryName() + "_" + suffix,
                         "inventory"
                 );
 
@@ -179,11 +171,11 @@ public class HeightLimitSign extends BlockRoadSign {
                 ModelLoader.setCustomModelResourceLocation(item2, meta, location2);
             }
 
-            ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
+            ModelLoader.setCustomStateMapper(height_limit_3, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                     EnumHeight typeValue = state.getValue(TYPE);
-                    String registryName = block.getRegistryName().toString();
+                    String registryName = height_limit_3.getRegistryName().toString();
                     String modelName = registryName + "_" + typeValue.getName();
 
                     Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -193,11 +185,11 @@ public class HeightLimitSign extends BlockRoadSign {
                     return new ModelResourceLocation(modelName, variantString);
                 }
             });
-            ModelLoader.setCustomStateMapper(block1, new StateMapperBase() {
+            ModelLoader.setCustomStateMapper(height_limit_4, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                     EnumHeight typeValue = state.getValue(TYPE);
-                    String registryName = block1.getRegistryName().toString();
+                    String registryName = height_limit_4.getRegistryName().toString();
                     String modelName = registryName + "_" + typeValue.getName();
 
                     Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -207,11 +199,11 @@ public class HeightLimitSign extends BlockRoadSign {
                     return new ModelResourceLocation(modelName, variantString);
                 }
             });
-            ModelLoader.setCustomStateMapper(block2, new StateMapperBase() {
+            ModelLoader.setCustomStateMapper(height_limit_5, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                     EnumHeight typeValue = state.getValue(TYPE);
-                    String registryName = block2.getRegistryName().toString();
+                    String registryName = height_limit_5.getRegistryName().toString();
                     String modelName = registryName + "_" + typeValue.getName();
 
                     Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -222,5 +214,5 @@ public class HeightLimitSign extends BlockRoadSign {
                 }
             });
         }
-    }
+
 }

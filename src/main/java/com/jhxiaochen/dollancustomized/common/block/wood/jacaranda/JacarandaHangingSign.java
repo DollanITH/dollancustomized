@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.access.ICardinal;
-import com.jhxiaochen.dollancustomized.common.item.ItemJacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.init.DollanItems;
 import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
@@ -27,9 +27,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import suike.suikecherry.tileentity.HangingSignTileEntity;
 
 import javax.annotation.Nullable;
@@ -185,13 +182,13 @@ public class JacarandaHangingSign extends BlockContainer implements ICardinal {
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        if (GuiScreen.isCtrlKeyDown()) return new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign);
+        if (GuiScreen.isCtrlKeyDown()) return new ItemStack(DollanItems.jacaranda_hanging_sign);
 
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof TileEntityJacarandaHangingSign) {
             TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
             int hasItemSide = tile.getDisplayedSides();
-            ItemStack itemStack = new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign);
+            ItemStack itemStack = new ItemStack(DollanItems.jacaranda_hanging_sign);
 
             if (hasItemSide == 0 || hasItemSide == 1) {
                 itemStack = tile.getDisplayItem(hasItemSide);
@@ -200,12 +197,12 @@ public class JacarandaHangingSign extends BlockContainer implements ICardinal {
             }
             return itemStack;
         }
-        return new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign);
+        return new ItemStack(DollanItems.jacaranda_hanging_sign);
     }
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign));
+        drops.add(new ItemStack(DollanItems.jacaranda_hanging_sign));
         TileEntity tileentity = world.getTileEntity(pos);
         if (tileentity instanceof TileEntityJacarandaHangingSign) {
             TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
@@ -217,7 +214,7 @@ public class JacarandaHangingSign extends BlockContainer implements ICardinal {
     @Override
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
         if (!player.capabilities.isCreativeMode) {
-            Block.spawnAsEntity(world, pos, new ItemStack(ItemJacarandaHangingSign.Registry.jacaranda_hanging_sign));
+            Block.spawnAsEntity(world, pos, new ItemStack(DollanItems.jacaranda_hanging_sign));
         }
         if (te instanceof TileEntityJacarandaHangingSign) {
             TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) te;
@@ -316,18 +313,4 @@ public class JacarandaHangingSign extends BlockContainer implements ICardinal {
         return new TileEntityJacarandaHangingSign();
     }
 
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-        public static Block jacaranda_hanging_sign = null;
-        public static Block jacaranda_hanging_sign_wall = null;
-
-        @SubscribeEvent
-        public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(
-                    jacaranda_hanging_sign = new JacarandaHangingSign("jacaranda_hanging_sign"));
-            event.getRegistry().register(
-                    jacaranda_hanging_sign_wall = new JacarandaHangingSign("jacaranda_hanging_sign_wall"));
-        }
-
-    }
 }

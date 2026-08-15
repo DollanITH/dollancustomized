@@ -21,9 +21,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemDollanCraft extends ItemFood
 {
 
-    public ItemDollanCraft(int amount, float saturation, boolean isWolfFood)
+    public ItemDollanCraft(int amount, float saturation)
     {
-        super(amount, saturation, isWolfFood);
+        super(amount, saturation, false);
         this.setHasSubtypes(true);
     }
 

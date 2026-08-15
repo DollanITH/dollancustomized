@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized;
 
+import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import com.jhxiaochen.dollancustomized.init.DollanBlocks;
 
 public class TabLight extends CreativeTabs {
 

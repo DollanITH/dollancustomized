@@ -1,14 +1,14 @@
-package com.jhxiaochen.dollancustomized.common.block.sign;
+package com.jhxiaochen.dollancustomized.common.block.sign.boundingbox;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class RoadSignpostHalfBoundingBox {
-
+public class RoadSignpostPoleBoundingBox {
 
     // 总体选择碰撞箱
-    protected static final AxisAlignedBB SELECTING_AABB = new AxisAlignedBB(0.5/16.0, 0, 0/16.0, 1.25/16.0, 24.0/16.0, 16.0/16.0);
+    protected static final AxisAlignedBB SELECTING_AABB = new AxisAlignedBB(1.0/16.0, 0, 7.0/16.0, 3.0/16.0, 16.0/16.0, 9.0/16.0);
 
+    // 旋转计算辅助方法
     private static AxisAlignedBB rotateAABB(AxisAlignedBB aabb, EnumFacing facing) {
         double minX = aabb.minX;
         double minY = aabb.minY;

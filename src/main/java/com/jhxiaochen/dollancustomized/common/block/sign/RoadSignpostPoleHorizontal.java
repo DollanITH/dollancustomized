@@ -2,6 +2,9 @@ package com.jhxiaochen.dollancustomized.common.block.sign;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.common.block.sign.boundingbox.RoadSignpostPoleHorizontalBoundingBox;
+import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -9,6 +12,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -82,9 +88,32 @@ public class RoadSignpostPoleHorizontal extends BlockHorizontal {
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
+        return state.getValue(FACING).getHorizontalIndex();
     }
 
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        Block block1 = DollanBlocks.road_signpost;
+        Block block2 = DollanBlocks.road_signpost_half;
+        if (heldItem.getItem() == Item.getItemFromBlock(block1)) {
+            if (worldIn.getBlockState(pos).getBlock() == this) {
+                worldIn.setBlockState(pos, block1.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RoadSignpost.TYPE, RoadSignpost.EnumSignpostType.ON_POLE_HORIZONTAL),2);
+                worldIn.playSound(null, pos, SoundType.METAL.getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                return true;
+            }
+        }
+        if (heldItem.getItem() == Item.getItemFromBlock(block2)) {
+            if (worldIn.getBlockState(pos).getBlock() == this) {
+                worldIn.setBlockState(pos, block2.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(RoadSignpostHalf.TYPE, RoadSignpostHalf.EnumSignpostType.ON_POLE_HORIZONTAL),2);
+                worldIn.playSound(null, pos, SoundType.METAL.getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
     }
@@ -92,7 +121,15 @@ public class RoadSignpostPoleHorizontal extends BlockHorizontal {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-        state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-        return state;
+        IBlockState neighborBlock = world.getBlockState(pos.offset(facing.getOpposite()));
+
+        if (neighborBlock.getBlock() instanceof RoadSignpostPoleLeft ||
+            neighborBlock.getBlock() instanceof RoadSignpostPoleRight ||
+            neighborBlock.getBlock() instanceof RoadSignpost ||
+            neighborBlock.getBlock() == this) {
+            EnumFacing neighborFacing = neighborBlock.getValue(FACING);
+            return state.withProperty(FACING, neighborFacing);
+        }
+        return state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 }

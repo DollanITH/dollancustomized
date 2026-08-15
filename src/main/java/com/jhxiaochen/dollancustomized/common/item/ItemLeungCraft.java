@@ -23,9 +23,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemLeungCraft extends ItemFood
 {
 
-    public ItemLeungCraft(int amount, float saturation, boolean isWolfFood)
+    public ItemLeungCraft(int amount, float saturation)
     {
-        super(amount, saturation, isWolfFood);
+        super(amount, saturation, false);
     }
 
     @SideOnly(Side.CLIENT)

@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
@@ -9,7 +8,6 @@ import com.jhxiaochen.dollancustomized.init.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -23,11 +21,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
@@ -231,23 +224,4 @@ public class ItemJacarandaHangingSign extends Item {
         return 800;
     }
 
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Registry {
-        public static Item jacaranda_hanging_sign = null;
-
-        @SubscribeEvent
-        public static void registerItem(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(
-                    jacaranda_hanging_sign = new ItemJacarandaHangingSign(
-                        JacarandaHangingSign.Registry.jacaranda_hanging_sign,
-                        JacarandaHangingSign.Registry.jacaranda_hanging_sign_wall,
-                        JacarandaHangingSignAttached.Registry.jacaranda_hanging_sign_attached
-                    ));
-        }
-
-        @SubscribeEvent
-        public static void registerModels(ModelRegistryEvent event) {
-            ModelLoader.setCustomModelResourceLocation(jacaranda_hanging_sign, 0, new ModelResourceLocation(jacaranda_hanging_sign.getRegistryName(), "inventory"));
-        }
-    }
 }

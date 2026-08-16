@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "powered=false,facing=up": { "model": "dollancustomized:mangrove_button" },
+        "powered=false,facing=down": { "model": "dollancustomized:mangrove_button", "x": 180 },
+        "powered=false,facing=north": { "model": "dollancustomized:mangrove_button", "x": 180, "y": 180 },
+        "powered=false,facing=south": { "model": "dollancustomized:mangrove_button", "x": 180, "y": 90 },
+        "powered=false,facing=west": { "model": "dollancustomized:mangrove_button", "x": 180, "y": 270 },
+        "powered=false,facing=east": { "model": "dollancustomized:mangrove_button", "x": 180, "y": 90, "z": 90 },
+        "powered=true,facing=up": { "model": "dollancustomized:mangrove_button_pressed" },
+        "powered=true,facing=down": { "model": "dollancustomized:mangrove_button_pressed", "x": 180 },
+        "powered=true,facing=north": { "model": "dollancustomized:mangrove_button_pressed", "x": 180, "y": 180 },
+        "powered=true,facing=south": { "model": "dollancustomized:mangrove_button_pressed", "x": 180, "y": 90 },
+        "powered=true,facing=west": { "model": "dollancustomized:mangrove_button_pressed", "x": 180, "y": 270 },
+        "powered=true,facing=east": { "model": "dollancustomized:mangrove_button_pressed", "x": 180, "y": 90, "z": 90 }
+    }
+}

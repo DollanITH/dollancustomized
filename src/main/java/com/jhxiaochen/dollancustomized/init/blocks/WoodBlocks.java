@@ -18,12 +18,41 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WoodBlocks {
-
+    public static Block mangrove_planks = new DollanPlanks().setRegistryName(Reference.MOD_ID, "mangrove_planks").setUnlocalizedName("mangrove_planks");
+    // 红木方块
+    public static Block mangrove_button = new DollanButton(false)
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_button")
+            .setRegistryName(Reference.MOD_ID, "mangrove_button");
+    public static Block mangrove_door = new DollanDoor(null)
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_door")
+            .setRegistryName(Reference.MOD_ID, "mangrove_door");
+    public static Block mangrove_fence = new DollanFence()
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_fence")
+            .setRegistryName(Reference.MOD_ID, "mangrove_fence");
+    public static Block mangrove_pressure_plate = new DollanPressurePlate(true)
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_pressure_plate")
+            .setRegistryName(Reference.MOD_ID, "mangrove_pressure_plate");
+    public static Block mangrove_stairs = new DollanStairs(new DollanPlanks()
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setHardness(2.0F).setResistance(5.0F)
+            .setUnlocalizedName("mangrove_planks")
+            .setRegistryName(Reference.MOD_ID, "mangrove_planks"))
+            .setCreativeTab(DollanCustomized.WOOD_TAB)
+            .setUnlocalizedName("mangrove_stairs")
+            .setRegistryName(Reference.MOD_ID, "mangrove_stairs");
+    public static Block mangrove_trapdoor = new DollanTrapdoor()
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_trapdoor")
+            .setRegistryName(Reference.MOD_ID, "mangrove_trapdoor");
     public static Block jacaranda_button = new DollanButton(true)
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setUnlocalizedName("jacaranda_button")
             .setRegistryName(Reference.MOD_ID, "jacaranda_button");
-    public static Block jacaranda_door = new DollanDoor()
+    public static Block jacaranda_door = new DollanDoor(item_jacaranda_door)
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setUnlocalizedName("jacaranda_door")
             .setRegistryName(Reference.MOD_ID, "jacaranda_door");
@@ -87,6 +116,8 @@ public class WoodBlocks {
 
     public static Item jacaranda_slab_item = new ItemSlab(jacaranda_slab,jacaranda_slab,jacaranda_double_slab).setRegistryName(jacaranda_slab.getRegistryName( ));
     public static Item item_jacaranda_door = new ItemDoor(jacaranda_door).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(jacaranda_door.getRegistryName());
+    // 红木物品
+    public static Item item_mangrove_door = new ItemDoor(mangrove_door).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "mangrove_door").setRegistryName(mangrove_door.getRegistryName());
     public static Block jacaranda_wall_sign  = new JacarandaWallSign();
     public static Block jacaranda_standing_sign = new JacarandaStandingSign();
     public static JacarandaHangingSignAttached jacaranda_hanging_sign_attached = new JacarandaHangingSignAttached();
@@ -96,6 +127,7 @@ public class WoodBlocks {
     public static void register()
     {
         //block register
+        registerBlock(mangrove_planks);
         registerBlock(jacaranda_button);
         registerBlock(jacaranda_door, item_jacaranda_door);
         registerBlock(jacaranda_fence);
@@ -115,12 +147,22 @@ public class WoodBlocks {
         registerBlock(jacaranda_hanging_sign_attached, null);
         registerSlabBlock(jacaranda_slab, jacaranda_double_slab, jacaranda_slab_item);
 
+        // 红木方块注册
+        registerBlock(mangrove_button);
+        registerBlock(mangrove_door, item_mangrove_door);
+        registerBlock(mangrove_fence);
+        registerBlock(mangrove_pressure_plate);
+        registerBlock(mangrove_stairs);
+        registerBlock(mangrove_trapdoor);
+
         //model & state mapper register
         ModelLoader.setCustomModelResourceLocation(item_jacaranda_door, 0, new ModelResourceLocation(item_jacaranda_door.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(jacaranda_slab_item, 0, new ModelResourceLocation(jacaranda_slab_item.getRegistryName(), "inventory"));
         ModelLoader.setCustomStateMapper(jacaranda_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
         ModelLoader.setCustomStateMapper(jacaranda_fence_gate, new StateMap.Builder().ignore(DollanFenceGate.POWERED).build());
         ModelLoader.setCustomStateMapper(jacaranda_leaves, (new StateMap.Builder()).ignore(JacarandaLeaves.CHECK_DECAY, JacarandaLeaves.DECAYABLE).build());
+        ModelLoader.setCustomModelResourceLocation(item_mangrove_door, 0, new ModelResourceLocation(item_mangrove_door.getRegistryName(), "inventory"));
+        ModelLoader.setCustomStateMapper(mangrove_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
 
     }
 

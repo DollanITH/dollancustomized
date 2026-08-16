@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "dollancustomized:mangrove_fence_inventory" },
+            { "model": "dollancustomized:mangrove_fence_post" },
+            { "model": "dollancustomized:mangrove_fence_side", "y": 90 },
+            { "model": "dollancustomized:mangrove_fence_side", "y": 180 },
+            { "model": "dollancustomized:mangrove_fence_side", "y": 270 }
+        ]
+    }
+}

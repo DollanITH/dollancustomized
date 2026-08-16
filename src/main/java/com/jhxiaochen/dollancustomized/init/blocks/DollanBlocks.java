@@ -221,7 +221,7 @@ public class DollanBlocks {
     public static Block marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
 
     public static Block beautiful_marble = new BlockMarble("beautiful_marble");
-    public static Block calcite = new DollanBlock("calcite").setHardness(1.5F).setResistance(10.0F);
+    public static Block calcite = new Block(Material.ROCK).setUnlocalizedName("dollancustomized.calcite").setRegistryName(Reference.MOD_ID, "calcite").setHardness(1.5F).setResistance(10.0F);
     public static Block cracked_deepslate = new BlockCrackedDeepSlate("cracked_deepslate");
     public static Block deepslate = new BlockDeepSlate("deepslate");
     public static Block elder_prismarine = new BlockElderPrismarine("elder_prismarine");
@@ -231,7 +231,6 @@ public class DollanBlocks {
     public static Block graymud = new DollanBlock2("graymud");
     public static Block graystoneblock = new DollanBlock2("graystoneblock");
     public static Block limestone = new BlockLimeStone();
-    public static Block mangrove_planks = new DollanPlanks("mangrove_planks");
     public static Block metal = new DollanBlock4("metal");
     public static Block mud_bricks = new DollanBlock2("mud_bricks");
     //public static Block myalite = new BlockMyalite("myalite");
@@ -686,7 +685,7 @@ public class DollanBlocks {
         registerCustomModel(limestone, 0, BlockLimeStone.LimeStoneType.NORMAL.getName());
         registerCustomModel(limestone, 1, BlockLimeStone.LimeStoneType.BRICKS.getName());
         registerCustomModel(limestone, 2, BlockLimeStone.LimeStoneType.PAVEMENT.getName());
-        registerSimpleBlock(mangrove_planks);
+
         registerSimpleBlock(metal);
         registerSimpleBlock(mud_bricks);
         registerSimpleBlock(myalite);

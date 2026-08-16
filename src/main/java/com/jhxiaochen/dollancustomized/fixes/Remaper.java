@@ -11,6 +11,7 @@ import net.minecraftforge.common.util.CompoundDataFixer;
 import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -57,6 +58,13 @@ public class Remaper {
 
         itemRemappings.put("dollancraft", "dollan");
         blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
+        if(Loader.isModLoaded("depthupdate")) {
+            ignoredMappings.add("graystoneblock");
+            ignoredMappings.add("cracked_deepslate");
+            ignoredMappings.add("calcite");
+            ignoredMappings.add("polished_deepslate");
+            ignoredMappings.add("deepslate");
+        }
     }
 
     @SubscribeEvent

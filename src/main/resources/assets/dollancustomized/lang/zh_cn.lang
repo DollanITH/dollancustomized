@@ -476,7 +476,7 @@ tile.road_sign_height_limit_5.height_2.name=限高5.5m标志
 tile.road_sign_height_limit_custom.name=自定义限高标志
 
 # 建筑材料
-tile.calcite.name=粗糙新大理石
+tile.dollancustomized.calcite.name=粗糙新大理石
 tile.cherry_planks.name=樱花木板
 tile.cracked_deepslate.bricks.name=裂纹深板岩石砖
 tile.cracked_deepslate.tiles.name=裂纹深板岩瓦

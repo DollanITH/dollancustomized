@@ -1,6 +1,5 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
-import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
@@ -16,8 +15,15 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class DollanDoor extends BlockDoor {
+    private Item doorItem;
+
     public DollanDoor() {
+        this(null);
+    }
+
+    public DollanDoor(Item doorItem) {
         super(Material.WOOD);
+        this.doorItem = doorItem;
         this.setHardness(3.0F);
     }
 
@@ -30,12 +36,22 @@ public class DollanDoor extends BlockDoor {
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(WoodBlocks.item_jacaranda_door);
+        if (doorItem != null) {
+            return new ItemStack(doorItem);
+        }
+        return new ItemStack(Items.OAK_DOOR);
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : new ItemStack(WoodBlocks.item_jacaranda_door).getItem( );
+        if (state.getValue(HALF) == EnumDoorHalf.UPPER) {
+            return Items.AIR;
+        }
+        return doorItem != null ? doorItem : Items.OAK_DOOR;
     }
 
+    public DollanDoor setDoorItem(Item doorItem) {
+        this.doorItem = doorItem;
+        return this;
+    }
 }

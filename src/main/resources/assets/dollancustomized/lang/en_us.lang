@@ -478,7 +478,7 @@ tile.road_sign_height_limit_5.height_2.name=Height Limit 5.5m Sign
 tile.road_sign_height_limit_custom.name=Custom Height Limit Sign
 
 # Building Materials
-tile.calcite.name=Rough Calcite
+tile.dollancustomized.calcite.name=Rough Calcite
 tile.cherry_planks.name=Cherry Planks
 tile.cracked_deepslate.bricks.name=Cracked Deepslate Bricks
 tile.cracked_deepslate.tiles.name=Cracked Deepslate Tiles

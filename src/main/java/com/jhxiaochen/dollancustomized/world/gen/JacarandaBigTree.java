@@ -2,7 +2,7 @@ package com.jhxiaochen.dollancustomized.world.gen;
 
 import com.google.common.collect.Lists;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanLog;
-import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

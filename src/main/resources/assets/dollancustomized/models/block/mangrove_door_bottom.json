@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "dollancustomized:blocks/mangrove_door_bottom",
+        "top": "dollancustomized:blocks/mangrove_door_top"
+    }
+}

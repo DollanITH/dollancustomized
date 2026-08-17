@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.access.ICardinal;
-import com.jhxiaochen.dollancustomized.init.DollanSounds;
+import com.jhxiaochen.dollancustomized.registry.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;

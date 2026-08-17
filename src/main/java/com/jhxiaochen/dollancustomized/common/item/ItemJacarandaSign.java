@@ -2,7 +2,7 @@ package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
-import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;

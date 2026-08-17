@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.world.gen;
 
-import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 
 /**
  * 枫木普通树生成器

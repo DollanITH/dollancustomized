@@ -2,7 +2,7 @@ package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.common.access.IArrow;
 import com.jhxiaochen.dollancustomized.common.block.road.BusLaneMark;
-import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.DollanBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;

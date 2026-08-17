@@ -1,7 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -10,6 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public abstract class DollanSlab extends BlockSlab {
     public static final PropertyEnum<EnumType>
                                 VARIANT = PropertyEnum.create("variant", EnumType.class);
-
+    ItemSlab itemSlab;
     public DollanSlab() {
         super(Material.WOOD);
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
@@ -28,7 +28,7 @@ public abstract class DollanSlab extends BlockSlab {
 
     public IBlockState getStateFromMeta(int meta)
     {
-        IBlockState iBlockState = this.getDefaultState().withProperty(VARIANT, EnumType.JACARANDA);
+        IBlockState iBlockState = this.getDefaultState().withProperty(VARIANT, EnumType.NULL);
         return !isDouble() ? iBlockState.withProperty(HALF, (meta & 8) == 0 ? BlockSlab.EnumBlockHalf.BOTTOM : BlockSlab.EnumBlockHalf.TOP) : iBlockState;
     }
 
@@ -54,24 +54,24 @@ public abstract class DollanSlab extends BlockSlab {
 
     @Override
     public Comparable<?> getTypeForItem(ItemStack stack) {
-        return EnumType.JACARANDA;
+        return EnumType.NULL;
     }
 
     @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        return new ItemStack(WoodBlocks.jacaranda_slab_item);
+        return new ItemStack(itemSlab);
     }
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
         drops.add(new ItemStack(
-                WoodBlocks.jacaranda_slab_item,
+                itemSlab,
                 this.isDouble() ? 2 : 1
         ));
     }
 
     enum EnumType implements IStringSerializable {
-        JACARANDA("jacaranda");
+        NULL("null");
 
         private final String name;
 
@@ -96,5 +96,31 @@ public abstract class DollanSlab extends BlockSlab {
     @Override
     protected BlockStateContainer createBlockState() {
         return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, VARIANT, HALF);
+    }
+
+    public static class DollanDoubleSlab extends DollanSlab {
+        public DollanDoubleSlab(ItemSlab itemSlab) {
+            super();
+            this.itemSlab = itemSlab;
+        }
+
+        @Override
+        public boolean isDouble() {
+            return true;
+        }
+    }
+
+    public static class DollanHalfSlab extends DollanSlab {
+
+        public DollanHalfSlab(ItemSlab itemSlab) {
+            super();
+            this.itemSlab = itemSlab;
+            this.setLightOpacity(0);
+        }
+
+        @Override
+        public boolean isDouble() {
+            return false;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.metro;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.init.DollanItems;
+import com.jhxiaochen.dollancustomized.registry.DollanItems;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

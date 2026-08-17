@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized;
 
-import com.jhxiaochen.dollancustomized.init.DollanItems;
+import com.jhxiaochen.dollancustomized.registry.DollanItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 

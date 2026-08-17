@@ -2,7 +2,7 @@ package com.jhxiaochen.dollancustomized.common.block;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
-import com.jhxiaochen.dollancustomized.init.DollanSounds;
+import com.jhxiaochen.dollancustomized.registry.DollanSounds;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

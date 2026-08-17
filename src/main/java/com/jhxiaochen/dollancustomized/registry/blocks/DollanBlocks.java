@@ -1,5 +1,6 @@
-package com.jhxiaochen.dollancustomized.init.blocks;
+package com.jhxiaochen.dollancustomized.registry.blocks;
 
+import com.google.common.collect.Maps;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.block.*;
@@ -13,12 +14,15 @@ import com.jhxiaochen.dollancustomized.common.block.rail.base.TwoBlocksSignBase;
 import com.jhxiaochen.dollancustomized.common.block.road.*;
 import com.jhxiaochen.dollancustomized.common.block.sign.*;
 import com.jhxiaochen.dollancustomized.common.item.*;
-import com.jhxiaochen.dollancustomized.init.DollanItems;
+import com.jhxiaochen.dollancustomized.registry.DollanItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.*;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -28,6 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class DollanBlocks {
 
@@ -366,6 +371,9 @@ public class DollanBlocks {
     public static Block road_sign_height_limit_custom = new BlockHeightLimitSignCustom();
     public static Block station_name_board = new BlockStationNameBoard().setRegistryName("station_name_board").setUnlocalizedName("StationNameBoard");
     public static Block arrow_no_diaotou = new DisableArrowYellow("arrow_no_diaotou");
+    public static Block height_limit_3 = new HeightLimitSign("road_sign_height_limit_3");
+    public static Block height_limit_4 = new HeightLimitSign("road_sign_height_limit_4");
+    public static Block height_limit_5 = new HeightLimitSign("road_sign_height_limit_5");
 
     public static void registerBlockAndModels() {
         registerSimpleBlock(road_signpost);
@@ -388,10 +396,6 @@ public class DollanBlocks {
         registerSimpleBlock(deport_stop_sign);
         registerSimpleBlock(empty_railway_sign);
         registerSimpleBlock(station_stop_sign);
-        registerCustomModel(station_stop_wall_sign, 0, "station_stop_sign_wall_single");
-        registerCustomModel(station_stop_wall_sign, 1, "station_stop_sign_wall");
-        registerCustomModel(station_stop_wall_sign, 2, "station_stop_sign_wall_single_1");
-        registerCustomModel(station_stop_wall_sign, 3, "station_stop_sign_wall_1");
         registerSimpleBlock(arrow_confluence_left, new ItemRoadMarkArrow(arrow_confluence_left));
         registerSimpleBlock(arrow_confluence_right, new ItemRoadMarkArrow(arrow_confluence_right));
         registerSimpleBlock(station_stop_wall_sign, new ItemStationStopWallSign());
@@ -484,18 +488,12 @@ public class DollanBlocks {
         registerSimpleBlock(road_sign_go_right);
         registerSimpleBlock(road_sign_go_left);
         registerSimpleBlock(road_sign_go_both);
-        for (BusLaneMark.EnumType subtype : BusLaneMark.EnumType.values()) {
-            registerCustomModel(bus_lane_mark, subtype.getMetadata(), "bus_lane_" + subtype.getName());
-        }
         registerSimpleBlock(road_sign_do_not_enter);
         registerSimpleBlock(road_traffic_light);
         registerSimpleBlock(road_traffic_light_red);
         registerSimpleBlock(road_traffic_light_green);
         registerSimpleBlock(road_traffic_light_yellow);
         registerSimpleBlock(road_pedestrian_traffic_light);
-        registerCustomModel(metro_fence, BlockMetroFence.FenceType.METRO.getMetadata(), "metro_fence");
-        registerCustomModel(metro_fence, BlockMetroFence.FenceType.ROAD_CENTER.getMetadata(), "road_center_fence");
-        registerCustomModel(metro_fence, BlockMetroFence.FenceType.ROAD.getMetadata(), "road_fence");
         registerSimpleBlock(road_sign_post);
         registerSimpleBlock(double_yellow_line_diagonal);
         registerSimpleBlock(double_yellow_line_diagonal_slab);
@@ -555,47 +553,7 @@ public class DollanBlocks {
         registerSimpleBlock(white_flat_lamp);
         registerSimpleBlock(white_punctiform_lamp);
         registerSimpleBlock(white_banding_lamp);
-        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt");
-        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt");
-        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt");
-        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.WHITE.getMetadata(), "white_asphalt");
-        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.YELLOW.getMetadata(), "yellow_asphalt");
-        registerCustomModel(asphalt_slab, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt_slab");
-        registerCustomModel(asphalt_slab, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt_slab");
-        registerCustomModel(asphalt_slab, BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt_slab");
 
-        registerCustomModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(), "lamp_tran_0");
-        registerCustomModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(), "lamp_tran_1");
-        registerCustomModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(), "lamp_tran_2");
-        registerCustomModel(lamp_tran, EnumDyeColor.RED.getMetadata(), "lamp_tran_3");
-        registerCustomModel(lamp_tran, EnumDyeColor.GREEN.getMetadata(), "lamp_tran_4");
-        registerCustomModel(lamp_tran, EnumDyeColor.BLUE.getMetadata(), "lamp_tran_blue");
-        registerCustomModel(lamp_tran, EnumDyeColor.BROWN.getMetadata(), "lamp_tran_brown");
-        registerCustomModel(lamp_tran, EnumDyeColor.GRAY.getMetadata(), "lamp_tran_gray");
-        registerCustomModel(lamp_tran, EnumDyeColor.LIGHT_BLUE.getMetadata(), "lamp_tran_light_blue");
-        registerCustomModel(lamp_tran, EnumDyeColor.LIME.getMetadata(), "lamp_tran_lime");
-        registerCustomModel(lamp_tran, EnumDyeColor.SILVER.getMetadata(), "lamp_tran_silver");
-        registerCustomModel(lamp_tran, EnumDyeColor.MAGENTA.getMetadata(), "lamp_tran_magenta");
-        registerCustomModel(lamp_tran, EnumDyeColor.PURPLE.getMetadata(), "lamp_tran_purple");
-        registerCustomModel(lamp_tran, EnumDyeColor.ORANGE.getMetadata(), "lamp_tran_orange");
-        registerCustomModel(lamp_tran, EnumDyeColor.PINK.getMetadata(), "lamp_tran_pink");
-        registerCustomModel(lamp_tran, EnumDyeColor.CYAN.getMetadata(), "lamp_tran_cyan");
-        registerCustomModel(light, EnumDyeColor.WHITE.getMetadata(), "lamp_white");
-        registerCustomModel(light, EnumDyeColor.BLACK.getMetadata(), "lamp_black");
-        registerCustomModel(light, EnumDyeColor.YELLOW.getMetadata(), "lamp_yellow");
-        registerCustomModel(light, EnumDyeColor.RED.getMetadata(), "lamp_red");
-        registerCustomModel(light, EnumDyeColor.GREEN.getMetadata(), "lamp_green");
-        registerCustomModel(light, EnumDyeColor.BLUE.getMetadata(), "lamp_blue");
-        registerCustomModel(light, EnumDyeColor.BROWN.getMetadata(), "lamp_brown");
-        registerCustomModel(light, EnumDyeColor.GRAY.getMetadata(), "lamp_gray");
-        registerCustomModel(light, EnumDyeColor.LIGHT_BLUE.getMetadata(), "lamp_light_blue");
-        registerCustomModel(light, EnumDyeColor.LIME.getMetadata(), "lamp_lime");
-        registerCustomModel(light, EnumDyeColor.SILVER.getMetadata(), "lamp_silver");
-        registerCustomModel(light, EnumDyeColor.MAGENTA.getMetadata(), "lamp_magenta");
-        registerCustomModel(light, EnumDyeColor.PURPLE.getMetadata(), "lamp_purple");
-        registerCustomModel(light, EnumDyeColor.ORANGE.getMetadata(), "lamp_orange");
-        registerCustomModel(light, EnumDyeColor.PINK.getMetadata(), "lamp_pink");
-        registerCustomModel(light, EnumDyeColor.CYAN.getMetadata(), "lamp_cyan");
         registerSimpleBlock(asphalt_cyan_black_half_line);
         registerSimpleBlock(asphalt_cyan_black_half_line_slab);
         registerSimpleBlock(asphalt_cyan_black_half);
@@ -642,15 +600,6 @@ public class DollanBlocks {
         registerSimpleBlock(road_sign_can_right);
         registerSimpleBlock(road_sign_can_diaotou);
 
-        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(), "merge_line");
-        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(), "merge_line_yellow");
-        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(), "separate_line");
-        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(), "separate_line_yellow");
-
-        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(), "merge_line_slab");
-        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(), "merge_line_yellow_slab");
-        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(), "separate_line_slab");
-        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(), "separate_line_yellow_slab");
 
         registerSimpleBlock(arrow_straight_diaotou, new ItemRoadMarkArrow(arrow_straight_diaotou));
         registerSimpleBlock(platform_wall);
@@ -658,42 +607,21 @@ public class DollanBlocks {
 
         registerSimpleBlock(dollan_loop_line);
 
-
-        registerCustomModel(beautiful_marble, 0, "normal_marble");
-        registerCustomModel(beautiful_marble, 1, "bricks_marble");
-        registerCustomModel(beautiful_marble, 2, "cut_marble");
-        registerCustomModel(beautiful_marble, 3, "litcut_marble");
-        registerCustomModel(beautiful_marble, 4, "smooth_marble");
         if (!Loader.isModLoaded("depthsupdate")) {
-            registerCustomModel(cracked_deepslate, 0, "bricks_cracked_deepslate");
-            registerCustomModel(cracked_deepslate, 1, "tiles_cracked_deepslate");
             registerSimpleBlock(calcite);
             registerSimpleBlock(polished_deepslate);
             registerSimpleBlock(graystoneblock);
-            registerCustomModel(deepslate, 0, "deepslate");
-            registerCustomModel(deepslate, 1, "deepslate_bricks");
-            registerCustomModel(deepslate, 2, "deepslate_tiles");
         }
-        registerCustomModel(elder_prismarine, 0, BlockElderPrismarine.PrismarineType.NORMAL.getName());
-        registerCustomModel(elder_prismarine, 1, BlockElderPrismarine.PrismarineType.BRICKS.getName());
-        registerCustomModel(elder_prismarine, 2, BlockElderPrismarine.PrismarineType.SMOOTH.getName());
         registerSimpleBlock(floorblock);
         registerSimpleBlock(gray_porcelain_tile);
         registerSimpleBlock(gray_wall);
         registerSimpleBlock(graymud);
-
-        registerCustomModel(limestone, 0, BlockLimeStone.LimeStoneType.NORMAL.getName());
-        registerCustomModel(limestone, 1, BlockLimeStone.LimeStoneType.BRICKS.getName());
-        registerCustomModel(limestone, 2, BlockLimeStone.LimeStoneType.PAVEMENT.getName());
-
         registerSimpleBlock(metal);
         registerSimpleBlock(mud_bricks);
         registerSimpleBlock(myalite);
         registerSimpleBlock(myalite_crystal);
         registerSimpleBlock(myalite_pavement);
         registerSimpleBlock(packed_mud);
-        registerCustomModel(polished_blackstone, 0, BlockPolishedBlackStone.BlackStoneType.NORMAL.getName());
-        registerCustomModel(polished_blackstone, 1, BlockPolishedBlackStone.BlackStoneType.BRICKS.getName());
         registerSimpleBlock(polished_limestone);
         registerSimpleBlock(polished_marble);
         registerSimpleBlock(polished_myalite);
@@ -705,25 +633,7 @@ public class DollanBlocks {
         registerSimpleBlock(white_color_purple_block);
         registerSimpleBlock(elder_sea_lantern);
         registerSimpleBlock(modern_stone_tile);
-        registerCustomModel(froglight, 0, BlockFrogLight.FrogLightType.PURPLE.getName() + "_froglight");
-        registerCustomModel(froglight, 1, BlockFrogLight.FrogLightType.ORANGE.getName() + "_froglight");
-        registerCustomModel(froglight, 2, BlockFrogLight.FrogLightType.GREEN.getName() + "_froglight");
-        registerCustomModel(marble_tile, EnumDyeColor.WHITE.getMetadata(), "white_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.BLACK.getMetadata(), "black_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.YELLOW.getMetadata(), "yellow_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.RED.getMetadata(), "red_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.GREEN.getMetadata(), "green_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.BLUE.getMetadata(), "blue_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.BROWN.getMetadata(), "brown_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.GRAY.getMetadata(), "gray_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.LIGHT_BLUE.getMetadata(), "light_blue_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.LIME.getMetadata(), "lime_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.SILVER.getMetadata(), "silver_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.MAGENTA.getMetadata(), "magenta_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.PURPLE.getMetadata(), "purple_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.ORANGE.getMetadata(), "orange_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.PINK.getMetadata(), "pink_marble_tile");
-        registerCustomModel(marble_tile, EnumDyeColor.CYAN.getMetadata(), "cyan_marble_tile");
+
         registerSimpleBlock(overhead_lines);
         registerSimpleBlock(overhead_lines_slope);
         registerSimpleBlock(overhead_lines_slope_1);
@@ -763,15 +673,6 @@ public class DollanBlocks {
         registerSimpleBlock(steel_double);
         registerSimpleBlock(steel_double_support);
 
-        registerCustomModel(overhead_steel_diagonal, 1, "overhead_steel_diagonal");
-        registerCustomModel(overhead_steel_diagonal, 0, "overhead_steel_diagonal_1");
-        registerCustomModel(overhead_steel_diagonal, 2, "overhead_steel_diagonal_2");
-        registerCustomModel(overhead_steel_diagonal_support, 0, "overhead_steel_diagonal_support");
-        registerCustomModel(overhead_steel_diagonal_support, 1, "overhead_steel_diagonal_support_2");
-        registerCustomModel(overhead_steel_diagonal_support, 2, "overhead_steel_diagonal_support_4");
-        registerCustomModel(overhead_steel_diagonal_support_1, 0, "overhead_steel_diagonal_support_1");
-        registerCustomModel(overhead_steel_diagonal_support_1, 1, "overhead_steel_diagonal_support_3");
-        registerCustomModel(overhead_steel_diagonal_support_1, 2, "overhead_steel_diagonal_support_5");
 
         registerSimpleBlock(overhead_post);
         registerSimpleBlock(overhead_post_1);
@@ -837,6 +738,180 @@ public class DollanBlocks {
                 return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
             }
         }));
+
+        registerSimpleBlock(height_limit_3, new ItemMultiTexture(height_limit_3, height_limit_3, stack -> {
+            HeightLimitSign.EnumHeight type = HeightLimitSign.EnumHeight.byMetadata(stack.getMetadata());
+            return type.getUnlocalizedName();
+        }));
+        registerSimpleBlock(height_limit_4, new ItemMultiTexture(height_limit_4, height_limit_4, stack -> {
+            HeightLimitSign.EnumHeight type = HeightLimitSign.EnumHeight.byMetadata(stack.getMetadata());
+            return type.getUnlocalizedName();
+        }));
+        registerSimpleBlock(height_limit_5, new ItemMultiTexture(height_limit_5, height_limit_5, stack -> {
+            HeightLimitSign.EnumHeight type = HeightLimitSign.EnumHeight.byMetadata(stack.getMetadata());
+            return type.getUnlocalizedName();
+        }));
+    }
+
+    public static void registerSimpleBlock(Block block, Item itemBlock) {
+        boolean flag = itemBlock instanceof ItemBlock && !(itemBlock instanceof ItemMultiTexture);
+        BLOCKS.add(block);
+        if (itemBlock != null) {
+            if (itemBlock.getRegistryName() == null && block.getRegistryName() != null) {
+                itemBlock.setRegistryName(block.getRegistryName());
+            }
+        DollanItems.ITEMS.add(itemBlock);
+        }
+        if (flag || itemBlock instanceof ItemRoadMarkArrow) {
+            registerModel(block);
+        }
+
+    }
+
+    /**
+     * 注册所有自定义模型
+     * 将所有 registerCustomModel 调用整合到这个方法中
+     */
+    public static void registerAllCustomModels() {
+
+        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt");
+        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt");
+        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt");
+        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.WHITE.getMetadata(), "white_asphalt");
+        registerCustomModel(asphalt, BlockAsphalt.AsphaltType.YELLOW.getMetadata(), "yellow_asphalt");
+        registerCustomModel(asphalt_slab, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt_slab");
+        registerCustomModel(asphalt_slab, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt_slab");
+        registerCustomModel(asphalt_slab, BlockAsphalt.AsphaltType.RED.getMetadata(), "red_asphalt_slab");
+
+        // 道路标志和标记的模型注册
+        registerCustomModel(station_stop_wall_sign, 0, "station_stop_sign_wall_single");
+        registerCustomModel(station_stop_wall_sign, 1, "station_stop_sign_wall");
+        registerCustomModel(station_stop_wall_sign, 2, "station_stop_sign_wall_single_1");
+        registerCustomModel(station_stop_wall_sign, 3, "station_stop_sign_wall_1");
+
+        // 公交车道标记的模型注册
+        for (BusLaneMark.EnumType subtype : BusLaneMark.EnumType.values()) {
+            registerCustomModel(bus_lane_mark, subtype.getMetadata(), "bus_lane_" + subtype.getName());
+        }
+
+        // 地铁围栏的模型注册
+        registerCustomModel(metro_fence, BlockMetroFence.FenceType.METRO.getMetadata(), "metro_fence");
+        registerCustomModel(metro_fence, BlockMetroFence.FenceType.ROAD_CENTER.getMetadata(), "road_center_fence");
+        registerCustomModel(metro_fence, BlockMetroFence.FenceType.ROAD.getMetadata(), "road_fence");
+
+        // 沥青路面和路板的模型注册
+        
+        // 交通灯的模型注册
+        registerCustomModel(lamp_tran, EnumDyeColor.WHITE.getMetadata(), "lamp_tran_0");
+        registerCustomModel(lamp_tran, EnumDyeColor.BLACK.getMetadata(), "lamp_tran_1");
+        registerCustomModel(lamp_tran, EnumDyeColor.YELLOW.getMetadata(), "lamp_tran_2");
+        registerCustomModel(lamp_tran, EnumDyeColor.RED.getMetadata(), "lamp_tran_3");
+        registerCustomModel(lamp_tran, EnumDyeColor.GREEN.getMetadata(), "lamp_tran_4");
+        registerCustomModel(lamp_tran, EnumDyeColor.BLUE.getMetadata(), "lamp_tran_blue");
+        registerCustomModel(lamp_tran, EnumDyeColor.BROWN.getMetadata(), "lamp_tran_brown");
+        registerCustomModel(lamp_tran, EnumDyeColor.GRAY.getMetadata(), "lamp_tran_gray");
+        registerCustomModel(lamp_tran, EnumDyeColor.LIGHT_BLUE.getMetadata(), "lamp_tran_light_blue");
+        registerCustomModel(lamp_tran, EnumDyeColor.LIME.getMetadata(), "lamp_tran_lime");
+        registerCustomModel(lamp_tran, EnumDyeColor.SILVER.getMetadata(), "lamp_tran_silver");
+        registerCustomModel(lamp_tran, EnumDyeColor.MAGENTA.getMetadata(), "lamp_tran_magenta");
+        registerCustomModel(lamp_tran, EnumDyeColor.PURPLE.getMetadata(), "lamp_tran_purple");
+        registerCustomModel(lamp_tran, EnumDyeColor.ORANGE.getMetadata(), "lamp_tran_orange");
+        registerCustomModel(lamp_tran, EnumDyeColor.PINK.getMetadata(), "lamp_tran_pink");
+        registerCustomModel(lamp_tran, EnumDyeColor.CYAN.getMetadata(), "lamp_tran_cyan");
+
+        // 普通路灯的模型注册
+        registerCustomModel(light, EnumDyeColor.WHITE.getMetadata(), "lamp_white");
+        registerCustomModel(light, EnumDyeColor.BLACK.getMetadata(), "lamp_black");
+        registerCustomModel(light, EnumDyeColor.YELLOW.getMetadata(), "lamp_yellow");
+        registerCustomModel(light, EnumDyeColor.RED.getMetadata(), "lamp_red");
+        registerCustomModel(light, EnumDyeColor.GREEN.getMetadata(), "lamp_green");
+        registerCustomModel(light, EnumDyeColor.BLUE.getMetadata(), "lamp_blue");
+        registerCustomModel(light, EnumDyeColor.BROWN.getMetadata(), "lamp_brown");
+        registerCustomModel(light, EnumDyeColor.GRAY.getMetadata(), "lamp_gray");
+        registerCustomModel(light, EnumDyeColor.LIGHT_BLUE.getMetadata(), "lamp_light_blue");
+        registerCustomModel(light, EnumDyeColor.LIME.getMetadata(), "lamp_lime");
+        registerCustomModel(light, EnumDyeColor.SILVER.getMetadata(), "lamp_silver");
+        registerCustomModel(light, EnumDyeColor.MAGENTA.getMetadata(), "lamp_magenta");
+        registerCustomModel(light, EnumDyeColor.PURPLE.getMetadata(), "lamp_purple");
+        registerCustomModel(light, EnumDyeColor.ORANGE.getMetadata(), "lamp_orange");
+        registerCustomModel(light, EnumDyeColor.PINK.getMetadata(), "lamp_pink");
+        registerCustomModel(light, EnumDyeColor.CYAN.getMetadata(), "lamp_cyan");
+
+        // 地铁线路和路板合并/分离线的模型注册
+        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_WHITE.getMetadata(), "merge_line");
+        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.MERGE_YELLOW.getMetadata(), "merge_line_yellow");
+        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_WHITE.getMetadata(), "separate_line");
+        registerCustomModel(ms_lines, RoadMergeOtherLine.EnumVariant.SEPARATE_YELLOW.getMetadata(), "separate_line_yellow");
+        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_WHITE.getMetadata(), "merge_line_slab");
+        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.MERGE_YELLOW.getMetadata(), "merge_line_yellow_slab");
+        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_WHITE.getMetadata(), "separate_line_slab");
+        registerCustomModel(ms_lines_slab, RoadMergeOtherLineSlab.EnumVariant.SEPARATE_YELLOW.getMetadata(), "separate_line_yellow_slab");
+
+        // 大理石的模型注册
+        registerCustomModel(beautiful_marble, 0, "normal_marble");
+        registerCustomModel(beautiful_marble, 1, "bricks_marble");
+        registerCustomModel(beautiful_marble, 2, "cut_marble");
+        registerCustomModel(beautiful_marble, 3, "litcut_marble");
+        registerCustomModel(beautiful_marble, 4, "smooth_marble");
+
+        // 深板岩的模型注册（条件）
+        if (!Loader.isModLoaded("depthsupdate")) {
+            registerCustomModel(cracked_deepslate, 0, "bricks_cracked_deepslate");
+            registerCustomModel(cracked_deepslate, 1, "tiles_cracked_deepslate");
+            registerCustomModel(deepslate, 0, "deepslate");
+            registerCustomModel(deepslate, 1, "deepslate_bricks");
+            registerCustomModel(deepslate, 2, "deepslate_tiles");
+        }
+
+        // 老海晶石的模型注册
+        registerCustomModel(elder_prismarine, 0, BlockElderPrismarine.PrismarineType.NORMAL.getName());
+        registerCustomModel(elder_prismarine, 1, BlockElderPrismarine.PrismarineType.BRICKS.getName());
+        registerCustomModel(elder_prismarine, 2, BlockElderPrismarine.PrismarineType.SMOOTH.getName());
+
+        // 石灰石的模型注册
+        registerCustomModel(limestone, 0, BlockLimeStone.LimeStoneType.NORMAL.getName());
+        registerCustomModel(limestone, 1, BlockLimeStone.LimeStoneType.BRICKS.getName());
+        registerCustomModel(limestone, 2, BlockLimeStone.LimeStoneType.PAVEMENT.getName());
+
+        // 黑曜石的模型注册
+        registerCustomModel(polished_blackstone, 0, BlockPolishedBlackStone.BlackStoneType.NORMAL.getName());
+        registerCustomModel(polished_blackstone, 1, BlockPolishedBlackStone.BlackStoneType.BRICKS.getName());
+
+        // 矮光石的模型注册
+        registerCustomModel(froglight, 0, BlockFrogLight.FrogLightType.PURPLE.getName() + "_froglight");
+        registerCustomModel(froglight, 1, BlockFrogLight.FrogLightType.ORANGE.getName() + "_froglight");
+        registerCustomModel(froglight, 2, BlockFrogLight.FrogLightType.GREEN.getName() + "_froglight");
+
+        // 大理地砖的模型注册
+        registerCustomModel(marble_tile, EnumDyeColor.WHITE.getMetadata(), "white_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.BLACK.getMetadata(), "black_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.YELLOW.getMetadata(), "yellow_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.RED.getMetadata(), "red_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.GREEN.getMetadata(), "green_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.BLUE.getMetadata(), "blue_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.BROWN.getMetadata(), "brown_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.GRAY.getMetadata(), "gray_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.LIGHT_BLUE.getMetadata(), "light_blue_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.LIME.getMetadata(), "lime_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.SILVER.getMetadata(), "silver_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.MAGENTA.getMetadata(), "magenta_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.PURPLE.getMetadata(), "purple_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.ORANGE.getMetadata(), "orange_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.PINK.getMetadata(), "pink_marble_tile");
+        registerCustomModel(marble_tile, EnumDyeColor.CYAN.getMetadata(), "cyan_marble_tile");
+
+        // 架空线路支柱的模型注册
+        registerCustomModel(overhead_steel_diagonal, 1, "overhead_steel_diagonal");
+        registerCustomModel(overhead_steel_diagonal, 0, "overhead_steel_diagonal_1");
+        registerCustomModel(overhead_steel_diagonal, 2, "overhead_steel_diagonal_2");
+        registerCustomModel(overhead_steel_diagonal_support, 0, "overhead_steel_diagonal_support");
+        registerCustomModel(overhead_steel_diagonal_support, 1, "overhead_steel_diagonal_support_2");
+        registerCustomModel(overhead_steel_diagonal_support, 2, "overhead_steel_diagonal_support_4");
+        registerCustomModel(overhead_steel_diagonal_support_1, 0, "overhead_steel_diagonal_support_1");
+        registerCustomModel(overhead_steel_diagonal_support_1, 1, "overhead_steel_diagonal_support_3");
+        registerCustomModel(overhead_steel_diagonal_support_1, 2, "overhead_steel_diagonal_support_5");
+
+        // 停车线地砖的模型注册
         registerCustomModel(stop_line, 0, "stop_line");
         registerCustomModel(stop_line, 1, "road_stop_diagonal_1");
         registerCustomModel(stop_line, 2, "road_stop_diagonal");
@@ -851,10 +926,15 @@ public class DollanBlocks {
         registerCustomModel(stop_line_cross_slab, 1, "road_stop_diagonal_white_line_1_slab");
         registerCustomModel(stop_line_cross_slab, 2, "road_stop_diagonal_yellow_line_slab");
         registerCustomModel(stop_line_cross_slab, 3, "road_stop_diagonal_yellow_line_1_slab");
-    }
 
-    @SideOnly(Side.CLIENT)
-    public static void RegStateMapper() {
+        // 限高标志的模型注册
+        registerCustomModel(height_limit_3, 0, "road_sign_height_limit_3_subtype_1");
+        registerCustomModel(height_limit_3, 1, "road_sign_height_limit_3_subtype_2");
+        registerCustomModel(height_limit_4, 0, "road_sign_height_limit_4_subtype_1");
+        registerCustomModel(height_limit_4, 1, "road_sign_height_limit_4_subtype_2");
+        registerCustomModel(height_limit_5, 0, "road_sign_height_limit_5_subtype_1");
+        registerCustomModel(height_limit_5, 1, "road_sign_height_limit_5_subtype_2");
+
         ModelLoader.setCustomStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
         if (!Loader.isModLoaded("depthsupdate")) {
@@ -893,45 +973,53 @@ public class DollanBlocks {
         );
         ModelLoader.setCustomStateMapper(DollanBlocks.station_end_door, new StateMap.Builder().withName(BlockStationEndDoor.HALF).withSuffix("_station_end_door").ignore(BlockStationEndDoor.POWERED).build());
 
-    }
+        ModelLoader.setCustomStateMapper(DollanBlocks.height_limit_3, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
+                String registryName = height_limit_3.getRegistryName().getResourcePath();
+                String modelName = registryName + "_" + typeValue.getName();
 
-    public static void registerSimpleBlock(Block block, Item itemBlock) {
-        boolean flag = itemBlock instanceof ItemBlock && !(itemBlock instanceof ItemMultiTexture);
-        BLOCKS.add(block);
-        if (itemBlock != null) {
-            if (itemBlock.getRegistryName() == null && block.getRegistryName() != null) {
-                itemBlock.setRegistryName(block.getRegistryName());
-            }
-        DollanItems.ITEMS.add(itemBlock);
-        }
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-            if (flag || itemBlock instanceof ItemRoadMarkArrow) {
-                registerModel(block);
-            }
+                Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+                map.remove(HeightLimitSign.TYPE);
+                String variantString = this.getPropertyString(map);
 
-        }
+                return new ModelResourceLocation(Reference.MOD_ID + ":"+  modelName, variantString);
+            }
+        });
+        ModelLoader.setCustomStateMapper(DollanBlocks.height_limit_4, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
+                String registryName = height_limit_4.getRegistryName().getResourcePath();
+                String modelName = registryName + "_" + typeValue.getName();
+
+                Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+                map.remove(HeightLimitSign.TYPE);
+                String variantString = this.getPropertyString(map);
+
+                return new ModelResourceLocation(Reference.MOD_ID + ":"+  modelName, variantString);
+            }
+        });
+        ModelLoader.setCustomStateMapper(DollanBlocks.height_limit_5, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
+                String registryName = height_limit_5.getRegistryName().getResourcePath();
+                String modelName = registryName + "_" + typeValue.getName();
+
+                Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+                map.remove(HeightLimitSign.TYPE);
+                String variantString = this.getPropertyString(map);
+
+                return new ModelResourceLocation(Reference.MOD_ID + ":"+  modelName, variantString);
+            }
+        });
+
     }
 
     public static void registerSimpleBlock(Block block) {
         registerSimpleBlock(block, new ItemBlock(block).setRegistryName(block.getRegistryName()));
-    }
-
-    public static void SimpleBlock(Block block) {
-        BLOCKS.add(block);
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-            registerCustomModel(block, 0, block.getRegistryName().getResourcePath());
-        }
-    }
-
-    public static void BlockHasMeta(Block block, int meta, String name) {
-        if (meta == 0) {
-            registerSimpleBlock(block);
-        }
-        registerCustomModel(block, meta, name);
-    }
-
-    private static void BlockHasMeta(Block block) {
-        registerSimpleBlock(block);
     }
 
     @SideOnly(Side.CLIENT)

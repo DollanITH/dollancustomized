@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.init;
+package com.jhxiaochen.dollancustomized.registry;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;

@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.fixes;
 
 import com.google.common.collect.ImmutableList;
-import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.DollanBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

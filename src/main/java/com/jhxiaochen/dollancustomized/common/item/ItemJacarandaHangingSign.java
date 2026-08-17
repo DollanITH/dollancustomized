@@ -4,7 +4,7 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSignAttached;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
-import com.jhxiaochen.dollancustomized.init.DollanSounds;
+import com.jhxiaochen.dollancustomized.registry.DollanSounds;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

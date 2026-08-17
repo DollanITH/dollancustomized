@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
 
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanLeaves;
-import com.jhxiaochen.dollancustomized.init.blocks.WoodBlocks;
 import com.jhxiaochen.dollancustomized.particle.ParticleManager;
+import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -1,6 +1,6 @@
 {
     "variants": {
-        "half=bottom,variant=jacaranda": { "model": "dollancustomized:jacaranda_slab" },
-        "half=top,variant=jacaranda": { "model": "dollancustomized:jacaranda_slab_top" }
+        "half=bottom,variant=null": { "model": "dollancustomized:jacaranda_slab" },
+        "half=top,variant=null": { "model": "dollancustomized:jacaranda_slab_top" }
     }
 }

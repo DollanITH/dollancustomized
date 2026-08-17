@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.command;
 
-import com.jhxiaochen.dollancustomized.init.DollanDamageSource;
+import com.jhxiaochen.dollancustomized.registry.DollanDamageSource;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

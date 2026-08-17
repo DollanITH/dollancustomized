@@ -1,11 +1,15 @@
 package com.jhxiaochen.dollancustomized.client.model;
 
 import com.jhxiaochen.dollancustomized.common.block.road.IronHorizontal;
+import com.jhxiaochen.dollancustomized.registry.DollanItems;
+import com.jhxiaochen.dollancustomized.registry.blocks.DollanBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -16,8 +20,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
-public class ModelBakeHandler {
+@Mod.EventBusSubscriber(value = Side.CLIENT)
+public class ModelHandler {
 
     private static final Set<Class<?>> TARGET_BLOCK_CLASSES = new HashSet<>(Arrays.asList(
             IronHorizontal.class
@@ -54,4 +58,15 @@ public class ModelBakeHandler {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
+        DollanBlocks.registerBlockAndModels();
+        DollanBlocks.registerAllCustomModels();
+        WoodBlocks.register();
+        DollanItems.registerModel();
+        DollanItems.register();
+        System.out.println("DollanCustomized Registered Models!");
+    }
+
 }

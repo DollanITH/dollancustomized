@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
-import com.jhxiaochen.dollancustomized.init.blocks.DollanBlocks;
+import com.jhxiaochen.dollancustomized.registry.blocks.DollanBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.properties.PropertyEnum;

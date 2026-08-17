@@ -649,3 +649,12 @@ itemGroup.tabWood=DollanCustomized | Wood
 
 # Station Name Board
 tile.StationNameBoard.name=Station Name Board
+
+# Mangrove Wood
+tile.mangrove_button.name=Mangrove Button
+item.dollancustomized_mangrove_door.name=Mangrove Door
+tile.mangrove_fence.name=Mangrove Fence
+tile.mangrove_fence_gate.name=Mangrove Fence Gate
+tile.mangrove_pressure_plate.name=Mangrove Pressure Plate
+tile.mangrove_stairs.name=Mangrove Stairs
+tile.mangrove_trapdoor.name=Mangrove Trapdoor

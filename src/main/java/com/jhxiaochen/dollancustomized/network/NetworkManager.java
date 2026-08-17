@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.network;
 
 import com.jhxiaochen.dollancustomized.network.packet.*;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -124,9 +125,9 @@ public class NetworkManager {
     
     // NBT工具
     public static NBTTagCompound createSignNBT(TileEntity te) {
-        if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) {
-            com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign sign =
-                (com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) te;
+        if (te instanceof TileEntityDollanSign) {
+            TileEntityDollanSign sign =
+                (TileEntityDollanSign) te;
             NBTTagCompound nbt = new NBTTagCompound();
             sign.writeToNBT(nbt);
             return nbt;

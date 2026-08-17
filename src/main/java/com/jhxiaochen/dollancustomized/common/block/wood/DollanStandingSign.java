@@ -1,16 +1,15 @@
-package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
+package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.access.IAxis;
-import com.jhxiaochen.dollancustomized.registry.DollanSounds;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -19,15 +18,13 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class JacarandaStandingSign extends JacarandaSign implements IAxis {
+public class DollanStandingSign extends DollanSign implements IAxis {
     public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
-    public JacarandaStandingSign() {
+    public DollanStandingSign(Item item) {
         super();
-        this.setCreativeTab(DollanCustomized.WOOD_TAB);
-        this.setSoundType(DollanSounds.CHERRY_WOOD);
-        this.setUnlocalizedName("jacaranda_standing_sign").setHardness(1.0F);
-        this.setRegistryName(Reference.MOD_ID, "jacaranda_standing_sign");
+        this.item_sign = item;
+        this.setCreativeTab(DollanCustomized.WOOD_TAB).setHardness(1.0F);
     }
 
     @Override
@@ -38,7 +35,7 @@ public class JacarandaStandingSign extends JacarandaSign implements IAxis {
         int slot = this.getSlotFromFacings(state.getValue(ROTATION), clickFacing, player);
         if (slot == -1) return false;
 
-        TileEntityJacarandaSign tile = (TileEntityJacarandaSign) world.getTileEntity(clickPos);
+        TileEntityDollanSign tile = (TileEntityDollanSign) world.getTileEntity(clickPos);
 
         // 获取手持物
         ItemStack heldItem = player.getHeldItem(hand);

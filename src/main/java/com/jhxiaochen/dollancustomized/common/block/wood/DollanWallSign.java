@@ -1,10 +1,8 @@
-package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
+package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.access.ICardinal;
-import com.jhxiaochen.dollancustomized.registry.DollanSounds;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.properties.IProperty;
@@ -12,6 +10,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -22,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class JacarandaWallSign extends JacarandaSign implements ICardinal {
+public class DollanWallSign extends DollanSign implements ICardinal {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos clickPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing clickFacing, float hitX, float hitY, float hitZ) {
@@ -35,7 +34,7 @@ public class JacarandaWallSign extends JacarandaSign implements ICardinal {
                 world, clickPos, player, true);
         }
 
-        TileEntityJacarandaSign tile = (TileEntityJacarandaSign) world.getTileEntity(clickPos);
+        TileEntityDollanSign tile = (TileEntityDollanSign) world.getTileEntity(clickPos);
 
         // 尝试打蜡
         if (tile.tryWaxed(0, heldItem)) {
@@ -53,13 +52,11 @@ public class JacarandaWallSign extends JacarandaSign implements ICardinal {
         return tile.editText(0, player);
     }
 
-    public JacarandaWallSign() {
+    public DollanWallSign(Item item) {
         super();
-        this.setCreativeTab(DollanCustomized.WOOD_TAB);
-        this.setSoundType(DollanSounds.CHERRY_WOOD);
-        this.setUnlocalizedName("jacaranda_wall_sign").setHardness(1.0F);
+        this.item_sign = item;
+        this.setCreativeTab(DollanCustomized.WOOD_TAB).setHardness(1.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setRegistryName(Reference.MOD_ID, "jacaranda_wall_sign");
     }
     public static final   PropertyDirection FACING         = BlockHorizontal.FACING;
     protected static final AxisAlignedBB

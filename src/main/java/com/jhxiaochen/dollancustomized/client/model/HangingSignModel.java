@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class JacarandaHangingSignModel extends ModelBase {
+public class HangingSignModel extends ModelBase {
     public final ModelRenderer root;
     public final ModelRenderer plank;
     public final ModelRenderer vChains;
@@ -40,7 +40,7 @@ public class JacarandaHangingSignModel extends ModelBase {
     private boolean showVChains = false;
     private boolean showNormalChains = true;
 
-    public JacarandaHangingSignModel() {
+    public HangingSignModel() {
         super();
 
         // 创建根模型 - 1.12.2需要纹理尺寸参数

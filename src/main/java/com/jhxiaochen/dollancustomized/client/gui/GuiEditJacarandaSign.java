@@ -1,10 +1,10 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSignAttached;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaStandingSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaWallSign;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSignAttached;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanStandingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanWallSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -26,9 +26,9 @@ import java.util.Deque;
 public class GuiEditJacarandaSign extends GuiScreen {
     private              int                     updateCounter;
     private              int                     editingSlot;
-    private              String                  titleText;
-    private final        TileEntityJacarandaSign tile;
-    private              int                     editLine = 0;
+    private       String               titleText;
+    private final TileEntityDollanSign tile;
+    private       int                  editLine = 0;
     private              Deque<String[]>         undoStack = new ArrayDeque<>();
     private              long                    lastCheckTime = 0;
     private static final double                  MAX_DISTANCE_SQ = 5.0 * 5.0;
@@ -41,7 +41,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
     private static final int BTN_DONE = 2;
     private static final int BTN_CANCEL = 3;
 
-    public GuiEditJacarandaSign(TileEntityJacarandaSign tile) {
+    public GuiEditJacarandaSign(TileEntityDollanSign tile) {
         this.tile = tile;
         this.needSave = true;
         this.editingSlot = tile.getEditedSlot();
@@ -85,11 +85,11 @@ public class GuiEditJacarandaSign extends GuiScreen {
 
         Block block = tile.getBlockType();
 
-        if (block instanceof JacarandaStandingSign || block instanceof JacarandaHangingSignAttached) {
+        if (block instanceof DollanStandingSign || block instanceof DollanHangingSignAttached) {
             float f1 = (float)(tile.getBlockMetadata() * 360) / 16.0F;
             GlStateManager.rotate(f1, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
-        } else if (block instanceof JacarandaWallSign) {
+        } else if (block instanceof DollanWallSign) {
             int i = tile.getBlockMetadata();
             float f2 = 0.0F;
 
@@ -103,7 +103,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
 
             GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
             GlStateManager.translate(0.0F, -1.0625F, 0.0F);
-        } else if (block instanceof JacarandaHangingSign) {
+        } else if (block instanceof DollanHangingSign) {
             int meta = tile.getBlockMetadata();
             float rotation = 180.0F;
 

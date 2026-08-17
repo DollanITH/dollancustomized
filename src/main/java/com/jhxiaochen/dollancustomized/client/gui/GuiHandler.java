@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -28,9 +28,9 @@ public class GuiHandler implements IGuiHandler {
         if (ID == HEIGHT_LIMIT_CUSTOM_GUI_ID && te instanceof TileEntityHeightLimitSignCustom) {
             return new GuiHeightLimitSignCustom((TileEntityHeightLimitSignCustom) te);
         }
-        if (ID == JACARANDA_SIGN_EDIT_GUI_ID && te instanceof TileEntityJacarandaSign) {
+        if (ID == JACARANDA_SIGN_EDIT_GUI_ID && te instanceof TileEntityDollanSign) {
             // 从TileEntity获取当前编辑的槽位
-            TileEntityJacarandaSign sign = (TileEntityJacarandaSign) te;
+            TileEntityDollanSign sign = (TileEntityDollanSign) te;
             return new GuiEditJacarandaSign(sign);
         }
         return null;

@@ -14,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class TileEntityJacarandaSign extends TileEntitySign {
+public class TileEntityDollanSign extends TileEntitySign {
 
     // 背面文本
     public final ITextComponent[] backText = new ITextComponent[] {

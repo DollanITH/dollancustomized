@@ -1,9 +1,9 @@
-package com.jhxiaochen.dollancustomized.client.renderer.sign;
+package com.jhxiaochen.dollancustomized.client.renderer.sign.mangrove;
 
-import com.jhxiaochen.dollancustomized.client.model.JacarandaHangingSignModel;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSignAttached;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.client.model.HangingSignModel;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSignAttached;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -28,13 +28,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<TileEntityJacarandaHangingSign> {
+public class MangroveHangingSignRenderer extends TileEntitySpecialRenderer<TileEntityDollanHangingSign> {
 
     // 蓝花楹木告示牌材质
-    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/jacaranda_hanging_sign.png");
+    private static final ResourceLocation
+            SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/mangrove_hanging_sign.png");
 
     // 模型实例
-    private JacarandaHangingSignModel jacarandaSignModel;
+    private HangingSignModel mangroveSignModel;
 
     // 物品渲染器
     private ItemRenderer itemRenderer;
@@ -49,8 +50,8 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
     private static final float MODEL_RENDER_SCALE = 1.0F;
     private static final float TEXT_SCALE = 0.009216667F;
     @Override
-    public void render(TileEntityJacarandaHangingSign tileEntity, double x, double y, double z, float partialTicks, int destroyStage,
-            float alpha) {
+    public void render(TileEntityDollanHangingSign tileEntity, double x, double y, double z, float partialTicks, int destroyStage,
+                       float alpha) {
         if (tileEntity == null) return;
         World world = tileEntity.getWorld();
         BlockPos blockpos = tileEntity.getPos();
@@ -58,8 +59,8 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
         IBlockState blockState = world.getBlockState(blockpos);
 
         Block block = tileEntity.getBlockType();
-        boolean isSideModel = block instanceof JacarandaHangingSign;
-        boolean isSideModelWall = block instanceof JacarandaHangingSign && ((JacarandaHangingSign) block).isInWall();
+        boolean isSideModel = block instanceof DollanHangingSign;
+        boolean isSideModelWall = block instanceof DollanHangingSign && ((DollanHangingSign) block).isInWall();
 
         GlStateManager.pushMatrix();
 
@@ -74,7 +75,7 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
             GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
         } else {
             // 顶部悬挂式使用 16 方向
-            int meta = blockState.getValue(JacarandaHangingSignAttached.ROTATION);
+            int meta = blockState.getValue(DollanHangingSignAttached.ROTATION);
             rotation = (float) (meta * 360) / 16;
             GlStateManager.translate((float) x + 0.5F, (float) y + 0.9375F, (float) z + 0.5F);
             GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
@@ -83,8 +84,8 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
         GlStateManager.translate(0.0F, -0.3125F, 0.0F);
 
         // 初始化模型
-        if (jacarandaSignModel == null) {
-            jacarandaSignModel = new JacarandaHangingSignModel();
+        if (mangroveSignModel == null) {
+            mangroveSignModel = new HangingSignModel();
         }
 
         // 更新可见部分（1.12.2中没有BlockState，直接判断metadata）
@@ -95,10 +96,10 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
             // 假设偶数是attached=true，奇数是attached=false，或者根据具体需求调整
             attached = !(tileEntity.getBlockMetadata() == 0 || tileEntity.getBlockMetadata() == 4 || tileEntity.getBlockMetadata() == 8 || tileEntity.getBlockMetadata() == 12);
         }
-        if (isSideModelWall || block instanceof JacarandaHangingSignAttached) {
-            jacarandaSignModel.evaluateVisibleParts(isSideModel, attached);
+        if (isSideModelWall || block instanceof DollanHangingSignAttached) {
+            mangroveSignModel.evaluateVisibleParts(isSideModel, attached);
         } else {
-            jacarandaSignModel.evaluateVisibleParts(false, false);
+            mangroveSignModel.evaluateVisibleParts(false, false);
         }
 
         // 设置模型缩放
@@ -113,7 +114,7 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
             GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
             GlStateManager.matrixMode(5888);
         } else {
-            this.bindTexture(JACARANDA_SIGN_TEXTURE);
+            this.bindTexture(SIGN_TEXTURE);
         }
 
         // 渲染告示牌模型
@@ -121,7 +122,7 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
         GlStateManager.pushMatrix();
         GlStateManager.disableCull();
         // 直接调用render方法，模型内部会根据visible属性决定显示什么
-        jacarandaSignModel.render();
+        mangroveSignModel.render();
 
         GlStateManager.popMatrix();
 
@@ -141,7 +142,7 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
         GlStateManager.popMatrix();
     }
 
-    private void renderSignText(TileEntityJacarandaHangingSign tileEntity, int destroyStage) {
+    private void renderSignText(TileEntityDollanHangingSign tileEntity, int destroyStage) {
         FontRenderer fontrenderer = this.getFontRenderer();
         int textSides = tileEntity.getTextSides();
 
@@ -231,7 +232,7 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
         return split.isEmpty() ? "" : split.get(0).getFormattedText();
     }
 
-    private void renderSignItem(TileEntityJacarandaHangingSign tileEntity, boolean isSideModel, float rotation) {
+    private void renderSignItem(TileEntityDollanHangingSign tileEntity, boolean isSideModel, float rotation) {
         if (tileEntity == null) return;
 
         // 初始化 ItemRenderer
@@ -263,7 +264,7 @@ public class JacarandaHangingSignRenderer extends TileEntitySpecialRenderer<Tile
         }
     }
 
-    private float[] getItemRenderPosition(TileEntityJacarandaHangingSign tileEntity, int slot, boolean isSideModel, float rotation) {
+    private float[] getItemRenderPosition(TileEntityDollanHangingSign tileEntity, int slot, boolean isSideModel, float rotation) {
         // 根据槽位获取渲染位置
         float x = 0, y = 0, z = 0;
 

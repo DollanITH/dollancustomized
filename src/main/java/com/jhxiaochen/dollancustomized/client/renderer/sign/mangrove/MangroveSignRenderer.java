@@ -1,9 +1,9 @@
-package com.jhxiaochen.dollancustomized.client.renderer.sign;
+package com.jhxiaochen.dollancustomized.client.renderer.sign.mangrove;
 
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaStandingSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaWallSign;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanStandingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanWallSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJacarandaSign> {
+public class MangroveSignRenderer extends TileEntitySpecialRenderer<TileEntityDollanSign> {
 
     private static final double FIXED_Y = 0.8343;
     private static final double IN_WALL_FIXED_Y = 0.5218;
@@ -33,14 +33,14 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
     private static final int[] TOTAL_SLOTS = new int[]{0, 1};
 
     // 蓝花楹木告示牌纹理
-    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/jacaranda_sign.png");
+    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/mangrove_sign.png");
     private static final float SIGN_SCALE = 0.6666667F;
 
     // 模型实例
     private static ModelSign signModel;
 
     @Override
-    public void render(TileEntityJacarandaSign tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileEntityDollanSign tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (tile == null) return;
 
         // 获取世界和方块状态
@@ -52,7 +52,7 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
         Block block = blockState.getBlock();
 
         // 检查是否是我们的告示牌
-        if (!(block instanceof JacarandaSign) && !(block instanceof JacarandaStandingSign)) {
+        if (!(block instanceof DollanSign) && !(block instanceof DollanStandingSign)) {
             return;
         }
 
@@ -63,18 +63,18 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
 
         GlStateManager.pushMatrix();
         int textSides = tile.getTextSides();
-        if (block instanceof JacarandaStandingSign) {
+        if (block instanceof DollanStandingSign) {
             // 竖直告示牌
 
             GlStateManager.translate((float) x + 0.5F,(float) y + 0.5F,(float) z + 0.5F);
             // 根据方块朝向旋转
-            int meta = blockState.getValue(JacarandaStandingSign.ROTATION);
+            int meta = blockState.getValue(DollanStandingSign.ROTATION);
             float rotation = (float)(meta * 360) / 16.0F;
             GlStateManager.rotate(-rotation, 0.0F, 1.0F, 0.0F);
 
             // 渲染告示牌板子
             this.getSignModel().signStick.showModel = true;
-        } else if (block instanceof JacarandaWallSign) {
+        } else if (block instanceof DollanWallSign) {
 
             // 墙上告示牌
             int meta = block.getMetaFromState(blockState);
@@ -150,7 +150,7 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
     }
 
     // 渲染（统一 slot 0 和 slot 1 的逻辑）
-    private void renderText(TileEntityJacarandaSign tile, boolean isSlot1, boolean isHighlighted) {
+    private void renderText(TileEntityDollanSign tile, boolean isSlot1, boolean isHighlighted) {
         ITextComponent[] lines = tile.getTextForSlot(isSlot1 ? 1 : 0);
 
         GlStateManager.pushMatrix();
@@ -162,7 +162,7 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
 
     }
 
-    private void applyTransforms(TileEntityJacarandaSign tile, boolean isSlot1) {
+    private void applyTransforms(TileEntityDollanSign tile, boolean isSlot1) {
         // slot 1 需要额外的 180° 旋转，y 1.0F
         if (isSlot1) {
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
@@ -215,7 +215,7 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
         GlStateManager.color(0.0F, 0.0F, 0.0F, 1.0F);
     }
 
-    private void renderGlowEffect(TileEntityJacarandaSign tile) {
+    private void renderGlowEffect(TileEntityDollanSign tile) {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.disableDepth();
@@ -227,10 +227,10 @@ public class JacarandaSignRenderer extends TileEntitySpecialRenderer<TileEntityJ
         GlStateManager.color(0.8F, 0.4F, 1.0F, 0.1F + pulse); // 紫色呼吸效果
 
         IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-        if (state.getBlock() instanceof JacarandaStandingSign) {
+        if (state.getBlock() instanceof DollanStandingSign) {
             // 竖直告示牌的光晕
             this.renderGlowQuad(0.45, 0.7, 0.1, 0.2);
-        } else if (state.getBlock() instanceof JacarandaWallSign) {
+        } else if (state.getBlock() instanceof DollanWallSign) {
             // 墙上告示牌的光晕
             this.renderGlowQuad(0.4, 0.5, 0.05, 0.15);
         }

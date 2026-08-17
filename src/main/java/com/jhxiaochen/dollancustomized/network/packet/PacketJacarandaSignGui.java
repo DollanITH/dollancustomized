@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
 import com.jhxiaochen.dollancustomized.client.gui.GuiEditJacarandaSign;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
@@ -68,14 +68,14 @@ public class PacketJacarandaSignGui implements IMessage {
                 minecraft.addScheduledTask(() -> {
                     TileEntity tileEntity = world.getTileEntity(message.pos);
 
-                    if (!(tileEntity instanceof TileEntityJacarandaSign)) {
+                    if (!(tileEntity instanceof TileEntityDollanSign)) {
                         // 如果找不到或类型不对，创建一个新的（模仿原版逻辑）
-                        tileEntity = new TileEntityJacarandaSign();
+                        tileEntity = new TileEntityDollanSign();
                         tileEntity.setWorld(world);
                         tileEntity.setPos(message.pos);
                     }
 
-                    TileEntityJacarandaSign jacarandaSign = (TileEntityJacarandaSign) tileEntity;
+                    TileEntityDollanSign jacarandaSign = (TileEntityDollanSign) tileEntity;
                     // 设置编辑的槽位
                     jacarandaSign.setEditedSlot(message.getSlot());
                     minecraft.displayGuiScreen(new GuiEditJacarandaSign(jacarandaSign));

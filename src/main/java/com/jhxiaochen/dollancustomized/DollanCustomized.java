@@ -58,12 +58,12 @@ public class DollanCustomized {
                 new ResourceLocation(Reference.MOD_ID, "height_limit_sign_custom")
         );
         GameRegistry.registerTileEntity(
-                TileEntityJacarandaSign.class,
+                TileEntityDollanSign.class,
                 new ResourceLocation(Reference.MOD_ID, "jacaranda_sign")
         );
 
         GameRegistry.registerTileEntity(
-                TileEntityJacarandaHangingSign.class,
+                TileEntityDollanHangingSign.class,
                 new ResourceLocation(Reference.MOD_ID, "jacaranda_hanging_sign")
         );
         GameRegistry.registerTileEntity(

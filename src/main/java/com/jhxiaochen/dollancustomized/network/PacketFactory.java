@@ -4,6 +4,7 @@ import com.jhxiaochen.dollancustomized.network.packet.PacketEditState;
 import com.jhxiaochen.dollancustomized.network.packet.PacketHeightLimitSign;
 import com.jhxiaochen.dollancustomized.network.packet.PacketRoadText;
 import com.jhxiaochen.dollancustomized.network.packet.PacketUpdateSignToServer;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -74,9 +75,9 @@ public class PacketFactory {
      * 从TileEntity创建NBT数据
      */
     public static NBTTagCompound createNBTFromTileEntity(TileEntity tileEntity) {
-        if (tileEntity instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) {
-            com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign sign =
-                (com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) tileEntity;
+        if (tileEntity instanceof TileEntityDollanSign) {
+            TileEntityDollanSign sign =
+                (TileEntityDollanSign) tileEntity;
             NBTTagCompound nbt = new NBTTagCompound();
             sign.writeToNBT(nbt);
             return nbt;

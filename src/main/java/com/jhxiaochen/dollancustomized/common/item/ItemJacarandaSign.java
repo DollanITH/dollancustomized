@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common.item;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
@@ -54,7 +54,7 @@ public class ItemJacarandaSign extends Item {
                     }
 
                     TileEntity tileentity = worldIn.getTileEntity(pos);
-                    if (tileentity instanceof TileEntityJacarandaSign && !ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack )) {
+                    if (tileentity instanceof TileEntityDollanSign && !ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack )) {
                         // 模仿原版openEditSign方法，但使用自定义网络包
                         if (player instanceof EntityPlayerMP) {
                             ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, pos, tileentity);

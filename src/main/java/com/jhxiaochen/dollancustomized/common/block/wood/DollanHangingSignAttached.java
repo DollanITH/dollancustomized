@@ -1,13 +1,12 @@
-package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
+package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.access.IAxis;
-import com.jhxiaochen.dollancustomized.registry.DollanItems;
-import com.jhxiaochen.dollancustomized.registry.DollanSounds;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
@@ -17,6 +16,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class JacarandaHangingSignAttached extends BlockContainer implements IAxis {
+public class DollanHangingSignAttached extends BlockContainer implements IAxis {
 
     public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
@@ -38,16 +38,23 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
     protected static final AxisAlignedBB X_BOX = new AxisAlignedBB(0.0625D, 0.0, 0.4375D, 0.9375D, 0.625D, 0.5625D);
     protected static final AxisAlignedBB Z_BOX = new AxisAlignedBB(0.4375D, 0.0, 0.0625D, 0.5625D, 0.625D, 0.9375D);
 
-    public JacarandaHangingSignAttached() {
+    private final Item item;
+    public DollanHangingSignAttached(String name, Item item) {
         super(Material.WOOD);
-        this.setCreativeTab(DollanCustomized.WOOD_TAB);this.setSoundType(DollanSounds.CHERRY_WOOD);
+        this.item = item;
+        this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(1.0F);
         this.setResistance(1.0F);
         this.setHarvestLevel("axe", 0);
         this.setLightOpacity(0);
-        this.setUnlocalizedName("jacaranda_hanging_sign_attached");
-        this.setRegistryName(Reference.MOD_ID, "jacaranda_hanging_sign_attached");
+        this.setUnlocalizedName(name);
+        this.setRegistryName(Reference.MOD_ID, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATION, 0));
+    }
+
+    @Override
+    public Block setSoundType(SoundType sound) {
+        return super.setSoundType(sound);
     }
 
     @Override
@@ -109,18 +116,18 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityJacarandaHangingSign();
+        return new TileEntityDollanHangingSign();
     }
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        if (GuiScreen.isCtrlKeyDown()) return new ItemStack(DollanItems.jacaranda_hanging_sign);
+        if (GuiScreen.isCtrlKeyDown()) return new ItemStack(item);
 
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (tileentity instanceof TileEntityJacarandaHangingSign) {
-            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
+        if (tileentity instanceof TileEntityDollanHangingSign) {
+            TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) tileentity;
             int hasItemSide = tile.getDisplayedSides();
-            ItemStack itemStack = new ItemStack(DollanItems.jacaranda_hanging_sign);
+            ItemStack itemStack = new ItemStack(item);
 
             if (hasItemSide == 0 || hasItemSide == 1) {
                 itemStack = tile.getDisplayItem(hasItemSide);
@@ -129,15 +136,15 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
             }
             return itemStack;
         }
-        return new ItemStack(DollanItems.jacaranda_hanging_sign);
+        return new ItemStack(item);
     }
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(DollanItems.jacaranda_hanging_sign));
+        drops.add(new ItemStack(item));
         TileEntity tileentity = world.getTileEntity(pos);
-        if (tileentity instanceof TileEntityJacarandaHangingSign) {
-            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
+        if (tileentity instanceof TileEntityDollanHangingSign) {
+            TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) tileentity;
             drops.add(tile.getItemHandler().getStackInSlot(0));
             drops.add(tile.getItemHandler().getStackInSlot(1));
         }
@@ -146,10 +153,10 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
     @Override
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
         if (!player.capabilities.isCreativeMode) {
-            Block.spawnAsEntity(world, pos, new ItemStack(DollanItems.jacaranda_hanging_sign));
+            Block.spawnAsEntity(world, pos, new ItemStack(item));
         }
-        if (te instanceof TileEntityJacarandaHangingSign) {
-            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) te;
+        if (te instanceof TileEntityDollanHangingSign) {
+            TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) te;
             Block.spawnAsEntity(world, pos, tile.getItemHandler().getStackInSlot(0));
             Block.spawnAsEntity(world, pos, tile.getItemHandler().getStackInSlot(1));
         }
@@ -177,7 +184,7 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
             return;
         }
 
-        this.spawnAsEntity(world, pos, new ItemStack(DollanItems.jacaranda_hanging_sign));
+        this.spawnAsEntity(world, pos, new ItemStack(item));
         world.setBlockToAir(pos);
     }
 
@@ -196,8 +203,8 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
 
         // 获取存储物品的 TileEntity
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (tileentity instanceof TileEntityJacarandaHangingSign) {
-            TileEntityJacarandaHangingSign tile = (TileEntityJacarandaHangingSign) tileentity;
+        if (tileentity instanceof TileEntityDollanHangingSign) {
+            TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) tileentity;
 
             // 检查是否涂蜡
             if (tile.isWaxed(slot)) {
@@ -237,7 +244,7 @@ public class JacarandaHangingSignAttached extends BlockContainer implements IAxi
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityJacarandaHangingSign();
+        return new TileEntityDollanHangingSign();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanHangingSign;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,9 +47,9 @@ public class PacketItemUpdate extends BasePacket {
                     if (msg.pos == null) return;
 
                     TileEntity te = world.getTileEntity(msg.pos);
-                    if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign) {
-                        com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign sign =
-                            (com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign) te;
+                    if (te instanceof TileEntityDollanHangingSign) {
+                        TileEntityDollanHangingSign sign =
+                            (TileEntityDollanHangingSign) te;
 
                         // 修改物品
                         sign.modifyDisplayedItem(world, msg.pos, msg.slot, msg.stack);

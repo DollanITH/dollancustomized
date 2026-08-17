@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -53,9 +54,9 @@ public class PacketEditState extends BasePacket {
                     if (world == null || msg.pos == null) return;
 
                     TileEntity te = world.getTileEntity(msg.pos);
-                    if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) {
-                        com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign sign =
-                            (com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign) te;
+                    if (te instanceof TileEntityDollanSign) {
+                        TileEntityDollanSign sign =
+                            (TileEntityDollanSign) te;
 
                         // 使用NBT更新数据
                         NBTTagCompound nbt = new NBTTagCompound();

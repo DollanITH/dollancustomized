@@ -1,10 +1,10 @@
-package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
+package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.registry.DollanItems;
-import com.jhxiaochen.dollancustomized.registry.DollanSounds;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -22,14 +22,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class JacarandaSign extends BlockContainer {
+public class DollanSign extends BlockContainer {
 
     protected static final AxisAlignedBB SIGN_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
 
-    public JacarandaSign() {
+    public Item item_sign;
+    public DollanSign() {
         super(Material.WOOD);
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
-        this.setSoundType(DollanSounds.CHERRY_WOOD);
         this.setHardness(1.0F);
     }
 
@@ -72,7 +72,12 @@ public class JacarandaSign extends BlockContainer {
 
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
-        return new TileEntityJacarandaSign();
+        return new TileEntityDollanSign();
+    }
+
+    @Override
+    public Block setSoundType(SoundType sound) {
+        return super.setSoundType(sound);
     }
 
     @Override
@@ -82,12 +87,12 @@ public class JacarandaSign extends BlockContainer {
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return DollanItems.jacaranda_sign;
+        return item_sign;
     }
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(DollanItems.jacaranda_sign);
+        return new ItemStack(item_sign);
     }
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)

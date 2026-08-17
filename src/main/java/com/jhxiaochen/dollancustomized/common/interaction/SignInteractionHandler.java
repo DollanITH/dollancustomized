@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.interaction;
 
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -10,8 +10,8 @@ public class SignInteractionHandler {
 
     public static boolean handleSignClick(World world, BlockPos pos, EntityPlayer player, boolean isSneaking) {
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TileEntityJacarandaSign) {
-            TileEntityJacarandaSign sign = (TileEntityJacarandaSign) te;
+        if (te instanceof TileEntityDollanSign) {
+            TileEntityDollanSign sign = (TileEntityDollanSign) te;
 
             if (world.isRemote) {
                 // 客户端：处理视觉效果
@@ -61,8 +61,8 @@ public class SignInteractionHandler {
     // 检查玩家是否可以编辑告示牌
     public static boolean canEditSign(World world, BlockPos pos, EntityPlayer player) {
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TileEntityJacarandaSign) {
-            TileEntityJacarandaSign sign = (TileEntityJacarandaSign) te;
+        if (te instanceof TileEntityDollanSign) {
+            TileEntityDollanSign sign = (TileEntityDollanSign) te;
 
             // 检查是否为服主或OP（可选功能）
             // boolean canEdit = player.canCommandSenderUseCommand(2, "sign");

@@ -17,7 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
  * 悬挂式蓝花楹木告示牌 TileEntity
  * 支持双面文本显示（正面和背面）
  */
-public class TileEntityJacarandaHangingSign extends TileEntityJacarandaSign {
+public class TileEntityDollanHangingSign extends TileEntityDollanSign {
 
     // 背面文本
     public final ITextComponent[] backText = new ITextComponent[] {
@@ -47,7 +47,7 @@ public class TileEntityJacarandaHangingSign extends TileEntityJacarandaSign {
     private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
-            TileEntityJacarandaHangingSign.this.markDirty();
+            TileEntityDollanHangingSign.this.markDirty();
         }
     };
 

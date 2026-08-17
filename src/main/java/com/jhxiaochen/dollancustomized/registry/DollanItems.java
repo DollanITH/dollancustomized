@@ -34,18 +34,18 @@ public class DollanItems{
     public static Item item_mangrove_door = new ItemDoor(WoodBlocks.mangrove_door).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "mangrove_door").setRegistryName(WoodBlocks.mangrove_door.getRegistryName());
     public static Item item_jacaranda_door = new ItemDoor(WoodBlocks.jacaranda_door).setCreativeTab(DollanCustomized.WOOD_TAB).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(WoodBlocks.jacaranda_door.getRegistryName());
     public static ItemSlab jacaranda_slab_item = (ItemSlab) new ItemSlab(WoodBlocks.jacaranda_slab, WoodBlocks.jacaranda_slab, WoodBlocks.jacaranda_double_slab).setRegistryName(WoodBlocks.jacaranda_slab.getRegistryName( ));
+    public static ItemSlab mangrove_slab_item = (ItemSlab) new ItemSlab(WoodBlocks.mangrove_slab, WoodBlocks.mangrove_double_slab, WoodBlocks.mangrove_double_slab).setRegistryName(WoodBlocks.jacaranda_slab.getRegistryName( ));
 
     public static void register() {
         registerItem(leungcraft);
         registerItem(dollan);
         registerItem(station_end_door);
-        registerItem(jacaranda_sign);
-        registerItem(jacaranda_hanging_sign);
     }
 
     public static void registerModel() {
         registerModel(dollan, 1, "dollancraft");
         registerModel(jacaranda_slab_item);
+        registerModel(mangrove_slab_item);
         registerModel(item_jacaranda_door);
         registerModel(item_mangrove_door);
     }

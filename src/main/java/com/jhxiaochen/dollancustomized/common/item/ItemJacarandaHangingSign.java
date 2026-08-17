@@ -1,11 +1,11 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSign;
-import com.jhxiaochen.dollancustomized.common.block.wood.jacaranda.JacarandaHangingSignAttached;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSign;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSignAttached;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
 import com.jhxiaochen.dollancustomized.registry.DollanSounds;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityJacarandaHangingSign;
+import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,10 +26,10 @@ import java.util.List;
 
 public class ItemJacarandaHangingSign extends Item {
     private Block block;
-    private Block blockInWall;
-    private JacarandaHangingSignAttached blockAttached;
+    private Block                     blockInWall;
+    private DollanHangingSignAttached blockAttached;
 
-    public ItemJacarandaHangingSign(Block block, Block blockInWall, JacarandaHangingSignAttached blockAttached) {
+    public ItemJacarandaHangingSign(Block block, Block blockInWall, DollanHangingSignAttached blockAttached) {
         this.maxStackSize = 16;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setUnlocalizedName("jacaranda_hanging_sign");
@@ -40,7 +40,7 @@ public class ItemJacarandaHangingSign extends Item {
         this.setBlock(block, blockInWall, blockAttached);
     }
 
-    private void setBlock(Block block, Block blockInWall, JacarandaHangingSignAttached blockAttached) {
+    private void setBlock(Block block, Block blockInWall, DollanHangingSignAttached blockAttached) {
         this.block = block;
         this.blockInWall = blockInWall;
         this.blockAttached = blockAttached;
@@ -77,7 +77,7 @@ public class ItemJacarandaHangingSign extends Item {
 
                     // 获取新的元数据放置
                     placeBlock(player, world, placePos, hand, this.block, playerFacing.getIndex());            TileEntity tileentity = world.getTileEntity(placePos);
-                    if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                    if (tileentity instanceof TileEntityDollanHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
                         // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
                         if (!world.isRemote && player instanceof EntityPlayerMP) {
                             ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
@@ -101,7 +101,7 @@ public class ItemJacarandaHangingSign extends Item {
                 {
                     // 锁链汇聚于一点 悬挂告示牌
                     placeBlock(player, world, placePos, hand, this.blockAttached, meta);            TileEntity tileentity = world.getTileEntity(placePos);
-                    if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                    if (tileentity instanceof TileEntityDollanHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
                         // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
                         if (!world.isRemote && player instanceof EntityPlayerMP) {
                             ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
@@ -116,7 +116,7 @@ public class ItemJacarandaHangingSign extends Item {
                     if (!getValidOrientations().contains(meta)) {
                         // 非正东南西北, 放置 旋转的 锁链汇聚于一点 悬挂告示牌
                         placeBlock(player, world, placePos, hand, this.blockAttached, meta);            TileEntity tileentity = world.getTileEntity(placePos);
-                        if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                        if (tileentity instanceof TileEntityDollanHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
                             // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
                             if (!world.isRemote && player instanceof EntityPlayerMP) {
                                 ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
@@ -128,7 +128,7 @@ public class ItemJacarandaHangingSign extends Item {
 
                     // 获取新的元数据放置
                     placeBlock(player, world, placePos, hand, this.block, playerFacing.getIndex());            TileEntity tileentity = world.getTileEntity(placePos);
-                    if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+                    if (tileentity instanceof TileEntityDollanHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
                         // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
                         if (!world.isRemote && player instanceof EntityPlayerMP) {
                             ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
@@ -155,13 +155,13 @@ public class ItemJacarandaHangingSign extends Item {
             }
             else {
                 // 旋转 90度 放置
-                signState = this.blockInWall.getDefaultState().withProperty(JacarandaHangingSign.FACING, clickFacing.rotateY());
+                signState = this.blockInWall.getDefaultState().withProperty(DollanHangingSign.FACING, clickFacing.rotateY());
             }
 
             // 墙上的悬挂告示牌
             placeBlock(player, world, placePos, hand, signState);
             TileEntity tileentity = world.getTileEntity(placePos);
-            if (tileentity instanceof TileEntityJacarandaHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
+            if (tileentity instanceof TileEntityDollanHangingSign && !ItemBlock.setTileEntityNBT(world, player, placePos, player.getHeldItem(hand))) {
                 // 模仿原版openEditSign方法，但使用自定义网络包（只在服务端打开GUI）
                 if (!world.isRemote && player instanceof EntityPlayerMP) {
                     ExtendedPlayer.openJacarandaSignGui((EntityPlayerMP) player, placePos, tileentity);
@@ -189,13 +189,13 @@ public class ItemJacarandaHangingSign extends Item {
 
     // 是否能放置双锁链告示牌
     public boolean canPlaceHangingSign(EnumFacing playerFacing, Block upBlock, IBlockState upBlockState, int playerAccurateFacing) {
-        if (upBlock instanceof JacarandaHangingSign) {
+        if (upBlock instanceof DollanHangingSign) {
             if (getValidOrientations().contains(playerAccurateFacing)) {
-                EnumFacing blockFacing = upBlockState.getValue(JacarandaHangingSign.FACING);
+                EnumFacing blockFacing = upBlockState.getValue(DollanHangingSign.FACING);
                 return playerFacing.getAxis() == blockFacing.getAxis();
             }
         }
-        else if (upBlock instanceof JacarandaHangingSignAttached) {
+        else if (upBlock instanceof DollanHangingSignAttached) {
             int blockFacing = upBlock.getMetaFromState(upBlockState);
 
             if (blockFacing == 0 || blockFacing == 8) {

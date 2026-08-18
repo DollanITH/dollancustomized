@@ -31,7 +31,7 @@ public class GuiHandler implements IGuiHandler {
         if (ID == JACARANDA_SIGN_EDIT_GUI_ID && te instanceof TileEntityDollanSign) {
             // 从TileEntity获取当前编辑的槽位
             TileEntityDollanSign sign = (TileEntityDollanSign) te;
-            return new GuiEditJacarandaSign(sign);
+            return new GuiEditDollanSign(sign);
         }
         return null;
     }

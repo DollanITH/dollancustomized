@@ -23,7 +23,7 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 
-public class GuiEditJacarandaSign extends GuiScreen {
+public class GuiEditDollanSign extends GuiScreen {
     private              int                     updateCounter;
     private              int                     editingSlot;
     private       String               titleText;
@@ -41,7 +41,7 @@ public class GuiEditJacarandaSign extends GuiScreen {
     private static final int BTN_DONE = 2;
     private static final int BTN_CANCEL = 3;
 
-    public GuiEditJacarandaSign(TileEntityDollanSign tile) {
+    public GuiEditDollanSign(TileEntityDollanSign tile) {
         this.tile = tile;
         this.needSave = true;
         this.editingSlot = tile.getEditedSlot();

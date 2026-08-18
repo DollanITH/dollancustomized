@@ -27,7 +27,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import suike.suikecherry.tileentity.HangingSignTileEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -43,10 +42,9 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
     protected static final AxisAlignedBB Z_BOX = new AxisAlignedBB(0.4375D, 0.0, 0.0625D, 0.5625D, 0.625D, 0.9375D);
 
     private final boolean inWall;
-    private final Item    item;
-    public DollanHangingSign(String name, Item item) {
+    private Item    item;
+    public DollanHangingSign(String name) {
         super(Material.WOOD);
-        this.item = item;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(1.0F);
         this.setResistance(1.0F);
@@ -56,6 +54,10 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
         this.setRegistryName(Reference.MOD_ID, name);
         this.inWall = name.endsWith("wall");
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    }
+
+    public void setItem(Item item) {
+        if (this.item == null) this.item = item;
     }
 
     public boolean isInWall() {
@@ -239,7 +241,7 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
             if (upBlock.getRegistryName().toString().contains("hanging")) {
                 int meta = upBlock.getMetaFromState(upBlockState);
                 if (meta != 0 && meta != 4 && meta != 8 && meta != 12) {
-                    HangingSignTileEntity tile = (HangingSignTileEntity) world.getTileEntity(pos);
+                    TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) world.getTileEntity(pos);
                     if (tile != null) {
                         Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(0));
                         Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(1));
@@ -249,7 +251,7 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
             }
             else if (!upBlockState.isSideSolid(world, pos.up(), EnumFacing.DOWN)) {
 
-                HangingSignTileEntity tile = (HangingSignTileEntity) world.getTileEntity(pos);
+                TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) world.getTileEntity(pos);
                 if (tile != null) {
                     Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(0));
                     Block.spawnAsEntity(world, pos, tile.getItemHandler( ).getStackInSlot(1));

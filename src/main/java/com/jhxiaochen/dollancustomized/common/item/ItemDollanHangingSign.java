@@ -24,23 +24,23 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemJacarandaHangingSign extends Item {
+public class ItemDollanHangingSign extends Item {
     private Block block;
-    private Block                     blockInWall;
+    private DollanHangingSign                     blockInWall;
     private DollanHangingSignAttached blockAttached;
 
-    public ItemJacarandaHangingSign(Block block, Block blockInWall, DollanHangingSignAttached blockAttached) {
+    public ItemDollanHangingSign(Block block, DollanHangingSign blockInWall, DollanHangingSignAttached blockAttached) {
         this.maxStackSize = 16;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
-        this.setUnlocalizedName("jacaranda_hanging_sign");
-        this.setRegistryName("jacaranda_hanging_sign");
         this.block = block;
         this.blockInWall = blockInWall;
         this.blockAttached = blockAttached;
         this.setBlock(block, blockInWall, blockAttached);
+        blockInWall.setItem(this);
+        blockAttached.setItem(this);
     }
 
-    private void setBlock(Block block, Block blockInWall, DollanHangingSignAttached blockAttached) {
+    private void setBlock(Block block, DollanHangingSign blockInWall, DollanHangingSignAttached blockAttached) {
         this.block = block;
         this.blockInWall = blockInWall;
         this.blockAttached = blockAttached;

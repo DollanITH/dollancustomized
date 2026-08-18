@@ -1,9 +1,10 @@
 package com.jhxiaochen.dollancustomized.common.item;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.common.block.wood.DollanSign;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
-import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
@@ -20,13 +21,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemJacarandaSign extends Item {
-    public ItemJacarandaSign() {
+public class ItemDollanSign extends Item {
+    public Block wallSign;
+    public Block standingSign;
+    public ItemDollanSign(DollanSign wallSign, DollanSign standingSign) {
         super();
+        this.wallSign = wallSign;
+        this.standingSign = standingSign;
+        wallSign.setItem(this);
+        standingSign.setItem(this);
         this.maxStackSize = 16;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
-        this.setUnlocalizedName("jacaranda_sign");
-        this.setRegistryName("jacaranda_sign");
     }
 
     @Override
@@ -48,9 +53,9 @@ public class ItemJacarandaSign extends Item {
 
                     if (facing == EnumFacing.UP) {
                         int i = MathHelper.floor((double)((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
-                        worldIn.setBlockState(pos, WoodBlocks.jacaranda_standing_sign.getDefaultState().withProperty(BlockStandingSign.ROTATION, Integer.valueOf(i)), 11);
+                        worldIn.setBlockState(pos, standingSign.getDefaultState().withProperty(BlockStandingSign.ROTATION, Integer.valueOf(i)), 11);
                     } else {
-                        worldIn.setBlockState(pos, WoodBlocks.jacaranda_wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, facing), 11);
+                        worldIn.setBlockState(pos, wallSign.getDefaultState().withProperty(BlockWallSign.FACING, facing), 11);
                     }
 
                     TileEntity tileentity = worldIn.getTileEntity(pos);

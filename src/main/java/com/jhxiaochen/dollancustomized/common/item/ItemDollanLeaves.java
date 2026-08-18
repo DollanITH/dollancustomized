@@ -12,7 +12,7 @@ public class ItemDollanLeaves extends ItemBlock {
 
     public int getMetadata(int damage)
     {
-        return damage | 4;
+        return damage | 1;
     }
 
 }

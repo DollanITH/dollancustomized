@@ -9,7 +9,6 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -21,9 +20,8 @@ import net.minecraft.world.World;
 public class DollanStandingSign extends DollanSign implements IAxis {
     public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
-    public DollanStandingSign(Item item) {
+    public DollanStandingSign() {
         super();
-        this.item_sign = item;
         this.setCreativeTab(DollanCustomized.WOOD_TAB).setHardness(1.0F);
     }
 

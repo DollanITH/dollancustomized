@@ -1,8 +1,9 @@
-package com.jhxiaochen.dollancustomized.client.renderer.sign.mangrove;
+package com.jhxiaochen.dollancustomized.client.renderer.sign;
 
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanStandingSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanWallSign;
+import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class MangroveSignRenderer extends TileEntitySpecialRenderer<TileEntityDollanSign> {
+public class SignRenderer extends TileEntitySpecialRenderer<TileEntityDollanSign> {
 
     private static final double FIXED_Y = 0.8343;
     private static final double IN_WALL_FIXED_Y = 0.5218;
@@ -33,7 +34,7 @@ public class MangroveSignRenderer extends TileEntitySpecialRenderer<TileEntityDo
     private static final int[] TOTAL_SLOTS = new int[]{0, 1};
 
     // 蓝花楹木告示牌纹理
-    private static final ResourceLocation JACARANDA_SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/mangrove_sign.png");
+    private static ResourceLocation SIGN_TEXTURE;
     private static final float SIGN_SCALE = 0.6666667F;
 
     // 模型实例
@@ -59,6 +60,13 @@ public class MangroveSignRenderer extends TileEntitySpecialRenderer<TileEntityDo
         // 检查是否为空气方块
         if (world.isAirBlock(blockpos)) {
             return;
+        }
+
+        if (block.getRegistryName().toString().contains("jacaranda")) {
+             SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/jacaranda_sign.png");
+        }
+        if (block == WoodBlocks.mangrove_wall_sign || block == WoodBlocks.mangrove_standing_sign) {
+             SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/mangrove_sign.png");
         }
 
         GlStateManager.pushMatrix();
@@ -101,7 +109,7 @@ public class MangroveSignRenderer extends TileEntitySpecialRenderer<TileEntityDo
             GlStateManager.matrixMode(5888); // GL_MODELVIEW
         } else {
             // 绑定蓝花楹木告示牌纹理
-            this.bindTexture(JACARANDA_SIGN_TEXTURE);
+            this.bindTexture(SIGN_TEXTURE);
         }
 
         GlStateManager.enableRescaleNormal();

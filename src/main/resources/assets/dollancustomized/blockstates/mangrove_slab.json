@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=null": { "model": "dollancustomized:mangrove_slab" },
+        "half=top,variant=null": { "model": "dollancustomized:mangrove_slab_top" }
+    }
+}

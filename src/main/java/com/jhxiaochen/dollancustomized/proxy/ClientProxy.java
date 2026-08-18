@@ -5,8 +5,8 @@ import com.jhxiaochen.dollancustomized.client.event.ParticleTextureEventHandler;
 import com.jhxiaochen.dollancustomized.client.font.*;
 import com.jhxiaochen.dollancustomized.client.renderer.road.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.road.RenderRoadText;
-import com.jhxiaochen.dollancustomized.client.renderer.sign.jacaranda.JacarandaHangingSignRenderer;
-import com.jhxiaochen.dollancustomized.client.renderer.sign.jacaranda.JacarandaSignRenderer;
+import com.jhxiaochen.dollancustomized.client.renderer.sign.HangingSignRenderer;
+import com.jhxiaochen.dollancustomized.client.renderer.sign.SignRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.station.StationNameBoardRenderer;
 import com.jhxiaochen.dollancustomized.particle.ParticleInit;
 import com.jhxiaochen.dollancustomized.tileentity.*;
@@ -57,9 +57,9 @@ public class ClientProxy implements CommonProxy {
         // 使用点测试渲染器
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeightLimitSignCustom.class, new RenderHeightLimitSignCustom());
         // 注册蓝花楹木告示牌渲染器
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDollanSign.class, new JacarandaSignRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDollanSign.class, new SignRenderer());
         // 注册悬挂式蓝花楹木告示牌渲染器
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDollanHangingSign.class, new JacarandaHangingSignRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDollanHangingSign.class, new HangingSignRenderer());
 
         // 注册车站大字壁渲染器
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStationNameBoard.class, new StationNameBoardRenderer());

@@ -659,3 +659,6 @@ tile.mangrove_pressure_plate.name=Mangrove Pressure Plate
 tile.mangrove_stairs.name=Mangrove Stairs
 tile.mangrove_slab.name=Mangrove Slab
 tile.mangrove_trapdoor.name=Mangrove Trapdoor
+tile.mangrove_sign.name=Mangrove Sign
+item.mangrove_sign.name=Mangrove Sign
+item.mangrove_hanging_sign.name=Mangrove Hanging Sign

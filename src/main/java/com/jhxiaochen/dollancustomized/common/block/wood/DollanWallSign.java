@@ -10,7 +10,6 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -52,9 +51,8 @@ public class DollanWallSign extends DollanSign implements ICardinal {
         return tile.editText(0, player);
     }
 
-    public DollanWallSign(Item item) {
+    public DollanWallSign() {
         super();
-        this.item_sign = item;
         this.setCreativeTab(DollanCustomized.WOOD_TAB).setHardness(1.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }

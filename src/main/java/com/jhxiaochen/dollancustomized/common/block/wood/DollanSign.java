@@ -33,6 +33,10 @@ public class DollanSign extends BlockContainer {
         this.setHardness(1.0F);
     }
 
+    public void setItem(Item item) {
+        if(this.item_sign == null) this.item_sign = item;
+    }
+
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return SIGN_AABB;

@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.client.renderer.sign.mangrove;
+package com.jhxiaochen.dollancustomized.client.renderer.sign;
 
 import com.jhxiaochen.dollancustomized.client.model.HangingSignModel;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSign;
@@ -28,14 +28,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class MangroveHangingSignRenderer extends TileEntitySpecialRenderer<TileEntityDollanHangingSign> {
+public class HangingSignRenderer extends TileEntitySpecialRenderer<TileEntityDollanHangingSign> {
 
     // 蓝花楹木告示牌材质
-    private static final ResourceLocation
-            SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/mangrove_hanging_sign.png");
+    private static ResourceLocation SIGN_TEXTURE = null;
 
     // 模型实例
-    private HangingSignModel mangroveSignModel;
+    private HangingSignModel SignModel;
 
     // 物品渲染器
     private ItemRenderer itemRenderer;
@@ -61,6 +60,11 @@ public class MangroveHangingSignRenderer extends TileEntitySpecialRenderer<TileE
         Block block = tileEntity.getBlockType();
         boolean isSideModel = block instanceof DollanHangingSign;
         boolean isSideModelWall = block instanceof DollanHangingSign && ((DollanHangingSign) block).isInWall();
+        if (block.getRegistryName().toString().contains("jacaranda"))
+            SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/jacaranda_hanging_sign.png");
+
+        if (block.getRegistryName().toString().contains("mangrove"))
+            SIGN_TEXTURE = new ResourceLocation("dollancustomized", "textures/entity/mangrove_hanging_sign.png");
 
         GlStateManager.pushMatrix();
 
@@ -84,8 +88,8 @@ public class MangroveHangingSignRenderer extends TileEntitySpecialRenderer<TileE
         GlStateManager.translate(0.0F, -0.3125F, 0.0F);
 
         // 初始化模型
-        if (mangroveSignModel == null) {
-            mangroveSignModel = new HangingSignModel();
+        if (SignModel == null) {
+            SignModel = new HangingSignModel();
         }
 
         // 更新可见部分（1.12.2中没有BlockState，直接判断metadata）
@@ -97,9 +101,9 @@ public class MangroveHangingSignRenderer extends TileEntitySpecialRenderer<TileE
             attached = !(tileEntity.getBlockMetadata() == 0 || tileEntity.getBlockMetadata() == 4 || tileEntity.getBlockMetadata() == 8 || tileEntity.getBlockMetadata() == 12);
         }
         if (isSideModelWall || block instanceof DollanHangingSignAttached) {
-            mangroveSignModel.evaluateVisibleParts(isSideModel, attached);
+            SignModel.evaluateVisibleParts(isSideModel, attached);
         } else {
-            mangroveSignModel.evaluateVisibleParts(false, false);
+            SignModel.evaluateVisibleParts(false, false);
         }
 
         // 设置模型缩放
@@ -122,7 +126,7 @@ public class MangroveHangingSignRenderer extends TileEntitySpecialRenderer<TileE
         GlStateManager.pushMatrix();
         GlStateManager.disableCull();
         // 直接调用render方法，模型内部会根据visible属性决定显示什么
-        mangroveSignModel.render();
+        SignModel.render();
 
         GlStateManager.popMatrix();
 

@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
-import com.jhxiaochen.dollancustomized.client.gui.GuiEditJacarandaSign;
+import com.jhxiaochen.dollancustomized.client.gui.GuiEditDollanSign;
 import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -78,7 +78,7 @@ public class PacketJacarandaSignGui implements IMessage {
                     TileEntityDollanSign jacarandaSign = (TileEntityDollanSign) tileEntity;
                     // 设置编辑的槽位
                     jacarandaSign.setEditedSlot(message.getSlot());
-                    minecraft.displayGuiScreen(new GuiEditJacarandaSign(jacarandaSign));
+                    minecraft.displayGuiScreen(new GuiEditDollanSign(jacarandaSign));
                 });
             }
 

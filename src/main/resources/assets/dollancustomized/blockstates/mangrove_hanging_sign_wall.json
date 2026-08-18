@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north":  { "model": "dollancustomized:mangrove_hanging_sign" },
+    "facing=south":  { "model": "dollancustomized:mangrove_hanging_sign", "y": 180 },
+    "facing=east":   { "model": "dollancustomized:mangrove_hanging_sign", "y": 90 },
+    "facing=west":   { "model": "dollancustomized:mangrove_hanging_sign", "y": 270 }
+  }
+}

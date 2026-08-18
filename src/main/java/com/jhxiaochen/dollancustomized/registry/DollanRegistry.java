@@ -3,28 +3,33 @@ package com.jhxiaochen.dollancustomized.registry;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.registry.blocks.DollanBlocks;
 import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class DollanRegistry {
-    @SubscribeEvent
-    public static void registerBlock(final RegistryEvent.Register<net.minecraft.block.Block> event) {
-        DollanBlocks.registerBlockAndModels();
-        WoodBlocks.register();
-        DollanBlocks.BLOCKS.forEach(block -> event.getRegistry().register(block));
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        DollanItems.register();
+        for (Item item : DollanItems.ITEMS) {
+            event.getRegistry().register(item);
+        }
     }
 
     @SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event) {
-        DollanItems.register();
-        DollanItems.ITEMS.forEach(item -> event.getRegistry().register(item));
+    public static void registerBlock(RegistryEvent.Register<Block> event) {
+        DollanBlocks.registerBlockAndModels();
+        WoodBlocks.register();
+        event.getRegistry().registerAll(DollanBlocks.BLOCKS.toArray(new Block[0]));
     }
 
     @SubscribeEvent

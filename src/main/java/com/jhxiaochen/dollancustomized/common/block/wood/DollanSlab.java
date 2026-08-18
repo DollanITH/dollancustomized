@@ -9,6 +9,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -20,10 +21,16 @@ import net.minecraft.world.World;
 public abstract class DollanSlab extends BlockSlab {
     public static final PropertyEnum<EnumType>
                                 VARIANT = PropertyEnum.create("variant", EnumType.class);
-    ItemSlab itemSlab;
+    private ItemSlab itemSlab;
     public DollanSlab() {
         super(Material.WOOD);
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
+    }
+
+    public void setItem(Item item) {
+        if (this.itemSlab == null) {
+            itemSlab = (ItemSlab) item;
+        }
     }
 
     public IBlockState getStateFromMeta(int meta)
@@ -99,9 +106,8 @@ public abstract class DollanSlab extends BlockSlab {
     }
 
     public static class DollanDoubleSlab extends DollanSlab {
-        public DollanDoubleSlab(ItemSlab itemSlab) {
+        public DollanDoubleSlab() {
             super();
-            this.itemSlab = itemSlab;
         }
 
         @Override
@@ -112,9 +118,8 @@ public abstract class DollanSlab extends BlockSlab {
 
     public static class DollanHalfSlab extends DollanSlab {
 
-        public DollanHalfSlab(ItemSlab itemSlab) {
+        public DollanHalfSlab() {
             super();
-            this.itemSlab = itemSlab;
             this.setLightOpacity(0);
         }
 

@@ -38,10 +38,9 @@ public class DollanHangingSignAttached extends BlockContainer implements IAxis {
     protected static final AxisAlignedBB X_BOX = new AxisAlignedBB(0.0625D, 0.0, 0.4375D, 0.9375D, 0.625D, 0.5625D);
     protected static final AxisAlignedBB Z_BOX = new AxisAlignedBB(0.4375D, 0.0, 0.0625D, 0.5625D, 0.625D, 0.9375D);
 
-    private final Item item;
-    public DollanHangingSignAttached(String name, Item item) {
+    private Item item;
+    public DollanHangingSignAttached(String name) {
         super(Material.WOOD);
-        this.item = item;
         this.setCreativeTab(DollanCustomized.WOOD_TAB);
         this.setHardness(1.0F);
         this.setResistance(1.0F);
@@ -51,6 +50,12 @@ public class DollanHangingSignAttached extends BlockContainer implements IAxis {
         this.setRegistryName(Reference.MOD_ID, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATION, 0));
     }
+
+
+    public void setItem(Item item) {
+        if (this.item == null) this.item = item;
+    }
+
 
     @Override
     public Block setSoundType(SoundType sound) {

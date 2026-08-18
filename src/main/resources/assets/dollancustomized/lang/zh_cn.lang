@@ -611,7 +611,7 @@ tile.jacaranda_button.name=蓝花楹木按钮
 item.dollancustomized_jacaranda_door.name=蓝花楹木门
 
 # 蓝花楹半砖
-tile.jacaranda_slab.name=蓝花楹木半砖
+tile.jacaranda_slab.name=蓝花楹木台阶
 
 # 蓝花楹栅栏
 tile.jacaranda_fence.name=蓝花楹木栅栏
@@ -626,7 +626,7 @@ item.jacaranda_hanging_sign.name=悬挂式蓝花楹木告示牌
 tile.jacaranda_pressure_plate.name=蓝花楹木压力板
 
 # 蓝花楹台阶
-tile.jacaranda_stairs.name=蓝花楹木台阶
+tile.jacaranda_stairs.name=蓝花楹木楼梯
 
 # 蓝花楹活板门
 tile.jacaranda_trapdoor.name=蓝花楹木活板门
@@ -657,3 +657,6 @@ tile.mangrove_pressure_plate.name=红木压力板
 tile.mangrove_stairs.name=红木楼梯
 tile.mangrove_slab.name=红木台阶
 tile.mangrove_trapdoor.name=红木活板门
+tile.mangrove_sign.name=红木告示牌
+item.mangrove_sign.name=红木告示牌
+item.mangrove_hanging_sign.name=悬挂式红木告示牌

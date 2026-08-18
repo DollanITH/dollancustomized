@@ -104,49 +104,65 @@ public class WoodBlocks {
             .setSoundType(DollanSounds.CHERRY_LEAVES)
             .setUnlocalizedName("jacaranda_sapling")
             .setRegistryName(Reference.MOD_ID, "jacaranda_sapling");
-    public static BlockSlab jacaranda_slab = (BlockSlab) new DollanSlab.DollanHalfSlab(DollanItems.jacaranda_slab_item)
+    public static DollanSlab jacaranda_slab = (DollanSlab) new DollanSlab.DollanHalfSlab()
                     .setSoundType(DollanSounds.CHERRY_WOOD)
                     .setUnlocalizedName("jacaranda_slab")
                     .setRegistryName(Reference.MOD_ID, "jacaranda_slab");
-    public static BlockSlab jacaranda_double_slab = (BlockSlab) new DollanSlab.DollanDoubleSlab(DollanItems.jacaranda_slab_item)
+    public static DollanSlab jacaranda_double_slab = (DollanSlab) new DollanSlab.DollanDoubleSlab()
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setUnlocalizedName("jacaranda_double_slab")
             .setRegistryName(Reference.MOD_ID, "jacaranda_double_slab");
-    public static BlockSlab mangrove_slab = (BlockSlab) new DollanSlab.DollanHalfSlab(DollanItems.jacaranda_slab_item)
-                    .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("jacaranda_slab")
-                    .setRegistryName(Reference.MOD_ID, "jacaranda_slab");
-    public static BlockSlab mangrove_double_slab = (BlockSlab) new DollanSlab.DollanDoubleSlab(DollanItems.jacaranda_slab_item)
-            .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_double_slab")
-            .setRegistryName(Reference.MOD_ID, "jacaranda_double_slab");
+    public static DollanSlab mangrove_slab = (DollanSlab) new DollanSlab.DollanHalfSlab()
+                    .setSoundType(SoundType.WOOD)
+                    .setUnlocalizedName("mangrove_slab")
+                    .setRegistryName(Reference.MOD_ID, "mangrove_slab");
+    public static DollanSlab mangrove_double_slab = (DollanSlab) new DollanSlab.DollanDoubleSlab()
+            .setSoundType(SoundType.WOOD)
+            .setUnlocalizedName("mangrove_double_slab")
+            .setRegistryName(Reference.MOD_ID, "mangrove_double_slab");
     public static Block jacaranda_trapdoor = new DollanTrapdoor()
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setUnlocalizedName("jacaranda_trapdoor")
             .setRegistryName(Reference.MOD_ID, "jacaranda_trapdoor");
-
-    public static Block jacaranda_wall_sign  = new DollanWallSign(DollanItems.jacaranda_sign)
+    public static Block jacaranda_wall_sign  = new DollanWallSign()
          .setSoundType(DollanSounds.CHERRY_WOOD)
          .setUnlocalizedName("jacaranda_wall_sign")
          .setRegistryName(Reference.MOD_ID, "jacaranda_wall_sign");
-    public static Block jacaranda_standing_sign = new DollanStandingSign(DollanItems.jacaranda_sign)
+    public static Block jacaranda_standing_sign = new DollanStandingSign()
         .setSoundType(DollanSounds.CHERRY_WOOD)
         .setUnlocalizedName("jacaranda_standing_sign")
-        .setRegistryName(Reference.MOD_ID, "jacaranda_standing_sign");;
+        .setRegistryName(Reference.MOD_ID, "jacaranda_standing_sign");
     public static DollanHangingSignAttached jacaranda_hanging_sign_attached =
-            (DollanHangingSignAttached) new DollanHangingSignAttached("jacaranda_hanging_sign_attached", DollanItems.jacaranda_hanging_sign)
+            (DollanHangingSignAttached) new DollanHangingSignAttached("jacaranda_hanging_sign_attached")
                 .setSoundType(DollanSounds.CHERRY_WOOD);
-    public static Block                     jacaranda_hanging_sign          = new DollanHangingSign("jacaranda_hanging_sign", DollanItems.jacaranda_hanging_sign)
+    public static Block                     jacaranda_hanging_sign          = new DollanHangingSign("jacaranda_hanging_sign")
         .setSoundType(DollanSounds.CHERRY_WOOD);
-    public static Block jacaranda_hanging_sign_wall = new DollanHangingSign("jacaranda_hanging_sign_wall", DollanItems.jacaranda_hanging_sign)
+    public static Block jacaranda_hanging_sign_wall = new DollanHangingSign("jacaranda_hanging_sign_wall")
         .setSoundType(DollanSounds.CHERRY_WOOD);
+
+    public static Block mangrove_wall_sign  = new DollanWallSign()
+          .setSoundType(SoundType.WOOD)
+         .setUnlocalizedName("mangrove_wall_sign")
+         .setRegistryName(Reference.MOD_ID, "mangrove_wall_sign");
+    public static Block mangrove_standing_sign = new DollanStandingSign()
+            .setSoundType(SoundType.WOOD)
+            .setUnlocalizedName("mangrove_standing_sign")
+        .setRegistryName(Reference.MOD_ID, "mangrove_standing_sign");
+    public static DollanHangingSignAttached mangrove_hanging_sign_attached =
+            (DollanHangingSignAttached) new DollanHangingSignAttached("mangrove_hanging_sign_attached")
+                    .setSoundType(SoundType.WOOD);
+    public static Block mangrove_hanging_sign
+            = new DollanHangingSign("mangrove_hanging_sign")
+            .setSoundType(SoundType.WOOD);
+    public static Block mangrove_hanging_sign_wall = new DollanHangingSign("mangrove_hanging_sign_wall")
+            .setSoundType(SoundType.WOOD);
 
     public static void register()
     {
         //block register
         registerBlock(mangrove_planks);
         registerBlock(jacaranda_button);
-        registerBlock(jacaranda_door, DollanItems.item_jacaranda_door);
+        registerBlock(jacaranda_door, null);
         registerBlock(jacaranda_fence);
         registerBlock(jacaranda_fence_gate);
         registerBlock(jacaranda_leaves, new ItemDollanLeaves(jacaranda_leaves));
@@ -159,10 +175,12 @@ public class WoodBlocks {
         registerBlock(jacaranda_pressure_plate);
         registerBlock(jacaranda_sapling);
         registerBlock(jacaranda_trapdoor);
-        registerSignBlock(jacaranda_wall_sign, jacaranda_standing_sign, DollanItems.jacaranda_sign);
-        registerHangingSignBlock(jacaranda_hanging_sign, jacaranda_hanging_sign_wall, jacaranda_hanging_sign_attached, DollanItems.jacaranda_hanging_sign);
-        registerSlabBlock(jacaranda_slab, jacaranda_double_slab, DollanItems.jacaranda_slab_item);
-        registerSlabBlock(mangrove_slab, mangrove_double_slab, DollanItems.mangrove_slab_item);
+        registerSignBlock(jacaranda_wall_sign, jacaranda_standing_sign);
+        registerHangingSignBlock(jacaranda_hanging_sign, jacaranda_hanging_sign_wall, jacaranda_hanging_sign_attached);
+        registerSignBlock(mangrove_wall_sign, mangrove_standing_sign);
+        registerHangingSignBlock(mangrove_hanging_sign, mangrove_hanging_sign_wall, mangrove_hanging_sign_attached);
+        registerSlabBlock(jacaranda_slab, jacaranda_double_slab);
+        registerSlabBlock(mangrove_slab, mangrove_double_slab);
 
         // 红木方块注册
         registerBlock(mangrove_button);
@@ -196,23 +214,20 @@ public class WoodBlocks {
         }
     }
 
-    public static void registerSlabBlock(BlockSlab singleslab, BlockSlab doubleslab, Item itemSlab) {
+    public static void registerSlabBlock(BlockSlab singleslab, BlockSlab doubleslab) {
         DollanBlocks.BLOCKS.add(singleslab);
         DollanBlocks.BLOCKS.add(doubleslab);
-        DollanItems.ITEMS.add(itemSlab);
     }
 
-    public static void registerSignBlock(Block sign, Block sign1, Item signitem) {
+    public static void registerSignBlock(Block sign, Block sign1) {
         DollanBlocks.BLOCKS.add(sign);
         DollanBlocks.BLOCKS.add(sign1);
-        DollanItems.ITEMS.add(signitem);
     }
 
-    public static void registerHangingSignBlock(Block sign, Block sign1, Block sign2, Item signitem) {
+    public static void registerHangingSignBlock(Block sign, Block sign1, Block sign2) {
         DollanBlocks.BLOCKS.add(sign);
         DollanBlocks.BLOCKS.add(sign1);
         DollanBlocks.BLOCKS.add(sign2);
-        DollanItems.ITEMS.add(signitem);
     }
 
     public static void registerBlock(Block block) {

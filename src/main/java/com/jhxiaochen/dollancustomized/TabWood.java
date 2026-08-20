@@ -32,7 +32,7 @@ public class TabWood extends CreativeTabs {
         final String[] ORDER = {
             "log", "wood", "stripped", "planks", "stairs",
             "slab", "fence", "fence_gate", "door", "trapdoor",
-            "pressure_plate", "button"
+            "pressure_plate", "button" , "sign" , "hanging_sign"
         };
 
         items.sort((o1, o2) -> {

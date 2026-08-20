@@ -77,7 +77,6 @@ public class PacketStationNameBoard extends BasePacket {
                         sign.fontSize = msg.fontSize;
                         sign.setColor(msg.colorRed, msg.colorGreen, msg.colorBlue);
                         sign.fontFamilyChinese = msg.fontFamilyChinese;
-                        sign.fontFamilyEnglish = msg.fontFamilyEnglish;
                         sign.markDirty();
                         world.notifyBlockUpdate(msg.pos, world.getBlockState(msg.pos),
                             world.getBlockState(msg.pos), 3);

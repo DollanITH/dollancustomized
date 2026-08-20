@@ -3,6 +3,8 @@ package com.jhxiaochen.dollancustomized.proxy;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.client.event.ParticleTextureEventHandler;
 import com.jhxiaochen.dollancustomized.client.font.*;
+import com.jhxiaochen.dollancustomized.client.font.chinese.ChineseFontLoader;
+import com.jhxiaochen.dollancustomized.client.font.chinese.ChineseFontRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.road.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.road.RenderRoadText;
 import com.jhxiaochen.dollancustomized.client.renderer.sign.HangingSignRenderer;
@@ -19,6 +21,8 @@ public class ClientProxy implements CommonProxy {
     public static RoadFontRenderer roadFontRenderer; // RoadText专用渲染器
     public static SignFontRenderer    signFontRenderer;  // 限高牌专用渲染器
     public static ChineseFontRenderer chineseFontRenderer;  // 限高牌专用渲染器
+    public static ChineseFontRenderer chineseFontRenderer_1;  // 限高牌专用渲染器
+    public static ChineseFontRenderer chineseFontRenderer_2; // 限高牌专用渲染器
     public static EnglishFontRenderer englishFontRenderer;  // 限高牌专用渲染器
     // 保留customFontRenderer以兼容现有代码，但内部会路由到对应的渲染器
     @Deprecated
@@ -35,6 +39,8 @@ public class ClientProxy implements CommonProxy {
         ResourceLocation ttfLocation = new ResourceLocation(Reference.MOD_ID, "fonts/road_text_fonts.ttf");
         ResourceLocation ttfLocation1 = new ResourceLocation(Reference.MOD_ID, "fonts/source-sans-pro-bold-2.otf");
         ResourceLocation ttfLocation2 = new ResourceLocation(Reference.MOD_ID, "fonts/sourcehansanscn-bold.otf");
+        ResourceLocation ttfLocation3 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_1.ttf");
+        ResourceLocation ttfLocation4 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_2.ttf");
 
         // 初始化粒子系统
         ParticleInit.init(null);
@@ -49,6 +55,10 @@ public class ClientProxy implements CommonProxy {
         // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
         ChineseFontLoader chineseFontLoader = new ChineseFontLoader(ttfLocation2, 32.0F);
         chineseFontRenderer = new ChineseFontRenderer(chineseFontLoader);
+        ChineseFontLoader chineseFontLoader_1 = new ChineseFontLoader(ttfLocation3, 32.0F);
+        chineseFontRenderer_1 = new ChineseFontRenderer(chineseFontLoader_1);
+        ChineseFontLoader chineseFontLoader_2 = new ChineseFontLoader(ttfLocation4, 32.0F);
+        chineseFontRenderer_2 = new ChineseFontRenderer(chineseFontLoader_2);
         // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
         EnglishFontLoader englishFontLoader = new EnglishFontLoader(ttfLocation1, 32.0F);
         englishFontRenderer = new EnglishFontRenderer(englishFontLoader);

@@ -15,8 +15,7 @@ public class TileEntityStationNameBoard extends TileEntity {
     public int colorRed = 255; // RGB颜色 - 红色分量
     public int colorGreen = 255; // RGB颜色 - 绿色分量
     public int colorBlue = 255; // RGB颜色 - 蓝色分量
-    public String fontFamilyChinese = "SourceHanSansCN-Bold"; // 中文字体
-    public String fontFamilyEnglish = "Source-Sans-Pro-Bold-2"; // 英文字体
+    public String fontFamilyChinese = "default"; // 中文字体
 
     // 【核心修复1】解除 64 格距离限制
     @Override
@@ -46,7 +45,6 @@ public class TileEntityStationNameBoard extends TileEntity {
         compound.setInteger("colorGreen", this.colorGreen);
         compound.setInteger("colorBlue", this.colorBlue);
         compound.setString("fontFamilyChinese", this.fontFamilyChinese);
-        compound.setString("fontFamilyEnglish", this.fontFamilyEnglish);
         return compound;
     }
 
@@ -60,7 +58,6 @@ public class TileEntityStationNameBoard extends TileEntity {
         this.colorGreen = compound.getInteger("colorGreen");
         this.colorBlue = compound.getInteger("colorBlue");
         this.fontFamilyChinese = compound.getString("fontFamilyChinese");
-        this.fontFamilyEnglish = compound.getString("fontFamilyEnglish");
     }
 
     @Override
@@ -108,10 +105,6 @@ public class TileEntityStationNameBoard extends TileEntity {
     // getter方法
     public String getFontFamilyChinese() {
         return fontFamilyChinese;
-    }
-
-    public String getFontFamilyEnglish() {
-        return fontFamilyEnglish;
     }
 
 

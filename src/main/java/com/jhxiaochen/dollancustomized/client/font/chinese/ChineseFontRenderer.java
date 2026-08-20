@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.client.font;
+package com.jhxiaochen.dollancustomized.client.font.chinese;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

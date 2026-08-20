@@ -71,6 +71,10 @@ public class WoodBlocks {
             .setSoundType(DollanSounds.CHERRY_LEAVES)
             .setUnlocalizedName("jacaranda_leaves")
             .setRegistryName(Reference.MOD_ID, "jacaranda_leaves");
+    public static Block mangrove_leaves = new DollanLeaves(null)
+            .setSoundType(SoundType.PLANT)
+            .setUnlocalizedName("mangrove_leaves")
+            .setRegistryName(Reference.MOD_ID, "mangrove_leaves");
     public static Block stripped_jacaranda_log = new DollanLog()
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setUnlocalizedName("stripped_jacaranda_log")
@@ -87,6 +91,22 @@ public class WoodBlocks {
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setUnlocalizedName("jacaranda_wood")
             .setRegistryName(Reference.MOD_ID, "jacaranda_wood");
+    public static Block stripped_mangrove_log = new DollanLog()
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("stripped_mangrove_log")
+            .setRegistryName(Reference.MOD_ID, "stripped_mangrove_log");
+    public static Block stripped_mangrove_wood = new DollanLog()
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("stripped_mangrove_wood")
+            .setRegistryName(Reference.MOD_ID, "stripped_mangrove_wood");
+    public static Block mangrove_log = new DollanLog(stripped_mangrove_log)
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_log")
+            .setRegistryName(Reference.MOD_ID, "mangrove_log");
+    public static Block mangrove_wood = new DollanLog(stripped_mangrove_wood)
+            .setSoundType(DollanSounds.CHERRY_WOOD)
+            .setUnlocalizedName("mangrove_wood")
+            .setRegistryName(Reference.MOD_ID, "mangrove_wood");
     public static Block jacaranda_planks = new DollanPlanks()
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setHardness(2.0F).setResistance(5.0F)
@@ -190,11 +210,17 @@ public class WoodBlocks {
         registerBlock(mangrove_stairs);
         registerBlock(mangrove_trapdoor);
         registerBlock(mangrove_fence_gate);
+        registerBlock(mangrove_log);
+        registerBlock(mangrove_wood);
+        registerBlock(stripped_mangrove_log);
+        registerBlock(stripped_mangrove_wood);
+        registerBlock(mangrove_leaves, new ItemDollanLeaves(mangrove_leaves));
 
         ModelLoader.setCustomStateMapper(jacaranda_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
         ModelLoader.setCustomStateMapper(jacaranda_fence_gate, new StateMap.Builder().ignore(DollanFenceGate.POWERED).build());
         ModelLoader.setCustomStateMapper(mangrove_fence_gate, new StateMap.Builder().ignore(DollanFenceGate.POWERED).build());
-        ModelLoader.setCustomStateMapper(jacaranda_leaves, (new StateMap.Builder()).ignore(JacarandaLeaves.CHECK_DECAY, JacarandaLeaves.DECAYABLE).build());
+        ModelLoader.setCustomStateMapper(jacaranda_leaves, (new StateMap.Builder()).ignore(DollanLeaves.CHECK_DECAY, DollanLeaves.DECAYABLE).build());
+        ModelLoader.setCustomStateMapper(mangrove_leaves, (new StateMap.Builder()).ignore(DollanLeaves.CHECK_DECAY, DollanLeaves.DECAYABLE).build());
         ModelLoader.setCustomStateMapper(mangrove_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
     }
 

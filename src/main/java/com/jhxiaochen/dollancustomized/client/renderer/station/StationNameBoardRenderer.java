@@ -10,6 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Objects;
+
 @SideOnly(Side.CLIENT)
 public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEntityStationNameBoard> {
 
@@ -66,21 +68,36 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
         GlStateManager.scale(1, -1, 1);
         // 获取字体大小和颜色
         float fontSizeMultiplier = te.getFontSizeMultiplier();
+        String fontCN = te.getFontFamilyChinese();
         int r = te.colorRed;
         int g = te.colorGreen;
         int b = te.colorBlue;
 
         // 使用新的字体渲染器
         float scale = fontSizeMultiplier * 0.25f; // 根据字体大小调整缩放
-        GlStateManager.translate(-ClientProxy.chineseFontRenderer.getStringWidth(te.getChineseText()) / 25f, 0.0, 0);
+
         // 渲染中文文本
         if (te.getChineseText() != null && !te.getChineseText().isEmpty()) {
             GlStateManager.pushMatrix();
 
             // 禁用深度写入，启用混合
             GlStateManager.scale(scale, scale, 1);
-            ClientProxy.chineseFontRenderer.drawString(te.getChineseText(), 0, 10, r,g,b);
 
+            // 计算中文文本在碰撞箱中心的X坐标
+            float chineseTextWidth = ClientProxy.chineseFontRenderer.getStringWidth(te.getChineseText());
+            float chineseX = -chineseTextWidth * scale / 2.0f + 1.5f; // 添加0.5像素微调
+            if (Objects.equals(fontCN, "default")) {
+                ClientProxy.chineseFontRenderer.drawString(te.getChineseText(), chineseX, 10, r, g, b);
+            }
+            if (Objects.equals(fontCN, "cn_1")) {
+                ClientProxy.chineseFontRenderer_1.drawString(te.getChineseText(), chineseX - 1.5f, 3, r, g, b);
+            }
+            if (Objects.equals(fontCN, "cn_2")) {
+                ClientProxy.chineseFontRenderer_2.drawString(te.getChineseText(), chineseX - 1.5f, 2, r, g, b);
+            }
+            if (fontCN == null) {
+                ClientProxy.chineseFontRenderer.drawString(te.getChineseText(), chineseX, 10, r, g, b);
+            }
             GlStateManager.popMatrix();
         }
 
@@ -92,25 +109,13 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
             // 禁用深度写入，启用混合
             GlStateManager.scale(engscale, engscale, 1);
 
-            // 强制居中：计算英文文本相对于整个面板的居中位置
-            // 中文文本已经在第75行进行了居中偏移
-            float chineseTextWidth = ClientProxy.chineseFontRenderer.getStringWidth(te.getChineseText());
+            // 计算英文文本在碰撞箱中心的X坐标
             float englishTextWidth = ClientProxy.englishFontRenderer.getStringWidth(te.getEnglishText());
-
-            // 计算偏移量：使英文文本相对于面板中心居中
-            // 中文文本的偏移是 -chineseTextWidth / 10.0（第75行）
-            // 英文文本需要：(总面板宽度 - 英文文本宽度) / 2 - 当前缩放基准
-            float centerXOffset = chineseTextWidth / 20.0f + englishTextWidth / 20.0f; // 除以2是因为之前的缩放
-
-            // 如果英文文本比中文文本长，需要额外偏移
-            if (englishTextWidth > chineseTextWidth / 0.5f) {
-                float difference = (englishTextWidth - chineseTextWidth) / 10.0F;
-                centerXOffset -= difference;
-            }
+            float englishX = -englishTextWidth * engscale / 2.0f + 1.5f; // 添加0.5像素微调
 
             // 英文文本在中文文本下方，偏移字体高度的1.2倍
             ClientProxy.englishFontRenderer.drawString(te.getEnglishText(),
-            centerXOffset,
+            englishX,
             -engscale * 1000,
             r,g,b);
 

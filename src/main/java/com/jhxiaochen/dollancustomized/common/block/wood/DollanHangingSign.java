@@ -13,6 +13,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -188,23 +189,61 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
     }
 
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        if (GuiScreen.isCtrlKeyDown()) return new ItemStack(item);
+    public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+        if (world.isRemote && !GuiScreen.isCtrlKeyDown()) {
+            EntityPlayer player = Minecraft.getMinecraft().player;
+            if (player == null) {
+                return new ItemStack(this.getItem());
+            } else {
+                TileEntityDollanHangingSign tile = getTileEntity(world, pos);
+                if (tile == null) {
+                    return new ItemStack(this.getItem());
+                } else {
+                    EnumFacing[] otherFacings = this.getOtherHorizontalFacings(player.getHorizontalFacing());
 
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (tileentity instanceof TileEntityDollanHangingSign) {
-            TileEntityDollanHangingSign tile = (TileEntityDollanHangingSign) tileentity;
-            int hasItemSide = tile.getDisplayedSides();
-            ItemStack itemStack = new ItemStack(item);
+                    for (EnumFacing facing : otherFacings) {
+                        int slot = this.getSlotFromFacings(state.getValue(FACING), facing);
+                        if (slot != -1) {
+                            ItemStack displayItem = tile.getDisplayItem(slot);
+                            if (displayItem != null && !displayItem.isEmpty()) {
+                                return displayItem;
+                            }
+                        }
+                    }
 
-            if (hasItemSide == 0 || hasItemSide == 1) {
-                itemStack = tile.getDisplayItem(hasItemSide);
-            } else if (hasItemSide == 2) {
-                itemStack = tile.getDisplayItem(tile.getAndToggleLastPickedSide());
+                    return new ItemStack(this.getItem());
+                }
             }
-            return itemStack;
+        } else {
+            return new ItemStack(this.getItem());
         }
-        return new ItemStack(item);
+    }
+
+    private EnumFacing[] getOtherHorizontalFacings(EnumFacing excludedFacing) {
+        EnumFacing[] allHorizontal = new EnumFacing[]{EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.EAST};
+        EnumFacing[] result = new EnumFacing[3];
+        int index = 0;
+
+        for(EnumFacing facing : allHorizontal) {
+            if (facing != excludedFacing) {
+                result[index++] = facing;
+            }
+        }
+
+        return result;
+    }
+
+    public Item getItem() {
+        return this.item;
+    }
+
+    public static TileEntityDollanHangingSign getTileEntity(IBlockAccess world, BlockPos pos) {
+            if (world != null && pos != null) {
+                TileEntity tile = world.getTileEntity(pos);
+                return tile instanceof TileEntityDollanHangingSign ? (TileEntityDollanHangingSign) tile : null;
+            } else {
+                return null;
+            }
     }
 
     @Override

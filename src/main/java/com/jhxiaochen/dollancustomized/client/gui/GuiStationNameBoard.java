@@ -28,8 +28,8 @@ public class GuiStationNameBoard extends GuiScreen {
     // 字体族按钮
     private GuiButton fontFamilyButton;
     private int currentFontFamilyIndex;
-    private String[] fontFamilyOptions = {"default", "sign", "road"};
-    private String[] fontFamilyNames = {"默认字体", "字体1", "字体2"};
+    private final String[] fontFamilyOptions = {"default", "cn_1", "cn_2"};
+    private final String[] fontFamilyNames = {"默认字体", "字体1", "字体2"};
 
     public GuiStationNameBoard(TileEntityStationNameBoard te) {
         this.tileEntity = te;
@@ -100,7 +100,7 @@ public class GuiStationNameBoard extends GuiScreen {
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException {
+    protected void actionPerformed(GuiButton button) {
         if (button.id == 7) {
             saveAndClose();
         } else if (button.id == 8) {

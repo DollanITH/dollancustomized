@@ -70,13 +70,13 @@ public class DollanLeaves extends BlockLeaves {
         float chance = rand.nextFloat();
         if (chance < 0.0625F) {
             // 6.25% 概率获得树苗
-            return Item.getItemFromBlock(sapling);
+            return sapling != null ? Item.getItemFromBlock(sapling) : Item.getItemFromBlock(this);
         } else if (chance < 0.9375F) {
             // 87.5% 概率获得木棍
             return Items.STICK;
         }
         // 6.25% 概率无掉落
-        return null;
+        return Items.AIR;
     }
 
     @Nonnull

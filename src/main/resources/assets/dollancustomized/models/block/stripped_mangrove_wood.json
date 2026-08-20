@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "dollancustomized:blocks/stripped_mangrove_log",
+        "side": "dollancustomized:blocks/stripped_mangrove_log"
+    }
+}

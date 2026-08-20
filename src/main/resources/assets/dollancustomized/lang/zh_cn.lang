@@ -660,3 +660,10 @@ tile.mangrove_trapdoor.name=红木活板门
 tile.mangrove_sign.name=红木告示牌
 item.mangrove_sign.name=红木告示牌
 item.mangrove_hanging_sign.name=悬挂式红木告示牌
+tile.stripped_mangrove_log.name=去皮红木原木
+tile.stripped_mangrove_wood.name=去皮红木
+tile.mangrove_log.name=红木原木
+tile.mangrove_wood.name=红木
+tile.mangrove_leaves.name=红树树叶
+
+

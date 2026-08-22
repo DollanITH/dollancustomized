@@ -25,7 +25,7 @@ public class BlockMyaliteCrystal extends BlockBreakable
         super(Material.GLASS, true);
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         this.setRegistryName("myalite_crystal");
-        this.setUnlocalizedName(Reference.MOD_ID + ".myalite.crystal");
+        this.setTranslationKey(Reference.MOD_ID + ".myalite.crystal");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setSoundType(SoundType.GLASS);
         this.setHardness(1.0F);
@@ -35,7 +35,7 @@ public class BlockMyaliteCrystal extends BlockBreakable
     @Override
     @SideOnly(Side.CLIENT)
     @Nonnull
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }

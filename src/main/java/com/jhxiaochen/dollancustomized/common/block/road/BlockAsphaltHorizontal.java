@@ -21,7 +21,7 @@ public class BlockAsphaltHorizontal extends BlockAsphaltBase {
         super(Material.ROCK);
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setHardness(1.0F);
         this.setResistance(5.0F);
         this.setTickRandomly(true);
@@ -39,7 +39,7 @@ public class BlockAsphaltHorizontal extends BlockAsphaltBase {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -60,7 +60,7 @@ public class BlockAsphaltHorizontal extends BlockAsphaltBase {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

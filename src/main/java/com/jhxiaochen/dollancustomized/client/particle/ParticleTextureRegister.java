@@ -29,7 +29,7 @@ public class ParticleTextureRegister {
 
         for (ResourceLocation texture : PARTICLE_TEXTURES) {
             // 强制纹理加载
-            textureMap.getAtlasSprite(texture.getResourcePath());
+            textureMap.getAtlasSprite(texture.getPath());
         }
 
         System.out.println("Loaded " + PARTICLE_TEXTURES.size() + " jacaranda particle textures");

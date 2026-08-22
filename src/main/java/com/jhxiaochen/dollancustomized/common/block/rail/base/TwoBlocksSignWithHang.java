@@ -91,7 +91,7 @@ public class TwoBlocksSignWithHang extends TwoBlocksSignBase {
     public IBlockState getStateFromMeta(int meta) {
         EnumSignHalf varient = EnumSignHalf.LOWER;
         EnumWallHalf wall = EnumWallHalf.NONE;
-        EnumFacing facing = EnumFacing.getHorizontal(meta & 3);
+        EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 3);
         switch (meta) {
             case 0:
             case 1:

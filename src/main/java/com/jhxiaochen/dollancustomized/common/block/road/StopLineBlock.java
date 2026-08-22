@@ -90,7 +90,7 @@ public class StopLineBlock extends BlockAsphaltHorizontal
         EnumVarient varient = EnumVarient.NORMAL;
         if ((meta & 0x4) != 0) varient = EnumVarient.DIAGONAL_1;
         else if ((meta & 0x8) != 0) varient = EnumVarient.DIAGONAL_2;
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(VARIENT, varient);
+        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(VARIENT, varient);
     }
 
     @Override

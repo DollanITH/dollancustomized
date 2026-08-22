@@ -120,7 +120,7 @@ public class BlockRoadText extends Block implements ITileEntityProvider, IArrow 
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() { return BlockRenderLayer.CUTOUT_MIPPED; }
+    public BlockRenderLayer getRenderLayer() { return BlockRenderLayer.CUTOUT_MIPPED; }
     @Override
     public boolean isOpaqueCube(IBlockState state) { return false; }
     @Override
@@ -133,7 +133,7 @@ public class BlockRoadText extends Block implements ITileEntityProvider, IArrow 
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, (meta & 4) != 0 ? MarkType.SLAB : MarkType.FULL);
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(TYPE, (meta & 4) != 0 ? MarkType.SLAB : MarkType.FULL);
     }
     @Override
     public int getMetaFromState(IBlockState state) {

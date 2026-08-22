@@ -49,7 +49,7 @@ public class OverheadLinesWye extends OverheadLinesHorzional {
 
     public OverheadLinesWye(String name) {
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
     }
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

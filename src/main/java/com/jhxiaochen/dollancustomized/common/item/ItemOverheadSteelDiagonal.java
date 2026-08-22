@@ -10,8 +10,8 @@ public class ItemOverheadSteelDiagonal extends ItemMultiTexture {
         super(block, block, var1 -> OverheadSteelDiagonal.EnumLineHalf.byMetadata(var1.getMetadata()).getName());
     }
     @Override
-    public String getUnlocalizedName(ItemStack stack)
+    public String getTranslationKey(ItemStack stack)
     {
-        return this.block.getUnlocalizedName();
+        return this.block.getTranslationKey();
     }
 }

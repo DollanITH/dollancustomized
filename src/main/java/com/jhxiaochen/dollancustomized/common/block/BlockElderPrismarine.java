@@ -73,7 +73,7 @@ public class BlockElderPrismarine extends Block {
         public BlockElderPrismarine(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(Reference.MOD_ID + ".elder_prismarine");
+        this.setTranslationKey(Reference.MOD_ID + ".elder_prismarine");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);

@@ -21,7 +21,7 @@ public class BlockTranLight extends BlockColored
     public BlockTranLight(String name)
         {
             super(Material.GLASS);
-            this.setUnlocalizedName(name);
+            this.setTranslationKey(name);
             this.setCreativeTab(DollanCustomized.LIGHT_TAB);
             this.setSoundType(SoundType.GLASS);
             this.setLightLevel(1.0F);
@@ -38,7 +38,7 @@ public class BlockTranLight extends BlockColored
 
         @SideOnly(Side.CLIENT)
         @Override
-        public BlockRenderLayer getBlockLayer() {
+        public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
         @Override

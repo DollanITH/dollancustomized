@@ -28,10 +28,10 @@ public class ItemRailwaySign2 extends ItemMultiTexture
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack)
+    public String getTranslationKey(ItemStack stack)
     {
             int i = stack.getMetadata();
-            return i > 0 ? this.block.getUnlocalizedName() + "." + this.nameFunction.apply(stack) : this.block.getUnlocalizedName();
+            return i > 0 ? this.block.getTranslationKey() + "." + this.nameFunction.apply(stack) : this.block.getTranslationKey();
     }
 
     @Override

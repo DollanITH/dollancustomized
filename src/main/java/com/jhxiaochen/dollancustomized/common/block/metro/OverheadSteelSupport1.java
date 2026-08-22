@@ -16,7 +16,7 @@ public class OverheadSteelSupport1 extends OverheadSteelHorzional {
 
     public OverheadSteelSupport1(String name) {
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
     }
 
     @Override

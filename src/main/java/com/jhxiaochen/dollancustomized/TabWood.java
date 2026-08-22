@@ -18,7 +18,7 @@ public class TabWood extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem()
+    public ItemStack createIcon()
     {
         return new ItemStack(WoodBlocks.jacaranda_log);
     }
@@ -38,8 +38,8 @@ public class TabWood extends CreativeTabs {
         items.sort((o1, o2) -> {
             ResourceLocation name1 = o1.getItem().getRegistryName();
             ResourceLocation name2 = o2.getItem().getRegistryName();
-            String s1 = name1 != null ? name1.getResourcePath() : "";
-            String s2 = name2 != null ? name2.getResourcePath() : "";
+            String s1 = name1 != null ? name1.getPath() : "";
+            String s2 = name2 != null ? name2.getPath() : "";
 
             // 先按木材种类排序（mangrove, jacaranda）
             String woodType1 = getWoodType(s1);

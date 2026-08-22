@@ -22,135 +22,135 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WoodBlocks {
-    public static Block mangrove_planks = new DollanPlanks().setRegistryName(Reference.MOD_ID, "mangrove_planks").setUnlocalizedName("mangrove_planks");
+    public static Block mangrove_planks = new DollanPlanks().setRegistryName(Reference.MOD_ID, "mangrove_planks").setTranslationKey("mangrove_planks");
     public static Block mangrove_button = new DollanButton(false)
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_button")
+            .setTranslationKey("mangrove_button")
             .setRegistryName(Reference.MOD_ID, "mangrove_button");
     public static Block mangrove_door = new DollanDoor()
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_door")
+            .setTranslationKey("mangrove_door")
             .setRegistryName(Reference.MOD_ID, "mangrove_door");
     public static Block mangrove_fence = new DollanFence()
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_fence")
+            .setTranslationKey("mangrove_fence")
             .setRegistryName(Reference.MOD_ID, "mangrove_fence");
     public static Block mangrove_pressure_plate = new DollanPressurePlate(true)
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_pressure_plate")
+            .setTranslationKey("mangrove_pressure_plate")
             .setRegistryName(Reference.MOD_ID, "mangrove_pressure_plate");
     public static Block mangrove_stairs = new DollanStairs(mangrove_planks)
             .setCreativeTab(DollanCustomized.WOOD_TAB)
-            .setUnlocalizedName("mangrove_stairs")
+            .setTranslationKey("mangrove_stairs")
             .setRegistryName(Reference.MOD_ID, "mangrove_stairs");
     public static Block mangrove_trapdoor = new DollanTrapdoor()
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_trapdoor")
+            .setTranslationKey("mangrove_trapdoor")
             .setRegistryName(Reference.MOD_ID, "mangrove_trapdoor");
     public static Block mangrove_fence_gate = new DollanFenceGate()
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_fence_gate")
+            .setTranslationKey("mangrove_fence_gate")
             .setRegistryName(Reference.MOD_ID, "mangrove_fence_gate");
     public static Block jacaranda_button = new DollanButton(true)
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_button")
+            .setTranslationKey("jacaranda_button")
             .setRegistryName(Reference.MOD_ID, "jacaranda_button");
     public static Block jacaranda_door = new DollanDoor()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_door")
+            .setTranslationKey("jacaranda_door")
             .setRegistryName(Reference.MOD_ID, "jacaranda_door");
     public static Block jacaranda_fence = new DollanFence()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_fence")
+            .setTranslationKey("jacaranda_fence")
             .setRegistryName(Reference.MOD_ID, "jacaranda_fence");
     public static Block jacaranda_fence_gate = new DollanFenceGate()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_fence_gate")
+            .setTranslationKey("jacaranda_fence_gate")
             .setRegistryName(Reference.MOD_ID, "jacaranda_fence_gate");
     public static Block jacaranda_leaves = new JacarandaLeaves()
             .setSoundType(DollanSounds.CHERRY_LEAVES)
-            .setUnlocalizedName("jacaranda_leaves")
+            .setTranslationKey("jacaranda_leaves")
             .setRegistryName(Reference.MOD_ID, "jacaranda_leaves");
     public static Block mangrove_leaves = new DollanLeaves(null)
             .setSoundType(SoundType.PLANT)
-            .setUnlocalizedName("mangrove_leaves")
+            .setTranslationKey("mangrove_leaves")
             .setRegistryName(Reference.MOD_ID, "mangrove_leaves");
     public static Block stripped_jacaranda_log = new DollanLog()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("stripped_jacaranda_log")
+            .setTranslationKey("stripped_jacaranda_log")
             .setRegistryName(Reference.MOD_ID, "stripped_jacaranda_log");
     public static Block stripped_jacaranda_wood = new DollanLog()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("stripped_jacaranda_wood")
+            .setTranslationKey("stripped_jacaranda_wood")
             .setRegistryName(Reference.MOD_ID, "stripped_jacaranda_wood");
     public static Block jacaranda_log = new DollanLog(stripped_jacaranda_log)
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_log")
+            .setTranslationKey("jacaranda_log")
             .setRegistryName(Reference.MOD_ID, "jacaranda_log");
     public static Block jacaranda_wood = new DollanLog(stripped_jacaranda_wood)
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_wood")
+            .setTranslationKey("jacaranda_wood")
             .setRegistryName(Reference.MOD_ID, "jacaranda_wood");
     public static Block stripped_mangrove_log = new DollanLog()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("stripped_mangrove_log")
+            .setTranslationKey("stripped_mangrove_log")
             .setRegistryName(Reference.MOD_ID, "stripped_mangrove_log");
     public static Block stripped_mangrove_wood = new DollanLog()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("stripped_mangrove_wood")
+            .setTranslationKey("stripped_mangrove_wood")
             .setRegistryName(Reference.MOD_ID, "stripped_mangrove_wood");
     public static Block mangrove_log = new DollanLog(stripped_mangrove_log)
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("mangrove_log")
+            .setTranslationKey("mangrove_log")
             .setRegistryName(Reference.MOD_ID, "mangrove_log");
     public static Block mangrove_wood = new DollanLog(stripped_mangrove_wood)
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("mangrove_wood")
+            .setTranslationKey("mangrove_wood")
             .setRegistryName(Reference.MOD_ID, "mangrove_wood");
     public static Block jacaranda_planks = new DollanPlanks()
             .setSoundType(DollanSounds.CHERRY_WOOD)
             .setHardness(2.0F).setResistance(5.0F)
-            .setUnlocalizedName("jacaranda_planks")
+            .setTranslationKey("jacaranda_planks")
             .setRegistryName(Reference.MOD_ID, "jacaranda_planks");
     public static Block jacaranda_stairs = new DollanStairs(jacaranda_planks)
             .setCreativeTab(DollanCustomized.WOOD_TAB)
-            .setUnlocalizedName("jacaranda_stairs")
+            .setTranslationKey("jacaranda_stairs")
             .setRegistryName(Reference.MOD_ID, "jacaranda_stairs");
     public static Block jacaranda_pressure_plate = new DollanPressurePlate(true)
                     .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("jacaranda_pressure_plate")
+                    .setTranslationKey("jacaranda_pressure_plate")
                     .setRegistryName(Reference.MOD_ID, "jacaranda_pressure_plate");
     public static Block jacaranda_sapling = new JacarandaSapling()
             .setSoundType(DollanSounds.CHERRY_LEAVES)
-            .setUnlocalizedName("jacaranda_sapling")
+            .setTranslationKey("jacaranda_sapling")
             .setRegistryName(Reference.MOD_ID, "jacaranda_sapling");
     public static DollanSlab jacaranda_slab = (DollanSlab) new DollanSlab.DollanHalfSlab()
                     .setSoundType(DollanSounds.CHERRY_WOOD)
-                    .setUnlocalizedName("jacaranda_slab")
+                    .setTranslationKey("jacaranda_slab")
                     .setRegistryName(Reference.MOD_ID, "jacaranda_slab");
     public static DollanSlab jacaranda_double_slab = (DollanSlab) new DollanSlab.DollanDoubleSlab()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_double_slab")
+            .setTranslationKey("jacaranda_double_slab")
             .setRegistryName(Reference.MOD_ID, "jacaranda_double_slab");
     public static DollanSlab mangrove_slab = (DollanSlab) new DollanSlab.DollanHalfSlab()
                     .setSoundType(SoundType.WOOD)
-                    .setUnlocalizedName("mangrove_slab")
+                    .setTranslationKey("mangrove_slab")
                     .setRegistryName(Reference.MOD_ID, "mangrove_slab");
     public static DollanSlab mangrove_double_slab = (DollanSlab) new DollanSlab.DollanDoubleSlab()
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_double_slab")
+            .setTranslationKey("mangrove_double_slab")
             .setRegistryName(Reference.MOD_ID, "mangrove_double_slab");
     public static Block jacaranda_trapdoor = new DollanTrapdoor()
             .setSoundType(DollanSounds.CHERRY_WOOD)
-            .setUnlocalizedName("jacaranda_trapdoor")
+            .setTranslationKey("jacaranda_trapdoor")
             .setRegistryName(Reference.MOD_ID, "jacaranda_trapdoor");
     public static Block jacaranda_wall_sign  = new DollanWallSign()
          .setSoundType(DollanSounds.CHERRY_WOOD)
-         .setUnlocalizedName("jacaranda_wall_sign")
+         .setTranslationKey("jacaranda_wall_sign")
          .setRegistryName(Reference.MOD_ID, "jacaranda_wall_sign");
     public static Block jacaranda_standing_sign = new DollanStandingSign()
         .setSoundType(DollanSounds.CHERRY_WOOD)
-        .setUnlocalizedName("jacaranda_standing_sign")
+        .setTranslationKey("jacaranda_standing_sign")
         .setRegistryName(Reference.MOD_ID, "jacaranda_standing_sign");
     public static DollanHangingSignAttached jacaranda_hanging_sign_attached =
             (DollanHangingSignAttached) new DollanHangingSignAttached("jacaranda_hanging_sign_attached")
@@ -162,11 +162,11 @@ public class WoodBlocks {
 
     public static Block mangrove_wall_sign  = new DollanWallSign()
           .setSoundType(SoundType.WOOD)
-         .setUnlocalizedName("mangrove_wall_sign")
+         .setTranslationKey("mangrove_wall_sign")
          .setRegistryName(Reference.MOD_ID, "mangrove_wall_sign");
     public static Block mangrove_standing_sign = new DollanStandingSign()
             .setSoundType(SoundType.WOOD)
-            .setUnlocalizedName("mangrove_standing_sign")
+            .setTranslationKey("mangrove_standing_sign")
         .setRegistryName(Reference.MOD_ID, "mangrove_standing_sign");
     public static DollanHangingSignAttached mangrove_hanging_sign_attached =
             (DollanHangingSignAttached) new DollanHangingSignAttached("mangrove_hanging_sign_attached")
@@ -235,7 +235,7 @@ public class WoodBlocks {
         }
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             if (flag) {
-                registerCustomModel(block, 0, block.getRegistryName().getResourcePath());
+                registerCustomModel(block, 0, block.getRegistryName().getPath());
             }
         }
     }

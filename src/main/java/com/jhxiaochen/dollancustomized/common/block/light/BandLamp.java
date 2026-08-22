@@ -47,7 +47,7 @@ public class BandLamp extends BlockHorizontal {
     public static final PropertyEnum<BandLamp.EnumVertical> VERTICAL = PropertyEnum.<BandLamp.EnumVertical>create("vertical", BandLamp.EnumVertical.class);
     public BandLamp(String name) {
         super(Material.GLASS);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(1.5F);
@@ -60,7 +60,7 @@ public class BandLamp extends BlockHorizontal {
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
@@ -144,7 +144,7 @@ public class BandLamp extends BlockHorizontal {
         EnumVertical vertical = EnumVertical.MID;
         if ((meta & 0x8) != 0) vertical = EnumVertical.DOWN;
         else if ((meta & 0x4) != 0) vertical = EnumVertical.UP;
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(VERTICAL, vertical);
+        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(VERTICAL, vertical);
     }
 
     @Override

@@ -18,7 +18,6 @@ public class MixinWorldType {
     public static WorldType FLAT;
 
     @Inject(method = "voidFadeMagnitude()D", at = @At(value = "RETURN"), cancellable = true, remap = false)
-    // 4. 参数必须是 CallbackInfoReturnable<Double>，注意是包装类 Double
     private void dollanModifyVoidFade(CallbackInfoReturnable<Double> cir) {
 
         World world = Minecraft.getMinecraft().world;

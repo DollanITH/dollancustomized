@@ -52,7 +52,7 @@ public class OverheadLinesDD1 extends OverheadLinesHorzional {
 
     public OverheadLinesDD1(String name) {
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
     }
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

@@ -110,7 +110,7 @@ public class BlockMetroFence extends Block {
     }
     public BlockMetroFence(String name) {
         super(Material.IRON);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(3.0F);
@@ -124,7 +124,7 @@ public class BlockMetroFence extends Block {
 
     public String getUnlocalizedName(ItemStack stack)
     {
-        return super.getUnlocalizedName() + "." + FenceType.byMetadata(stack.getMetadata()).getUnlocalizedName();
+        return super.getTranslationKey() + "." + FenceType.byMetadata(stack.getMetadata()).getUnlocalizedName();
     }
 
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
@@ -224,7 +224,7 @@ public class BlockMetroFence extends Block {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
         Block block = iblockstate.getBlock();
-        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.blockMaterial || block instanceof BlockFenceGate);
+        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.material || block instanceof BlockFenceGate);
         return !isExcepBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID || flag;
     }
 

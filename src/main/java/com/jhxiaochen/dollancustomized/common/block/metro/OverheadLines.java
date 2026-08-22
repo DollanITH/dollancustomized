@@ -31,7 +31,7 @@ public class OverheadLines extends Block
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     public OverheadLines(String name) {
         super(Material.CLOTH);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(1.5F);
@@ -50,7 +50,7 @@ public class OverheadLines extends Block
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
     public boolean isOpaqueCube(IBlockState state)

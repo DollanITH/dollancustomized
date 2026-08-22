@@ -88,7 +88,7 @@ public class RoadSeparateDiagonalSlab extends Block {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         // 获取低2位作为方向索引
-        EnumFacing facing = EnumFacing.getHorizontal(meta & 3);
+        EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 3);
         // 获取高位作为变体索引 (右移2位)
         EnumVariant variant = EnumVariant.byMetadata(meta >> 2);
         return this.getDefaultState().withProperty(FACING, facing).withProperty(VARIANT, variant);
@@ -113,7 +113,7 @@ public class RoadSeparateDiagonalSlab extends Block {
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
@@ -182,7 +182,7 @@ public class RoadSeparateDiagonalSlab extends Block {
 
         @SubscribeEvent
         public static void registerBlock(RegistryEvent.Register<Block> event) {
-            event.getRegistry().register(block = new RoadSeparateDiagonalSlab().setRegistryName("separate_diagonal_slab").setUnlocalizedName("separate_diagonal_slab"));
+            event.getRegistry().register(block = new RoadSeparateDiagonalSlab().setRegistryName("separate_diagonal_slab").setTranslationKey("separate_diagonal_slab"));
         }
 
             @SubscribeEvent

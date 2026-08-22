@@ -118,7 +118,7 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
     public OverheadSteelDiagonalSupport(String name) {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
@@ -228,7 +228,7 @@ public class OverheadSteelDiagonalSupport extends OverheadSteelHorzional {
         EnumLineHalf type = EnumLineHalf.SINGLE;
         if ((meta & 4) != 0) type = EnumLineHalf.DOUBLE;
         if ((meta & 8) != 0) type = EnumLineHalf.DOUBLE_1;
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, type);
+        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(TYPE, type);
     }
 
     @Override

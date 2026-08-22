@@ -20,7 +20,7 @@ public class OverheadLinesSupport extends OverheadLinesHorzional {
     public OverheadLinesSupport(String name) {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setHardness(0.7F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.CLOTH);

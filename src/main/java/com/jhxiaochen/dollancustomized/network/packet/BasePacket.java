@@ -55,7 +55,7 @@ public abstract class BasePacket implements IMessage {
     }
 
     protected static void writeNBT(ByteBuf buf, NBTTagCompound nbt) {
-        if (nbt == null || nbt.hasNoTags()) {
+        if (nbt == null || nbt.isEmpty()) {
             buf.writeInt(0);
             return;
         }

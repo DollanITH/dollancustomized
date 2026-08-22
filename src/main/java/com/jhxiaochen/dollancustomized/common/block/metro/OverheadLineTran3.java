@@ -32,7 +32,7 @@ public class OverheadLineTran3 extends Block {
         super(Material.ROCK);
         this.setRegistryName("overhead_translation_3");
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName("overhead_translation_3");
+        this.setTranslationKey("overhead_translation_3");
         this.setHardness(2.25F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);
@@ -50,7 +50,7 @@ public class OverheadLineTran3 extends Block {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -124,7 +124,7 @@ public class OverheadLineTran3 extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

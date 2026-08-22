@@ -62,7 +62,7 @@ public class OverheadLineTran5 extends OverheadSteelHorzional {
     public OverheadLineTran5(String name) {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setHardness(2.5F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);

@@ -215,9 +215,9 @@ public class DollanBlocks {
     public static Block road_traffic_light_red = new BlockRoadSign("road_traffic_light_red");
     public static Block road_traffic_light_green = new BlockRoadSign("road_traffic_light_green");
     public static Block road_traffic_light_yellow = new BlockRoadSign("road_traffic_light_yellow");
-    public static Block power_method_change_sign = new TwoBlocksSignBase().setRegistryName("power_method_change_sign").setUnlocalizedName("PowerMethodChangeSign");
-    public static Block station_stop_sign = new StationStopSign().setRegistryName("station_stop_sign").setUnlocalizedName("StationStopSign");
-    public static Block station_stop_wall_sign = new StationStopWallSign().setRegistryName("station_stop_wall_sign").setUnlocalizedName("StationStopSign");
+    public static Block power_method_change_sign = new TwoBlocksSignBase().setRegistryName("power_method_change_sign").setTranslationKey("PowerMethodChangeSign");
+    public static Block station_stop_sign = new StationStopSign().setRegistryName("station_stop_sign").setTranslationKey("StationStopSign");
+    public static Block station_stop_wall_sign = new StationStopWallSign().setRegistryName("station_stop_wall_sign").setTranslationKey("StationStopSign");
     public static Block thick_white_line_45 = new BlockAsphaltHorizontal("thick_white_line_45");
     public static Block thick_white_line_slab_45 = new BlockAsphaltSlabHorizontal("thick_white_line_slab_45");
     public static Block thick_yellow_line_45 = new BlockAsphaltHorizontal("thick_yellow_line_45");
@@ -226,7 +226,7 @@ public class DollanBlocks {
     public static Block marble_block = new DollanBlock("marble_block").setHardness(1.5F).setResistance(10.0F);
 
     public static Block beautiful_marble = new BlockMarble("beautiful_marble");
-    public static Block calcite = new Block(Material.ROCK).setUnlocalizedName("dollancustomized.calcite").setRegistryName(Reference.MOD_ID, "calcite").setHardness(1.5F).setResistance(10.0F);
+    public static Block calcite = new Block(Material.ROCK).setTranslationKey("dollancustomized.calcite").setRegistryName(Reference.MOD_ID, "calcite").setHardness(1.5F).setResistance(10.0F);
     public static Block cracked_deepslate = new BlockCrackedDeepSlate("cracked_deepslate");
     public static Block deepslate = new BlockDeepSlate("deepslate");
     public static Block elder_prismarine = new BlockElderPrismarine("elder_prismarine");
@@ -239,9 +239,9 @@ public class DollanBlocks {
     public static Block metal = new DollanBlock4("metal");
     public static Block mud_bricks = new DollanBlock2("mud_bricks");
     //public static Block myalite = new BlockMyalite("myalite");
-    public static Block myalite = new Block(Material.ROCK).setRegistryName("myalite").setCreativeTab(DollanCustomized.Blocks).setUnlocalizedName(Reference.MOD_ID + ".myalite.normal").setHardness(1.0F).setResistance(10F);
+    public static Block myalite = new Block(Material.ROCK).setRegistryName("myalite").setCreativeTab(DollanCustomized.Blocks).setTranslationKey(Reference.MOD_ID + ".myalite.normal").setHardness(1.0F).setResistance(10F);
     public static Block myalite_crystal = new BlockMyaliteCrystal();
-    public static Block myalite_pavement = new Block(Material.ROCK).setRegistryName("myalite_pavement").setCreativeTab(DollanCustomized.Blocks).setUnlocalizedName(Reference.MOD_ID + ".myalite.pavement").setHardness(1.0F).setResistance(10F);
+    public static Block myalite_pavement = new Block(Material.ROCK).setRegistryName("myalite_pavement").setCreativeTab(DollanCustomized.Blocks).setTranslationKey(Reference.MOD_ID + ".myalite.pavement").setHardness(1.0F).setResistance(10F);
     public static Block packed_mud = new DollanBlock2("packed_mud");
     public static Block polished_blackstone = new BlockPolishedBlackStone();
     public static Block polished_deepslate = new DollanPolishedDeepSlate("polished_deepslate");
@@ -332,8 +332,8 @@ public class DollanBlocks {
     public static Block metro_tran5 = new OverheadLineTran5("overhead_translation_5");
     public static Block metro_tran6 = new OverheadLineTran6("overhead_translation_6");
     public static Block metro_tran7 = new OverheadLineTran7();
-    public static Block deport_stop_sign = new TwoBlocksSignBase().setRegistryName("deport_stop_sign").setUnlocalizedName("DeportStopSign");
-    public static Block empty_railway_sign = new EmptySignBlock().setRegistryName("empty_railway_sign").setUnlocalizedName("empty_railway_sign");
+    public static Block deport_stop_sign = new TwoBlocksSignBase().setRegistryName("deport_stop_sign").setTranslationKey("DeportStopSign");
+    public static Block empty_railway_sign = new EmptySignBlock().setRegistryName("empty_railway_sign").setTranslationKey("empty_railway_sign");
 
     public static Block road_signpost = new RoadSignpost();
     public static Block road_signpost_half = new RoadSignpostHalf();
@@ -367,9 +367,9 @@ public class DollanBlocks {
     public static Block dollan_line_20 = new BlockMetroBlock("dollan_line_20");
     public static Block dollan_line_21 = new BlockMetroBlock("dollan_line_21");
     public static Block dollan_line_22 = new BlockMetroBlock("dollan_line_22");
-    public static Block road_text_mark = new BlockRoadText().setRegistryName("road_text_mark").setUnlocalizedName("RoadTextMark");
+    public static Block road_text_mark = new BlockRoadText().setRegistryName("road_text_mark").setTranslationKey("RoadTextMark");
     public static Block road_sign_height_limit_custom = new BlockHeightLimitSignCustom();
-    public static Block station_name_board = new BlockStationNameBoard().setRegistryName("station_name_board").setUnlocalizedName("StationNameBoard");
+    public static Block station_name_board = new BlockStationNameBoard().setRegistryName("station_name_board").setTranslationKey("StationNameBoard");
     public static Block arrow_no_diaotou = new DisableArrowYellow("arrow_no_diaotou");
     public static Block height_limit_3 = new HeightLimitSign("road_sign_height_limit_3");
     public static Block height_limit_4 = new HeightLimitSign("road_sign_height_limit_4");
@@ -387,8 +387,8 @@ public class DollanBlocks {
         registerSimpleBlock(station_name_board);
         registerSimpleBlock(road_give_way_mark);
         registerSimpleBlock(road_slow_down_mark);
-        registerSimpleBlock(lamp_tran, new ItemMultiTexture(lamp_tran, lamp_tran, p_apply_1_ -> EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
-        registerSimpleBlock(light, new ItemMultiTexture(light, light, p_apply_1_ -> EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
+        registerSimpleBlock(lamp_tran, new ItemMultiTexture(lamp_tran, lamp_tran, p_apply_1_ -> EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getTranslationKey()));
+        registerSimpleBlock(light, new ItemMultiTexture(light, light, p_apply_1_ -> EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getTranslationKey()));
         registerSimpleBlock(metro_fence, new ItemMultiTexture(metro_fence, metro_fence, p_apply_1_ -> BlockMetroFence.FenceType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
         registerSimpleBlock(station_end_door, null);
         registerSimpleBlock(railway_sign_post);
@@ -735,7 +735,7 @@ public class DollanBlocks {
         }));
         registerSimpleBlock(marble_tile, new ItemMultiTexture(marble_tile, marble_tile, new ItemMultiTexture.Mapper() {
             public String apply(ItemStack p_apply_1_) {
-                return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName();
+                return EnumDyeColor.byMetadata(p_apply_1_.getMetadata()).getTranslationKey();
             }
         }));
 
@@ -977,7 +977,7 @@ public class DollanBlocks {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
-                String registryName = height_limit_3.getRegistryName().getResourcePath();
+                String registryName = height_limit_3.getRegistryName().getPath();
                 String modelName = registryName + "_" + typeValue.getName();
 
                 Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -991,7 +991,7 @@ public class DollanBlocks {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
-                String registryName = height_limit_4.getRegistryName().getResourcePath();
+                String registryName = height_limit_4.getRegistryName().getPath();
                 String modelName = registryName + "_" + typeValue.getName();
 
                 Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -1005,7 +1005,7 @@ public class DollanBlocks {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
-                String registryName = height_limit_5.getRegistryName().getResourcePath();
+                String registryName = height_limit_5.getRegistryName().getPath();
                 String modelName = registryName + "_" + typeValue.getName();
 
                 Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
@@ -1032,7 +1032,7 @@ public class DollanBlocks {
 
     @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block) {
-        registerCustomModel(block, 0, block.getRegistryName().getResourcePath());
+        registerCustomModel(block, 0, block.getRegistryName().getPath());
     }
 
 }

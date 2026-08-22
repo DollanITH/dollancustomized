@@ -16,7 +16,7 @@ public class TabdollanMetro extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(DollanBlocks.dollan_line_1);
     }
 

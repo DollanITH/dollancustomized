@@ -11,7 +11,7 @@ public class TabLight extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(DollanBlocks.light);
     }
 

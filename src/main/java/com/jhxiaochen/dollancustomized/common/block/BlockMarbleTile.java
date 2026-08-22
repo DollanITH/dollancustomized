@@ -13,7 +13,7 @@ public class BlockMarbleTile extends BlockColored {
     public BlockMarbleTile() {
         super(Material.ROCK);
         this.setRegistryName("marble_tile");
-        this.setUnlocalizedName(Reference.MOD_ID + "." + "marble_tile");
+        this.setTranslationKey(Reference.MOD_ID + "." + "marble_tile");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.1F);
         this.setResistance(5F);

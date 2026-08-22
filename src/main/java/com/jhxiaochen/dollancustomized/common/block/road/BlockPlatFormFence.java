@@ -30,7 +30,7 @@ public class BlockPlatFormFence extends Block {
         super(Material.ROCK);
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(3.0F);
         this.setSoundType(SoundType.METAL);
@@ -65,7 +65,7 @@ public class BlockPlatFormFence extends Block {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -86,7 +86,7 @@ public class BlockPlatFormFence extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

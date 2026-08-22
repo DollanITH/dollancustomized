@@ -119,7 +119,7 @@ public class StationStopWallSign extends RailwaySignBase {
         if (meta >= 4 && meta <= 7) connected = EnumVarient.DOUBLE_WALL_RIGHT;
         else if (meta >= 8 && meta <= 11) connected = EnumVarient.SINGLE_WALL_LEFT;
         else if (meta >= 12 && meta <= 15) connected = EnumVarient.DOUBLE_WALL_LEFT;
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(WALL, connected);
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(WALL, connected);
     }
 
     @Override

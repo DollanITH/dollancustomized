@@ -1,0 +1,68 @@
+package com.jhxiaochen.dollancustomized.client.event;
+
+import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.client.font.*;
+import com.jhxiaochen.dollancustomized.client.font.chinese.ChineseFontLoader;
+import com.jhxiaochen.dollancustomized.client.font.chinese.ChineseFontRenderer;
+import com.jhxiaochen.dollancustomized.client.particle.ParticleInit;
+import com.jhxiaochen.dollancustomized.client.renderer.road.RenderHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.client.renderer.road.RenderRoadText;
+import com.jhxiaochen.dollancustomized.client.renderer.sign.HangingSignRenderer;
+import com.jhxiaochen.dollancustomized.client.renderer.sign.SignRenderer;
+import com.jhxiaochen.dollancustomized.client.renderer.station.StationNameBoardRenderer;
+import com.jhxiaochen.dollancustomized.common.tileentity.*;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+public class ClientEvent {
+    public static RoadFontRenderer roadFontRenderer; // RoadText专用渲染器
+    public static SignFontRenderer signFontRenderer;  // 限高牌专用渲染器
+    public static ChineseFontRenderer chineseFontRenderer;  // 限高牌专用渲染器
+    public static ChineseFontRenderer chineseFontRenderer_1;  // 限高牌专用渲染器
+    public static ChineseFontRenderer chineseFontRenderer_2; // 限高牌专用渲染器
+    public static EnglishFontRenderer englishFontRenderer;  // 限高牌专用渲染器
+    // 保留customFontRenderer以兼容现有代码，但内部会路由到对应的渲染器
+    @Deprecated
+    public static SignFontRenderer customFontRenderer = signFontRenderer;
+
+    ResourceLocation ttfLocation = new ResourceLocation(Reference.MOD_ID, "fonts/road_text_fonts.ttf");
+    ResourceLocation ttfLocation1 = new ResourceLocation(Reference.MOD_ID, "fonts/source-sans-pro-bold-2.otf");
+    ResourceLocation ttfLocation2 = new ResourceLocation(Reference.MOD_ID, "fonts/sourcehansanscn-bold.otf");
+    ResourceLocation ttfLocation3 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_1.ttf");
+    ResourceLocation ttfLocation4 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_2.ttf");
+
+    public void init(FMLInitializationEvent event){
+        // 初始化粒子系统
+        ParticleInit.init(null);
+
+        // RoadText 使用像素风格渲染器（高性能）
+        RoadFontLoader roadFontLoader = new RoadFontLoader(ttfLocation, 32.0F);
+        roadFontRenderer = new RoadFontRenderer(roadFontLoader);
+
+        // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
+        SignFontLoader signFontLoader = new SignFontLoader(ttfLocation, 32.0F);
+        signFontRenderer = new SignFontRenderer(signFontLoader);
+        // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
+        ChineseFontLoader chineseFontLoader = new ChineseFontLoader(ttfLocation2, 32.0F);
+        chineseFontRenderer = new ChineseFontRenderer(chineseFontLoader);
+        ChineseFontLoader chineseFontLoader_1 = new ChineseFontLoader(ttfLocation3, 32.0F);
+        chineseFontRenderer_1 = new ChineseFontRenderer(chineseFontLoader_1);
+        ChineseFontLoader chineseFontLoader_2 = new ChineseFontLoader(ttfLocation4, 32.0F);
+        chineseFontRenderer_2 = new ChineseFontRenderer(chineseFontLoader_2);
+        // 限高牌使用边缘抗锯齿渲染器（视觉效果更好）
+        EnglishFontLoader englishFontLoader = new EnglishFontLoader(ttfLocation1, 32.0F);
+        englishFontRenderer = new EnglishFontRenderer(englishFontLoader);
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoadText.class, new RenderRoadText());
+        // 使用点测试渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeightLimitSignCustom.class, new RenderHeightLimitSignCustom());
+        // 注册蓝花楹木告示牌渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDollanSign.class, new SignRenderer());
+        // 注册悬挂式蓝花楹木告示牌渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDollanHangingSign.class, new HangingSignRenderer());
+
+        // 注册车站大字壁渲染器
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStationNameBoard.class, new StationNameBoardRenderer());
+    }
+}

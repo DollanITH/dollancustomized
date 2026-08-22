@@ -37,7 +37,7 @@ public class DoubleDiagonalStopLineBlockSlab extends BlockAsphaltSlabHorizontal 
 
     @SubscribeEvent
     public static void registerBlock(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(block = new DoubleDiagonalStopLineBlockSlab( ).setRegistryName(Reference.MOD_ID,"stop_line_cross_1_slab").setUnlocalizedName("stop_line_cross_1_slab"));
+        event.getRegistry().register(block = new DoubleDiagonalStopLineBlockSlab( ).setRegistryName(Reference.MOD_ID,"stop_line_cross_1_slab").setTranslationKey("stop_line_cross_1_slab"));
     }
 
     @SubscribeEvent
@@ -127,7 +127,7 @@ public class DoubleDiagonalStopLineBlockSlab extends BlockAsphaltSlabHorizontal 
             if (meta >= 4 && meta <= 7) varient = EnumVarient.WHITE_1;
             else if (meta >= 8 && meta <= 11) varient = EnumVarient.YELLOW;
             else if (meta >= 12 && meta <= 15) varient = EnumVarient.YELLOW_1;
-            return getDefaultState( ).withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(VARIENT, varient);
+            return getDefaultState( ).withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(VARIENT, varient);
         }
 
         @Override

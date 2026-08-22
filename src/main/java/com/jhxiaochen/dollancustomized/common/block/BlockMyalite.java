@@ -82,7 +82,7 @@ public class BlockMyalite extends Block {
         public BlockMyalite(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(Reference.MOD_ID + ".myalite");
+        this.setTranslationKey(Reference.MOD_ID + ".myalite");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);
@@ -137,7 +137,7 @@ public class BlockMyalite extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 

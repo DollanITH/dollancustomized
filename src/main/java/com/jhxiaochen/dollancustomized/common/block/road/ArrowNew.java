@@ -75,7 +75,7 @@ public class ArrowNew extends IronHorizontal implements IArrow {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, (meta & 4) != 0 ? MarkType.SLAB : MarkType.FULL);
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(TYPE, (meta & 4) != 0 ? MarkType.SLAB : MarkType.FULL);
     }
 
     @Override

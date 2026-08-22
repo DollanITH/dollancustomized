@@ -26,7 +26,7 @@ public class RoadLamp1U extends BlockHorizontal
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public RoadLamp1U() {
         super(Material.ROCK);
-        this.setUnlocalizedName("road_lamp_1_up");
+        this.setTranslationKey("road_lamp_1_up");
         this.setRegistryName("road_lamp_1_up");
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(1.5F);
@@ -37,7 +37,7 @@ public class RoadLamp1U extends BlockHorizontal
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
@@ -86,7 +86,7 @@ public class RoadLamp1U extends BlockHorizontal
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     @Override

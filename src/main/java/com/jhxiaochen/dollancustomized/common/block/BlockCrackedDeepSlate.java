@@ -74,7 +74,7 @@ public class BlockCrackedDeepSlate extends Block {
         public BlockCrackedDeepSlate(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);

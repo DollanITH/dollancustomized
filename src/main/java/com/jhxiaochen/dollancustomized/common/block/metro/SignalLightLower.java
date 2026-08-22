@@ -28,7 +28,7 @@ public class SignalLightLower extends Block {
         super(Material.ROCK);
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setLightLevel(0.25F);
@@ -59,7 +59,7 @@ public class SignalLightLower extends Block {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
     public boolean isOpaqueCube(IBlockState state)
@@ -83,7 +83,7 @@ public class SignalLightLower extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

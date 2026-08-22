@@ -79,7 +79,7 @@ public RoadMergeOtherLineSlab(String name){
     super(Material.ROCK);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     this.setRegistryName(name);
-    this.setUnlocalizedName(name);
+    this.setTranslationKey(name);
     this.setCreativeTab(DollanCustomized.ROAD_TAB);
     this.setHardness(1.2F);
     this.setResistance(10F);
@@ -160,7 +160,7 @@ public RoadMergeOtherLineSlab(String name){
         return AABB_BOTTOM_HALF;
     }
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
     @Override

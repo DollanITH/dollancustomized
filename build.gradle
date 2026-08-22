@@ -1,167 +1,320 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        maven { url = 'https://maven.cleanroommc.com'}
-        maven { url = 'https://repo.spongepowered.org/maven' }
-        mavenCentral()
-        flatDir { dirs 'libs' }
-        maven { url 'https://libraries.minecraft.net/' } // 其他依赖
-        maven { url 'https://maven.modrepo.de/' } // 可能包含JEI的仓
-        mavenLocal()
+// It is advised to not edit this file directly, in order to update script easily.
+// Instead, edit gradle/scripts/extra.gradle to customize the build.
+
+import groovy.json.JsonOutput
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.4.1'
+    id 'xyz.wagyourtail.unimined' version '1.4.37-kappa'
+    id 'net.kyori.blossom' version '2.2.0'
+    id 'com.diffplug.spotless' version '8.10.0'
+    id 'com.gradleup.shadow' version '9.6.1' apply false
+}
+
+apply from: 'gradle/scripts/helpers.gradle'
+
+if (propertyBool('enable_shadow')) {
+    apply plugin: 'com.gradleup.shadow'
+}
+
+// Early Assertions
+assertProperty 'mod_version'
+assertProperty 'root_package'
+assertProperty 'mod_id'
+assertProperty 'mod_name'
+
+assertSubProperties 'use_access_transformer', 'access_transformer_locations'
+assertSubProperties 'use_mixins', 'mixin_configs'
+assertSubProperties 'is_coremod', 'coremod_includes_mod', 'coremod_plugin_class_name'
+
+setDefaultProperty 'generate_sources_jar', true, false
+setDefaultProperty 'generate_javadocs_jar', true, false
+setDefaultProperty 'enable_shadow', false, false
+setDefaultProperty 'minecraft_username', true, 'Dev'
+setDefaultProperty 'extra_jvm_args', false, ''
+
+version = propertyString('mod_version')
+group = propertyString('root_package')
+
+base {
+    archivesName = propertyString('mod_id')
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
     }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    if (propertyBool('generate_sources_jar')) {
+        withSourcesJar()
+    }
+    if (propertyBool('generate_javadocs_jar')) {
+        withJavadocJar()
     }
 }
-        
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 
-version = project.version
-group = 'com.jhxiaochen.dollancustomized' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'dollancustomized'
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-
-mixin {
-    add sourceSets.main, "mixins.dollancustomized.json"
+configurations {
+    contain
+    implementation.extendsFrom(contain)
+    modCompileOnly
+    compileOnly.extendsFrom(modCompileOnly)
+    modRuntimeOnly
+    runtimeOnly.extendsFrom(modRuntimeOnly)
+    if (propertyBool('enable_shadow')) {
+        shaded
+        implementation.extendsFrom(shaded)
+    }
 }
 
-repositories {
-    maven { url = 'https://maven.cleanroommc.com'}
-    maven { url = "https://repo.spongepowered.org/maven" }
-}
+boolean useMixins = propertyBool('use_mixins')
+def mixinConfigs = propertyStringList('mixin_configs', ',')
+String mixinConfigValue = mixinConfigs.join(',')
 
-minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    //mappings channel: 'snapshot', version: '20171003-1.12'
-    mappings channel: 'snapshot', version: '20171003-1.12'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+String remapTaskName = propertyBool('enable_shadow') ? "remapShadowJar" : "remapJar"
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    runs {
-        client {
-            workingDirectory project.file('run')
+//noinspection GroovyAssignabilityCheck
+unimined.minecraft {
+    version "1.12.2"
 
-            args '--username=jhxiaochen', '-Dnet.minecraftforge.gradle.test_certs=false', '-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT',
-            '-Dcom.mojang.authlib.forceTrustSSL=true','-XX:+UseG1GC', '-Xmx6G', '-Xms6G', '-XX:+UnlockExperimentalVMOptions', '-XX:G1NewSizePercent=20', '-XX:G1ReservePercent=20', '-XX:MaxGCPauseMillis=50', '-XX:G1HeapRegionSize=32M'
+    mappings {
+        mcp("stable", "39-1.12")
+    }
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+    cleanroom {
+        if (propertyBool('use_access_transformer')) {
+            accessTransformer "${rootProject.projectDir}/src/main/resources/${propertyString('access_transformer_locations')}"
         }
-
-        server {
-            workingDirectory project.file('server')
-
-            args "-Xms7G -Xmx7G"
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+        loader "0.6.10-alpha"
+        runs.all {
+            args += ['--username', minecraft_username]
+            if (useMixins) {
+                systemProperty('crl.dev.mixin', mixinConfigValue)
+            }
+            def extraArgs = propertyString('extra_jvm_args')
+            if (extraArgs != null && !extraArgs.trim().isEmpty()) {
+                jvmArgs += extraArgs.split { "\\s+" }.toList()
+            }
+            if (propertyBool('enable_foundation_debug')) {
+                systemProperty("foundation.dump", "true")
+                systemProperty("foundation.verbose", "true")
+            }
+            if (propertyBool('is_coremod')) {
+                systemProperty("fml.coreMods.load", propertyString('coremod_plugin_class_name'))
+            }
+            return
         }
+    }
+
+    defaultRemapJar = false
+
+    if (sourceSet == sourceSets.main) {
+        String jarTaskName = propertyBool('enable_shadow') ? "shadowJar" : "jar"
+
+        remap(tasks.named(jarTaskName).get()) {
+            if (useMixins) {
+                mixinRemap {
+                    enableBaseMixin()
+                    enableMixinExtra()
+                }
+            }
+        }
+    }
+
+    mods {
+        remap(configurations.modCompileOnly)
+        remap(configurations.modRuntimeOnly)
     }
 }
 
+// Do not configure your deps here!
+// Check gradle/scripts/dependencies.gradle for that.
 dependencies {
-
-    def mixin = 'zone.rong:mixinbooter:11.5'
-    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
-
-    // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
-    // compile "some.group:artifact:version"
-    implementation(mixin) { transitive = false }
-    annotationProcessor(mixin)
-
-    // Real examples
-    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-    compile (fileTree(dir: 'libs', include: '*.jar'))
-    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-    compile 'com.cleanroommc:configanytime:1.0'
-
-    // These dependencies get remapped to your current MCP mappings
-    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-}
-
-// Example for how to get properties into the manifest for reading by the runtime..
-jar {
-    manifest {
-        attributes([
-            'MixinConfigs': 'mixins.dollancustomized.json',
-            "Specification-Title": "dollancustomized",
-            "Specification-Vendor": "dollancustomized",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"dollancustomized",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+    if (useMixins) {
+        compileOnly 'com.cleanroommc:sponge-mixin:0.20.13+mixin.0.8.7'
+    }
+    if (propertyBool('enable_junit_testing')) {
+        testImplementation 'org.junit.jupiter:junit-jupiter:6.1.3'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
 }
-jar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
+
+apply from: 'gradle/scripts/dependencies.gradle'
 
 processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-
-        // replace version and version_minecraft
-        expand 'version': project.version
-    }
-
-    // copy everything else, that is not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-        exclude '**/*.md'
-        exclude '**/Thumbs.db'
-    }
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar') 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+sourceSets {
+    main {
+        blossom {
+            javaSources {
+                property('mod_id', propertyString('mod_id'))
+                property('mod_name', propertyString('mod_name'))
+                property('mod_version', propertyString('mod_version'))
+            }
+            resources {
+                property('mod_id', propertyString('mod_id'))
+                property('mod_name', propertyString('mod_name'))
+                property('mod_version', propertyString('mod_version'))
+                property('mod_description', propertyString('mod_description'))
+                property('mod_authors', propertyStringList('mod_authors', ',').collect {it.strip()}.join('", "'))
+                property('mod_credits', propertyString('mod_credits'))
+                property('mod_license', propertyString('mod_license'))
+                property('mod_url', propertyString('mod_url'))
+                property('mod_issue_tracker_url', propertyString('mod_issue_tracker_url'))
+                property('mod_update_json', propertyString('mod_update_json'))
+                property('mod_icon_item', propertyString('mod_icon_item'))
+                property('mod_logo_path', propertyString('mod_logo_path'))
+                property('mod_icon_path', propertyString('mod_icon_path'))
+                property('mod_background_path', propertyString('mod_background_path'))
+            }
         }
     }
 }
-sourceSets { main { output.resourcesDir = output.classesDir } }
+
+compileJava {
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+    archiveClassifier = 'dev'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    if (configurations.contain.size() > 0) {
+        into('/') {
+            from configurations.contain
+        }
+    }
+    doFirst {
+        manifest {
+            def attribute_map = [:]
+            attribute_map['ModType'] = "CRL"
+            if (useMixins) {
+                attribute_map['MixinConfigs'] = mixinConfigValue
+            }
+            if (configurations.contain.size() > 0) {
+                attribute_map['ContainedDeps'] = configurations.contain.collect { it.name }.join(' ')
+                attribute_map['NonModDeps'] = true
+            }
+            if (propertyBool('is_coremod')) {
+                attribute_map['FMLCorePlugin'] = propertyString('coremod_plugin_class_name')
+                if (propertyBool('coremod_includes_mod')) {
+                    attribute_map['FMLCorePluginContainsFMLMod'] = true
+                }
+            }
+            if (propertyBool('use_access_transformer')) {
+                attribute_map['FMLAT'] = propertyString('access_transformer_locations')
+            }
+            attributes(attribute_map)
+        }
+    }
+    finalizedBy(tasks.named(remapTaskName).get())
+}
+
+if (propertyBool('enable_shadow')) {
+    // Shade deps to the dev jar, so the normal dev jar will contain deps
+    shadowJar {
+        archiveClassifier = 'dev'
+        //noinspection GroovyAssignabilityCheck,GroovyAccessibility
+        configurations = [ project.configurations.shaded ]
+    }
+    // Unshaded dev jar get 'plain' as name
+    tasks.named("jar").configure {
+        finalizedBy shadowJar
+        archiveClassifier = "plain"
+    }
+}
+/*
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+    project {
+        settings {
+            runConfigurations {
+                "0. Gen Sources"(Gradle) {
+                    taskNames = ["genSources"]
+                }
+                "1. Run Client"(Gradle) {
+                    taskNames = ["runClient"]
+                }
+                "2. Run Server"(Gradle) {
+                    taskNames = ["runServer"]
+                }
+                "3. Build Mod"(Gradle) {
+                    taskNames = ["build"]
+                }
+                "4. Apply Spotless"(Gradle) {
+                    taskNames = ["spotlessApply"]
+                }
+            }
+            compiler.javac {
+                afterEvaluate {
+                    javacAdditionalOptions = "-encoding utf8"
+                    moduleJavacAdditionalOptions = [
+                            (project.name + ".main"): tasks.compileJava.options.compilerArgs.collect { '"' + it + '"' }.join(' ')
+                    ]
+                }
+            }
+        }
+    }
+}*/
+
+compileTestJava {
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_25
+}
+
+test {
+    useJUnitPlatform()
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(25)
+    })
+    if (propertyBool('show_testing_output')) {
+        testLogging {
+            showStandardStreams = true
+        }
+    }
+}
+
+tasks.register('generateMixinJson') {
+    group = 'build setup'
+    description = 'Generates missing Mixin configuration JSON files.'
+    onlyIf {
+        useMixins
+    }
+    doLast {
+        def missingConfigs = mixinConfigs.findAll { configName ->
+            !file("src/main/resources/${configName}").exists()
+        }
+        if (missingConfigs.isEmpty()) {
+            logger.lifecycle('No missing Mixin JSON files.')
+            return
+        }
+        missingConfigs.each { configName ->
+            def configFile = file("src/main/resources/${configName}")
+            configFile.parentFile.mkdirs()
+            def config = [
+                    'package': '',
+                    'refmap': propertyString('mixin_refmap'),
+                    'required': true,
+                    'target': '@env(DEFAULT)',
+                    'minVersion': '0.8.7',
+                    'compatibilityLevel': 'JAVA_25',
+                    'mixins': [],
+                    'server': [],
+                    'client': [],
+                    'setSourceFile': true
+            ]
+            configFile.setText(JsonOutput.prettyPrint(JsonOutput.toJson(config)) + '\n', 'UTF-8')
+            logger.lifecycle("Generated Mixin JSON: ${configFile}")
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+apply from: 'gradle/scripts/publishing.gradle'
+apply from: 'gradle/scripts/extra.gradle'

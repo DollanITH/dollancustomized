@@ -75,7 +75,7 @@ public RoadMergeOtherLine(String name){
     super(Material.ROCK);
     this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     this.setRegistryName(name);
-    this.setUnlocalizedName(name);
+    this.setTranslationKey(name);
     this.setCreativeTab(DollanCustomized.ROAD_TAB);
     this.setHardness(1.2F);
     this.setResistance(10F);
@@ -83,7 +83,7 @@ public RoadMergeOtherLine(String name){
     this.setTickRandomly(true);
     }
 
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 

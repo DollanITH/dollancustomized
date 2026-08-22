@@ -72,11 +72,11 @@ public class Remaper {
         for (RegistryEvent.MissingMappings.Mapping<Block> missingMapping : event.getMappings()) {
             ResourceLocation resourceLocation = missingMapping.key;
 
-            String resourcePath = resourceLocation.getResourcePath();
+            String resourcePath = resourceLocation.getPath();
             if (ignoredMappings.contains(resourcePath)) {
                 missingMapping.ignore();
             } else if (blockRemappings.containsKey(resourcePath)) {
-                ResourceLocation remappedResourceLocation = new ResourceLocation(resourceLocation.getResourceDomain(), blockRemappings.get(resourcePath));
+                ResourceLocation remappedResourceLocation = new ResourceLocation(resourceLocation.getNamespace(), blockRemappings.get(resourcePath));
                     Block remappedBlock = ForgeRegistries.BLOCKS.getValue(remappedResourceLocation);
                     if (remappedBlock != Blocks.AIR) {
                         missingMapping.remap(remappedBlock);
@@ -96,12 +96,12 @@ public class Remaper {
         for (RegistryEvent.MissingMappings.Mapping<Item> missingMapping : event.getMappings()) {
             ResourceLocation resourceLocation = missingMapping.key;
 
-            String resourcePath = resourceLocation.getResourcePath();
+            String resourcePath = resourceLocation.getPath();
             if (ignoredMappings.contains(resourcePath)) {
                 missingMapping.ignore();
             } else if (itemRemappings.containsKey(resourcePath)) {
                 ResourceLocation remappedResourceLocation =
-                        new ResourceLocation(resourceLocation.getResourceDomain( ), itemRemappings.get(resourcePath));
+                        new ResourceLocation(resourceLocation.getNamespace( ), itemRemappings.get(resourcePath));
                 Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
                 if (remappedItem != Items.AIR) {
                     missingMapping.remap(remappedItem);
@@ -109,7 +109,7 @@ public class Remaper {
 
             } else if (blockRemappings.containsKey(resourcePath)) {
                 ResourceLocation remappedResourceLocation =
-                        new ResourceLocation(resourceLocation.getResourceDomain( ), blockRemappings.get(resourcePath));
+                        new ResourceLocation(resourceLocation.getNamespace( ), blockRemappings.get(resourcePath));
                 Item remappedItem = ForgeRegistries.ITEMS.getValue(remappedResourceLocation);
                 if (remappedItem != Items.AIR) {
                     missingMapping.remap(remappedItem);

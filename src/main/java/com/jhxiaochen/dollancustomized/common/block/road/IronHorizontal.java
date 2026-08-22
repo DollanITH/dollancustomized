@@ -30,7 +30,7 @@ public class IronHorizontal extends Block {
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setRegistryName(name);
         this.setSoundType(SoundType.METAL);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setHardness(1.2F);
         this.setResistance(10F);
@@ -60,7 +60,7 @@ public class IronHorizontal extends Block {
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT; // 使用 cutout 渲染层
     }
 
@@ -82,7 +82,7 @@ public class IronHorizontal extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

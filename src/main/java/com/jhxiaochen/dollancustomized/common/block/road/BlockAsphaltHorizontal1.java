@@ -22,7 +22,7 @@ public class BlockAsphaltHorizontal1 extends BlockAsphaltBase {
     public BlockAsphaltHorizontal1(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setHardness(1.0F);
         this.setResistance(5.0F);
         this.setTickRandomly(true);
@@ -31,7 +31,7 @@ public class BlockAsphaltHorizontal1 extends BlockAsphaltBase {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 

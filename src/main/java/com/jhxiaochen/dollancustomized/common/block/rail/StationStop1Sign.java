@@ -21,7 +21,7 @@ public class StationStop1Sign extends TwoBlocksSignWithHang {
 
     @SubscribeEvent
     public static void registerBlock(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(block = new StationStop1Sign().setRegistryName("station_stop_1_sign").setUnlocalizedName("StationStopSign"));
+        event.getRegistry().register(block = new StationStop1Sign().setRegistryName("station_stop_1_sign").setTranslationKey("StationStopSign"));
     }
 
     @SubscribeEvent

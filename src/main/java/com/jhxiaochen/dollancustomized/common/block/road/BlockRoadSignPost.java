@@ -38,7 +38,7 @@ public class BlockRoadSignPost extends Block {
     public BlockRoadSignPost() {
         super(Material.IRON);
         this.setRegistryName("road_sign_post");
-        this.setUnlocalizedName("road_sign_post");
+        this.setTranslationKey("road_sign_post");
         this.setDefaultState(this.blockState.getBaseState().withProperty(UP, false)
                 .withProperty(DOWN, false).withProperty(NORTH, false)
                 .withProperty(EAST, false).withProperty(SOUTH, false)

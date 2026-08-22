@@ -76,7 +76,7 @@ public class BlockMarble extends Block {
         public BlockMarble(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(Reference.MOD_ID + ".beautiful_marble");
+        this.setTranslationKey(Reference.MOD_ID + ".beautiful_marble");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);

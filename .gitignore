@@ -17,10 +17,10 @@ out
 build
 .gradle
 
+# kate
+*.kate-swp
+
 # other
 eclipse
 run
-server
-
-# Files from Forge MDK
-forge*changelog.txt
+/mods/

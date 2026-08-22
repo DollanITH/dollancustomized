@@ -10,7 +10,7 @@ public class BlockMetroBlock extends Block {
     public BlockMetroBlock(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.DOLLAN_METRO_TAB);
         this.setHardness(1.5F);
         this.setResistance(10F);

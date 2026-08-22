@@ -31,7 +31,7 @@ public class PunLamp extends BlockHorizontal
     public static final PropertyDirection FACING = BlockDirectional.FACING;
     public PunLamp(String name) {
         super(Material.GLASS);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(1.5F);
@@ -44,7 +44,7 @@ public class PunLamp extends BlockHorizontal
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
@@ -109,7 +109,7 @@ public class PunLamp extends BlockHorizontal
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
     }
 
     @Override

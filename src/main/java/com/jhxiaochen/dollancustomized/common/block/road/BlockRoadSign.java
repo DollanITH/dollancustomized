@@ -24,7 +24,7 @@ import java.util.LinkedList;
 public class BlockRoadSign extends Block {
     public BlockRoadSign(String name) {
         super(Material.IRON);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setHardness(1.4F);
@@ -95,7 +95,7 @@ public class BlockRoadSign extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -111,7 +111,7 @@ public class BlockRoadSign extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     @Override

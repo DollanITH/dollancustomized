@@ -47,7 +47,7 @@ public class TwoBlocksSignBase extends Block {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -122,7 +122,7 @@ public class TwoBlocksSignBase extends Block {
     public IBlockState getStateFromMeta(int meta) {
         EnumSignHalf varient = EnumSignHalf.LOWER;
         if ((meta & 0x4) != 0) varient = EnumSignHalf.UPPER;
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(HALF, varient);
+        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(HALF, varient);
     }
 
     @Override

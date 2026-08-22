@@ -1,18 +1,19 @@
-{
-  "modListVersion": 2,
-  "modList": [{
-    "modid": "dollancustomized",
-    "name": "DollanCustomized",
-    "description": "Dollan Official Customized Mod for Minecraft 1.12.2",
-    "version": "${version}",
-    "mcversion": "1.12.2",
-    "url": "https://wiki.dollancraft.top",
-    "updateUrl": "",
-    "authorList": ["jhxiaochen", "AI" ,"HChanJ1689"],
-    "credits": "Mods Created By jhxiaochen & AI & HChanJ1689",
-    "logoFile": "logo.png",
-    "screenshots": [],
-    "dependencies": ["required-after:mixinbooter"],
-    "dependants": []
-  }]
-}
+[{
+	"modid": "{{ mod_id }}",
+	"name": "{{ mod_name }}",
+	"version": "{{ mod_version }}",
+	"mcversion": "1.12.2",
+	"description": "{{ mod_description }}",
+	"authorList": ["{{ mod_authors }}"],
+	"credits": "{{ mod_credits }}",
+	"url": "{{ mod_url }}",
+	"updateJSON": "{{ mod_update_json }}",
+	"logoFile": "{{ mod_logo_path }}",
+	"modProperties": {
+		"license": "{{ mod_license }}",
+		"issueTrackerUrl": "{{ mod_issue_tracker_url }}",
+		"iconItem": "{{ mod_icon_item }}",
+		"iconFile": "{{ mod_icon_path }}",
+		"backgroundFile": "{{ mod_background_path }}"
+	}
+}]

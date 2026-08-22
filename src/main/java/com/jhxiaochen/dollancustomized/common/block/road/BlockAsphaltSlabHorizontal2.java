@@ -26,7 +26,7 @@ public class BlockAsphaltSlabHorizontal2 extends BlockAsphaltBase {
     public BlockAsphaltSlabHorizontal2(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.2F);
         this.setTickRandomly(true);

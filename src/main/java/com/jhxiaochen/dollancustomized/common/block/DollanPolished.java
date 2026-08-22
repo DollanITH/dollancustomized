@@ -12,7 +12,7 @@ public class DollanPolished extends net.minecraft.block.Block {
         public DollanPolished(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(Reference.MOD_ID + "." + name);
+        this.setTranslationKey(Reference.MOD_ID + "." + name);
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(2.3F);
         this.setResistance(25F);

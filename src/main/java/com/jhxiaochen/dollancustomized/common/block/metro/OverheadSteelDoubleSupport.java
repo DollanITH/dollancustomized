@@ -31,7 +31,7 @@ public class OverheadSteelDoubleSupport extends Block {
         super(Material.ROCK);
         this.setRegistryName("overhead_steel_double_support");
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(UP, Boolean.FALSE));
-        this.setUnlocalizedName("overhead_steel_double_support");
+        this.setTranslationKey("overhead_steel_double_support");
         this.setHardness(2.25F);
         this.setResistance(5.0F);
         this.setSoundType(SoundType.METAL);
@@ -75,7 +75,7 @@ public class OverheadSteelDoubleSupport extends Block {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -105,7 +105,7 @@ public class OverheadSteelDoubleSupport extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     @Override

@@ -61,7 +61,7 @@ public class BlockOverHeadWebRotated extends BlockRotatedPillar {
 
     public BlockOverHeadWebRotated(String name) {
         super(Material.IRON, MapColor.IRON);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(5.0F);
@@ -81,7 +81,7 @@ public class BlockOverHeadWebRotated extends BlockRotatedPillar {
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

@@ -33,7 +33,7 @@ public class RoadSignpostPoleDouble extends BlockHorizontal {
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setLightOpacity(0);
         this.setRegistryName(Reference.MOD_ID, "road_signpost_pole_double");
-        this.setUnlocalizedName("road_signpost_pole_double");
+        this.setTranslationKey("road_signpost_pole_double");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class RoadSignpostPoleDouble extends BlockHorizontal {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -80,7 +80,7 @@ public class RoadSignpostPoleDouble extends BlockHorizontal {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

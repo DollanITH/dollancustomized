@@ -57,7 +57,7 @@ public class BusLaneMark extends IronHorizontal {
         if (meta >= 4 && meta <= 7) varient = EnumType.ZHUAN;
         else if (meta >= 8 && meta <= 11) varient = EnumType.JIAO;
         else if (meta >= 12 && meta <= 15) varient = EnumType.YONG;
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, varient);
+        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(TYPE, varient);
     }
 
     @Override

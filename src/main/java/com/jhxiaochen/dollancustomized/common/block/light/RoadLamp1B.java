@@ -29,7 +29,7 @@ public class RoadLamp1B extends BlockHorizontal
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public RoadLamp1B() {
         super(Material.ROCK);
-        this.setUnlocalizedName("road_lamp_1_bottom");
+        this.setTranslationKey("road_lamp_1_bottom");
         this.setRegistryName("road_lamp_1_bottom");
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(1.5F);
@@ -40,7 +40,7 @@ public class RoadLamp1B extends BlockHorizontal
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
@@ -82,7 +82,7 @@ public class RoadLamp1B extends BlockHorizontal
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
@@ -100,7 +100,7 @@ public class RoadLamp1B extends BlockHorizontal
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-        state = state.withProperty(FACING, placer.getHorizontalFacing());
+        state = state.withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         return state;
     }
 

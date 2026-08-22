@@ -16,7 +16,7 @@ public class TabMSMetro extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem()
+    public ItemStack createIcon()
     {
         return new ItemStack(DollanBlocks.mingsha_S1);
     }

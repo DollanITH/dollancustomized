@@ -77,7 +77,7 @@ public class BlockAsphaltSlab extends BlockAsphaltBase {
     public BlockAsphaltSlab(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.2F);
         this.setResistance(10F);
@@ -121,7 +121,7 @@ public class BlockAsphaltSlab extends BlockAsphaltBase {
         return AABB_BOTTOM_HALF;
     }
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
     @Override

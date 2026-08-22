@@ -76,7 +76,7 @@ public class BlockDeepSlate extends Block {
         public BlockDeepSlate(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(Reference.MOD_ID + ".deepslate");
+        this.setTranslationKey(Reference.MOD_ID + ".deepslate");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.0F);
         this.setResistance(10F);

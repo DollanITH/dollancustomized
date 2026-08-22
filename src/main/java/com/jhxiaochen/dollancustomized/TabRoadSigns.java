@@ -12,7 +12,7 @@ public class TabRoadSigns extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem()
+    public ItemStack createIcon()
     {
         return new ItemStack(DollanBlocks.road_sign_sl_15);
     }

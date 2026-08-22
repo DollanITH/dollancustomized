@@ -39,7 +39,7 @@ public class OverheadPost1 extends Block {
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     public OverheadPost1(String name) {
         super(Material.IRON, MapColor.IRON);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(4.0F);
@@ -95,7 +95,7 @@ public class OverheadPost1 extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

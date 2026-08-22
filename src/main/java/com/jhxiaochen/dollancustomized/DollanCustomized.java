@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized;
 
+import com.jhxiaochen.dollancustomized.client.event.ClientEvent;
 import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.client.particle.ParticleTextureRegister;
@@ -7,7 +8,7 @@ import com.jhxiaochen.dollancustomized.command.*;
 import com.jhxiaochen.dollancustomized.common.tileentity.*;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
-import com.jhxiaochen.dollancustomized.proxy.CommonProxy;
+import com.jhxiaochen.dollancustomized.proxy.IProxy;
 import com.jhxiaochen.dollancustomized.world.level.WorldProviderFlatDim;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,15 +29,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = "after:configanytime")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class DollanCustomized {
 
     @Mod.Instance(Reference.MOD_ID)
     public static DollanCustomized     instance;
     public static SignFontLoader yourFontLoader;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-    public static CommonProxy proxy;
+    @SidedProxy(
+            modId = Reference.MOD_ID,
+            clientSide = "com.jhxiaochen.dollancustomized.proxy.ClientProxy",
+            serverSide = "com.jhxiaochen.dollancustomized.proxy.CommonProxy"
+    )
+    public static IProxy proxy;
+
+    public static ClientEvent clientEvent = new ClientEvent();
 
     public static final CreativeTabs LIGHT_TAB = new TabLight();
     public static final CreativeTabs DOLLAN_TRAN_TAB = new TabdollanTran();
@@ -52,6 +58,8 @@ public class DollanCustomized {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("Pre Init");
+        // Initialize proxy based on side
+
         // 初始化网络系统
         NetworkManager.init();
 
@@ -65,12 +73,11 @@ public class DollanCustomized {
         );
         GameRegistry.registerTileEntity(
                 TileEntityDollanSign.class,
-                new ResourceLocation(Reference.MOD_ID, "jacaranda_sign")
+                new ResourceLocation(Reference.MOD_ID, "sign")
         );
-
         GameRegistry.registerTileEntity(
                 TileEntityDollanHangingSign.class,
-                new ResourceLocation(Reference.MOD_ID, "jacaranda_hanging_sign")
+                new ResourceLocation(Reference.MOD_ID, "hanging_sign")
         );
         GameRegistry.registerTileEntity(
                 TileEntityStationNameBoard.class,
@@ -79,7 +86,6 @@ public class DollanCustomized {
 
         MinecraftForge.EVENT_BUS.register(this);
         Remaper.registerFixable();
-        proxy.preInit();
     }
 
     @Mod.EventHandler
@@ -88,10 +94,11 @@ public class DollanCustomized {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
         DimensionManager.registerDimension(3, FLAT_DIM);
 
+        if (event.getSide() == Side.CLIENT) {
+            clientEvent.init(event);
+        }
         // Register particle rendering
         registerParticles();
-
-        proxy.init();
     }
 
     @SideOnly(Side.CLIENT)
@@ -100,12 +107,6 @@ public class DollanCustomized {
         // No special registration needed as they use the standard particle system
         // Preload particle textures
         ParticleTextureRegister.preloadTextures();
-    }
-
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        System.out.println("Post Init");
-        proxy.postInit();
     }
 
     @Mod.EventHandler
@@ -136,11 +137,7 @@ public class DollanCustomized {
         }
 
         if (player.posY < 0) {
-            player.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
-        }
-
-        if (player.posY > player.world.getHeight()) {
-            player.changeDimension(0);
+            player.attackEntityFrom(DamageSource.GENERIC, 20.0F);
         }
 
         double distSq = player.posX * player.posX + player.posZ * player.posZ;

@@ -22,7 +22,7 @@ public class BlockStationEndDoor extends BlockDoor {
     public BlockStationEndDoor(String name) {
         super(Material.GLASS);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setSoundType(SoundType.GLASS);
         this.setHardness(1.5F);

@@ -30,7 +30,7 @@ public class BlockAsphaltSlabHorizontal extends BlockAsphaltBase {
         super(Material.ROCK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.2F);
         this.setResistance(10F);
@@ -102,7 +102,7 @@ public class BlockAsphaltSlabHorizontal extends BlockAsphaltBase {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

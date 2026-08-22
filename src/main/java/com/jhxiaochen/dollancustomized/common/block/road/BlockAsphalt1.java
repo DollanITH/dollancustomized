@@ -12,7 +12,7 @@ public class BlockAsphalt1 extends BlockAsphaltBase {
     public BlockAsphalt1(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setHardness(1.0F);
         this.setTickRandomly(true);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
@@ -20,7 +20,7 @@ public class BlockAsphalt1 extends BlockAsphaltBase {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 

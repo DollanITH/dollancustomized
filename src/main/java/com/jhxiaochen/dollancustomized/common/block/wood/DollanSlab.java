@@ -50,8 +50,8 @@ public abstract class DollanSlab extends BlockSlab {
     }
 
     @Override
-    public String getUnlocalizedName(int meta) {
-        return super.getUnlocalizedName( );
+    public String getTranslationKey(int meta) {
+        return super.getTranslationKey( );
     }
 
     @Override

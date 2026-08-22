@@ -16,7 +16,7 @@ public class TabRoad extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem()
+    public ItemStack createIcon()
     {
         return new ItemStack(DollanBlocks.asphalt);
     }
@@ -35,8 +35,8 @@ public class TabRoad extends CreativeTabs {
             ResourceLocation name1 = o1.getItem().getRegistryName();
             ResourceLocation name2 = o2.getItem().getRegistryName();
             // 只取路径部分（忽略modid），如果为null给个默认值
-            String s1 = name1 != null ? name1.getResourcePath() : "";
-            String s2 = name2 != null ? name2.getResourcePath() : "";
+            String s1 = name1 != null ? name1.getPath() : "";
+            String s2 = name2 != null ? name2.getPath() : "";
 
             // 2. 获取材质前缀
             String base1 = getBaseName(s1);

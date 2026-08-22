@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.renderer.station;
 
+import com.jhxiaochen.dollancustomized.client.event.ClientEvent;
 import com.jhxiaochen.dollancustomized.common.block.metro.BlockStationNameBoard;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
-import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
@@ -84,19 +84,19 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
             GlStateManager.scale(scale, scale, 1);
 
             // 计算中文文本在碰撞箱中心的X坐标
-            float chineseTextWidth = ClientProxy.chineseFontRenderer.getStringWidth(te.getChineseText());
+            float chineseTextWidth = ClientEvent.chineseFontRenderer.getStringWidth(te.getChineseText());
             float chineseX = -chineseTextWidth * scale / 2.0f + 1.5f; // 添加0.5像素微调
             if (Objects.equals(fontCN, "default")) {
-                ClientProxy.chineseFontRenderer.drawString(te.getChineseText(), chineseX, 10, r, g, b);
+                ClientEvent.chineseFontRenderer.drawString(te.getChineseText(), chineseX, 10, r, g, b);
             }
             if (Objects.equals(fontCN, "cn_1")) {
-                ClientProxy.chineseFontRenderer_1.drawString(te.getChineseText(), chineseX - 1.5f, 3, r, g, b);
+                ClientEvent.chineseFontRenderer_1.drawString(te.getChineseText(), chineseX - 1.5f, 3, r, g, b);
             }
             if (Objects.equals(fontCN, "cn_2")) {
-                ClientProxy.chineseFontRenderer_2.drawString(te.getChineseText(), chineseX - 1.5f, 2, r, g, b);
+                ClientEvent.chineseFontRenderer_2.drawString(te.getChineseText(), chineseX - 1.5f, 2, r, g, b);
             }
             if (fontCN == null) {
-                ClientProxy.chineseFontRenderer.drawString(te.getChineseText(), chineseX, 10, r, g, b);
+                ClientEvent.chineseFontRenderer.drawString(te.getChineseText(), chineseX, 10, r, g, b);
             }
             GlStateManager.popMatrix();
         }
@@ -110,11 +110,11 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
             GlStateManager.scale(engscale, engscale, 1);
 
             // 计算英文文本在碰撞箱中心的X坐标
-            float englishTextWidth = ClientProxy.englishFontRenderer.getStringWidth(te.getEnglishText());
+            float englishTextWidth = ClientEvent.englishFontRenderer.getStringWidth(te.getEnglishText());
             float englishX = -englishTextWidth * engscale / 2.0f + 1.5f; // 添加0.5像素微调
 
             // 英文文本在中文文本下方，偏移字体高度的1.2倍
-            ClientProxy.englishFontRenderer.drawString(te.getEnglishText(),
+            ClientEvent.englishFontRenderer.drawString(te.getEnglishText(),
             englishX,
             -engscale * 1000,
             r,g,b);

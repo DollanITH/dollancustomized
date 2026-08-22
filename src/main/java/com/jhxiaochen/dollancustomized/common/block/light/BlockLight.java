@@ -12,7 +12,7 @@ public class BlockLight extends BlockColored {
     public BlockLight(String name) {
         super(Material.ROCK);
         this.setRegistryName("light");
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.LIGHT_TAB);
         this.setHardness(2F);
         this.setLightLevel(1.0F);

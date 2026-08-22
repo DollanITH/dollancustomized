@@ -71,7 +71,7 @@ public class BlockPolishedBlackStone extends Block {
         public BlockPolishedBlackStone() {
         super(Material.ROCK);
         this.setRegistryName("polished_blackstone");
-        this.setUnlocalizedName(Reference.MOD_ID + "." + "polished_blackstone");
+        this.setTranslationKey(Reference.MOD_ID + "." + "polished_blackstone");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(2.3F);
         this.setResistance(20F);

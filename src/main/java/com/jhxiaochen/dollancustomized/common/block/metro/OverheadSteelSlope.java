@@ -23,7 +23,7 @@ public class OverheadSteelSlope extends OverheadSteelHorzional {
     public OverheadSteelSlope(String name) {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setSoundType(SoundType.METAL);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }

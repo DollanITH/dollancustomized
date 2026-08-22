@@ -73,7 +73,7 @@ public class BlockLimeStone extends Block {
         public BlockLimeStone() {
         super(Material.ROCK);
         this.setRegistryName("limestone");
-        this.setUnlocalizedName(Reference.MOD_ID + ".limestone");
+        this.setTranslationKey(Reference.MOD_ID + ".limestone");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(2.0F);
         this.setResistance(15F);

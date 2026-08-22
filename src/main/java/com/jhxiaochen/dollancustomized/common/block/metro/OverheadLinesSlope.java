@@ -22,7 +22,7 @@ public class OverheadLinesSlope extends OverheadLinesHorzional {
     public OverheadLinesSlope(String name) {
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setSoundType(SoundType.CLOTH);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }

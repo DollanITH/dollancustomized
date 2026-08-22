@@ -31,7 +31,7 @@ public class SignalPost extends Block {
 
     public SignalPost(String name) {
         super(Material.ROCK, MapColor.STONE);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setHardness(3.0F);
@@ -101,7 +101,7 @@ public class SignalPost extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

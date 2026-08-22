@@ -42,7 +42,7 @@ public class RoadSignpostHalf extends BlockHorizontal {
         this.setCreativeTab(DollanCustomized.ROAD_Signs);
         this.setLightOpacity(0);
         this.setRegistryName(Reference.MOD_ID, "road_signpost_half");
-        this.setUnlocalizedName("road_signpost_half");
+        this.setTranslationKey("road_signpost_half");
     }
 
     enum EnumSignpostType implements IStringSerializable
@@ -91,7 +91,7 @@ public class RoadSignpostHalf extends BlockHorizontal {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -121,7 +121,7 @@ public class RoadSignpostHalf extends BlockHorizontal {
         } else if ((meta & 8) != 0) {
             type = EnumSignpostType.ON_POLE;
         }
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(TYPE, type);
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(TYPE, type);
     }
 
     public int getMetaFromState(IBlockState state) {

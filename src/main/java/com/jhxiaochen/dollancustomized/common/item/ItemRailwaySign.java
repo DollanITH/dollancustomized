@@ -26,9 +26,9 @@ public class ItemRailwaySign extends ItemBlock
         this.setCreativeTab(DollanCustomized.METRO_TAB);
     }
 
-    public String getUnlocalizedName(ItemStack stack)
+    public String getTranslationKey(ItemStack stack)
     {
-        return this.block.getUnlocalizedName();
+        return this.block.getTranslationKey();
     }
 
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)

@@ -1,14 +1,11 @@
 {
-  "required": false,
-  "compatibilityLevel": "JAVA_8",
+  "required": true,
+  "compatibilityLevel": "JAVA_25",
   "package": "com.jhxiaochen.dollancustomized.mixin",
   "minVersion": "0.8.7",
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
-  "priority": 3000,
-  "mixinPriority": 1000,
   "mixins": [
-    "MixinBlockRailBase",
     "MixinWorldType"
   ],
   "client": [

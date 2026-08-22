@@ -47,7 +47,7 @@ public class DollanHangingSignAttached extends BlockContainer implements IAxis {
         this.setResistance(1.0F);
         this.setHarvestLevel("axe", 0);
         this.setLightOpacity(0);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(Reference.MOD_ID, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATION, 0));
     }

@@ -17,7 +17,7 @@ public class BlockAsphaltSlab1 extends BlockAsphaltBase {
     public BlockAsphaltSlab1(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.ROAD_TAB);
         this.setHardness(1.2F);
         this.setResistance(10F);

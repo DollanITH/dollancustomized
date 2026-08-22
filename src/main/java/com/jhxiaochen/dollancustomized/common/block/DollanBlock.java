@@ -10,7 +10,7 @@ public class DollanBlock extends net.minecraft.block.Block {
         public DollanBlock(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setHardness(1.7F);
         this.setResistance(20F);

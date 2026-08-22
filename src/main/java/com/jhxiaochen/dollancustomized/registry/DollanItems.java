@@ -19,31 +19,31 @@ public class DollanItems{
     public static final List<Item> ITEMS = new LinkedList<>();
     public static Item leungcraft = new ItemLeungCraft(5, 1.2F)
             .setAlwaysEdible()
-            .setUnlocalizedName("leungcraft").setRegistryName("leungcraft");
+            .setTranslationKey("leungcraft").setRegistryName("leungcraft");
     public static Item dollan = new ItemDollanCraft(5, 1.2F)
             .setAlwaysEdible()
-            .setUnlocalizedName("dollancraft").setRegistryName("dollan");
+            .setTranslationKey("dollancraft").setRegistryName("dollan");
     public static Item station_end_door = new ItemStationEndDoor(DollanBlocks.station_end_door);
     public static Item jacaranda_sign = new ItemDollanSign((DollanSign) WoodBlocks.jacaranda_wall_sign, (DollanSign) WoodBlocks.jacaranda_standing_sign)
-        .setUnlocalizedName("jacaranda_sign")
+        .setTranslationKey("jacaranda_sign")
         .setRegistryName("jacaranda_sign");
     public static Item jacaranda_hanging_sign = new ItemDollanHangingSign(
             WoodBlocks.jacaranda_hanging_sign,
             (DollanHangingSign) WoodBlocks.jacaranda_hanging_sign_wall,
             WoodBlocks.jacaranda_hanging_sign_attached
-    ).setUnlocalizedName("jacaranda_hanging_sign")
+    ).setTranslationKey("jacaranda_hanging_sign")
         .setRegistryName("jacaranda_hanging_sign");
     public static Item mangrove_sign = new ItemDollanSign((DollanSign) WoodBlocks.mangrove_wall_sign, (DollanSign) WoodBlocks.mangrove_standing_sign)
-            .setUnlocalizedName("mangrove_sign")
+            .setTranslationKey("mangrove_sign")
             .setRegistryName("mangrove_sign");
     public static Item mangrove_hanging_sign = new ItemDollanHangingSign(
             WoodBlocks.mangrove_hanging_sign,
             (DollanHangingSign) WoodBlocks.mangrove_hanging_sign_wall,
             WoodBlocks.mangrove_hanging_sign_attached
-    ).setUnlocalizedName("mangrove_hanging_sign")
+    ).setTranslationKey("mangrove_hanging_sign")
             .setRegistryName("mangrove_hanging_sign");
-    public static Item item_mangrove_door = new ItemDollanDoor(WoodBlocks.mangrove_door).setUnlocalizedName(Reference.MOD_ID + "_" + "mangrove_door").setRegistryName(WoodBlocks.mangrove_door.getRegistryName());
-    public static Item item_jacaranda_door = new ItemDollanDoor(WoodBlocks.jacaranda_door).setUnlocalizedName(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(WoodBlocks.jacaranda_door.getRegistryName());
+    public static Item item_mangrove_door = new ItemDollanDoor(WoodBlocks.mangrove_door).setTranslationKey(Reference.MOD_ID + "_" + "mangrove_door").setRegistryName(WoodBlocks.mangrove_door.getRegistryName());
+    public static Item item_jacaranda_door = new ItemDollanDoor(WoodBlocks.jacaranda_door).setTranslationKey(Reference.MOD_ID + "_" + "jacaranda_door").setRegistryName(WoodBlocks.jacaranda_door.getRegistryName());
     public static ItemDollanSlab jacaranda_slab_item =
             (ItemDollanSlab) new ItemDollanSlab(WoodBlocks.jacaranda_slab, WoodBlocks.jacaranda_double_slab)
                     .setRegistryName(WoodBlocks.jacaranda_slab.getRegistryName( ));
@@ -77,7 +77,7 @@ public class DollanItems{
 
     private static void registerModel(Item item)
     {
-        registerModel(item, 0, item.getRegistryName().getResourcePath());
+        registerModel(item, 0, item.getRegistryName().getPath());
     }
 
     @SideOnly(Side.CLIENT)

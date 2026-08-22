@@ -86,7 +86,7 @@ public class BlockStationNameBoard extends Block implements ITileEntityProvider 
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
@@ -112,7 +112,7 @@ public class BlockStationNameBoard extends Block implements ITileEntityProvider 
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3));
     }
 
     @Override

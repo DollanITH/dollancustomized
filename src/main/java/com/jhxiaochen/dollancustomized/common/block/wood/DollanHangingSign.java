@@ -51,7 +51,7 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
         this.setResistance(1.0F);
         this.setHarvestLevel("axe", 0);
         this.setLightOpacity(0);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(Reference.MOD_ID, name);
         this.inWall = name.endsWith("wall");
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
@@ -77,7 +77,7 @@ public class DollanHangingSign extends BlockContainer implements ICardinal {
 
     public IBlockState getStateFromMeta(int meta)
     {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+        EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
         if (enumfacing.getAxis() == EnumFacing.Axis.Y)
         {

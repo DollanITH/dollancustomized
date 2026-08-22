@@ -21,9 +21,9 @@ public class ItemStationStopWallSign extends ItemMultiTexture {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack)
+    public String getTranslationKey(ItemStack stack)
     {
-        return this.block.getUnlocalizedName() + "." + this.nameFunction.apply(stack);
+        return this.block.getTranslationKey() + "." + this.nameFunction.apply(stack);
     }
 
     @Override

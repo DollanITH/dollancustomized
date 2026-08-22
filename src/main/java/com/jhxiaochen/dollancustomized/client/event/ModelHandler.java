@@ -47,7 +47,7 @@ public class ModelHandler {
         ArrayList<ModelResourceLocation> mrls = new ArrayList<>(event.getModelRegistry().getKeys());
 
         for (ModelResourceLocation mrl : mrls) {
-            if (!mrl.getResourceDomain().equals("dollancustomized")) continue;
+            if (!mrl.getNamespace().equals("dollancustomized")) continue;
 
             IBakedModel original = event.getModelRegistry().getObject(mrl);
             if (original == null) {
@@ -55,7 +55,7 @@ public class ModelHandler {
                 continue;
             }
 
-            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(mrl.getResourceDomain(), mrl.getResourcePath()));
+            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(mrl.getNamespace(), mrl.getPath()));
             if (block == null) continue;
 
             boolean shouldOffset = false;

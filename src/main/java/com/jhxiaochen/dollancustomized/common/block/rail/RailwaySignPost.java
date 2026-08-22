@@ -31,7 +31,7 @@ public class RailwaySignPost extends BlockHorizontal {
         this.setCreativeTab(DollanCustomized.METRO_TAB);
         this.setLightOpacity(0);
         this.setRegistryName("railway_sign_post");
-        this.setUnlocalizedName("RailwaySignPost");
+        this.setTranslationKey("RailwaySignPost");
     }
 
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
@@ -101,7 +101,7 @@ public class RailwaySignPost extends BlockHorizontal {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -126,7 +126,7 @@ public class RailwaySignPost extends BlockHorizontal {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {

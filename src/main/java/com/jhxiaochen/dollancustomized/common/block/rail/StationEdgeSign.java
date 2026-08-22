@@ -22,7 +22,7 @@ public class StationEdgeSign extends RailwaySignBase {
 
     @SubscribeEvent
     public static void registerBlock(RegistryEvent.Register<Block> event){
-        event.getRegistry().register(block = new StationEdgeSign().setRegistryName("station_edge_sign").setUnlocalizedName("StationEdgeSign"));
+        event.getRegistry().register(block = new StationEdgeSign().setRegistryName("station_edge_sign").setTranslationKey("StationEdgeSign"));
     }
 
     @SubscribeEvent

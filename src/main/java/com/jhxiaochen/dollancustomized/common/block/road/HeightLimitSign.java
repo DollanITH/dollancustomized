@@ -82,7 +82,7 @@ public class HeightLimitSign extends BlockRoadSign {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
-                .withProperty(FACING, EnumFacing.getHorizontal(meta & 3))
+                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3))
                 .withProperty(TYPE, EnumHeight.byMetadata(meta >> 2));
     }
 

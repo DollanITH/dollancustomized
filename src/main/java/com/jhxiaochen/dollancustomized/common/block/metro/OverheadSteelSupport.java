@@ -61,7 +61,7 @@ public class OverheadSteelSupport extends Block
             PropertyEnum.create("shape", BlockRailBase.EnumRailDirection.class, BlockRailBase.EnumRailDirection.NORTH_SOUTH, BlockRailBase.EnumRailDirection.EAST_WEST);
     public OverheadSteelSupport(String name) {
         super(Material.IRON);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, BlockRailBase.EnumRailDirection.NORTH_SOUTH).withProperty(UP, Boolean.FALSE));
         this.setCreativeTab(DollanCustomized.METRO_TAB);
@@ -101,7 +101,7 @@ public class OverheadSteelSupport extends Block
     @SideOnly(Side.CLIENT)
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

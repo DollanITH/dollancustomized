@@ -68,7 +68,7 @@ public class BlockFrogLight extends Block {
         public BlockFrogLight() {
         super(Material.ROCK);
         this.setRegistryName("froglight");
-        this.setUnlocalizedName(Reference.MOD_ID + "." + "froglight");
+        this.setTranslationKey(Reference.MOD_ID + "." + "froglight");
         this.setCreativeTab(DollanCustomized.Blocks);
         this.setSoundType(SoundType.GLASS);
         this.setHardness(1.2F);

@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://maven.cleanroommc.com'}
+        maven { url = 'https://repo.spongepowered.org/maven' }
         mavenCentral()
         flatDir { dirs 'libs' }
         maven { url 'https://libraries.minecraft.net/' } // 其他依赖
@@ -9,6 +11,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
         
@@ -16,11 +19,22 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-version = '3.8.1'
+apply plugin: 'org.spongepowered.mixin'
+
+version = project.version
 group = 'com.jhxiaochen.dollancustomized' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'dollancraftcustomized'
+archivesBaseName = 'dollancustomized'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+mixin {
+    add sourceSets.main, "mixins.dollancustomized.json"
+}
+
+repositories {
+    maven { url = 'https://maven.cleanroommc.com'}
+    maven { url = "https://repo.spongepowered.org/maven" }
+}
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -63,6 +77,8 @@ minecraft {
 }
 
 dependencies {
+
+    def mixin = 'zone.rong:mixinbooter:11.5'
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
@@ -71,6 +87,8 @@ dependencies {
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"
+    implementation(mixin) { transitive = false }
+    annotationProcessor(mixin)
 
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
@@ -78,6 +96,7 @@ dependencies {
     compile (fileTree(dir: 'libs', include: '*.jar'))
     // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+    compile 'com.cleanroommc:configanytime:1.0'
 
     // These dependencies get remapped to your current MCP mappings
     // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
@@ -92,6 +111,7 @@ dependencies {
 jar {
     manifest {
         attributes([
+            'MixinConfigs': 'mixins.dollancustomized.json',
             "Specification-Title": "dollancustomized",
             "Specification-Vendor": "dollancustomized",
             "Specification-Version": "1", // We are version 1 of ourselves
@@ -104,6 +124,26 @@ jar {
 }
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // replace version and version_minecraft
+        expand 'version': project.version
+    }
+
+    // copy everything else, that is not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+        exclude '**/*.md'
+        exclude '**/Thumbs.db'
+    }
 }
 
 // Example configuration to allow publishing using the maven-publish task

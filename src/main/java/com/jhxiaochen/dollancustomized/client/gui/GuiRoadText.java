@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.network.packet.PacketRoadText;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

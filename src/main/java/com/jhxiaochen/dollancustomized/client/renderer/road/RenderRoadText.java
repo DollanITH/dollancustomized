@@ -2,8 +2,8 @@ package com.jhxiaochen.dollancustomized.client.renderer.road;
 
 import com.jhxiaochen.dollancustomized.client.font.RoadFontRenderer;
 import com.jhxiaochen.dollancustomized.common.block.road.BlockRoadText;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
 import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

@@ -4,7 +4,7 @@ import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSignAttached;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanStandingSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanWallSign;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

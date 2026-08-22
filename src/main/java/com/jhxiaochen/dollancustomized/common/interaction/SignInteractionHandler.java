@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.common.interaction;
 
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

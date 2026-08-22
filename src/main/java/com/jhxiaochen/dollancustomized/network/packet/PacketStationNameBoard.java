@@ -1,6 +1,6 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityStationNameBoard;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

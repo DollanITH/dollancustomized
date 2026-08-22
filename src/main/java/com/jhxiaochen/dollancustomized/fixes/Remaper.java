@@ -134,7 +134,7 @@ public class Remaper {
         modFixs.registerFix(FixTypes.ITEM_INSTANCE, ItemFlatteningDefinitions.createItemFlattening());
     }
 
-    private Remaper() {
+    public Remaper() {
     }
 
     @Nullable

@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.renderer.station;
 
 import com.jhxiaochen.dollancustomized.common.block.metro.BlockStationNameBoard;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
 import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityStationNameBoard;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;

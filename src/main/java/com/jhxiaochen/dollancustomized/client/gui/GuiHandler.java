@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

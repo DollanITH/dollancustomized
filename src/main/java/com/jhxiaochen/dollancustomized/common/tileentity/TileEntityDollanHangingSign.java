@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.tileentity;
+package com.jhxiaochen.dollancustomized.common.tileentity;
 
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.registry.DollanSounds;

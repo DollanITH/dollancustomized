@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -45,9 +46,9 @@ public class PacketRoadText extends BasePacket {
                     if (world == null || msg.pos == null || msg.text == null) return;
 
                     TileEntity te = world.getTileEntity(msg.pos);
-                    if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText) {
-                        com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText sign =
-                            (com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText) te;
+                    if (te instanceof TileEntityRoadText) {
+                        TileEntityRoadText sign =
+                            (TileEntityRoadText) te;
                         sign.text = msg.text;
                         sign.colorMode = msg.colorMode;
                         sign.markDirty();

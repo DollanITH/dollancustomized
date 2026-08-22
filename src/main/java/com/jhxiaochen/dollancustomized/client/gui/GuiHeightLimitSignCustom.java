@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.network.packet.PacketHeightLimitSign;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

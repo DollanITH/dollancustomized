@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common.block.road;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.client.gui.GuiRoadText;
 import com.jhxiaochen.dollancustomized.common.access.IArrow;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityRoadText;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;

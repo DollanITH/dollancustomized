@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.network;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import com.jhxiaochen.dollancustomized.network.packet.*;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

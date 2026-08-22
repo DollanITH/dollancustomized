@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

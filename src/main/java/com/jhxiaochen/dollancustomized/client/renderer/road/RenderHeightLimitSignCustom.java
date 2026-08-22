@@ -2,8 +2,8 @@ package com.jhxiaochen.dollancustomized.client.renderer.road;
 
 import com.jhxiaochen.dollancustomized.client.font.SignFontRenderer;
 import com.jhxiaochen.dollancustomized.common.block.road.BlockHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

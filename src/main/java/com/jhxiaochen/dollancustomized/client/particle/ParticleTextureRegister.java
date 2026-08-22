@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.particle;
+package com.jhxiaochen.dollancustomized.client.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;

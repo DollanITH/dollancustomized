@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common.item;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanSign;
 import com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;

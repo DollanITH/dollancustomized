@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.client.renderer.sign;
 import com.jhxiaochen.dollancustomized.client.model.HangingSignModel;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSign;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanHangingSignAttached;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanHangingSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.network.packet;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -40,9 +41,9 @@ public class PacketHeightLimitSign extends BasePacket {
                     if (world == null || msg.pos == null || msg.heightValue == null) return;
 
                     TileEntity te = world.getTileEntity(msg.pos);
-                    if (te instanceof com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom) {
-                        com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom sign =
-                            (com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom) te;
+                    if (te instanceof TileEntityHeightLimitSignCustom) {
+                        TileEntityHeightLimitSignCustom sign =
+                            (TileEntityHeightLimitSignCustom) te;
 
                         try {
                             if (msg.heightValue.contains(".")) {

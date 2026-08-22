@@ -3,7 +3,7 @@ package com.jhxiaochen.dollancustomized.common.block.wood;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.access.IAxis;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanHangingSign;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanHangingSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

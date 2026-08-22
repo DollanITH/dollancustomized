@@ -1,10 +1,10 @@
 package com.jhxiaochen.dollancustomized.network;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import com.jhxiaochen.dollancustomized.network.packet.PacketEditState;
 import com.jhxiaochen.dollancustomized.network.packet.PacketHeightLimitSign;
 import com.jhxiaochen.dollancustomized.network.packet.PacketRoadText;
 import com.jhxiaochen.dollancustomized.network.packet.PacketUpdateSignToServer;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityDollanSign;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

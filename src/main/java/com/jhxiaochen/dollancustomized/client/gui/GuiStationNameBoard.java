@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.network.packet.PacketStationNameBoard;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityStationNameBoard;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

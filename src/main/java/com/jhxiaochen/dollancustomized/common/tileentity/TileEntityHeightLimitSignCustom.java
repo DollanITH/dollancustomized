@@ -1,4 +1,4 @@
-package com.jhxiaochen.dollancustomized.tileentity;
+package com.jhxiaochen.dollancustomized.common.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

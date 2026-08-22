@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
 import com.jhxiaochen.dollancustomized.client.gui.GuiHeightLimitSignCustom;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;

@@ -2,7 +2,7 @@ package com.jhxiaochen.dollancustomized.common.block.metro;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.client.gui.GuiStationNameBoard;
-import com.jhxiaochen.dollancustomized.tileentity.TileEntityStationNameBoard;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;

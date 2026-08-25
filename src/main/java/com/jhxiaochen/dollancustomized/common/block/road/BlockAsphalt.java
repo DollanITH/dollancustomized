@@ -121,4 +121,3 @@ public class BlockAsphalt extends BlockAsphaltBase {
     }
 
 }
-

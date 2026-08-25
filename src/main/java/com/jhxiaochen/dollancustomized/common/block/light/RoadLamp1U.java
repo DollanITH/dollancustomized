@@ -106,4 +106,3 @@ public class RoadLamp1U extends BlockHorizontal
         return false;
     }
 }
-

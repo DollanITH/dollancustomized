@@ -131,4 +131,3 @@ public class LightLamp extends BlockHorizontal {
         return false;
     }
 }
-

@@ -121,4 +121,3 @@ public class BlockElderPrismarine extends Block {
     }
 
 }
-

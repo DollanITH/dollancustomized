@@ -4,6 +4,9 @@ repositories {
     flatDir {
         dirs('libs') // /libs
     }
+    flatDir {
+        dirs('mods') // /mods
+    }
     // Other repositories described by default:
     // CleanroomMC: https://maven.cleanroommc.com
     maven {
@@ -27,6 +30,10 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    maven {
+        name = 'Hileb'
+        url = 'https://ecdcaeb.github.io/maven/'
+    }
     mavenCentral()
     mavenLocal() // Must be last for caching to work
 }
@@ -39,11 +46,13 @@ dependencies {
     fileTree(dir: 'libs', include: ['*.jar']).each { jar ->
         modCompileOnly files(jar)
     }
-    fileTree(dir: 'mods', include: ['*.jar']).each { jar ->
-        modImplementation files(jar)
-    }
+    modRuntimeOnly "maven.modrinth:PTBoUymw:beG5tpIw"
+    modRuntimeOnly("curse.maven:ctm-267602:2915363")
 
-    modImplementation("curse.maven:fugue-1005815:7663573")
+    modImplementation "maven.modrinth:1mPcAmuy:jZIkQLdu"
+    modRuntimeOnly("maven.modrinth:vylTACsh:jViSfJQF")
+    modImplementation "maven.modrinth:dKv1FGT7:v3ZmWrP5"
+
     // Example - Dependency descriptor:
     // 'com.google.code.gson:gson:2.8.6' << group: com.google.code.gson, name:gson, version:2.8.6
     // 'group:name:version:classifier' where classifier is optional
@@ -82,6 +91,7 @@ dependencies {
     // implementation ('com.google.code.gson:gson:2.8.6') {
     //     transitive = false
     // }
+
 }
 
 if (propertyBool('enable_shadow')) {

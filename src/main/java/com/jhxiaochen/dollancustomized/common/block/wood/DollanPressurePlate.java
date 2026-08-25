@@ -1,13 +1,14 @@
 package com.jhxiaochen.dollancustomized.common.block.wood;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.registry.DollanSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import suike.suikecherry.sound.Sound;
 
 public class DollanPressurePlate extends BlockPressurePlate {
     boolean cherry_sound;
@@ -21,7 +22,7 @@ public class DollanPressurePlate extends BlockPressurePlate {
     @Override
     protected void playClickOnSound(World world, BlockPos pos) {
         if (cherry_sound) {
-            Sound.playSound(world, pos, "block.cherry_button.click", 2.0F, 1.0F);
+            world.playSound(null, pos, DollanSounds.BLOCK_CHERRY_BUTTON_CLICK, SoundCategory.BLOCKS, 2.0F, 1.0F);
         } else {
             super.playClickOnSound(world, pos);
         }
@@ -30,9 +31,9 @@ public class DollanPressurePlate extends BlockPressurePlate {
     @Override
     protected void playClickOffSound(World world, BlockPos pos) {
         if (cherry_sound) {
-            Sound.playSound(world, pos, "block.cherry_button.restore", 2.0F, 1.0F);
+            world.playSound(null, pos, DollanSounds.BLOCK_CHERRY_BUTTON_RESTORE, SoundCategory.BLOCKS, 2.0F, 1.0F);
         } else {
-            super.playClickOnSound(world, pos);
+            super.playClickOffSound(world, pos);
         }
     }
 

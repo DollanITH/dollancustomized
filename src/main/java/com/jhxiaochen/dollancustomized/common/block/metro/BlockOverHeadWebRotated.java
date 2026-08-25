@@ -248,4 +248,3 @@ public class BlockOverHeadWebRotated extends BlockRotatedPillar {
         }
     }
 }
-

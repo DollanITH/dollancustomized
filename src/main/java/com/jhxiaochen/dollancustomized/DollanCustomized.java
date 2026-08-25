@@ -3,7 +3,6 @@ package com.jhxiaochen.dollancustomized;
 import com.jhxiaochen.dollancustomized.client.event.ClientEvent;
 import com.jhxiaochen.dollancustomized.client.font.SignFontLoader;
 import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
-import com.jhxiaochen.dollancustomized.client.particle.ParticleTextureRegister;
 import com.jhxiaochen.dollancustomized.command.*;
 import com.jhxiaochen.dollancustomized.common.tileentity.*;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
@@ -27,7 +26,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class DollanCustomized {
@@ -95,18 +93,9 @@ public class DollanCustomized {
         DimensionManager.registerDimension(3, FLAT_DIM);
 
         if (event.getSide() == Side.CLIENT) {
-            clientEvent.init(event);
+            clientEvent.init();
         }
-        // Register particle rendering
-        registerParticles();
-    }
 
-    @SideOnly(Side.CLIENT)
-    private void registerParticles() {
-        // Jacaranda particles are spawned through ParticleManager
-        // No special registration needed as they use the standard particle system
-        // Preload particle textures
-        ParticleTextureRegister.preloadTextures();
     }
 
     @Mod.EventHandler

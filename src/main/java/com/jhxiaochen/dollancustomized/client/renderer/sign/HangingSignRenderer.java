@@ -158,6 +158,10 @@ public class HangingSignRenderer extends TileEntitySpecialRenderer<TileEntityDol
                 // 获取渲染位置（会自动缓存）
                 ITextComponent[] lines = tileEntity.getTextForSlot(slot);
 
+                if (tileEntity.getParentBlock() instanceof DollanHangingSignAttached) {
+                    GlStateManager.rotate(180.0F, 0,1,0);
+                }
+
                 // 获取当前正在编辑的行
                 int lineBeingEdited = tileEntity.lineBeingEdited;
                 boolean isHighlighted = (lineBeingEdited != -1);

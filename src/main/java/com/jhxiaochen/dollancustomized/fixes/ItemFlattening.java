@@ -15,61 +15,61 @@ import java.util.List;
  * @author Choonster
  */
 public class ItemFlattening implements IFixableData {
-	private final List<FlatteningDefinition> flatteningDefinitions;
+    private final List<FlatteningDefinition> flatteningDefinitions;
 
-	public ItemFlattening(final List<FlatteningDefinition> flatteningDefinitions) {
-		this.flatteningDefinitions = flatteningDefinitions;
-	}
+    public ItemFlattening(final List<FlatteningDefinition> flatteningDefinitions) {
+        this.flatteningDefinitions = flatteningDefinitions;
+    }
 
-	@Override
-	public int getFixVersion() {
-		return 1340;
-	}
+    @Override
+    public int getFixVersion() {
+        return 1340;
+    }
 
-	@Override
-	public NBTTagCompound fixTagCompound(final NBTTagCompound compound) {
-		final ResourceLocation oldName = new ResourceLocation(compound.getString("id"));
-		final short oldMetadata = compound.getShort("Damage");
-		final NBTTagCompound oldStackCompoundTag = compound.getCompoundTag("tag");
+    @Override
+    public NBTTagCompound fixTagCompound(final NBTTagCompound compound) {
+        final ResourceLocation oldName = new ResourceLocation(compound.getString("id"));
+        final short oldMetadata = compound.getShort("Damage");
+        final NBTTagCompound oldStackCompoundTag = compound.getCompoundTag("tag");
 
-		flatteningDefinitions.stream()
-				.filter(flatteningDefinition -> flatteningDefinition.oldName.equals(oldName))
-				.filter(flatteningDefinition -> flatteningDefinition.oldMetadata == oldMetadata)
-				.findFirst()
-				.ifPresent(flatteningDefinition -> {
-					final ItemStack newItemStack = flatteningDefinition.itemStackGetter.getItemStack(flatteningDefinition.newItem, flatteningDefinition.oldMetadata, oldStackCompoundTag);
-					final NBTTagCompound newNBT = newItemStack.serializeNBT();
+        flatteningDefinitions.stream()
+                .filter(flatteningDefinition -> flatteningDefinition.oldName.equals(oldName))
+                .filter(flatteningDefinition -> flatteningDefinition.oldMetadata == oldMetadata)
+                .findFirst()
+                .ifPresent(flatteningDefinition -> {
+                    final ItemStack newItemStack = flatteningDefinition.itemStackGetter.getItemStack(flatteningDefinition.newItem, flatteningDefinition.oldMetadata, oldStackCompoundTag);
+                    final NBTTagCompound newNBT = newItemStack.serializeNBT();
 
-					compound.setString("id", newNBT.getString("id"));
-					compound.setShort("Damage", newNBT.getShort("Damage"));
-					compound.setTag("tag", newNBT.getCompoundTag("tag"));
-				});
+                    compound.setString("id", newNBT.getString("id"));
+                    compound.setShort("Damage", newNBT.getShort("Damage"));
+                    compound.setTag("tag", newNBT.getCompoundTag("tag"));
+                });
 
-		return compound;
-	}
+        return compound;
+    }
 
-	static class FlatteningDefinition {
-		final ResourceLocation oldName;
-		final int oldMetadata;
+    static class FlatteningDefinition {
+        final ResourceLocation oldName;
+        final int oldMetadata;
 
-		final Item newItem;
+        final Item newItem;
 
-		final ItemStackGetter itemStackGetter;
+        final ItemStackGetter itemStackGetter;
 
-		FlatteningDefinition(final ResourceLocation oldName, final int oldMetadata, final Item newItem, final ItemStackGetter itemStackGetter) {
-			this.oldName = oldName;
-			this.oldMetadata = oldMetadata;
-			this.newItem = newItem;
-			this.itemStackGetter = itemStackGetter;
-		}
+        FlatteningDefinition(final ResourceLocation oldName, final int oldMetadata, final Item newItem, final ItemStackGetter itemStackGetter) {
+            this.oldName = oldName;
+            this.oldMetadata = oldMetadata;
+            this.newItem = newItem;
+            this.itemStackGetter = itemStackGetter;
+        }
 
-		FlatteningDefinition(final String oldName, final int oldMetadata, final Item newItem, final ItemStackGetter itemStackGetter) {
-			this(new ResourceLocation(Reference.MOD_ID, oldName), oldMetadata, newItem, itemStackGetter);
-		}
-	}
+        FlatteningDefinition(final String oldName, final int oldMetadata, final Item newItem, final ItemStackGetter itemStackGetter) {
+            this(new ResourceLocation(Reference.MOD_ID, oldName), oldMetadata, newItem, itemStackGetter);
+        }
+    }
 
-	@FunctionalInterface
-	interface ItemStackGetter {
-		ItemStack getItemStack(Item item, int oldMetadata, NBTTagCompound oldStackTagCompound);
-	}
+    @FunctionalInterface
+    interface ItemStackGetter {
+        ItemStack getItemStack(Item item, int oldMetadata, NBTTagCompound oldStackTagCompound);
+    }
 }

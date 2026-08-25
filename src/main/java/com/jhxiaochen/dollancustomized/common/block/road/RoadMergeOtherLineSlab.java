@@ -261,4 +261,3 @@ public RoadMergeOtherLineSlab(String name){
         return new ItemStack(this, 1, ((EnumVariant)state.getValue(VARIANT)).getMetadata());
     }
     }
-

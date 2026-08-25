@@ -4,7 +4,7 @@ import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.client.font.*;
 import com.jhxiaochen.dollancustomized.client.font.chinese.ChineseFontLoader;
 import com.jhxiaochen.dollancustomized.client.font.chinese.ChineseFontRenderer;
-import com.jhxiaochen.dollancustomized.client.particle.ParticleInit;
+import com.jhxiaochen.dollancustomized.client.particle.ParticleTextureRegister;
 import com.jhxiaochen.dollancustomized.client.renderer.road.RenderHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.client.renderer.road.RenderRoadText;
 import com.jhxiaochen.dollancustomized.client.renderer.sign.HangingSignRenderer;
@@ -13,7 +13,6 @@ import com.jhxiaochen.dollancustomized.client.renderer.station.StationNameBoardR
 import com.jhxiaochen.dollancustomized.common.tileentity.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 public class ClientEvent {
     public static RoadFontRenderer roadFontRenderer; // RoadText专用渲染器
@@ -32,9 +31,9 @@ public class ClientEvent {
     ResourceLocation ttfLocation3 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_1.ttf");
     ResourceLocation ttfLocation4 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_2.ttf");
 
-    public void init(FMLInitializationEvent event){
+    public void init(){
         // 初始化粒子系统
-        ParticleInit.init(null);
+        ParticleTextureRegister.preloadTextures();
 
         // RoadText 使用像素风格渲染器（高性能）
         RoadFontLoader roadFontLoader = new RoadFontLoader(ttfLocation, 32.0F);

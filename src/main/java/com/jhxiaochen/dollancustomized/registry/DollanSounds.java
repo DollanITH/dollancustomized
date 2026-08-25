@@ -38,6 +38,10 @@ public class DollanSounds {
     public static SoundEvent
             BLOCK_CHERRY_LEAVES_HIT = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.cherry_leaves.hit"));
     public static SoundEvent
+            BLOCK_CHERRY_BUTTON_CLICK = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.cherry_button.click"));
+    public static SoundEvent
+            BLOCK_CHERRY_BUTTON_RESTORE = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "block.cherry_button.restore"));
+    public static SoundEvent
             ITEM_AXE_STRIP = new SoundEvent(new ResourceLocation(Reference.MOD_ID , "item.axe.strip"));
     public static SoundType CHERRY_WOOD = new SoundType(1.0F, 1.0F,
                                           DollanSounds.BLOCK_CHERRY_WOOD_BREAK,
@@ -54,4 +58,3 @@ public class DollanSounds {
 
 
 }
-

@@ -1,9 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -225,7 +223,7 @@ public class BlockMetroFence extends Block {
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
         Block block = iblockstate.getBlock();
         boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.material || block instanceof BlockFenceGate);
-        return !isExcepBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID || flag;
+        return !isExcepBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID || flag || iblockstate.getBlock() instanceof BlockGlass || iblockstate.getBlock() instanceof BlockStainedGlass;
     }
 
     protected static boolean isExcepBlockForAttachWithPiston(Block p_194142_0_)

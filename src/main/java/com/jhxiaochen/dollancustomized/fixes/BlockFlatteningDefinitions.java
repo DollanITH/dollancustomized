@@ -11,12 +11,12 @@ import net.minecraft.util.EnumFacing;
  * @author Choonster
  */
 public class BlockFlatteningDefinitions {
-	/**
-	 * Creates an instance of the BlockFlattening data fixer with the definitions of the blocks to flatten.
-	 *
-	 * @return The BlockFlattening instance
-	 */
-	public static BlockFlattening createBlockFlattening() {
+    /**
+     * Creates an instance of the BlockFlattening data fixer with the definitions of the blocks to flatten.
+     *
+     * @return The BlockFlattening instance
+     */
+    public static BlockFlattening createBlockFlattening() {
         final ImmutableList.Builder<BlockFlattening.FlatteningDefinition> flatteningDefinitions = new ImmutableList.Builder<>();
 
         flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(
@@ -242,6 +242,6 @@ public class BlockFlatteningDefinitions {
             ));
         }
 
-		return new BlockFlattening(flatteningDefinitions.build());
-	}
+        return new BlockFlattening(flatteningDefinitions.build());
+    }
 }

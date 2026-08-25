@@ -27,6 +27,14 @@
             "uvlock": true
           }
         }
+      },
+      "on_pole": {
+        "submodel": {
+          "pole": {
+            "model": "dollancustomized:road_signpost_pole",
+            "uvlock": true
+          }
+        }
       }
     }
   }

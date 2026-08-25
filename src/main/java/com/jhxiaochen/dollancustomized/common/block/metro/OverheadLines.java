@@ -120,6 +120,3 @@ public class OverheadLines extends Block
     }
 
 }
-
-
-

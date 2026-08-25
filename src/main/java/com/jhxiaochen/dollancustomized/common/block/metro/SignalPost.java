@@ -126,4 +126,3 @@ public class SignalPost extends Block {
         return new BlockStateContainer(this, new IProperty[] {UP, DOWN});
     }
 }
-

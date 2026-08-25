@@ -245,4 +245,3 @@ public RoadMergeOtherLine(String name){
         return new ItemStack(this, 1, ((EnumVariant)state.getValue(VARIANT)).getMetadata());
     }
     }
-

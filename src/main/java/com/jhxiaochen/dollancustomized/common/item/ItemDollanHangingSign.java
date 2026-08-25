@@ -61,7 +61,7 @@ public class ItemDollanHangingSign extends Item {
         if (world.isOutsideBuildHeight(placePos)) return EnumActionResult.FAIL;
 
         if (replaceBlock || world.isAirBlock(placePos)) {
-            EnumFacing playerFacing = player.getHorizontalFacing();
+            EnumFacing playerFacing = player.getHorizontalFacing().getOpposite();
 
             if (clickFacing == EnumFacing.DOWN) {
                 BlockPos upBlockPos = placePos.up();

@@ -135,6 +135,3 @@ public class PunLamp extends BlockHorizontal
 
     }
 }
-
-
-

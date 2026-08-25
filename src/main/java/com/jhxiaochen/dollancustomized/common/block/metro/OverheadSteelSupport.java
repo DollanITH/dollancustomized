@@ -217,6 +217,3 @@ public class OverheadSteelSupport extends Block
     }
 
 }
-
-
-

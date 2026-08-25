@@ -1,18 +1,16 @@
 {
   "required": true,
-  "compatibilityLevel": "JAVA_25",
+  "compatibilityLevel": "JAVA_21",
   "package": "com.jhxiaochen.dollancustomized.mixin",
   "minVersion": "0.8.7",
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
   "mixins": [
+    "MixinBlockFence",
     "MixinWorldType"
   ],
   "client": [
   ],
   "server": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  ]
 }

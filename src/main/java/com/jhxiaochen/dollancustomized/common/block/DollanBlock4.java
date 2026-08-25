@@ -31,4 +31,3 @@ public class DollanBlock4 extends net.minecraft.block.Block {
 
 
 }
-

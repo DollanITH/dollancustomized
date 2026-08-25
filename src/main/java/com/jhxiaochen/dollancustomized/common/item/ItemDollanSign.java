@@ -10,6 +10,7 @@ import net.minecraft.block.BlockWallSign;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -42,6 +43,10 @@ public class ItemDollanSign extends Item {
         if (facing != EnumFacing.DOWN && (iblockstate.getMaterial().isSolid() || flag) && (!flag || facing == EnumFacing.UP)) {
             pos = pos.offset(facing);
             ItemStack itemstack = player.getHeldItem(hand);
+
+            if (!player.canPlayerEdit(pos, facing, itemstack) || !Blocks.STANDING_SIGN.canPlaceBlockAt(worldIn, pos)) {
+                return EnumActionResult.FAIL;
+            }
 
             if (player.canPlayerEdit(pos, facing, itemstack)) {
                 if (worldIn.isRemote) {

@@ -29,4 +29,3 @@ public class DollanPolished extends net.minecraft.block.Block {
 
 
 }
-

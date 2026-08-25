@@ -138,4 +138,3 @@ public class OverheadPost extends Block {
         return new BlockStateContainer(this, new IProperty[] {UP, DOWN});
     }
 }
-

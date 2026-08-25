@@ -48,6 +48,8 @@ public class DollanRegistry {
         event.getRegistry().register(DollanSounds.BLOCK_CHERRY_LEAVES_FALL.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.cherry_leaves.fall")));
         event.getRegistry().register(DollanSounds.BLOCK_CHERRY_LEAVES_BREAK.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.cherry_leaves.break")));
         event.getRegistry().register(DollanSounds.BLOCK_CHERRY_LEAVES_HIT.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.cherry_leaves.hit")));
+        event.getRegistry().register(DollanSounds.BLOCK_CHERRY_BUTTON_CLICK.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.cherry_button.click")));
+        event.getRegistry().register(DollanSounds.BLOCK_CHERRY_BUTTON_RESTORE.setRegistryName(new ResourceLocation(Reference.MOD_ID , "block.cherry_button.restore")));
         event.getRegistry().register(DollanSounds.ITEM_AXE_STRIP.setRegistryName(new ResourceLocation(Reference.MOD_ID , "item.axe.strip")));
     }
 }

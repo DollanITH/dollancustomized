@@ -11,13 +11,13 @@ import net.minecraft.item.ItemStack;
  * @author Choonster
  */
 public class ItemFlatteningDefinitions {
-	/**
-	 * Creates an instance of the ItemFlattening data fixer with the definitions of the items to flatten.
-	 *
-	 * @return The ItemFlattening instance
-	 */
-	public static ItemFlattening createItemFlattening() {
-		final ImmutableList.Builder<ItemFlattening.FlatteningDefinition> flatteningDefinitions = new ImmutableList.Builder<>();
+    /**
+     * Creates an instance of the ItemFlattening data fixer with the definitions of the items to flatten.
+     *
+     * @return The ItemFlattening instance
+     */
+    public static ItemFlattening createItemFlattening() {
+        final ImmutableList.Builder<ItemFlattening.FlatteningDefinition> flatteningDefinitions = new ImmutableList.Builder<>();
 
         flatteningDefinitions.add(new ItemFlattening.FlatteningDefinition(
                 "myalite",
@@ -40,6 +40,6 @@ public class ItemFlatteningDefinitions {
                 (item, oldMetadata, oldStackTagCompound) -> new ItemStack(item)
         ));
 
-		return new ItemFlattening(flatteningDefinitions.build());
-	}
+        return new ItemFlattening(flatteningDefinitions.build());
+    }
 }

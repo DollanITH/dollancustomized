@@ -54,7 +54,17 @@ public class WorldProviderFlatDim extends WorldProvider {
     }
 
     @Override
+    public void calculateInitialWeather() {
+    }
+
+    @Override
     public void updateWeather() {
+        world.getWorldInfo().setCleanWeatherTime(world.getWorldInfo().getCleanWeatherTime());
+    }
+
+    @Override
+    public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
+        super.setAllowedSpawnTypes(false, true);
     }
 
     @Override

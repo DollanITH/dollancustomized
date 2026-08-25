@@ -12,7 +12,7 @@ import com.jhxiaochen.dollancustomized.common.block.rail.StationStopSign;
 import com.jhxiaochen.dollancustomized.common.block.rail.StationStopWallSign;
 import com.jhxiaochen.dollancustomized.common.block.rail.base.TwoBlocksSignBase;
 import com.jhxiaochen.dollancustomized.common.block.road.*;
-import com.jhxiaochen.dollancustomized.common.block.sign.*;
+import com.jhxiaochen.dollancustomized.common.block.signpost.*;
 import com.jhxiaochen.dollancustomized.common.item.*;
 import com.jhxiaochen.dollancustomized.registry.DollanItems;
 import net.minecraft.block.Block;
@@ -1036,4 +1036,3 @@ public class DollanBlocks {
     }
 
 }
-

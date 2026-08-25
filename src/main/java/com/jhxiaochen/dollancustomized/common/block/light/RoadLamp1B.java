@@ -136,4 +136,3 @@ public class RoadLamp1B extends BlockHorizontal
     }
 
 }
-

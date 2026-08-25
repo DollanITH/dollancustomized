@@ -179,4 +179,3 @@ public class BlockMyalite extends Block {
         return state.getValue(BlockMyalite.VARIANT) == BlockMyalite.MyaliteType.CRYSTAL ? 0 : this.lightOpacity;
     }
 }
-

@@ -22,6 +22,7 @@ import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -80,6 +81,15 @@ public class ModelHandler {
         DollanItems.registerModel();
         DollanItems.register();
         System.out.println("DollanCustomized Registered Models!");
+    }
+
+    @SubscribeEvent
+    public static void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+        // 注册所有12个蓝花楹粒子纹理
+        for (int i = 0; i < 12; i++) {
+            ResourceLocation texture = new ResourceLocation("dollancustomized", "particles/jacaranda_" + i);
+            event.getMap().registerSprite(texture);
+        }
     }
 
     @SubscribeEvent

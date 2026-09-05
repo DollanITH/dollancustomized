@@ -1,15 +1,28 @@
 {
   "required": true,
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_25",
   "package": "com.jhxiaochen.dollancustomized.mixin",
   "minVersion": "0.8.7",
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
   "mixins": [
     "MixinBlockFence",
+    "MixinBlockFenceGate",
+    "MixinBlockRail",
+    "MixinBlockRailDetector",
+    "MixinBlockRailPowered",
+    "MixinEntityIronGolem",
+    "MixinEntitySnowman",
+    "MixinItemBlock",
+    "MixinRailPlace",
     "MixinWorldType"
   ],
   "client": [
+    "MixinResourcePackRepository",
+    "accessor.EntryAccessor",
+    "accessor.GameSettingsAccessor",
+    "accessor.MinecraftAccessor",
+    "accessor.RepositoryAccessor"
   ],
   "server": [
   ]

@@ -1,0 +1,16 @@
+{
+  "package": "com.jhxiaochen.dollancustomized.mixin.mod",
+  "required": true,
+  "target": "@env(MOD)",
+  "minVersion": "0.8.7",
+  "plugin": "com.jhxiaochen.dollancustomized.DollanMixinConfigPlugin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "futuremc.MixinFlowerWorldGen"
+  ],
+  "server": [
+  ],
+  "client": [
+  ],
+  "setSourceFile": true
+}

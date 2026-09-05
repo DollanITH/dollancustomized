@@ -204,7 +204,7 @@ public class WoodBlocks {
 
         // 红木方块注册
         registerBlock(mangrove_button);
-        registerBlock(mangrove_door, DollanItems.item_mangrove_door);
+        registerBlock(mangrove_door, null);
         registerBlock(mangrove_fence);
         registerBlock(mangrove_pressure_plate);
         registerBlock(mangrove_stairs);

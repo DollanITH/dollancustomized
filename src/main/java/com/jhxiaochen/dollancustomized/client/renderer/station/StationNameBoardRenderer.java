@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Objects;
 
@@ -56,7 +55,6 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
         }
         GlStateManager.rotate(-rotateY, 0, 1, 0);
         GlStateManager.translate(0, 0.3125, 0.5125);
-        GL11.glCullFace(GL11.GL_FRONT);
         // 翻转到正面
         GlStateManager.scale(1, -1, 1);
         GlStateManager.translate(-0.99375, 0, -0.99375);
@@ -79,7 +77,7 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
         // 渲染中文文本
         if (te.getChineseText() != null && !te.getChineseText().isEmpty()) {
             GlStateManager.pushMatrix();
-
+            GlStateManager.disableCull();
             // 禁用深度写入，启用混合
             GlStateManager.scale(scale, scale, 1);
 
@@ -105,7 +103,7 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
         if (te.getEnglishText() != null && !te.getEnglishText().isEmpty()) {
             float engscale = scale * 0.375f;
             GlStateManager.pushMatrix();
-
+            GlStateManager.disableCull();
             // 禁用深度写入，启用混合
             GlStateManager.scale(engscale, engscale, 1);
 
@@ -121,7 +119,6 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
 
             GlStateManager.popMatrix();
         }
-        GL11.glCullFace(GL11.GL_BACK);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();

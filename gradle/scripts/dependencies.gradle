@@ -52,6 +52,8 @@ dependencies {
     modImplementation "maven.modrinth:1mPcAmuy:jZIkQLdu"
     modRuntimeOnly("maven.modrinth:vylTACsh:jViSfJQF")
     modImplementation "maven.modrinth:dKv1FGT7:v3ZmWrP5"
+    modImplementation "maven.modrinth:qnQsVE2z:MPJKDJmI"
+    modRuntimeOnly "maven.modrinth:NvZ9ZhwE:FgbUBupA"
 
     // Example - Dependency descriptor:
     // 'com.google.code.gson:gson:2.8.6' << group: com.google.code.gson, name:gson, version:2.8.6

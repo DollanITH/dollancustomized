@@ -94,12 +94,12 @@ public class TileEntityStationNameBoard extends TileEntity {
 
     // 获取字体大小
     public float getFontSizeMultiplier() {
-        switch (this.fontSize) {
-            case 1: return 0.8125f; // 小
-            case 2: return 0.9325f; // 中
-            case 3: return 1.1625f; // 大
-            default: return 0.9325f;
-        }
+        return switch (this.fontSize) {
+            case 1 -> 0.8125f; // 小
+            case 2 -> 0.9325f; // 中
+            case 3 -> 1.1625f; // 大
+            default -> 0.9325f;
+        };
     }
 
     // getter方法

@@ -6,7 +6,11 @@
   "plugin": "com.jhxiaochen.dollancustomized.DollanMixinConfigPlugin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "futuremc.MixinFlowerWorldGen"
+    "futuremc.MixinFlowerWorldGen",
+    "railcraft.MixinBlockTrackFlex",
+    "railcraft.MixinBlockTrackForce",
+    "railcraft.MixinBlockTrackOutfitted",
+    "railcraft.MixinWorldGenJaded"
   ],
   "server": [
   ],

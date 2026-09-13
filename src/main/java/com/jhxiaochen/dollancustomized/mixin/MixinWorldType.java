@@ -37,10 +37,10 @@ public class MixinWorldType {
     {
         World world = Minecraft.getMinecraft().world;
         if ((Object) this == FLAT || world.provider.getDimensionType() == DollanCustomized.FLAT_DIM) {
-            cir.cancel();
             return;
         }
         cir.setReturnValue(256.0F);
+        cir.cancel();
     }
 
 }

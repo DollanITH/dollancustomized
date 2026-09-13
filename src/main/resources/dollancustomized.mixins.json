@@ -6,6 +6,7 @@
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
   "mixins": [
+    "MixinBlockDoor",
     "MixinBlockFence",
     "MixinBlockFenceGate",
     "MixinBlockRail",
@@ -13,7 +14,6 @@
     "MixinBlockRailPowered",
     "MixinEntityIronGolem",
     "MixinEntitySnowman",
-    "MixinItemBlock",
     "MixinRailPlace",
     "MixinWorldType"
   ],
@@ -21,7 +21,6 @@
     "MixinResourcePackRepository",
     "accessor.EntryAccessor",
     "accessor.GameSettingsAccessor",
-    "accessor.MinecraftAccessor",
     "accessor.RepositoryAccessor"
   ],
   "server": [

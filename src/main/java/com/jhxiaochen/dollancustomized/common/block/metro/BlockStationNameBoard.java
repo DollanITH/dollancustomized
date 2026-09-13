@@ -3,10 +3,7 @@ package com.jhxiaochen.dollancustomized.common.block.metro;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.client.gui.GuiStationNameBoard;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -155,7 +152,13 @@ public class BlockStationNameBoard extends Block implements ITileEntityProvider 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         // 检查是否能放置在墙上
         for (EnumFacing facing : EnumFacing.values()) {
-            if (isSideSolid(worldIn.getBlockState(pos.offset(facing.getOpposite())), worldIn, pos.offset(facing.getOpposite()), facing.getOpposite())) {
+            if (isSideSolid(worldIn.getBlockState(pos.offset(facing.getOpposite())), worldIn, pos.offset(facing.getOpposite()), facing.getOpposite()) || isFullCube(worldIn.getBlockState(pos.offset(facing.getOpposite())))) {
+                return true;
+            }
+            if (worldIn.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockGlass) {
+                return true;
+            }
+            if (worldIn.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockStainedGlass) {
                 return true;
             }
         }
@@ -165,6 +168,12 @@ public class BlockStationNameBoard extends Block implements ITileEntityProvider 
     private boolean canPlaceAt(World worldIn, BlockPos pos, EnumFacing facing) {
         BlockPos blockpos = pos.offset(facing.getOpposite());
         IBlockState iblockstate = worldIn.getBlockState(blockpos);
+        if (worldIn.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockGlass) {
+            return true;
+        }
+        if (worldIn.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockStainedGlass) {
+            return true;
+        }
         return iblockstate.isSideSolid(worldIn, blockpos, facing.getOpposite());
     }
 

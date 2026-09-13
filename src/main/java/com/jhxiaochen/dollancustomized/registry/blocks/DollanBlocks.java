@@ -392,8 +392,8 @@ public class DollanBlocks {
         registerSimpleBlock(metro_fence, new ItemMultiTexture(metro_fence, metro_fence, p_apply_1_ -> BlockMetroFence.FenceType.byMetadata(p_apply_1_.getMetadata()).getUnlocalizedName()));
         registerSimpleBlock(station_end_door, null);
         registerSimpleBlock(railway_sign_post);
-        registerSimpleBlock(power_method_change_sign);
-        registerSimpleBlock(deport_stop_sign);
+        registerSimpleBlock(power_method_change_sign, new ItemRailwaySign(power_method_change_sign));
+        registerSimpleBlock(deport_stop_sign, new ItemRailwaySign(deport_stop_sign));
         registerSimpleBlock(empty_railway_sign);
         registerSimpleBlock(station_stop_sign);
         registerSimpleBlock(arrow_confluence_left, new ItemRoadMarkArrow(arrow_confluence_left));

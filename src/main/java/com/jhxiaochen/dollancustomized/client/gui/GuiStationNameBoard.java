@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.gui;
 
+import com.cleanroommc.client.IMEHandler;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.network.packet.PacketStationNameBoard;
@@ -7,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
 
@@ -31,6 +33,14 @@ public class GuiStationNameBoard extends GuiScreen {
     private final String[] fontFamilyOptions = {"default", "cn_1", "cn_2"};
     private final String[] fontFamilyNames = {"默认字体", "字体1", "字体2"};
 
+    /** 待重挂的字段（跨帧执行 false→true 序列） */
+    private GuiTextField pendingRefocus;
+    /** 重挂序列的执行进度：0=未开始, 1=已执行setFocused(false), 2=完成 */
+    private int refocusStage = 0;
+    /** 记录当前逻辑焦点，用于检测焦点变化 */
+    private GuiTextField lastFocusTarget;
+
+
     public GuiStationNameBoard(TileEntityStationNameBoard te) {
         this.tileEntity = te;
         this.currentRed = te.colorRed;
@@ -49,6 +59,8 @@ public class GuiStationNameBoard extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
+        Keyboard.enableRepeatEvents(true);
+        IMEHandler.setIME(true);
 
         // 强制释放鼠标焦点，确保指针显示
         if (this.mc != null && this.mc.inGameHasFocus) {
@@ -56,11 +68,6 @@ public class GuiStationNameBoard extends GuiScreen {
         }
 
         if (this.fontRenderer == null) return;
-
-        // 文本输入字段
-        this.chineseTextField = new GuiTextField(0, this.fontRenderer, this.width / 2 - 100, this.height / 2 - 80, 200, 20);
-        this.chineseTextField.setMaxStringLength(15);
-        this.chineseTextField.setText(this.tileEntity.chineseText != null ? this.tileEntity.chineseText : "");
 
         this.englishTextField = new GuiTextField(1, this.fontRenderer, this.width / 2 - 100, this.height / 2 - 40, 200, 20);
         this.englishTextField.setMaxStringLength(40);
@@ -88,11 +95,26 @@ public class GuiStationNameBoard extends GuiScreen {
         // 确认和取消按钮
         this.doneButton = this.addButton(new GuiButton(7, this.width / 2 - 90, this.height / 2 + 85, 90, 20, I18n.format("gui.done")));
         this.cancelButton = this.addButton(new GuiButton(8, this.width / 2 + 4, this.height / 2 + 85, 90, 20, I18n.format("gui.cancel")));
+        // 文本输入字段
+        this.chineseTextField = new GuiTextField(0, this.fontRenderer, this.width / 2 - 100, this.height / 2 - 80, 200, 20);
+        this.chineseTextField.setMaxStringLength(15);
+        this.chineseTextField.setText(this.tileEntity.chineseText != null ? this.tileEntity.chineseText : "");
+
+        this.chineseTextField.setFocused(true);
+        this.lastFocusTarget = this.chineseTextField;  // ← 加这行
+
     }
 
     private String getFontSizeButtonName() {
         String[] sizeNames = {"小号", "中号", "大号"};
         return "字体大小: " + sizeNames[currentFontSize - 1];
+    }
+
+    // GuiRoadText 有，GuiStationNameBoard 完全没有：
+    @Override
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
+        super.onGuiClosed();
     }
 
     private String getFontFamilyButtonName() {
@@ -123,19 +145,39 @@ public class GuiStationNameBoard extends GuiScreen {
             int b = Integer.parseInt(this.blueTextField.getText());
 
             // 限制范围
-            currentRed = Math.max(0, Math.min(255, r));
-            currentGreen = Math.max(0, Math.min(255, g));
-            currentBlue = Math.max(0, Math.min(255, b));
+            r = Math.max(0, Math.min(255, r));
+            g = Math.max(0, Math.min(255, g));
+            b = Math.max(0, Math.min(255, b));
 
-            // 更新字段显示
-            this.redTextField.setText(String.valueOf(currentRed));
-            this.greenTextField.setText(String.valueOf(currentGreen));
-            this.blueTextField.setText(String.valueOf(currentBlue));
+            // 只在值真正变化时才回写 setText，
+            // 避免在 IME 组合过程中打断输入、避免重置光标位置
+            if (currentRed != r) {
+                currentRed = r;
+                this.redTextField.setText(String.valueOf(r));
+            }
+            if (currentGreen != g) {
+                currentGreen = g;
+                this.greenTextField.setText(String.valueOf(g));
+            }
+            if (currentBlue != b) {
+                currentBlue = b;
+                this.blueTextField.setText(String.valueOf(b));
+            }
         } catch (NumberFormatException e) {
-            // 如果解析失败，恢复当前值
-            this.redTextField.setText(String.valueOf(currentRed));
-            this.greenTextField.setText(String.valueOf(currentGreen));
-            this.blueTextField.setText(String.valueOf(currentBlue));
+            // 解析失败（含空文本、负号、非数字等），恢复为当前有效值，
+            // 同样只在变化时回写
+            String rText = String.valueOf(currentRed);
+            String gText = String.valueOf(currentGreen);
+            String bText = String.valueOf(currentBlue);
+            if (!rText.equals(this.redTextField.getText())) {
+                this.redTextField.setText(rText);
+            }
+            if (!gText.equals(this.greenTextField.getText())) {
+                this.greenTextField.setText(gText);
+            }
+            if (!bText.equals(this.blueTextField.getText())) {
+                this.blueTextField.setText(bText);
+            }
         }
     }
 
@@ -155,58 +197,23 @@ public class GuiStationNameBoard extends GuiScreen {
         this.mc.displayGuiScreen(null);
     }
 
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        // 1. 将键盘输入转发给文本框
-        if (this.chineseTextField.isFocused()) {
-            this.chineseTextField.textboxKeyTyped(typedChar, keyCode);
-        } else if (this.englishTextField.isFocused()) {
-            this.englishTextField.textboxKeyTyped(typedChar, keyCode);
-        } else if (this.redTextField.isFocused()) {
-            if (keyCode == 28 || keyCode == 156) { // Enter or Numpad Enter
-                updateRGBFromFields();
-                if (!saveAndCloseCheck()) {
-                    super.keyTyped(typedChar, keyCode);
-                }
-            } else {
-                this.redTextField.textboxKeyTyped(typedChar, keyCode);
-            }
-        } else if (this.greenTextField.isFocused()) {
-            if (keyCode == 28 || keyCode == 156) { // Enter or Numpad Enter
-                updateRGBFromFields();
-                if (!saveAndCloseCheck()) {
-                    super.keyTyped(typedChar, keyCode);
-                }
-            } else {
-                this.greenTextField.textboxKeyTyped(typedChar, keyCode);
-            }
-        } else if (this.blueTextField.isFocused()) {
-            if (keyCode == 28 || keyCode == 156) { // Enter or Numpad Enter
-                updateRGBFromFields();
-                if (!saveAndCloseCheck()) {
-                    super.keyTyped(typedChar, keyCode);
-                }
-            } else {
-                this.blueTextField.textboxKeyTyped(typedChar, keyCode);
-            }
+    private GuiTextField getFocusedTextField() {
+        if (this.chineseTextField != null && this.chineseTextField.isFocused()) {
+            return this.chineseTextField;
         }
-
-        // 2. 拦截 ESC 键 (keyCode == 1)
-        if (keyCode == 1) {
-            this.mc.displayGuiScreen(null);
-            return;
+        if (this.englishTextField != null && this.englishTextField.isFocused()) {
+            return this.englishTextField;
         }
-
-        // 3. 拦截 ENTER 键 (keyCode == 28)
-        if (keyCode == 28 && !chineseTextField.isFocused() && !englishTextField.isFocused() &&
-            !redTextField.isFocused() && !greenTextField.isFocused() && !blueTextField.isFocused()) {
-            updateRGBFromFields();
-            saveAndClose();
-            return;
+        if (this.redTextField != null && this.redTextField.isFocused()) {
+            return this.redTextField;
         }
-
-        // 4. 其他按键交给父类处理
-        super.keyTyped(typedChar, keyCode);
+        if (this.greenTextField != null && this.greenTextField.isFocused()) {
+            return this.greenTextField;
+        }
+        if (this.blueTextField != null && this.blueTextField.isFocused()) {
+            return this.blueTextField;
+        }
+        return null;
     }
 
     private boolean saveAndCloseCheck() {
@@ -217,24 +224,110 @@ public class GuiStationNameBoard extends GuiScreen {
         return false;
     }
 
+    /** 判断点落在哪个字段内，无则返回 null */
+    private GuiTextField fieldAt(int mouseX, int mouseY) {
+        if (inBounds(mouseX, mouseY, chineseTextField)) return chineseTextField;
+        if (inBounds(mouseX, mouseY, englishTextField)) return englishTextField;
+        if (inBounds(mouseX, mouseY, redTextField))     return redTextField;
+        if (inBounds(mouseX, mouseY, greenTextField))   return greenTextField;
+        if (inBounds(mouseX, mouseY, blueTextField))    return blueTextField;
+        return null;
+    }
+
+    private boolean inBounds(int mx, int my, GuiTextField f) {
+        return f != null
+                && mx >= f.x && mx < f.x + f.width
+                && my >= f.y && my < f.y + f.height;
+    }
+
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        this.chineseTextField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.englishTextField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.redTextField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.greenTextField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.blueTextField.mouseClicked(mouseX, mouseY, mouseButton);
+        GuiTextField target = fieldAt(mouseX, mouseY);
+        if (target != null) {
+            // ── 焦点迁移：0 次中间态，直接切到目标 ──
+            if (chineseTextField != null) chineseTextField.setFocused(target == chineseTextField);
+            if (englishTextField != null) englishTextField.setFocused(target == englishTextField);
+            if (redTextField != null)     redTextField.setFocused(target == redTextField);
+            if (greenTextField != null)   greenTextField.setFocused(target == greenTextField);
+            if (blueTextField != null)    blueTextField.setFocused(target == blueTextField);
 
-        // 当点击RGB字段时自动更新值
-        if (redTextField.isFocused() || greenTextField.isFocused() || blueTextField.isFocused()) {
-            updateRGBFromFields();
+            if (target == redTextField || target == greenTextField || target == blueTextField) {
+                updateRGBFromFields();
+            }
+
+            // ── 关键：目标字段若是"逻辑焦点变化"，登记跨帧重挂 ──
+            if (target != lastFocusTarget) {
+                lastFocusTarget = target;
+                pendingRefocus = target;
+                refocusStage = 0;  // 下一次 updateScreen 开始序列
+            }
+            return;
         }
 
+        // 点击空白：0 次焦点变更，不登记重挂
+        if (getFocusedTextField() == null && chineseTextField != null) {
+            chineseTextField.setFocused(true);
+            lastFocusTarget = chineseTextField;
+            pendingRefocus = chineseTextField;
+            refocusStage = 0;
+        }
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        // 1. 先无条件转发给聚焦字段（GuiRoadText 同款：不判定焦点直接转，
+        //    未聚焦字段的 textboxKeyTyped 自身会拒绝处理）
+        GuiTextField focused = getFocusedTextField();
+
+        if (focused == null) {
+            focused = chineseTextField;
+            if (focused != null) {
+                focused.setFocused(true);
+                lastFocusTarget = focused;   // ← 同步
+                pendingRefocus = focused;    // ← 顺带补一次重挂
+                refocusStage = 0;
+            }
+        }
+
+        if (focused != null) {
+            focused.textboxKeyTyped(typedChar, keyCode);
+        }
+
+        // 2. ESC（转发之后处理，与 GuiRoadText 一致）
+        if (keyCode == Keyboard.KEY_ESCAPE) {
+            this.mc.displayGuiScreen(null);
+            return;
+        }
+
+        // 3. Enter 提交
+        if (keyCode == Keyboard.KEY_RETURN || keyCode == Keyboard.KEY_NUMPADENTER) {
+            updateRGBFromFields();
+            saveAndClose();
+            return;
+        }
+
+        // 4. 其余交父类（保持 Cleanroom 输入链路完整）
+        super.keyTyped(typedChar, keyCode);
+    }
+
+    @Override
     public void updateScreen() {
+        // ── IME 重挂序列：setFocused(false) → 等一帧 → setFocused(true) ──
+        // 这模拟了"GUI 重新打开"的完整挂载时序，让 Cleanroom 把 IME 上下文
+        // 重新绑定到当前字段。拆成两帧是因为同一帧内 false→true 会被
+        // 输入层当作"无变化"合并掉，这正是点击切焦点后 IME 丢失的根源。
+        if (pendingRefocus != null) {
+            if (refocusStage == 0) {
+                pendingRefocus.setFocused(false);
+                refocusStage = 1;
+            } else if (refocusStage == 1) {
+                pendingRefocus.setFocused(true);
+                pendingRefocus = null;
+                refocusStage = 0;
+            }
+        }
+
         this.chineseTextField.updateCursorCounter();
         this.englishTextField.updateCursorCounter();
         this.redTextField.updateCursorCounter();
@@ -242,6 +335,7 @@ public class GuiStationNameBoard extends GuiScreen {
         this.blueTextField.updateCursorCounter();
         super.updateScreen();
     }
+
 
     @Override
     public void drawDefaultBackground() {

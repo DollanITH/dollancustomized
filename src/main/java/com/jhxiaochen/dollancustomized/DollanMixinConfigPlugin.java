@@ -22,10 +22,13 @@ public class DollanMixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String s, String s1) {
-        if (s1.contains(".futuremc.")) {
+        if (s1.contains(".mod.futuremc.")) {
             return Loader.isModLoaded("futuremc");
         }
-        return false;
+        if (s1.contains(".mod.railcraft.")) {
+            return Loader.isModLoaded("railcraft");
+        }
+        return true;
     }
 
     @Override

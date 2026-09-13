@@ -29,24 +29,6 @@ public class DollanConfig {
     @Config.RangeInt(min = 0, max = 10000)
     public static int SAFE_RANGE = 3000;
 
-    @Config.Name("Enable Optifine Enhanced Pack")
-    @Config.Comment("Optifine 增强资源包默认启用的开关。玩家在资源包界面禁用后会自动写回 false")
-    public static boolean ENABLE_OPTIFINE_PACK = true;
-
-    /**
-     * 运行时修改资源包开关并写回磁盘。
-     * ConfigAnytime 的 @Config 字段由 ConfigManager 管理，
-     * 直接改字段后调用 sync 即可同步到配置文件。
-     */
-    public static void setOptifinePackEnabled(boolean enabled) {
-        ENABLE_OPTIFINE_PACK = enabled;
-        try {
-            ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
-        } catch (Exception e) {
-            DollanCustomized.LOGGER.warn("写回资源包开关配置失败", e);
-        }
-    }
-
     static {
         ConfigAnytime.register(DollanConfig.class);
     }

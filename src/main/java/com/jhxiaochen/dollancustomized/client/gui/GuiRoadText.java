@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
 
@@ -29,6 +30,7 @@ public class GuiRoadText extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
+        Keyboard.enableRepeatEvents(true);
 
         // 强制释放鼠标焦点，确保指针显示
         if (this.mc != null && this.mc.inGameHasFocus) {
@@ -117,6 +119,12 @@ public class GuiRoadText extends GuiScreen {
         if (this.mc != null) {
             super.drawDefaultBackground();
         }
+    }
+
+    @Override
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
+        super.onGuiClosed();
     }
 
     @Override

@@ -58,7 +58,7 @@ public class Remaper {
 
         itemRemappings.put("dollancraft", "dollan");
         blockRemappings1.put("cherry_planks", "suikecherry:cherry_planks");
-        if(Loader.isModLoaded("depthupdate")) {
+        if(Loader.isModLoaded("depthsupdate")) {
             ignoredMappings.add("graystoneblock");
             ignoredMappings.add("cracked_deepslate");
             ignoredMappings.add("calcite");

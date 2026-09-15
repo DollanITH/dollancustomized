@@ -4,6 +4,7 @@ import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.mixin.accessor.EntryAccessor;
 import com.jhxiaochen.dollancustomized.mixin.accessor.GameSettingsAccessor;
 import com.jhxiaochen.dollancustomized.mixin.accessor.RepositoryAccessor;
+import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.ResourcePackRepository;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,7 +26,7 @@ public class MixinResourcePackRepository {
 
     @Inject(method = "updateRepositoryEntriesAll", at = @At("TAIL"))
     private void dollan$reinject(CallbackInfo ci) {
-        if (DollanCustomized.modPack == null) return;
+        if (ClientProxy.modPack == null) return;
 
         ResourcePackRepository repo = Minecraft.getMinecraft().getResourcePackRepository();
         if (repo == null) return;
@@ -33,19 +34,19 @@ public class MixinResourcePackRepository {
         // 判重：已存在同名的 Entry 就不重复建立
         boolean exists = false;
         for (ResourcePackRepository.Entry e : ((RepositoryAccessor) repo).getAllEntries()) {
-            if (e.getResourcePackName().equals(DollanCustomized.modPack.getPackName())) {
+            if (e.getResourcePackName().equals(ClientProxy.modPack.getPackName())) {
                 exists = true;
                 break;
             }
         }
         if (exists) {
             // 已有 entry，只需确保名单写入
-            this.dollan$ensureDefaultSelected(DollanCustomized.modPack.getPackName());
+            this.dollan$ensureDefaultSelected(ClientProxy.modPack.getPackName());
             return;
         }
 
         // 直接用 ModPack 构造 Entry：Entry 从出生就持有 ModPack
-        ResourcePackRepository.Entry entry = EntryAccessor.create(repo, DollanCustomized.modPack);
+        ResourcePackRepository.Entry entry = EntryAccessor.create(repo, ClientProxy.modPack);
 
         // 主动读取元数据，填入 Entry 的 rePackMetadataSection（消除 GUI 红字）
         try {

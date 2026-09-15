@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.common.block.wood.jacaranda;
 
-import com.jhxiaochen.dollancustomized.DollanConfig;
 import com.jhxiaochen.dollancustomized.client.particle.ParticleManager;
 import com.jhxiaochen.dollancustomized.common.block.wood.DollanLeaves;
+import com.jhxiaochen.dollancustomized.config.DollanConfig;
 import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +19,7 @@ import java.util.Random;
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         super.randomDisplayTick(stateIn, worldIn, pos, rand);
         // 只在客户端生成粒子
-        if (!worldIn.isRemote || !DollanConfig.ENABLE_JACARANDA_LEAVES) {
+        if (!worldIn.isRemote || !DollanConfig.CLIENT_CONFIG.ENABLE_JACARANDA_LEAVES) {
             return;
         }
 

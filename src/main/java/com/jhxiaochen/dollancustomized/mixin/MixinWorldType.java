@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.mixin;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -17,7 +18,7 @@ public class MixinWorldType {
     @Final
     public static WorldType FLAT;
 
-    @Inject(method = "voidFadeMagnitude()D", at = @At(value = "RETURN"), cancellable = true, remap = false)
+    @Inject(method = "voidFadeMagnitude()D", at = @At(value = "RETURN"), cancellable = true)
     private void dollanModifyVoidFade(CallbackInfoReturnable<Double> cir) {
 
         World world = Minecraft.getMinecraft().world;
@@ -32,15 +33,24 @@ public class MixinWorldType {
         cir.cancel();
     }
 
-    @Inject(method = "getCloudHeight()F", at = @At(value = "RETURN") , cancellable = true, remap = false)
+    @Inject(method = "getCloudHeight()F", at = @At(value = "RETURN") , cancellable = true)
     private void voidGetCloudHeight(CallbackInfoReturnable<Float> cir)
     {
         World world = Minecraft.getMinecraft().world;
         if ((Object) this == FLAT || world.provider.getDimensionType() == DollanCustomized.FLAT_DIM) {
             return;
         }
-        cir.setReturnValue(256.0F);
-        cir.cancel();
+        if (cir.getReturnValue() == 128.0F) {
+            cir.setReturnValue(256.0F);
+            cir.cancel();
+        }
+    }
+
+    @ModifyReturnValue(method = "getHorizon", at = @At(value = "RETURN"))
+    private double voidGetHorizon(double original)
+    {
+        World world = Minecraft.getMinecraft().world;
+        return world.getSeaLevel();
     }
 
 }

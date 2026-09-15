@@ -1,8 +1,8 @@
 package com.jhxiaochen.dollancustomized.client.renderer.station;
 
-import com.jhxiaochen.dollancustomized.client.event.ClientEvent;
 import com.jhxiaochen.dollancustomized.common.block.metro.BlockStationNameBoard;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
+import com.jhxiaochen.dollancustomized.proxy.ClientProxy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
@@ -136,11 +136,11 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
 
             // 根据字体选择对应的渲染器
             if (Objects.equals(fontCN, "cn_1")) {
-                ClientEvent.chineseFontRenderer_1.drawString(chineseText, chineseX, chineseY, r, g, b);
+                ClientProxy.chineseFontRenderer_1.drawString(chineseText, chineseX, chineseY, r, g, b);
             } else if (Objects.equals(fontCN, "cn_2")) {
-                ClientEvent.chineseFontRenderer_2.drawString(chineseText, chineseX, chineseY, r, g, b);
+                ClientProxy.chineseFontRenderer_2.drawString(chineseText, chineseX, chineseY, r, g, b);
             } else {
-                ClientEvent.chineseFontRenderer.drawString(chineseText, chineseX, chineseY, r, g, b);
+                ClientProxy.chineseFontRenderer.drawString(chineseText, chineseX, chineseY, r, g, b);
             }
         } finally {
             GlStateManager.popMatrix();
@@ -170,7 +170,7 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
             GlStateManager.disableCull();
             GlStateManager.scale(englishScale, englishScale, 1);
 
-            ClientEvent.englishFontRenderer.drawString(englishText, englishX, englishY, r, g, b);
+            ClientProxy.englishFontRenderer.drawString(englishText, englishX, englishY, r, g, b);
         } finally {
             GlStateManager.popMatrix();
         }
@@ -185,11 +185,11 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
         }
 
         if (Objects.equals(fontCN, "cn_1")) {
-            return ClientEvent.chineseFontRenderer_1.getStringWidth(text);
+            return ClientProxy.chineseFontRenderer_1.getStringWidth(text);
         } else if (Objects.equals(fontCN, "cn_2")) {
-            return ClientEvent.chineseFontRenderer_2.getStringWidth(text);
+            return ClientProxy.chineseFontRenderer_2.getStringWidth(text);
         } else {
-            return ClientEvent.chineseFontRenderer.getStringWidth(text);
+            return ClientProxy.chineseFontRenderer.getStringWidth(text);
         }
     }
 
@@ -201,7 +201,7 @@ public class StationNameBoardRenderer extends TileEntitySpecialRenderer<TileEnti
             return 0;
         }
 
-        return ClientEvent.englishFontRenderer.getStringWidth(text);
+        return ClientProxy.englishFontRenderer.getStringWidth(text);
     }
 
     /**

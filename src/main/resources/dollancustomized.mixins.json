@@ -18,6 +18,7 @@
     "MixinWorldType"
   ],
   "client": [
+    "MixinMinecraft",
     "MixinResourcePackRepository",
     "accessor.EntryAccessor",
     "accessor.GameSettingsAccessor",

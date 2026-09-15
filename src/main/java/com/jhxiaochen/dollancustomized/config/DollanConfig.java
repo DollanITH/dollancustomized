@@ -1,6 +1,8 @@
-package com.jhxiaochen.dollancustomized;
+package com.jhxiaochen.dollancustomized.config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
+import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.config.category.ClientConfig;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -20,14 +22,18 @@ public class DollanConfig {
         }
     }
 
-    @Config.Name("Enable Jacaranda Leaves' Particles")
-    @Config.Comment("蓝花楹树树叶粒子效果开关")
-    public static boolean ENABLE_JACARANDA_LEAVES = true;
+    @Config.Name("Config (Client Only)")
+    @Config.Comment("客户端设置,服务端设置没有效果!")
+    public static final ClientConfig CLIENT_CONFIG = new ClientConfig();
 
     @Config.Name("Formwork Safe Range")
     @Config.Comment("模板世界玩家被自杀的设置.若超出此坐标数,玩家将会被自杀")
     @Config.RangeInt(min = 0, max = 10000)
     public static int SAFE_RANGE = 3000;
+
+    @Config.Name("Remapper Boolean")
+    @Config.Comment("开启方块重映射、物品重映射(用于当方块或物品有变更时,或有缺失时)")
+    public static boolean REMAPPER = true;
 
     static {
         ConfigAnytime.register(DollanConfig.class);

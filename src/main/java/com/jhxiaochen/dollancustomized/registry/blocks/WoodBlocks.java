@@ -195,12 +195,9 @@ public class WoodBlocks {
         registerBlock(jacaranda_pressure_plate);
         registerBlock(jacaranda_sapling);
         registerBlock(jacaranda_trapdoor);
+        registerSlabBlock(jacaranda_slab, jacaranda_double_slab);
         registerSignBlock(jacaranda_wall_sign, jacaranda_standing_sign);
         registerHangingSignBlock(jacaranda_hanging_sign, jacaranda_hanging_sign_wall, jacaranda_hanging_sign_attached);
-        registerSignBlock(mangrove_wall_sign, mangrove_standing_sign);
-        registerHangingSignBlock(mangrove_hanging_sign, mangrove_hanging_sign_wall, mangrove_hanging_sign_attached);
-        registerSlabBlock(jacaranda_slab, jacaranda_double_slab);
-        registerSlabBlock(mangrove_slab, mangrove_double_slab);
 
         // 红木方块注册
         registerBlock(mangrove_button);
@@ -215,6 +212,9 @@ public class WoodBlocks {
         registerBlock(stripped_mangrove_log);
         registerBlock(stripped_mangrove_wood);
         registerBlock(mangrove_leaves, new ItemDollanLeaves(mangrove_leaves));
+        registerSignBlock(mangrove_wall_sign, mangrove_standing_sign);
+        registerHangingSignBlock(mangrove_hanging_sign, mangrove_hanging_sign_wall, mangrove_hanging_sign_attached);
+        registerSlabBlock(mangrove_slab, mangrove_double_slab);
 
         ModelLoader.setCustomStateMapper(jacaranda_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
         ModelLoader.setCustomStateMapper(jacaranda_fence_gate, new StateMap.Builder().ignore(DollanFenceGate.POWERED).build());

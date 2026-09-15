@@ -1,6 +1,7 @@
 package com.jhxiaochen.dollancustomized.fixes;
 
 import com.jhxiaochen.dollancustomized.Reference;
+import com.jhxiaochen.dollancustomized.config.DollanConfig;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -69,6 +70,10 @@ public class Remaper {
 
     @SubscribeEvent
     public static void onMissingBlockMappings(RegistryEvent.MissingMappings<Block> event) {
+        if (DollanConfig.REMAPPER) {
+            return;
+        }
+
         for (RegistryEvent.MissingMappings.Mapping<Block> missingMapping : event.getMappings()) {
             ResourceLocation resourceLocation = missingMapping.key;
 
@@ -93,6 +98,10 @@ public class Remaper {
 
     @SubscribeEvent
     public static void onMissingItemMappings(RegistryEvent.MissingMappings<Item> event) {
+        if (DollanConfig.REMAPPER) {
+            return;
+        }
+
         for (RegistryEvent.MissingMappings.Mapping<Item> missingMapping : event.getMappings()) {
             ResourceLocation resourceLocation = missingMapping.key;
 

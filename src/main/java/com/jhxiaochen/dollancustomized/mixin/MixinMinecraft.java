@@ -1,16 +1,20 @@
 package com.jhxiaochen.dollancustomized.mixin;
 
 import com.jhxiaochen.dollancustomized.config.DollanConfig;
+import com.jhxiaochen.dollancustomized.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.world.GameType;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.PixelFormat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
@@ -19,6 +23,8 @@ public class MixinMinecraft {
     @Shadow
     public EntityPlayerSP player;
 
+    @Shadow
+    private boolean fullscreen;
     /** 记录进入旁观模式前的游戏模式ID（0=生存 1=创造 2=冒险 3=旁观），-1 表示未记录 */
     @Unique
     private int previousGameModeId = -1;
@@ -52,12 +58,25 @@ public class MixinMinecraft {
             GameType type = GameType.getByID(restoreModeId);
             player.sendChatMessage("/gamemode " + type.getName());
             previousGameModeId = 1;
-            cir.setReturnValue(true);
+            cir.setReturnValue(false);
         } else {
             // 其它模式（生存/创造/冒险）-> 记住当前模式，再切到旁观
             previousGameModeId = currentModeId;
             player.sendChatMessage("/gamemode spectator");
-            cir.setReturnValue(true);
+            cir.setReturnValue(false);
         }
+    }
+
+    /** 窗口一创建（createDisplay 返回时）就用模组标题，加载过程不再显示 "Cleanroom" */
+    @Inject(method = "createDisplay", at = @At("HEAD"), cancellable = true)
+    private void onDisplayCreated(CallbackInfo ci) {
+        Display.setResizable(true);
+        Display.setTitle("DollanITH Client V" + Reference.VERSION);
+
+        Display.create((new PixelFormat()).withDepthBits(24));
+        net.minecraftforge.client.ForgeHooksClient.initializeWindowsInformation();
+        net.minecraftforge.client.ForgeHooksClient.setWindowStyle(fullscreen);
+        net.minecraftforge.client.ForgeHooksClient.initializeTaskbarAPI();
+        ci.cancel();
     }
 }

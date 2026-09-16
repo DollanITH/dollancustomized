@@ -24,10 +24,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -130,6 +127,11 @@ public class DollanCustomized {
         System.out.println("Commands Registered successfully.");
     }
 
+    @Mod.EventHandler
+    public void contruction(FMLLoadCompleteEvent event) {
+        proxy.contruction(event);
+    }
+
     // ============================== 模板世界边界 ==============================
 
     @SubscribeEvent
@@ -180,4 +182,5 @@ public class DollanCustomized {
         if (entry != null) entry.setEgg(egg);
         EntityList.ENTITY_EGGS.put(rl, egg);
     }
+
 }

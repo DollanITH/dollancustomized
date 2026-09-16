@@ -15,11 +15,15 @@ import com.jhxiaochen.dollancustomized.client.resourcepack.ModPack;
 import com.jhxiaochen.dollancustomized.common.tileentity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeEarlyConfig;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.lwjgl.opengl.Display;
 
 public class ClientProxy implements IProxy {
 
@@ -50,6 +54,8 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
+        Display.setTitle("DollanITH Client V" + Reference.VERSION);
+        // 强制无边框窗口使用显示器精确尺寸（关闭 lwjglxx 在 Windows 下对高度 +1 的兼容处理）
         java.io.File src = event.getSourceFile();
         DollanCustomized.LOGGER.info("[preInit] sourceFile={}, 存在={}", src.getAbsolutePath(), src.exists());
         modPack = new ModPack(src);
@@ -92,7 +98,6 @@ public class ClientProxy implements IProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStationNameBoard.class, new StationNameBoardRenderer());
 
         MinecraftForge.EVENT_BUS.register(this);
-
     }
 
     @Override
@@ -105,4 +110,14 @@ public class ClientProxy implements IProxy {
             mc.refreshResources();
         }
     }
+
+    @Override
+    public void contruction(FMLLoadCompleteEvent event) {
+        Display.setTitle("DollanITH Client V" + Reference.VERSION);
+        ForgeEarlyConfig.WINDOW_BORDERLESS_WINDOWS_COMPATIBILITY = false;
+        ForgeEarlyConfig.WINDOW_BORDERLESS_REPLACES_FULLSCREEN = true;
+        ConfigManager.sync(ForgeEarlyConfig.class);
+        DollanCustomized.LOGGER.info("[DollanCustomized] 已将全屏模式切换为无边框全屏");
+    }
+
 }

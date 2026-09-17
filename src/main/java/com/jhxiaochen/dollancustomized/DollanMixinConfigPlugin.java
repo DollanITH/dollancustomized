@@ -9,6 +9,25 @@ import java.util.List;
 import java.util.Set;
 
 public class DollanMixinConfigPlugin implements IMixinConfigPlugin {
+    private static final boolean OPTIFINE_LOADED = detectOptiFine();
+
+    private static boolean detectOptiFine() {
+        try {
+            Class.forName("optifine.OptiFineForgeTweaker");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    private static boolean detectAquaacrobatics() {
+        try {
+            Class.forName("com.fuzs.aquaacrobatics.client.handler.FogHandler");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
 
     @Override
     public void onLoad(String s) {
@@ -27,6 +46,12 @@ public class DollanMixinConfigPlugin implements IMixinConfigPlugin {
         }
         if (s1.contains(".mod.railcraft.")) {
             return Loader.isModLoaded("railcraft");
+        }
+        if (s1.contains(".mod.waterfog.")) {
+            return Loader.isModLoaded("nothirium") && detectAquaacrobatics() && OPTIFINE_LOADED;
+        }
+        if (s1.contains("mod.sakura.")) {
+            return Loader.isModLoaded("sakura");
         }
         return true;
     }

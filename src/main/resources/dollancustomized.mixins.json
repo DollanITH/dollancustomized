@@ -15,7 +15,8 @@
     "MixinEntityIronGolem",
     "MixinEntitySnowman",
     "MixinRailPlace",
-    "MixinWorldType"
+    "MixinWorldType",
+    "accessor.BlockAccessor"
   ],
   "client": [
     "MixinMinecraft",

@@ -70,7 +70,7 @@ public class Remaper {
 
     @SubscribeEvent
     public static void onMissingBlockMappings(RegistryEvent.MissingMappings<Block> event) {
-        if (DollanConfig.REMAPPER) {
+        if (!DollanConfig.REMAPPER) {
             return;
         }
 
@@ -98,7 +98,7 @@ public class Remaper {
 
     @SubscribeEvent
     public static void onMissingItemMappings(RegistryEvent.MissingMappings<Item> event) {
-        if (DollanConfig.REMAPPER) {
+        if (!DollanConfig.REMAPPER) {
             return;
         }
 

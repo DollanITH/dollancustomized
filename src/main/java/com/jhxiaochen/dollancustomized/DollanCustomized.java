@@ -9,6 +9,7 @@ import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
 import com.jhxiaochen.dollancustomized.proxy.IProxy;
 import com.jhxiaochen.dollancustomized.world.level.WorldProviderFlatDim;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
@@ -25,10 +27,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -93,7 +98,7 @@ public class DollanCustomized {
                 new ResourceLocation(Reference.MOD_ID, "station_name_board"));
 
         MinecraftForge.EVENT_BUS.register(this);
-        if (DollanConfig.REMAPPER) {
+        if (!DollanConfig.REMAPPER) {
         Remaper.registerFixable();
         }
     }
@@ -181,6 +186,26 @@ public class DollanCustomized {
                 net.minecraftforge.fml.common.registry.ForgeRegistries.ENTITIES.getValue(rl);
         if (entry != null) entry.setEgg(egg);
         EntityList.ENTITY_EGGS.put(rl, egg);
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    @SideOnly(Side.CLIENT)
+    public static void clampUnderwaterFogDensity(EntityViewRenderEvent.FogDensity event) {
+        if (!Loader.isModLoaded("nothirium") && detectAquaacrobatics()) return;
+        if (event.getState() == null || event.getState().getMaterial() != Material.WATER) return;
+
+        if (event.getDensity() < 0.1F) {
+            event.setDensity(0.1F);
+        }
+    }
+
+    private static boolean detectAquaacrobatics() {
+        try {
+            Class.forName("com.fuzs.aquaacrobatics.client.handler.FogHandler");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
     }
 
 }

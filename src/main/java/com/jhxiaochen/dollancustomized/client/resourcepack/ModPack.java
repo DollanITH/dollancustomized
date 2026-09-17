@@ -101,6 +101,7 @@ public class ModPack extends AbstractResourcePack implements Closeable {
         Set<String> set = Sets.newHashSet();
         set.add("dollancustomized");
         set.add("minecraft");
+        set.add("futuremc");
         return set;
     }
 

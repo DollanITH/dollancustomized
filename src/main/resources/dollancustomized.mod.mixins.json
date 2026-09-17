@@ -10,11 +10,15 @@
     "railcraft.MixinBlockTrackFlex",
     "railcraft.MixinBlockTrackForce",
     "railcraft.MixinBlockTrackOutfitted",
-    "railcraft.MixinWorldGenJaded"
+    "railcraft.MixinWorldGenJaded",
+    "sakura.MixinLeavesBlock",
+    "sakura.MixinWorldGenUmeSapling"
   ],
   "server": [
   ],
   "client": [
+    "waterfog.ChunkRendererGL15Mixin",
+    "waterfog.FogUtilMixin"
   ],
   "setSourceFile": true
 }

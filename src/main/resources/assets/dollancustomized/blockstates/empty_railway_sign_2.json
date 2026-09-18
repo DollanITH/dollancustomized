@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dollancustomized:sign_none_2_inventory"
+  },
+  "variants": {
+    "inventory": [{}],
+    "half": {
+      "lower": {"model": "dollancustomized:sign_none_2_lower"},
+      "upper": {"model": "dollancustomized:sign_none_2_upper"}
+    },
+    "facing": {
+      "west": {"y": 270},
+      "north": {},
+      "south": {"y": 180},
+      "east": {"y": 90}
+    }
+  }
+}

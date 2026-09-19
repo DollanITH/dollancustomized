@@ -6,6 +6,12 @@
   "variants": {
     "normal": [{}],
     "inventory": [{}],
+    "variant" : {
+      "sign_none_0" : {},
+      "sign_none_1": {
+        "model" : "dollancustomized:sign_none_1"
+      }
+    },
     "facing": {
       "west": {"y": 90},
       "north": {"y": 180},

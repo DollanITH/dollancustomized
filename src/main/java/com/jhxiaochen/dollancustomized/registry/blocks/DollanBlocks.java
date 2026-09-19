@@ -935,6 +935,9 @@ public class DollanBlocks {
         registerCustomModel(height_limit_5, 0, "road_sign_height_limit_5_subtype_1");
         registerCustomModel(height_limit_5, 1, "road_sign_height_limit_5_subtype_2");
 
+        registerCustomModel(empty_railway_sign, 0, "sign_none");
+        registerCustomModel(empty_railway_sign, 4, "sign_none_1");
+
         ModelLoader.setCustomStateMapper(DollanBlocks.beautiful_marble,
                 new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
         if (!Loader.isModLoaded("depthsupdate")) {

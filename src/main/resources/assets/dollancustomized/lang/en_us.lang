@@ -197,6 +197,8 @@ tile.StationStopSign.wall.name=Train Stop Position Sign (Wall Mounted)
 tile.DeportStopSign.name=One Stop Position Sign
 tile.StationEdgeSign.name=Station Boundary Sign
 tile.empty_railway_sign.name=Blank Railway Sign
+tile.empty_railway_sign.sign_none_0.name=Blank Railway Sign
+tile.empty_railway_sign.sign_none_1.name=Blank Railway Sign (1)
 
 # Traffic Markings
 tile.asphalt.black.name=Black Asphalt

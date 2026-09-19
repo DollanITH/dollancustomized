@@ -197,6 +197,8 @@ tile.StationStopSign.wall.name=列车停车位置标志(与墙壁连接)
 tile.DeportStopSign.name=一度停车位置标志
 tile.StationEdgeSign.name=站界标志
 tile.empty_railway_sign.name=空白铁路牌
+tile.empty_railway_sign.sign_none_0.name=空白铁路牌
+tile.empty_railway_sign.sign_none_1.name=空白铁路牌 (1)
 
 # 道路标线
 tile.asphalt.black.name=黑色沥青方块

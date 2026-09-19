@@ -3,6 +3,7 @@ package com.jhxiaochen.dollancustomized.common.block.rail;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.block.rail.base.TwoBlocksSignBase;
 import com.jhxiaochen.dollancustomized.common.block.rail.base.TwoBlocksSignWithHang;
+import com.jhxiaochen.dollancustomized.common.item.ItemRailwaySign;
 import com.jhxiaochen.dollancustomized.common.item.ItemRailwaySign2;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -30,6 +31,7 @@ public class StationStop1Sign extends TwoBlocksSignWithHang {
     @SubscribeEvent
     public static void registerItem(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemRailwaySign2(block).setRegistryName(block.getRegistryName()));
+        event.getRegistry().register(new ItemRailwaySign(block1).setRegistryName(block1.getRegistryName()));
     }
 
     @SubscribeEvent

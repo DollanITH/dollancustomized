@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Minecraft.class)
+@Mixin(value = Minecraft.class, priority = 1001)
 public class MixinMinecraft {
 
     @Shadow
@@ -25,7 +25,7 @@ public class MixinMinecraft {
     @Unique
     private int previousGameModeId = -1;
 
-    @Redirect(method = "processKeyF3", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;canUseCommand(ILjava/lang/String;)Z"))
+    @Redirect(method = "processKeyF3", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;canUseCommand(ILjava/lang/String;)Z"), require = 0)
     public boolean processKeyF3(EntityPlayerSP instance, int permLevel, String commandName) {
         return true;
     }

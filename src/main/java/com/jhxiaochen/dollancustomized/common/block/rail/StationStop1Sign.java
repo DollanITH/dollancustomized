@@ -39,7 +39,7 @@ public class StationStop1Sign extends TwoBlocksSignWithHang {
     public static void registerModel(ModelRegistryEvent event) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation("dollancustomized:station_stop_1_sign", "inventory"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 1, new ModelResourceLocation("dollancustomized:station_stop_1_sign_wall", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block1), 1, new ModelResourceLocation("dollancustomized:empty_railway_sign_2", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block1), 0, new ModelResourceLocation("dollancustomized:sign_none_2", "inventory"));
         ModelLoader.setCustomStateMapper(block, new StateMap.Builder().withName(WALL).withSuffix("_station_stop_1_sign").build( ));
     }
 

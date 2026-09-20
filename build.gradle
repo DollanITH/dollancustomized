@@ -189,7 +189,6 @@ compileJava {
 }
 
 jar {
-    archiveClassifier = 'dev'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     if (configurations.contain.size() > 0) {
         into('/') {

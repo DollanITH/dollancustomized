@@ -41,6 +41,9 @@ public class DollanMixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String s, String s1) {
+        if (s1.contains(".mod.gnetum.")) {
+            return Loader.isModLoaded("gnetum");
+        }
         if (s1.contains(".mod.futuremc.")) {
             return Loader.isModLoaded("futuremc");
         }

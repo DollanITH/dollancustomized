@@ -56,6 +56,7 @@ dependencies {
     modImplementation "maven.modrinth:dKv1FGT7:v3ZmWrP5"
     modImplementation "maven.modrinth:qnQsVE2z:MPJKDJmI"
     modRuntimeOnly "maven.modrinth:NvZ9ZhwE:FgbUBupA"
+    modCompileOnly "maven.modrinth:7MoE34WK:a3gijsQd"
 
     modCompileOnly("curse.maven:railcraft-51195:3853491")
     compileOnly("curse.maven:renderlib-624967:6461209")

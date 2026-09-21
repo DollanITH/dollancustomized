@@ -17,6 +17,7 @@
   "server": [
   ],
   "client": [
+    "gnetum.MixinUncachedElements",
     "waterfog.ChunkRendererGL15Mixin",
     "waterfog.FogUtilMixin"
   ],

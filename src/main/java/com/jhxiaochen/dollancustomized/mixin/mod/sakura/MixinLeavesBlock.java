@@ -27,10 +27,12 @@ public class MixinLeavesBlock {
         IBlockState newState;
         if (!(self instanceof BlockUmeLeave)){
             newState = blockStateContainer.getBaseState()
+                    .withProperty(BlockLeaves.CHECK_DECAY, true)
                     .withProperty(BlockLeaves.DECAYABLE, true);
         } else {
             newState = blockStateContainer.getBaseState()
                     .withProperty(BlockUmeLeave.AGE, 0)
+                    .withProperty(BlockLeaves.CHECK_DECAY, true)
                     .withProperty(BlockLeaves.DECAYABLE, true);
         }
         ((BlockAccessor) self).dollan$setDefaultState(newState);

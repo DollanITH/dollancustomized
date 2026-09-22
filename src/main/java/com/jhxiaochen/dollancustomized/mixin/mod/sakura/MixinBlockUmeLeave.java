@@ -29,6 +29,7 @@ public abstract class MixinBlockUmeLeave extends Block {
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state, CallbackInfo ci) {
         if (this.isMaxAge(state)) {
             spawnAsEntity(worldIn, pos, new ItemStack(ItemLoader.FOODSET, 1, 166));
+            super.breakBlock(worldIn, pos, state);
         }
 
         super.breakBlock(worldIn, pos, state);

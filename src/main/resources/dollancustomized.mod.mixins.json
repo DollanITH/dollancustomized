@@ -11,6 +11,7 @@
     "railcraft.MixinBlockTrackForce",
     "railcraft.MixinBlockTrackOutfitted",
     "railcraft.MixinWorldGenJaded",
+    "sakura.MixinBlockUmeLeave",
     "sakura.MixinLeavesBlock",
     "sakura.MixinWorldGenUmeSapling"
   ],

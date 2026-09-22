@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
     - name: Set up JDK
@@ -27,5 +27,5 @@ jobs:
       with:
         name: dollancustomized-jars
         path: build/libs
-        retention-days: 7
+        retention-days: 2
         if-no-files-found: error

@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: rcy570966137658
+    runs-on: [self-hosted, rcy570966137658]
     steps:
     - uses: actions/checkout@v7
     - name: Set up JDK

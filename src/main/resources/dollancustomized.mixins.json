@@ -21,6 +21,7 @@
   "client": [
     "MixinMinecraft",
     "MixinResourcePackRepository",
+    "mod.optifine.MixinShadersDimension",
     "accessor.EntryAccessor",
     "accessor.GameSettingsAccessor",
     "accessor.RepositoryAccessor"

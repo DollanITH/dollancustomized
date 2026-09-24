@@ -91,6 +91,9 @@ public abstract class MixinRailPlace {
     )
     private BlockRailBase.EnumRailDirection dollan$defaultDirection() {
         EntityLivingBase placer = Minecraft.getMinecraft().player;
+        if (placer == null) {
+            return BlockRailBase.EnumRailDirection.NORTH_SOUTH;
+        }
         EnumFacing facing = placer.getHorizontalFacing().getOpposite();
         if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
             return BlockRailBase.EnumRailDirection.EAST_WEST;

@@ -9,6 +9,7 @@ import com.jhxiaochen.dollancustomized.registry.blocks.WoodBlocks;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -82,8 +83,13 @@ public class DollanItems{
 
     @SideOnly(Side.CLIENT)
     private static void registerModel(Item item, int metadata, String name) {
+        // 模型注册仅客户端：专用服务器没有 ModelResourceLocation/ModelLoader（client 类），
+        // 方法虽标 @SideOnly，但 FML 不 stub 方法调用点，服务端会直接执行方法体导致
+        // SideTransformer 拒绝加载 client 类而崩溃，因此方法内必须再加 side 守卫。
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             ModelResourceLocation model = new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory");
             ModelLoader.setCustomModelResourceLocation(item, metadata, model);
         }
+    }
 
 }

@@ -1,9 +1,9 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
-import com.jhxiaochen.dollancustomized.client.gui.GuiHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -22,12 +22,13 @@ public class BlockHeightLimitSignCustom extends BlockRoadSign {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
                                     EntityPlayer player, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
-        // 【关键】必须确保仅在客户端（world.isRemote）打开 GUI！
-        if (world.isRemote) {
+        // 服务端通过 openGui 打开 GUI：方法体不引用任何客户端类（GuiHeightLimitSignCustom/GuiScreen），
+        // 避免服务端加载本方块类时验证方法字节码而触发 NoClassDefFoundError: GuiScreen。
+        // 客户端由 GuiHandler.getClientGuiElement（IGuiHandler 接口方法自带 @SideOnly，已被 stub）创建 GUI。
+        if (!world.isRemote) {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityHeightLimitSignCustom) {
-                // 在客户端打开 GUI，Minecraft 会自动正确处理鼠标指针的释放
-                Minecraft.getMinecraft().displayGuiScreen(new GuiHeightLimitSignCustom((TileEntityHeightLimitSignCustom) te));
+                player.openGui(DollanCustomized.instance, GuiHandler.HEIGHT_LIMIT_CUSTOM_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         // 返回 true 表示交互成功

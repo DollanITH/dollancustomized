@@ -76,6 +76,8 @@ public class ModelHandler {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         DollanBlocks.registerBlockAndModels();
+        BlockModelRegistry.registerStateMappers();
+        BlockModelRegistry.registerWoodStateMappers();
         DollanBlocks.registerAllCustomModels();
         WoodBlocks.register();
         DollanItems.registerModel();

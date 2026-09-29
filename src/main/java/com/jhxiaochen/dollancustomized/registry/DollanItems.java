@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -78,10 +77,11 @@ public class DollanItems{
 
     private static void registerModel(Item item)
     {
-        registerModel(item, 0, item.getRegistryName().getPath());
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            registerModel(item, 0, item.getRegistryName().getPath());
+        }
     }
 
-    @SideOnly(Side.CLIENT)
     private static void registerModel(Item item, int metadata, String name) {
         // 模型注册仅客户端：专用服务器没有 ModelResourceLocation/ModelLoader（client 类），
         // 方法虽标 @SideOnly，但 FML 不 stub 方法调用点，服务端会直接执行方法体导致

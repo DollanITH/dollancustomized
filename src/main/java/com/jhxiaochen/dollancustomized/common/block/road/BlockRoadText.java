@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.client.gui.GuiRoadText;
+import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.common.access.IArrow;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
 import net.minecraft.block.*;
@@ -11,7 +11,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -53,12 +52,13 @@ public class BlockRoadText extends Block implements ITileEntityProvider, IArrow 
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        // 【关键修复】必须确保仅在客户端（worldIn.isRemote）打开 GUI！
-        if (worldIn.isRemote) {
+        // 服务端通过 openGui 打开 GUI：方法体不引用任何客户端类（GuiRoadText/GuiScreen），
+        // 避免服务端加载本方块类时验证方法字节码而触发 NoClassDefFoundError: GuiScreen。
+        // 客户端收到 OpenGui 包后由 GuiHandler.getClientGuiElement（@SideOnly(CLIENT)，已被 stub）创建 GUI。
+        if (!worldIn.isRemote) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof TileEntityRoadText) {
-                // 在客户端打开 GUI，Minecraft 会自动正确处理鼠标指针的释放
-                Minecraft.getMinecraft().displayGuiScreen(new GuiRoadText((TileEntityRoadText) te));
+                playerIn.openGui(DollanCustomized.instance, GuiHandler.ROAD_TEXT_GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         // 返回 true 表示交互成功

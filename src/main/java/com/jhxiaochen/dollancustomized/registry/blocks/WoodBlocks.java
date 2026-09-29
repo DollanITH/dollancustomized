@@ -12,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
@@ -216,18 +215,6 @@ public class WoodBlocks {
         registerHangingSignBlock(mangrove_hanging_sign, mangrove_hanging_sign_wall, mangrove_hanging_sign_attached);
         registerSlabBlock(mangrove_slab, mangrove_double_slab);
 
-        // 模型注册仅客户端：专用服务器没有 net.minecraftforge.client.model.ModelLoader 和
-        // net.minecraft.client.renderer.block.statemap.*（StateMap -> IStateMapper）类，
-        // 直接执行会被 SideTransformer 拒绝加载 IStateMapper 而崩溃（NoClassDefFoundError）。
-        // 因此这里必须加 side 守卫，服务端只注册方块、跳过全部模型注册。
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-            ModelLoader.setCustomStateMapper(jacaranda_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
-            ModelLoader.setCustomStateMapper(jacaranda_fence_gate, new StateMap.Builder().ignore(DollanFenceGate.POWERED).build());
-            ModelLoader.setCustomStateMapper(mangrove_fence_gate, new StateMap.Builder().ignore(DollanFenceGate.POWERED).build());
-            ModelLoader.setCustomStateMapper(jacaranda_leaves, (new StateMap.Builder()).ignore(DollanLeaves.CHECK_DECAY, DollanLeaves.DECAYABLE).build());
-            ModelLoader.setCustomStateMapper(mangrove_leaves, (new StateMap.Builder()).ignore(DollanLeaves.CHECK_DECAY, DollanLeaves.DECAYABLE).build());
-            ModelLoader.setCustomStateMapper(mangrove_door, new StateMap.Builder().ignore(DollanDoor.POWERED).build());
-        }
     }
 
     public static void registerBlock(Block block, Item itemBlock) {

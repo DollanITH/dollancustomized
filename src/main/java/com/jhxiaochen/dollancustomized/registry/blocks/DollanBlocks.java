@@ -1,6 +1,5 @@
 package com.jhxiaochen.dollancustomized.registry.blocks;
 
-import com.google.common.collect.Maps;
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.common.block.*;
@@ -16,13 +15,8 @@ import com.jhxiaochen.dollancustomized.common.block.signpost.*;
 import com.jhxiaochen.dollancustomized.common.item.*;
 import com.jhxiaochen.dollancustomized.registry.DollanItems;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.*;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -32,7 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class DollanBlocks {
 
@@ -772,6 +765,7 @@ public class DollanBlocks {
      * 注册所有自定义模型
      * 将所有 registerCustomModel 调用整合到这个方法中
      */
+    @SideOnly(Side.CLIENT)
     public static void registerAllCustomModels() {
 
         registerCustomModel(asphalt, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt");
@@ -938,87 +932,6 @@ public class DollanBlocks {
         registerCustomModel(empty_railway_sign, 0, "sign_none");
         registerCustomModel(empty_railway_sign, 4, "sign_none_1");
 
-        ModelLoader.setCustomStateMapper(DollanBlocks.beautiful_marble,
-                new StateMap.Builder().withSuffix("_marble").withName(BlockMarble.VARIANT).build());
-        if (!Loader.isModLoaded("depthsupdate")) {
-            ModelLoader.setCustomStateMapper(DollanBlocks.cracked_deepslate,
-                    new StateMap.Builder().withSuffix("_cracked_deepslate").withName(BlockCrackedDeepSlate.VARIANT).build());
-            ModelLoader.setCustomStateMapper(DollanBlocks.deepslate,
-                    new StateMap.Builder().withName(BlockDeepSlate.VARIANT).build());
-        }
-        ModelLoader.setCustomStateMapper(DollanBlocks.elder_prismarine,
-                new StateMap.Builder().withName(BlockElderPrismarine.VARIANT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.limestone,
-                new StateMap.Builder().withName(BlockLimeStone.VARIANT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.polished_blackstone,
-                new StateMap.Builder().withName(BlockPolishedBlackStone.VARIANT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.froglight,
-                new StateMap.Builder().withName(BlockFrogLight.COLOR).withSuffix("_froglight").build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.marble_tile,
-                new StateMap.Builder().withName(BlockColored.COLOR).withSuffix("_marble_tile").build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.stop_line,
-                new StateMap.Builder().withName(StopLineBlock.VARIENT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.stop_line_slab,
-                new StateMap.Builder().withName(StopLineBlockSlab.VARIENT).withSuffix("_slab").build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.stop_line_cross,
-                new StateMap.Builder().withName(DiagonalStopLineBlock.VARIENT).build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.stop_line_cross_slab,
-                new StateMap.Builder().withName(DiagonalStopLineBlockSlab.VARIENT).withSuffix("_slab").build());
-        ModelLoader.setCustomStateMapper(DollanBlocks.overhead_steel_diagonal_support,
-                new StateMap.Builder()
-                        .withName(OverheadSteelDiagonalSupport.TYPE)
-                        .withSuffix("_overhead_steel_diagonal_support").build()
-        );
-        ModelLoader.setCustomStateMapper(DollanBlocks.overhead_steel_diagonal_support_1,
-                new StateMap.Builder()
-                        .withName(OverheadSteelDiagonalSupport.TYPE)
-                        .withSuffix("_overhead_steel_diagonal_support_1").build()
-        );
-        ModelLoader.setCustomStateMapper(DollanBlocks.station_end_door, new StateMap.Builder().withName(BlockStationEndDoor.HALF).withSuffix("_station_end_door").ignore(BlockStationEndDoor.POWERED).build());
-
-        ModelLoader.setCustomStateMapper(DollanBlocks.height_limit_3, new StateMapperBase() {
-            @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
-                String registryName = height_limit_3.getRegistryName().getPath();
-                String modelName = registryName + "_" + typeValue.getName();
-
-                Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
-                map.remove(HeightLimitSign.TYPE);
-                String variantString = this.getPropertyString(map);
-
-                return new ModelResourceLocation(Reference.MOD_ID + ":"+  modelName, variantString);
-            }
-        });
-        ModelLoader.setCustomStateMapper(DollanBlocks.height_limit_4, new StateMapperBase() {
-            @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
-                String registryName = height_limit_4.getRegistryName().getPath();
-                String modelName = registryName + "_" + typeValue.getName();
-
-                Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
-                map.remove(HeightLimitSign.TYPE);
-                String variantString = this.getPropertyString(map);
-
-                return new ModelResourceLocation(Reference.MOD_ID + ":"+  modelName, variantString);
-            }
-        });
-        ModelLoader.setCustomStateMapper(DollanBlocks.height_limit_5, new StateMapperBase() {
-            @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                HeightLimitSign.EnumHeight typeValue = state.getValue(HeightLimitSign.TYPE);
-                String registryName = height_limit_5.getRegistryName().getPath();
-                String modelName = registryName + "_" + typeValue.getName();
-
-                Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
-                map.remove(HeightLimitSign.TYPE);
-                String variantString = this.getPropertyString(map);
-
-                return new ModelResourceLocation(Reference.MOD_ID + ":"+  modelName, variantString);
-            }
-        });
-
     }
 
     public static void registerSimpleBlock(Block block) {
@@ -1033,9 +946,10 @@ public class DollanBlocks {
         }
     }
 
-    @SideOnly(Side.CLIENT)
     private static void registerModel(net.minecraft.block.Block block) {
-        registerCustomModel(block, 0, block.getRegistryName().getPath());
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            registerCustomModel(block, 0, block.getRegistryName().getPath());
+        }
     }
 
 }

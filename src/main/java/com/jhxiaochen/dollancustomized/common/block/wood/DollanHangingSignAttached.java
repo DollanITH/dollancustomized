@@ -27,6 +27,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -126,6 +128,7 @@ public class DollanHangingSignAttached extends BlockContainer implements IAxis {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
         if (world.isRemote && !GuiScreen.isCtrlKeyDown()) {
             EntityPlayer player = Minecraft.getMinecraft().player;

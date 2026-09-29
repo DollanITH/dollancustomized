@@ -3,6 +3,7 @@ package com.jhxiaochen.dollancustomized.client.gui;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityDollanSign;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
+import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityStationNameBoard;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +14,7 @@ public class GuiHandler implements IGuiHandler {
     public static final int ROAD_TEXT_GUI_ID = 1; // GUI 的唯一 ID
     public static final int HEIGHT_LIMIT_CUSTOM_GUI_ID = 2; // 自定义限高路牌 GUI ID
     public static final int JACARANDA_SIGN_EDIT_GUI_ID = 3; // 蓝花楹木告示牌编辑 GUI ID
+    public static final int STATION_NAME_BOARD_GUI_ID = 4; // 车站站名牌编辑 GUI ID
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -32,6 +34,9 @@ public class GuiHandler implements IGuiHandler {
             // 从TileEntity获取当前编辑的槽位
             TileEntityDollanSign sign = (TileEntityDollanSign) te;
             return new GuiEditDollanSign(sign);
+        }
+        if (ID == STATION_NAME_BOARD_GUI_ID && te instanceof TileEntityStationNameBoard) {
+            return new GuiStationNameBoard((TileEntityStationNameBoard) te);
         }
         return null;
     }

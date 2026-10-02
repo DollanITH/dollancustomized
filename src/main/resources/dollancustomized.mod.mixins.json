@@ -18,6 +18,7 @@
   "server": [
   ],
   "client": [
+    "optifine.MixinShadersDimension",
     "gnetum.MixinASMEventHandlerHelper",
     "gnetum.MixinUncachedElements",
     "waterfog.ChunkRendererGL15Mixin",

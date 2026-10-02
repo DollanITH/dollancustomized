@@ -148,12 +148,14 @@ public class DollanCustomized {
         if (DollanConfig.SAFE_RANGE > 0 && DollanConfig.SAFE_RANGE < 10000) {
             border = DollanConfig.SAFE_RANGE;
         } else {
-            border = 3000;
+            border = 0;
         }
 
         if (player.world.provider.getDimensionType() != FLAT_DIM) return;
-        if (player.posY < 0 || player.posY > player.world.getHeight()) {
-            player.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+        if (DollanConfig.OUTSIDE_BUILDING_HEIGHT_RANGE) {
+            if (player.posY < 0 || player.posY > player.world.getHeight()) {
+                player.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+            }
         }
 
         double distSq = player.posX * player.posX + player.posZ * player.posZ;

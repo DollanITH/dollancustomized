@@ -11,9 +11,9 @@ import com.jhxiaochen.dollancustomized.client.renderer.road.RenderRoadText;
 import com.jhxiaochen.dollancustomized.client.renderer.sign.HangingSignRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.sign.SignRenderer;
 import com.jhxiaochen.dollancustomized.client.renderer.station.StationNameBoardRenderer;
-import com.jhxiaochen.dollancustomized.client.resourcepack.ModPack;
+import com.jhxiaochen.dollancustomized.client.resourcepack.BuiltinResourcePackInstaller;
 import com.jhxiaochen.dollancustomized.common.tileentity.*;
-import net.minecraft.client.Minecraft;
+import com.jhxiaochen.dollancustomized.config.DollanConfig;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeEarlyConfig;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,9 +26,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.lwjgl.opengl.Display;
 
 public class ClientProxy implements IProxy {
-
-    public static ModPack modPack;
-
 
     // ============================== 字体渲染器 ==============================
 
@@ -49,19 +46,11 @@ public class ClientProxy implements IProxy {
     private final ResourceLocation ttfLocation3 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_1.ttf");
     private final ResourceLocation ttfLocation4 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_2.ttf");
 
-    /** 记录上一帧是否在资源包界面，用于检测"离开界面 = 玩家点完完成按钮" */
-    private boolean lastGuiWasPackScreen = false;
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         Display.setTitle("DollanITH Client V" + Reference.VERSION);
-        // 强制无边框窗口使用显示器精确尺寸（关闭 lwjglxx 在 Windows 下对高度 +1 的兼容处理）
-        java.io.File src = event.getSourceFile();
-        DollanCustomized.LOGGER.info("[preInit] sourceFile={}, 存在={}", src.getAbsolutePath(), src.exists());
-        modPack = new ModPack(src);
-        DollanCustomized.LOGGER.info("[preInit] modPack 已创建: {}", modPack.getClass().getName());
-        // defaultResourcePacks 挂载这步先删掉（上一版有 MinecraftAccessor 那行的话），
-        // 现在只留 GUI 注入一条路，减少变量
+        BuiltinResourcePackInstaller.install();
     }
 
     @Override
@@ -102,21 +91,15 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-        if (modPack != null) {
-            Minecraft mc = Minecraft.getMinecraft();
-            // 触发 TAIL：注入 entry + ensureDefaultSelected 写名单
-            mc.getResourcePackRepository().updateRepositoryEntriesAll();
-            // 按最新名单重新绑定并加载资源（getRepositoryEntries 每次按名字实时查 entry）
-            mc.refreshResources();
-        }
     }
 
     @Override
     public void contruction(FMLLoadCompleteEvent event) {
-        Display.setTitle("DollanITH Client V" + Reference.VERSION);
-        ForgeEarlyConfig.WINDOW_BORDERLESS_WINDOWS_COMPATIBILITY = false;
-        ForgeEarlyConfig.WINDOW_BORDERLESS_REPLACES_FULLSCREEN = true;
-        ConfigManager.sync(ForgeEarlyConfig.class);
+        if (DollanConfig.CLIENT_CONFIG.ENABLE_BORDERLESS_WINDOW) {
+            ForgeEarlyConfig.WINDOW_BORDERLESS_WINDOWS_COMPATIBILITY = false;
+            ForgeEarlyConfig.WINDOW_BORDERLESS_REPLACES_FULLSCREEN = true;
+            ConfigManager.sync(ForgeEarlyConfig.class);
+        }
         DollanCustomized.LOGGER.info("[DollanCustomized] 已将全屏模式切换为无边框全屏");
     }
 

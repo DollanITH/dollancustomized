@@ -14,17 +14,12 @@
     "MixinBlockRailPowered",
     "MixinEntityIronGolem",
     "MixinEntitySnowman",
-    "accessor.BlockAccessor"
+    "IMixinBlock"
   ],
   "client": [
     "MixinMinecraft",
-    "MixinResourcePackRepository",
     "MixinWorldType",
-    "MixinRailPlace",
-    "mod.optifine.MixinShadersDimension",
-    "accessor.EntryAccessor",
-    "accessor.GameSettingsAccessor",
-    "accessor.RepositoryAccessor"
+    "MixinRailPlace"
   ],
   "server": [
   ]

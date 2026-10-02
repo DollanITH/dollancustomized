@@ -31,6 +31,10 @@ public class DollanConfig {
     @Config.RangeInt(min = 0, max = 10000)
     public static int SAFE_RANGE = 3000;
 
+    @Config.Name("Formwork Dead Setting")
+    @Config.Comment("模板世界玩家被自杀的设置.若开启此选项，超出世界高度的玩家将会被自杀")
+    public static boolean OUTSIDE_BUILDING_HEIGHT_RANGE = true;
+
     @Config.Name("Remapper Boolean")
     @Config.Comment("开启方块重映射、物品重映射(用于当方块或物品有变更时,或有缺失时)")
     public static boolean REMAPPER = true;

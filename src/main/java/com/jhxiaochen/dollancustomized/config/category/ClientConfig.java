@@ -9,4 +9,7 @@ public class ClientConfig {
     @Config.Name("Enable Enhanced F3+N")
     @Config.Comment("强化F3+N游戏模式切换开关")
     public final boolean ENABLE_ENHANCED_F3N = true;
+    @Config.Name("Borderless Window Normally")
+    @Config.Comment("默认开启无边框全屏")
+    public final boolean ENABLE_BORDERLESS_WINDOW = true;
 }

@@ -1,7 +1,7 @@
 package com.jhxiaochen.dollancustomized.mixin.mod.sakura;
 
 import cn.mcmod.sakura.block.tree.BlockUmeLeave;
-import com.jhxiaochen.dollancustomized.mixin.accessor.BlockAccessor;
+import com.jhxiaochen.dollancustomized.mixin.IMixinBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.BlockStateContainer;
@@ -35,6 +35,6 @@ public class MixinLeavesBlock {
                     .withProperty(BlockLeaves.CHECK_DECAY, true)
                     .withProperty(BlockLeaves.DECAYABLE, true);
         }
-        ((BlockAccessor) self).dollan$setDefaultState(newState);
+        ((IMixinBlock) self).dollan$setDefaultState(newState);
     }
 }

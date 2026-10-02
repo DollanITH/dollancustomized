@@ -19,8 +19,10 @@
   "client": [
     "MixinMinecraft",
     "MixinWorldType",
-    "MixinRailPlace"
+    "MixinRailPlace",
+    "MixinResourcePackRepository"
   ],
   "server": [
+    "MixinCommandTeleport"
   ]
 }

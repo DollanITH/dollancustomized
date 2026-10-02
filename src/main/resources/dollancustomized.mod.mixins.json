@@ -13,14 +13,15 @@
     "railcraft.MixinWorldGenJaded",
     "sakura.MixinBlockUmeLeave",
     "sakura.MixinLeavesBlock",
+    "sakura.MixinWorldGenHotSpring",
     "sakura.MixinWorldGenUmeSapling"
   ],
   "server": [
   ],
   "client": [
-    "optifine.MixinShadersDimension",
     "gnetum.MixinASMEventHandlerHelper",
     "gnetum.MixinUncachedElements",
+    "optifine.MixinShadersDimension",
     "waterfog.ChunkRendererGL15Mixin",
     "waterfog.FogUtilMixin"
   ],

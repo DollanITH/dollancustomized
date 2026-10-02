@@ -1,8 +1,10 @@
 package com.jhxiaochen.dollancustomized.mixin;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
+import com.jhxiaochen.dollancustomized.client.resourcepack.BuiltinResourcePackInstaller;
 import net.minecraft.client.resources.ResourcePackRepository;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,15 +16,48 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 让 dollan_opifine_pack 与 programmer_art 两个内置资源包互斥：
- * 启用其中一个时自动禁用另一个（保留"后启用"的那个）。
- * 在 ResourcePackRepository.setRepositories 选择列表变更时强制互斥。
+ * 1. 把三个内置内存资源包注入资源包仓库的"可用列表"，使它们出现在游戏内
+ *    "资源包"界面的可用列表里，可像普通资源包一样勾选/取消。
+ * 2. dollan_pack 与 programmer_art 互斥：启用其中一个时自动禁用另一个
+ *    （保留"后启用"的那个），在 setRepositories 选择列表变更时强制互斥。
  */
 @Mixin(ResourcePackRepository.class)
 public class MixinResourcePackRepository {
 
     @Unique private static final String PACK_A = "dollan_pack";
     @Unique private static final String PACK_B = "programmer_art";
+
+    /** 可用列表（GUI 显示未勾选的候选包）。 */
+    @Shadow private List<ResourcePackRepository.Entry> repositoryEntriesAll;
+
+    /** 在刷新可用列表时注入三个内置资源包（AbstractResourcePack，绑定隔离目录），使其在资源包界面可选。 */
+    @Inject(method = "updateRepositoryEntriesAll", at = @At("TAIL"))
+    private void dollan$injectAvailablePacks(CallbackInfo ci) {
+        if (this.repositoryEntriesAll == null) {
+            return;
+        }
+        ResourcePackRepository self = (ResourcePackRepository) (Object) this;
+        for (String packName : BuiltinResourcePackInstaller.PACK_NAMES) {
+            if (dollan$contains(this.repositoryEntriesAll, packName)) {
+                continue;
+            }
+            ResourcePackRepository.Entry entry = BuiltinResourcePackInstaller.createEntry(
+                    self, BuiltinResourcePackInstaller.buildPack(packName));
+            if (entry != null) {
+                this.repositoryEntriesAll.add(entry);
+                DollanCustomized.LOGGER.debug("[内置资源包] '{}' 已加入可用列表", packName);
+            }
+        }
+    }
+
+    @Unique private static boolean dollan$contains(List<ResourcePackRepository.Entry> entries, String packName) {
+        for (ResourcePackRepository.Entry e : entries) {
+            if (packName.equals(e.getResourcePackName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /** 上一次生效的已选资源包名（用于判断"这次新增了哪个"= 刚启用的那个）。 */
     @Unique private static Set<String> dollan$lastSelected = new HashSet<>();

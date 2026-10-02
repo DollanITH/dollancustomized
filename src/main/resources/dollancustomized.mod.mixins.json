@@ -21,6 +21,7 @@
   "client": [
     "gnetum.MixinASMEventHandlerHelper",
     "gnetum.MixinUncachedElements",
+    "optifine.MixinResUtils",
     "optifine.MixinShadersDimension",
     "waterfog.ChunkRendererGL15Mixin",
     "waterfog.FogUtilMixin"

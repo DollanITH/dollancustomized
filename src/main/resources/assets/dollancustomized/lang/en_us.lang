@@ -670,3 +670,17 @@ tile.stripped_mangrove_wood.name=Stripped Mangrove Wood
 tile.mangrove_log.name=Mangrove Log
 tile.mangrove_wood.name=Mangrove Wood
 tile.mangrove_leaves.name=Mangrove Leaves
+
+# Personal Time /ptime
+commands.dollancustomized.ptime.playeronly=This command may only be executed by a player in-game
+commands.dollancustomized.ptime.usage=/ptime set <day|night|<0-24000>> | /ptime reset | /ptime status
+commands.dollancustomized.ptime.usage.set=/ptime set <day|night|<0-24000>>
+commands.dollancustomized.ptime.unknown=Unknown sub-command %s. Usage: %s
+commands.dollancustomized.ptime.invalid="%s" is not a valid time (use day, night or a number of ticks)
+commands.dollancustomized.ptime.toosmall=The time you entered (%s) is too small, it must be at least 0
+commands.dollancustomized.ptime.set.success=Personal time set to %s (%s)
+commands.dollancustomized.ptime.reset.success=Personal time reset; now in sync with server time
+commands.dollancustomized.ptime.status.sync=Your time is currently in sync with the server
+commands.dollancustomized.ptime.status.offset=Your personal time is %s (%d ticks %s the server)
+commands.dollancustomized.ptime.ahead=ahead of
+commands.dollancustomized.ptime.behind=behind

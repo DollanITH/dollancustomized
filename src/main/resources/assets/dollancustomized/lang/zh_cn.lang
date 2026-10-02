@@ -670,3 +670,17 @@ tile.mangrove_wood.name=红木
 tile.mangrove_leaves.name=红树树叶
 
 
+
+# 玩家独立时间 /ptime
+commands.dollancustomized.ptime.playeronly=此命令只能由玩家在游戏内执行
+commands.dollancustomized.ptime.usage=/ptime set <day|night|<0-24000>> | /ptime reset | /ptime status
+commands.dollancustomized.ptime.usage.set=/ptime set <day|night|<0-24000>>
+commands.dollancustomized.ptime.unknown=未知子命令 %s。用法：%s
+commands.dollancustomized.ptime.invalid="%s" 不是有效的时间（请使用 day、night 或 tick 数字）
+commands.dollancustomized.ptime.toosmall=你输入的时间 (%s) 太小，必须至少为 0
+commands.dollancustomized.ptime.set.success=个人时间已设为 %s（%s）
+commands.dollancustomized.ptime.reset.success=个人时间已重置，现在与服务器时间同步
+commands.dollancustomized.ptime.status.sync=你的时间当前与服务器同步
+commands.dollancustomized.ptime.status.offset=你的个人时间是 %s（比服务器 %s %s %d tick）
+commands.dollancustomized.ptime.ahead=快
+commands.dollancustomized.ptime.behind=慢

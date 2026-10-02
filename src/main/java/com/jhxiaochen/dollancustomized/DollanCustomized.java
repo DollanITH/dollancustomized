@@ -7,6 +7,7 @@ import com.jhxiaochen.dollancustomized.common.tileentity.*;
 import com.jhxiaochen.dollancustomized.config.DollanConfig;
 import com.jhxiaochen.dollancustomized.fixes.Remaper;
 import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.personaltime.PersonalTimeManager;
 import com.jhxiaochen.dollancustomized.proxy.IProxy;
 import com.jhxiaochen.dollancustomized.world.level.WorldProviderFlatDim;
 import net.minecraft.block.material.Material;
@@ -98,6 +99,7 @@ public class DollanCustomized {
                 new ResourceLocation(Reference.MOD_ID, "station_name_board"));
 
         MinecraftForge.EVENT_BUS.register(this);
+        PersonalTimeManager.register(); // 玩家独立时间：登录时挂时间包拦截器
         if (!DollanConfig.REMAPPER) {
         Remaper.registerFixable();
         }
@@ -129,6 +131,7 @@ public class DollanCustomized {
         event.registerServerCommand(new CommandTreeKiller());
         event.registerServerCommand(new CommandTreeUndo());
         event.registerServerCommand(new CommandTreeUndoDebug());
+        event.registerServerCommand(new CommandPersonalTime());
         System.out.println("Commands Registered successfully.");
     }
 

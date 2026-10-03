@@ -129,10 +129,9 @@ public class CommandPersonalTime extends CommandBase {
             if (personalTime < 0) {
                 personalTime += 24000;
             }
-            sendMessage(player, LANG + ".status.offset",
-                    ticksToRealTime(personalTime),
-                    Math.abs(offset),
-                    offset > 0 ? LANG + ".ahead" : LANG + ".behind");
+            // 用两个自包含模板，分别对应"快/慢"，避免把 key 当参数传入导致不翻译。
+            String key = offset > 0 ? LANG + ".status.ahead" : LANG + ".status.behind";
+            sendMessage(player, key, ticksToRealTime(personalTime), Math.abs(offset));
         }
     }
 

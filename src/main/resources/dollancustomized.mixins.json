@@ -6,23 +6,24 @@
   "target": "@env(DEFAULT)",
   "setSourceFile": true,
   "mixins": [
+    "IMixinBlock",
     "MixinBlockDoor",
     "MixinBlockFence",
     "MixinBlockFenceGate",
     "MixinBlockRail",
     "MixinBlockRailDetector",
     "MixinBlockRailPowered",
+    "MixinCommandTeleport",
+    "MixinCommandTP",
     "MixinEntityIronGolem",
-    "MixinEntitySnowman",
-    "IMixinBlock"
+    "MixinEntitySnowman"
   ],
   "client": [
     "MixinMinecraft",
-    "MixinWorldType",
     "MixinRailPlace",
-    "MixinResourcePackRepository"
+    "MixinResourcePackRepository",
+    "MixinWorldType"
   ],
   "server": [
-    "MixinCommandTeleport"
   ]
 }

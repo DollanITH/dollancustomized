@@ -14,7 +14,8 @@
     "sakura.MixinBlockUmeLeave",
     "sakura.MixinLeavesBlock",
     "sakura.MixinWorldGenHotSpring",
-    "sakura.MixinWorldGenUmeSapling"
+    "sakura.MixinWorldGenUmeSapling",
+    "cherryon.MixinModBlockHangingSign"
   ],
   "server": [
   ],

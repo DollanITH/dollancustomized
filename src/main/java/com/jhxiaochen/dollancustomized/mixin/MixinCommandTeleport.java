@@ -1,12 +1,13 @@
 package com.jhxiaochen.dollancustomized.mixin;
 
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.server.CommandTeleport;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
@@ -20,12 +21,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * 指令层拦截：/teleport 命令（net.minecraft.command.server.CommandTeleport）。
  *
- * 与 MixinCommandTP（/tp）同逻辑：
+ * 与 MixinCommandTP（/tp）同思路，但注意两者差异：
+ * 1) /teleport 恒为 ≥4 参，args[0] 永远是目标实体，坐标从 [1] 开始（x/y/z）；
+ * 2) /teleport 的相对坐标基准是"发送者位置"（原版 sender.getPositionVector()），
+ *    不是目标实体位置 —— 与 /tp 不同，拦截时必须一致，否则 ~ 形态漏判。
+ *
+ * 注入点（MCP 名，refmap 由 remapJar 生成）：
  * 1) doTeleport（SRG func_189862_a）—— 传送核心静态方法 (Entity, CoordinateArg×5)，
  *    所有 /teleport 形态的最终汇聚点，HEAD 越界即 cancel。
- * 2) execute（SRG func_184881_a）—— 命令入口，更早拦截（仅"传自己"的 3/5 参形态）。
- *
- * method 必须写 MCP 名（refmap 由 remapJar 生成，运行时映射到 notch 短名）。
+ *    边界检查必须用 CoordinateArg.getResult()（最终绝对坐标）而非 getAmount()。
+ * 2) execute（SRG func_184881_a）—— 命令入口，更早拦截。
  */
 @Mixin(CommandTeleport.class)
 public abstract class MixinCommandTeleport {
@@ -38,9 +43,6 @@ public abstract class MixinCommandTeleport {
             CommandBase.CoordinateArg x, CommandBase.CoordinateArg y,
             CommandBase.CoordinateArg z, CommandBase.CoordinateArg yaw,
             CommandBase.CoordinateArg pitch, CallbackInfo ci) {
-        if (!(entity instanceof EntityPlayer)) {
-            return;
-        }
         World world = entity.world;
         if (world == null) {
             return;
@@ -57,8 +59,9 @@ public abstract class MixinCommandTeleport {
         double minZ = cz - d / 2.0D;
         double maxZ = cz + d / 2.0D;
 
-        double tx = x.getAmount();
-        double tz = z.getAmount();
+        // getResult() = 最终绝对坐标（相对坐标已加基准），getAmount() 只是原始增量/数值
+        double tx = x.getResult();
+        double tz = z.getResult();
         boolean blocked = (tx < minX || tx > maxX || tz < minZ || tz > maxZ);
         LOGGER.debug("[DollanTP] CommandTeleport.doTeleport x={} z={} dim={} border=(c={},{} d={}) blocked={}",
                 tx, tz, world.provider.getDimension(), cx, cz, d, blocked);
@@ -70,21 +73,17 @@ public abstract class MixinCommandTeleport {
         }
     }
 
-    // ---- 命令执行入口（更早拦截；仅"传自己"的 3/5 参形态）----
+    // ---- 命令执行入口（更早拦截）----
     @Inject(method = "execute", at = @At("HEAD"), cancellable = true)
     private void dollan$limitExecute(MinecraftServer server, ICommandSender sender, String[] args, CallbackInfo ci) {
-        if (args == null || args.length < 3) {
-            return;
+        if (args == null || args.length < 4) {
+            return; // 原版 /teleport 要求 ≥4 参，其余交给 vanilla 报错
         }
-        if (!(sender instanceof EntityPlayerMP)) {
-            return; // 4/6 参（传别人）与命令方块场景由 doTeleport 兜底
+        Entity target = dollan$resolveTarget(server, sender, args[0]);
+        if (target == null) {
+            return; // 目标解析失败：交给 vanilla 报错
         }
-        // 奇数长度（3/5）坐标从 index 0 开始（传自己）；偶数长度（4/6）index 0 是目标玩家名，跳过
-        if (args.length % 2 == 0) {
-            return;
-        }
-        EntityPlayerMP player = (EntityPlayerMP) sender;
-        World world = player.getEntityWorld();
+        World world = target.world;
         if (world == null) {
             return;
         }
@@ -100,22 +99,72 @@ public abstract class MixinCommandTeleport {
         double minZ = cz - d / 2.0D;
         double maxZ = cz + d / 2.0D;
 
-        CommandBase.CoordinateArg xArg;
-        CommandBase.CoordinateArg zArg;
-        try {
-            xArg = CommandBase.parseCoordinate(player.posX, args[0], true);
-            zArg = CommandBase.parseCoordinate(player.posZ, args[2], true);
-        } catch (Exception ex) {
-            return; // 坐标格式非法：交给原逻辑报错
+        // 相对坐标基准 = 发送者位置（原版 sender.getPositionVector()），与 /tp 不同
+        Vec3d basePos = sender.getPositionVector();
+        double tx = dollan$resolveXZ(basePos.x, args[1]);
+        double tz = dollan$resolveXZ(basePos.z, args[3]);
+        if (Double.isNaN(tx) || Double.isNaN(tz)) {
+            return; // 解析失败（^ 或非法输入）：交给 vanilla 报错
         }
-        double tx = xArg.getAmount();
-        double tz = zArg.getAmount();
         boolean blocked = (tx < minX || tx > maxX || tz < minZ || tz > maxZ);
-        LOGGER.info("[DollanTP] CommandTeleport.execute x={} z={} dim={} border=(c={},{} d={}) blocked={}",
+        LOGGER.debug("[DollanTP] CommandTeleport.execute x={} z={} dim={} border=(c={},{} d={}) blocked={}",
                 tx, tz, world.provider.getDimension(), cx, cz, d, blocked);
         if (blocked) {
             ci.cancel();
-            player.sendMessage(new TextComponentTranslation("commands.dollancustomized.tp_out_of_border"));
+            if (sender instanceof EntityPlayerMP) {
+                ((EntityPlayerMP) sender).sendMessage(new TextComponentTranslation("commands.dollancustomized.tp_out_of_border"));
+            } else if (target instanceof EntityPlayerMP) {
+                ((EntityPlayerMP) target).sendMessage(new TextComponentTranslation("commands.dollancustomized.tp_out_of_border"));
+            }
         }
+    }
+
+    /**
+     * 解析目标实体：支持玩家名 / 选择器（@s、@p、@a、@e 等）/ UUID，
+     * 与原版 execute 使用同一入口 CommandBase.getEntity。解析失败返回 null，交给 vanilla 报错。
+     */
+    private static Entity dollan$resolveTarget(MinecraftServer server, ICommandSender sender, String s) {
+        try {
+            return CommandBase.getEntity(server, sender, s);
+        } catch (CommandException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 解析 X/Z 坐标字符串，逻辑与原版 CommandBase.parseCoordinate 的 X/Z 分支一致：
+     * - 绝对数字：直接返回（整数且无小数点时 +0.5 中心对齐，与原版一致）；
+     * - ~ / ~N：base + N；
+     * - ^ 或非法输入：返回 NaN（1.12.2 原版不支持 ^，交给 vanilla 报错；核心注入点仍会兜底）。
+     */
+    private static double dollan$resolveXZ(double base, String s) {
+        if (s == null) {
+            return base;
+        }
+        s = s.trim();
+        if (s.isEmpty()) {
+            return base;
+        }
+        if (s.startsWith("^")) {
+            return Double.NaN; // 1.12.2 无 ^ 局部坐标：不拦截，交给 vanilla 报错
+        }
+        boolean tilde = s.startsWith("~");
+        if (tilde && Double.isNaN(base)) {
+            return Double.NaN;
+        }
+        double d0 = 0.0D;
+        if (!tilde || s.length() > 1) {
+            boolean hasDot = s.contains(".");
+            String num = tilde ? s.substring(1) : s;
+            try {
+                d0 += Double.parseDouble(num);
+            } catch (NumberFormatException e) {
+                return Double.NaN;
+            }
+            if (!hasDot && !tilde) {
+                d0 += 0.5D; // centerBlock：与原版 parseCoordinate(..., true) 一致
+            }
+        }
+        return d0 + (tilde ? base : 0.0D);
     }
 }

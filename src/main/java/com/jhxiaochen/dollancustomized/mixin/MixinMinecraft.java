@@ -1,6 +1,5 @@
 package com.jhxiaochen.dollancustomized.mixin;
 
-import com.jhxiaochen.dollancustomized.Reference;
 import com.jhxiaochen.dollancustomized.config.DollanConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -65,10 +64,11 @@ public class MixinMinecraft {
 
     @Redirect(
             method = "createDisplay",
-            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V")
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V"),
+            require = 0
     )
     private void dollan$setTitle(String title) {
-        Display.setTitle("DollanITH Client V" + Reference.VERSION);
+        Display.setTitle("DollanITH Client V10");
     }
 
 }

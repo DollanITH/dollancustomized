@@ -14,7 +14,13 @@ import com.jhxiaochen.dollancustomized.client.renderer.station.StationNameBoardR
 import com.jhxiaochen.dollancustomized.client.resourcepack.BuiltinResourcePackInstaller;
 import com.jhxiaochen.dollancustomized.common.tileentity.*;
 import com.jhxiaochen.dollancustomized.config.DollanConfig;
+import com.jhxiaochen.dollancustomized.registry.blocks.DollanBlocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.ForgeEarlyConfig;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigManager;
@@ -46,10 +52,21 @@ public class ClientProxy implements IProxy {
     private final ResourceLocation ttfLocation3 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_1.ttf");
     private final ResourceLocation ttfLocation4 = new ResourceLocation(Reference.MOD_ID, "fonts/chinese_2.ttf");
 
+    @Override
+    public AxisAlignedBB getLightSelectionBox(net.minecraft.world.IBlockAccess world, BlockPos pos) {
+        Minecraft minecraft = Minecraft.getMinecraft();
+        EntityPlayer player = minecraft.player;
+        if (player != null
+                && (player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(DollanBlocks.light_block)
+                || player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(DollanBlocks.light_block))) {
+            return net.minecraft.block.Block.FULL_BLOCK_AABB;
+        }
+        return new net.minecraft.util.math.AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+    }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        Display.setTitle("DollanITH Client V" + Reference.VERSION);
+        Display.setTitle("DollanITH Client V10");
         BuiltinResourcePackInstaller.install();
     }
 

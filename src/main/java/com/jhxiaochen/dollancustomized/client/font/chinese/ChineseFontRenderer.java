@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.font.chinese;
 
+import com.jhxiaochen.dollancustomized.fixes.ShaderTextLightmap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -51,6 +52,10 @@ public class ChineseFontRenderer {
         float scale = chineseFontLoader.getRenderScale();
         float currentX = 0;
 
+        // OptiFine 光影下着色器需要逐顶点 lightmap，否则文字会被延迟光照算成全黑
+        int lightmapU = ShaderTextLightmap.u();
+        int lightmapV = ShaderTextLightmap.v();
+
         for (char c : text.toCharArray()) {
             // 特殊处理空格字符
             if (c == ' ') {
@@ -86,11 +91,11 @@ public class ChineseFontRenderer {
 
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder buffer = tessellator.getBuffer();
-            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-            buffer.pos(drawX, drawY, 0).tex(u1, v1).color(r, g, b, a).endVertex();
-            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).color(r, g, b, a).endVertex();
-            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).color(r, g, b, a).endVertex();
-            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).color(r, g, b, a).endVertex();
+            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
+            buffer.pos(drawX, drawY, 0).tex(u1, v1).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
             tessellator.draw();
 
             currentX += renderW;

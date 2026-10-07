@@ -50,7 +50,7 @@ public class MixinWorldType {
     private double voidGetHorizon(double original)
     {
         World world = Minecraft.getMinecraft().world;
-        return world.getSeaLevel();
+        return (Object) this == FLAT ? 0.0D : world.getSeaLevel();
     }
 
 }

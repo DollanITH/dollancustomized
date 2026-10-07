@@ -40,6 +40,8 @@ public class NetworkManager {
             PacketType.ITEM_UPDATE.getId(), PacketType.ITEM_UPDATE.getTargetSide());
         INSTANCE.registerMessage(PacketStationNameBoard.Handler.class, PacketStationNameBoard.class,
             PacketType.STATION_NAME_BOARD.getId(), PacketType.STATION_NAME_BOARD.getTargetSide());
+        INSTANCE.registerMessage(PacketOpenTextGui.Handler.class, PacketOpenTextGui.class,
+            PacketType.OPEN_TEXT_GUI.getId(), PacketType.OPEN_TEXT_GUI.getTargetSide());
     }
 
     // 发送方法
@@ -97,6 +99,14 @@ public class NetworkManager {
 
     public static void openJacarandaSignGui(EntityPlayerMP player, BlockPos pos, int slot) {
         INSTANCE.sendTo(new PacketJacarandaSignGui(pos, slot), player);
+    }
+
+    /**
+     * 打开自定义文字方块编辑 GUI（服务端 → 客户端）。
+     * guiId 取值见 {@link PacketOpenTextGui} 的 GUI_* 常量。
+     */
+    public static void openTextGui(EntityPlayerMP player, BlockPos pos, int guiId) {
+        INSTANCE.sendTo(new PacketOpenTextGui(pos, guiId), player);
     }
 
     // 发送文本更新到所有玩家

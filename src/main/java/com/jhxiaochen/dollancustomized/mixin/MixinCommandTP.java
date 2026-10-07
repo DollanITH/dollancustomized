@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 import org.apache.logging.log4j.LogManager;
@@ -67,12 +67,12 @@ public abstract class MixinCommandTP {
         double tx = x.getAmount();
         double tz = z.getAmount();
         boolean blocked = (tx < minX || tx > maxX || tz < minZ || tz > maxZ);
-        LOGGER.info("[DollanTP] CommandTP.teleportEntityToCoordinates x={} z={} dim={} border=(c={},{} d={}) blocked={}",
+        LOGGER.debug("[DollanTP] CommandTP.teleportEntityToCoordinates x={} z={} dim={} border=(c={},{} d={}) blocked={}",
                 tx, tz, world.provider.getDimension(), cx, cz, d, blocked);
         if (blocked) {
             ci.cancel();
             if (entity instanceof EntityPlayerMP) {
-                ((EntityPlayerMP) entity).sendMessage(new TextComponentString("你不能传送出世界边界！"));
+                ((EntityPlayerMP) entity).sendMessage(new TextComponentTranslation("commands.dollancustomized.tp_out_of_border"));
             }
         }
     }
@@ -122,7 +122,7 @@ public abstract class MixinCommandTP {
                 tx, tz, world.provider.getDimension(), cx, cz, d, blocked);
         if (blocked) {
             ci.cancel();
-            player.sendMessage(new TextComponentString("你不能传送出世界边界！"));
+            player.sendMessage(new TextComponentTranslation("commands.dollancustomized.tp_out_of_border"));
         }
     }
 }

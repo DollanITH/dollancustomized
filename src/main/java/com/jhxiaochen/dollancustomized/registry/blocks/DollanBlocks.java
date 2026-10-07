@@ -367,8 +367,10 @@ public class DollanBlocks {
     public static Block height_limit_3 = new HeightLimitSign("road_sign_height_limit_3");
     public static Block height_limit_4 = new HeightLimitSign("road_sign_height_limit_4");
     public static Block height_limit_5 = new HeightLimitSign("road_sign_height_limit_5");
+    public static Block light_block = new BlockLightBlock().setRegistryName("light_block").setTranslationKey("LightBlock");
 
     public static void registerBlockAndModels() {
+        registerSimpleBlock(light_block, new ItemLightBlock(light_block));
         registerSimpleBlock(road_signpost);
         registerSimpleBlock(road_signpost_half);
         registerSimpleBlock(road_signpost_pole);
@@ -767,6 +769,10 @@ public class DollanBlocks {
      */
     @SideOnly(Side.CLIENT)
     public static void registerAllCustomModels() {
+
+        for (int i = 0; i <= 15; i++) {
+            registerCustomModel(light_block, i , "light_block_" + i);
+        }
 
         registerCustomModel(asphalt, BlockAsphalt.AsphaltType.BLACK.getMetadata(), "black_asphalt");
         registerCustomModel(asphalt, BlockAsphalt.AsphaltType.CYAN.getMetadata(), "cyan_asphalt");

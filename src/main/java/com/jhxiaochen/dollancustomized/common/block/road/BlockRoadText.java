@@ -1,9 +1,10 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.common.access.IArrow;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityRoadText;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.network.packet.PacketOpenTextGui;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -13,6 +14,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -52,13 +54,12 @@ public class BlockRoadText extends Block implements ITileEntityProvider, IArrow 
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        // 服务端通过 openGui 打开 GUI：方法体不引用任何客户端类（GuiRoadText/GuiScreen），
-        // 避免服务端加载本方块类时验证方法字节码而触发 NoClassDefFoundError: GuiScreen。
-        // 客户端收到 OpenGui 包后由 GuiHandler.getClientGuiElement（@SideOnly(CLIENT)，已被 stub）创建 GUI。
-        if (!worldIn.isRemote) {
+        // 服务端通过自定义包打开 GUI，避免直接引用客户端类（GuiRoadText/GuiScreen）触发 NoClassDefFoundError。
+        // 客户端收到 PacketOpenTextGui 后由 Handler（@SideOnly(CLIENT)）创建并显示 GUI。
+        if (!worldIn.isRemote && playerIn instanceof EntityPlayerMP) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof TileEntityRoadText) {
-                playerIn.openGui(DollanCustomized.instance, GuiHandler.ROAD_TEXT_GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                NetworkManager.openTextGui((EntityPlayerMP) playerIn, pos, PacketOpenTextGui.GUI_ROAD_TEXT);
             }
         }
         // 返回 true 表示交互成功

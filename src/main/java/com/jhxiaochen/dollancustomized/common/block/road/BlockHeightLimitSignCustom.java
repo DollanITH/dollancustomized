@@ -1,11 +1,12 @@
 package com.jhxiaochen.dollancustomized.common.block.road;
 
-import com.jhxiaochen.dollancustomized.DollanCustomized;
-import com.jhxiaochen.dollancustomized.client.gui.GuiHandler;
 import com.jhxiaochen.dollancustomized.common.tileentity.TileEntityHeightLimitSignCustom;
+import com.jhxiaochen.dollancustomized.network.NetworkManager;
+import com.jhxiaochen.dollancustomized.network.packet.PacketOpenTextGui;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -22,16 +23,12 @@ public class BlockHeightLimitSignCustom extends BlockRoadSign {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,
                                     EntityPlayer player, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
-        // 服务端通过 openGui 打开 GUI：方法体不引用任何客户端类（GuiHeightLimitSignCustom/GuiScreen），
-        // 避免服务端加载本方块类时验证方法字节码而触发 NoClassDefFoundError: GuiScreen。
-        // 客户端由 GuiHandler.getClientGuiElement（IGuiHandler 接口方法自带 @SideOnly，已被 stub）创建 GUI。
-        if (!world.isRemote) {
+        if (!world.isRemote && player instanceof EntityPlayerMP) {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityHeightLimitSignCustom) {
-                player.openGui(DollanCustomized.instance, GuiHandler.HEIGHT_LIMIT_CUSTOM_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+                NetworkManager.openTextGui((EntityPlayerMP) player, pos, PacketOpenTextGui.GUI_HEIGHT_LIMIT_SIGN);
             }
         }
-        // 返回 true 表示交互成功
         return true;
     }
 

@@ -683,3 +683,12 @@ commands.dollancustomized.ptime.reset.success=Personal time reset; now in sync w
 commands.dollancustomized.ptime.status.sync=Your time is currently in sync with the server
 commands.dollancustomized.ptime.status.ahead=Your personal time is %s (%d ticks ahead of the server)
 commands.dollancustomized.ptime.status.behind=Your personal time is %s (%d ticks behind the server)
+
+# /fixlight
+commands.fixlight.usage=/fixlight [radius] or /fixlight <x> <y> <z> [radius] - Force recompute lighting in a radius
+commands.fixlight.serveronly=This command can only be executed on the server world
+commands.fixlight.notloaded=No loaded chunks found in range, move closer to the affected area and try again
+commands.fixlight.success=Force-relit %d chunk(s) (center %d, %d, %d, radius %d blocks)
+commands.dollancustomized.tp_out_of_border=You cannot teleport outside the world border!
+tile.LightBlock.level.name=Light Block
+item.dollancustomized.light_level=Light Level: %d

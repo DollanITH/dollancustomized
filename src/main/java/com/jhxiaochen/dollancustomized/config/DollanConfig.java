@@ -28,8 +28,8 @@ public class DollanConfig {
 
     @Config.Name("Formwork Safe Range")
     @Config.Comment("模板世界玩家被自杀的设置.若超出此坐标数,玩家将会被自杀")
-    @Config.RangeInt(min = 0, max = 10000)
-    public static int SAFE_RANGE = 3000;
+    @Config.RangeInt(min = 0, max = 30000)
+    public static int SAFE_RANGE = 4000;
 
     @Config.Name("Formwork Dead Setting")
     @Config.Comment("模板世界玩家被自杀的设置.若开启此选项，超出世界高度的玩家将会被自杀")

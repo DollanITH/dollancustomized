@@ -132,6 +132,7 @@ public class DollanCustomized {
         event.registerServerCommand(new CommandTreeUndo());
         event.registerServerCommand(new CommandTreeUndoDebug());
         event.registerServerCommand(new CommandPersonalTime());
+        event.registerServerCommand(new CommandFixLight());
         System.out.println("Commands Registered successfully.");
     }
 
@@ -148,11 +149,7 @@ public class DollanCustomized {
 
         int border;
         EntityPlayer player = event.player;
-        if (DollanConfig.SAFE_RANGE > 0 && DollanConfig.SAFE_RANGE < 10000) {
-            border = DollanConfig.SAFE_RANGE;
-        } else {
-            border = 0;
-        }
+        border = Math.max(DollanConfig.SAFE_RANGE, 0);
 
         if (player.world.provider.getDimensionType() != FLAT_DIM) return;
         if (DollanConfig.OUTSIDE_BUILDING_HEIGHT_RANGE) {

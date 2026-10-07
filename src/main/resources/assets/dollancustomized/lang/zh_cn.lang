@@ -197,9 +197,9 @@ tile.StationStopSign.wall.name=列车停车位置标志(与墙壁连接)
 tile.DeportStopSign.name=一度停车位置标志
 tile.StationEdgeSign.name=站界标志
 tile.empty_railway_sign.name=空白铁路牌
-tile.empty_railway_sign_2.name=空白铁路牌2
+tile.empty_railway_sign_2.name=空白铁路牌
 tile.empty_railway_sign.sign_none_0.name=空白铁路牌
-tile.empty_railway_sign.sign_none_1.name=空白铁路牌 (1)
+tile.empty_railway_sign.sign_none_1.name=空白铁路牌
 
 # 道路标线
 tile.asphalt.black.name=黑色沥青方块
@@ -683,3 +683,12 @@ commands.dollancustomized.ptime.reset.success=个人时间已重置，现在与�
 commands.dollancustomized.ptime.status.sync=你的时间当前与服务器同步
 commands.dollancustomized.ptime.status.ahead=你的个人时间是 %s（比服务器快 %s tick）
 commands.dollancustomized.ptime.status.behind=你的个人时间是 %s（比服务器慢 %s tick）
+
+# /fixlight
+commands.fixlight.usage=/fixlight [半径] 或 /fixlight <x> <y> <z> [半径] —— 强制重算指定范围的光照
+commands.fixlight.serveronly=该命令只能在服务端世界执行
+commands.fixlight.notloaded=范围内没有已加载的区块，请靠近异常区域后再执行
+commands.fixlight.success=已强制重算 %d 个区块的光照（中心 %d, %d, %d，半径 %d 格）
+commands.dollancustomized.tp_out_of_border=你不能传送出世界边界！
+tile.LightBlock.level.name=光源方块
+item.dollancustomized.light_level=光照等级: %d

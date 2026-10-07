@@ -18,7 +18,8 @@ public enum PacketType {
     // 服务端 -> 客户端
     UPDATE_SIGN_DATA(11, Side.CLIENT),
     OPEN_JACARANDA_SIGN_GUI(12, Side.CLIENT),
-    ITEM_UPDATE(13, Side.CLIENT);
+    ITEM_UPDATE(13, Side.CLIENT),
+    OPEN_TEXT_GUI(14, Side.CLIENT);
 
     private final int id;
     private final Side targetSide;

@@ -1,5 +1,6 @@
 package com.jhxiaochen.dollancustomized.client.font;
 
+import com.jhxiaochen.dollancustomized.fixes.ShaderTextLightmap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -63,6 +64,10 @@ public class SignFontRenderer {
         float scale = signFontLoader.getRenderScale();
         float currentX = 0;
 
+        // OptiFine 光影下着色器需要逐顶点 lightmap，否则文字会被延迟光照算成全黑
+        int lightmapU = ShaderTextLightmap.u();
+        int lightmapV = ShaderTextLightmap.v();
+
         for (char c : text.toCharArray()) {
             float[] data = signFontLoader.getCharData(c);
             if (data == null) {
@@ -92,11 +97,11 @@ public class SignFontRenderer {
 
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder buffer = tessellator.getBuffer();
-            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-            buffer.pos(drawX, drawY, 0).tex(u1, v1).color(r, g, b, a).endVertex();
-            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).color(r, g, b, a).endVertex();
-            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).color(r, g, b, a).endVertex();
-            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).color(r, g, b, a).endVertex();
+            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
+            buffer.pos(drawX, drawY, 0).tex(u1, v1).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
             tessellator.draw();
 
             currentX += renderW;
@@ -147,6 +152,10 @@ public class SignFontRenderer {
         float scale = signFontLoader.getRenderScale();
         float currentX = 0;
 
+        // OptiFine 光影下着色器需要逐顶点 lightmap，否则文字会被延迟光照算成全黑
+        int lightmapU = ShaderTextLightmap.u();
+        int lightmapV = ShaderTextLightmap.v();
+
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
 
@@ -179,25 +188,25 @@ public class SignFontRenderer {
             int drawY = 0;
 
             // 先绘制主体文字
-            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-            buffer.pos(drawX, drawY, 0).tex(u1, v1).color(r, g, b, a).endVertex();
-            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).color(r, g, b, a).endVertex();
-            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).color(r, g, b, a).endVertex();
-            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).color(r, g, b, a).endVertex();
+            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
+            buffer.pos(drawX, drawY, 0).tex(u1, v1).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY, 0).tex(u2, v1).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX + renderW, drawY + renderH, 0).tex(u2, v2).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
+            buffer.pos(drawX, drawY + renderH, 0).tex(u1, v2).lightmap(lightmapU, lightmapV).color(r, g, b, a).endVertex();
             tessellator.draw();
 
             // 再绘制极精细的抗锯齿边缘（范围缩小到1/3）
-            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+            buffer.begin(7, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
 
             // 仅下边缘微小抗锯齿（最小范围）
-            buffer.pos(drawX + 0.1f, drawY + renderH - 0.1f, 0).tex(u1, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.04f).endVertex();
-            buffer.pos(drawX + renderW - 0.1f, drawY + renderH - 0.1f, 0).tex(u2, v2).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.04f).endVertex();
+            buffer.pos(drawX + 0.1f, drawY + renderH - 0.1f, 0).tex(u1, v2).lightmap(lightmapU, lightmapV).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.04f).endVertex();
+            buffer.pos(drawX + renderW - 0.1f, drawY + renderH - 0.1f, 0).tex(u2, v2).lightmap(lightmapU, lightmapV).color(r * 0.4f, g * 0.4f, b * 0.4f, 0.04f).endVertex();
 
             // 四个角落的微弱抗锯齿（极小范围）
-            buffer.pos(drawX - 0.05f, drawY - 0.05f, 0).tex(u1, v1).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
-            buffer.pos(drawX + renderW + 0.05f, drawY - 0.05f, 0).tex(u2, v1).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
-            buffer.pos(drawX - 0.05f, drawY + renderH + 0.05f, 0).tex(u1, v2).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
-            buffer.pos(drawX + renderW + 0.05f, drawY + renderH + 0.05f, 0).tex(u2, v2).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX - 0.05f, drawY - 0.05f, 0).tex(u1, v1).lightmap(lightmapU, lightmapV).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX + renderW + 0.05f, drawY - 0.05f, 0).tex(u2, v1).lightmap(lightmapU, lightmapV).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX - 0.05f, drawY + renderH + 0.05f, 0).tex(u1, v2).lightmap(lightmapU, lightmapV).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
+            buffer.pos(drawX + renderW + 0.05f, drawY + renderH + 0.05f, 0).tex(u2, v2).lightmap(lightmapU, lightmapV).color(r * 0.1f, g * 0.1f, b * 0.1f, 0.025f).endVertex();
 
             tessellator.draw();
 

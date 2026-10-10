@@ -152,10 +152,13 @@ public class BlockStationNameBoard extends Block implements ITileEntityProvider 
 
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        // 贴墙方块只能水平朝向，仅检查水平四个方向的相邻方块（完整或不完整方块均可）
+        // 贴墙方块只能水平朝向：水平四个方向中只要任一侧存在可吸附的墙面即可放置。
+        // 注意：不能在第一轮循环里直接 return，否则只会检查第一个方向（NORTH），导致其他朝向无法放置。
         for (EnumFacing facing : EnumFacing.HORIZONTALS) {
             BlockPos neighbor = pos.offset(facing.getOpposite());
-            return canAttachTo(worldIn, worldIn.getBlockState(neighbor), neighbor, facing);
+            if (canAttachTo(worldIn, worldIn.getBlockState(neighbor), neighbor, facing)) {
+                return true;
+            }
         }
         return false;
     }
@@ -228,4 +231,8 @@ public class BlockStationNameBoard extends Block implements ITileEntityProvider 
         return true;
     }
 
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
 }

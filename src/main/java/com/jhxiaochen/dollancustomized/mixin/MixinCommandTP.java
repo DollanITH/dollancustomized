@@ -17,25 +17,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * 指令层拦截（单文件方案）：在指令输入时就阻止越界传送，绝不传送后再拉回。
- *
- * 目标：net.minecraft.command.CommandTP —— 1.12.2 运行时 /tp 命令的真实类
- * （命令名 "tp"，继承 CommandBase；注意它和 net.minecraft.command.server.CommandTeleport
- * （命令名 "teleport"，/teleport）是两个独立命令类）。
- *
- * 两个注入点（MCP 名，由 remapJar 生成 refmap 映射到运行时 notch 短名）：
- * 1) teleportEntityToCoordinates —— 传送核心静态方法 (Entity, CoordinateArg×5)。
- *    /tp 的所有坐标形态最终都汇聚到这里，HEAD 越界即 cancel。
- *    边界检查必须用 CoordinateArg.getResult()（原版解析出的"最终绝对坐标"）：
- *    相对坐标 ~N 时 getAmount() 只是增量 N，用它检查会漏判（曾导致 ~ 形态漏拦）。
- * 2) execute —— 命令入口，更早拦截。形态判定与原版逐字节一致：
- *    - 2/4/6 参：args[0] 是目标实体（@s / 玩家名 / 选择器），坐标从 [1] 开始；
- *    - 其余（1/3/5 参）：目标是命令发送者本人，坐标从 [0] 开始；
- *    - 1/2 参：传送到实体位置，无坐标输入，不拦截；
- *    - 坐标不足（< coordStart + 3）的形态：不拦截，交 vanilla 报错。
- *    相对坐标 ~ 的解析基准是"目标实体当前位置"（原版 parseCoordinate(entity.posX, ...)）。
- */
 @Mixin(CommandTP.class)
 public abstract class MixinCommandTP {
 

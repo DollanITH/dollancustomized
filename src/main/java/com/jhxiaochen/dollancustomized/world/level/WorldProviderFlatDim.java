@@ -69,13 +69,9 @@ public class WorldProviderFlatDim extends WorldProvider {
 
     @Override
     public WorldBorder createWorldBorder() {
-        WorldBorder border = super.createWorldBorder(); // 不要 new 匿名类，直接获取原版对象
-        border.setCenter(0.0, 0.0); // 中心点在 (0,0)
-        border.setSize(6000);       // 设置直径为 5000 (半径 2500)
-
-        // 如果你希望玩家碰到边界直接死，而不是被墙挡住，可以在 PlayerTickEvent 里处理
-        // 这里只负责设置“墙”
-
+        WorldBorder border = super.createWorldBorder();
+        border.setCenter(0.0, 0.0);
+        border.setSize(6000);
         return border;
     }
 
@@ -116,6 +112,6 @@ public class WorldProviderFlatDim extends WorldProvider {
     @Override
     @SideOnly(Side.CLIENT)
     public double getHorizon() {
-        return -64.0D;
+        return 0.0D;
     }
 }

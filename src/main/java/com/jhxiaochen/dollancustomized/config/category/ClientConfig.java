@@ -11,5 +11,6 @@ public class ClientConfig {
     public final boolean ENABLE_ENHANCED_F3N = true;
     @Config.Name("Borderless Window Normally")
     @Config.Comment("默认开启无边框全屏")
+    @Config.RequiresMcRestart
     public final boolean ENABLE_BORDERLESS_WINDOW = true;
 }

@@ -11,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
+import com.jhxiaochen.dollancustomized.common.rail.RailPlacementTracker;
+
 @Mixin(BlockRailPowered.class)
 public abstract class MixinBlockRailPowered extends Block {
     public MixinBlockRailPowered(Material materialIn) {
@@ -20,6 +22,7 @@ public abstract class MixinBlockRailPowered extends Block {
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+        RailPlacementTracker.record(world, pos, placer);
         EnumFacing direction = placer.getHorizontalFacing().getOpposite();
         boolean flag1 = direction == EnumFacing.EAST || direction == EnumFacing.WEST;
         return state.withProperty(BlockRailPowered.SHAPE, flag1 ? BlockRailBase.EnumRailDirection.EAST_WEST : BlockRailBase.EnumRailDirection.NORTH_SOUTH);

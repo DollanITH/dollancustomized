@@ -16,11 +16,11 @@
     "MixinCommandTeleport",
     "MixinCommandTP",
     "MixinEntityIronGolem",
-    "MixinEntitySnowman"
+    "MixinEntitySnowman",
+    "MixinRailPlace"
   ],
   "client": [
     "MixinMinecraft",
-    "MixinRailPlace",
     "MixinResourcePackRepository",
     "MixinWorldType"
   ],

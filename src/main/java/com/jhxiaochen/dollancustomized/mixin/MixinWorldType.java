@@ -2,6 +2,7 @@ package com.jhxiaochen.dollancustomized.mixin;
 
 import com.jhxiaochen.dollancustomized.DollanCustomized;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -47,9 +48,11 @@ public class MixinWorldType {
     }
 
     @ModifyReturnValue(method = "getHorizon", at = @At(value = "RETURN"))
-    private double voidGetHorizon(double original)
+    private double voidGetHorizon(double original, @Local(argsOnly = true) World world)
     {
-        World world = Minecraft.getMinecraft().world;
+        if (world.provider.getDimensionType() == DollanCustomized.FLAT_DIM) {
+            return original;
+        }
         return (Object) this == FLAT ? 0.0D : world.getSeaLevel();
     }
 

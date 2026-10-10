@@ -18,20 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * 指令层拦截：/teleport 命令（net.minecraft.command.server.CommandTeleport）。
- *
- * 与 MixinCommandTP（/tp）同思路，但注意两者差异：
- * 1) /teleport 恒为 ≥4 参，args[0] 永远是目标实体，坐标从 [1] 开始（x/y/z）；
- * 2) /teleport 的相对坐标基准是"发送者位置"（原版 sender.getPositionVector()），
- *    不是目标实体位置 —— 与 /tp 不同，拦截时必须一致，否则 ~ 形态漏判。
- *
- * 注入点（MCP 名，refmap 由 remapJar 生成）：
- * 1) doTeleport（SRG func_189862_a）—— 传送核心静态方法 (Entity, CoordinateArg×5)，
- *    所有 /teleport 形态的最终汇聚点，HEAD 越界即 cancel。
- *    边界检查必须用 CoordinateArg.getResult()（最终绝对坐标）而非 getAmount()。
- * 2) execute（SRG func_184881_a）—— 命令入口，更早拦截。
- */
 @Mixin(CommandTeleport.class)
 public abstract class MixinCommandTeleport {
 

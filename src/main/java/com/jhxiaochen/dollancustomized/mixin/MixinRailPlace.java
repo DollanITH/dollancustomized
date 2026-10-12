@@ -16,28 +16,35 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * 让"孤轨/兜底的默认方向"跟随真正的放置者朝向，而不是恒定 NORTH_SOUTH。
+ * 让"<b>孤轨</b>的默认方向"跟随真正的放置者朝向，而不是恒定 {@code NORTH_SOUTH}。
+ * 用于在 1.12.2 上复刻高版本（1.19+）"按玩家朝向决定铁轨初始方向"的手感。
  *
- * <h2>背景</h2>
- * {@code Block#getStateForPlacement(..., EntityLivingBase placer)} 能拿到真实放置者，
- * DollanCustomized 也已重写它（MixinBlockRail / MixinBlockRailDetector / MixinBlockRailPowered）
- * 把 shape 设为东西向或南北向。但放下之后原版会走
- * {@code BlockRailBase.onBlockAdded -> new Rail(...).place(true, true)}，而 {@code place()}
- * 的默认方向逻辑<b>只看四个邻居有没有铁轨，不知道放置者是谁</b>，于是刚设好的 shape 立刻被覆盖。
- *
- * <h2>place() 内的 NORTH_SOUTH 读取点（按方法内出现顺序）</h2>
+ * <h2>place() 内的方向判定结构（已逐条核对字节码）</h2>
  * <pre>
- *  ordinal 0 : 89  getstatic NORTH_SOUTH   if (!north &amp;&amp; !south &amp;&amp; !east &amp;&amp; !west) dir = NORTH_SOUTH;  // 孤轨
- *  ordinal 1 : 241 getstatic NORTH_SOUTH   if (!north &amp;&amp; south || ...) dir = NORTH_SOUTH;            // 连接判定
- *  ordinal 2 : 397 getstatic NORTH_SOUTH   if (dir == NORTH_SOUTH) { ...canMakeSlopes... }           // 比较，非赋值
- *  ordinal 3 : 509 getstatic NORTH_SOUTH   if (dir == null) dir = NORTH_SOUTH;                       // 兜底
+ *  7/8/9/10 = hasNeighborRail(north/south/west/east)
+ *  dir (local 11) 初始为 null
+ *
+ *   89: (!east &amp;&amp; !west) &amp;&amp; (north || south)   → NORTH_SOUTH   // ★ 南北直线
+ *  114: (!north &amp;&amp; !south) &amp;&amp; (west || east)   → EAST_WEST     // 东西直线
+ *  ... 之后是坡道/交叉等组合判定（走别的常量，不是 NORTH_SOUTH）...
+ *  509: if (dir == null) dir = NORTH_SOUTH;                      // 兜底
+ *  514: updateConnectedRails(dir);                               // 用 dir 写回状态
  * </pre>
  *
- * <p><b>原实现只重定向了 ordinal = 3（兜底），而孤轨走的是 ordinal = 0</b> —— 单独放一根铁轨时
- * {@code dir} 在那一步已被赋成 NORTH_SOUTH（非 null），永远到不了兜底分支，所以修复实际不生效。
- * 这里同时接管 ordinal 0 与 ordinal 3：孤轨用放置者朝向，兜底也保持一致。
+ * <h2>★ 两条分支的语义必须严格区分</h2>
+ * <ul>
+ *   <li><b>ordinal 0（字节码 89）＝ 南北直线</b>。条件是
+ *       {@code (!east &amp;&amp; !west) &amp;&amp; (north || south)} ——
+ *       <b>南北方向确实有邻居铁轨</b>。原版在这里给出 NORTH_SOUTH 是<b>连接推导的结果</b>，
+ *       不是"随便选一个默认值"。<b>绝不能改成玩家朝向</b>：否则一条本该南北相连的
+ *       铁轨会被摆成东西向，直接断链。</li>
+ *   <li><b>ordinal 3（字节码 509）＝ 兜底</b>。条件是 {@code dir == null}，
+ *       即前面所有分支都<b>没有</b>给出方向 —— 只有真正孤轨才会走到这里。
+ *       <b>这里才是"按玩家朝向"的正确位置。</b></li>
+ * </ul>
  *
- * <p>ordinal 1 与 2 刻意不动，它们参与真实连接判定与坡道判断。
+ * <p>放置者朝向的来源见 {@link RailPlacementTracker}：由 {@code getStateForPlacement}
+ * 登记、{@code place()} 里取用，因此服务端与客户端能算出同一结果。
  */
 @Mixin(BlockRailBase.Rail.class)
 public abstract class MixinRailPlace {
@@ -47,27 +54,17 @@ public abstract class MixinRailPlace {
     @Shadow @Final private IBlockState state;
     @Shadow @Final private BlockRailBase block;
 
-    /**
-     * 孤轨默认方向（ordinal 0）。
-     *
-     * <p>取不到放置者记录时回落到 {@code this.state} 当前的 shape —— 那是
-     * {@code getStateForPlacement} 刚按朝向设好的值，比恒定 NORTH_SOUTH 更贴近意图。
-     */
-    @Redirect(
-            method = "place",
-            at = @At(
-                    value = "FIELD",
-                    target = "Lnet/minecraft/block/BlockRailBase$EnumRailDirection;NORTH_SOUTH:Lnet/minecraft/block/BlockRailBase$EnumRailDirection;",
-                    ordinal = 0,
-                    opcode = Opcodes.GETSTATIC)
-    )
-    private BlockRailBase.EnumRailDirection dollan$defaultDirectionForIsolatedRail() {
-        return dollan$resolveDefault();
-    }
+    /** 轨道是否允许变成上下坡；坡道判定与它相关，取不到记录时要据此让位给原版。 */
+    @Shadow @Final private boolean canMakeSlopes;
 
     /**
-     * 兜底默认方向（ordinal 3，{@code if (dir == null) dir = NORTH_SOUTH;}）。
-     * 与 ordinal 0 用同一套逻辑，避免两条路径结果不一致。
+     * 兜底默认方向（ordinal 3，字节码 509：{@code if (dir == null) dir = NORTH_SOUTH;}）。
+     *
+     * <p><b>这是唯一应该按放置者朝向决定方向的位置</b> —— 只有四邻全无铁轨的孤轨
+     * 才会让 {@code dir} 保持 {@code null} 并落到这里。
+     *
+     * <p>注意 ordinal <b>0</b>（字节码 89）刻意<b>不</b>重定向：那是南北直线分支，
+     * 其 NORTH_SOUTH 是连接推导的结果，改动它会破坏连接。
      */
     @Redirect(
             method = "place",
@@ -82,13 +79,25 @@ public abstract class MixinRailPlace {
     }
 
     /**
-     * 依据 {@link RailPlacementTracker} 里登记的放置者朝向给出默认方向。
+     * 依据 {@link RailPlacementTracker} 里登记的放置者朝向给出孤轨默认方向。
      *
-     * <p>放在服务端与客户端都会执行；服务端只要在 {@code getStateForPlacement} 阶段登记过，
-     * 就能算出与客户端一致的结果，不会再出现"客户端显示一个方向、服务端同步成另一个方向"。
+     * <p>两种情况让位给原版 {@code NORTH_SOUTH}：
+     * <ul>
+     *   <li>上下方存在铁轨（可能构成坡道）—— 原版坡道判定只在 {@code dir == NORTH_SOUTH}
+     *       时进入，这里若返回 {@code EAST_WEST} 就等于把坡道能力关掉了；</li>
+     *   <li>取不到放置者记录 —— 命令放置、结构生成、记录过期等。</li>
+     * </ul>
      */
     private BlockRailBase.EnumRailDirection dollan$resolveDefault() {
+        // 先无条件取走记录：无论后面走哪条分支，都不能把它留给下一次放置。
         EnumFacing.Axis axis = RailPlacementTracker.takeAxis(this.world, this.pos);
+
+        // 上下方有轨道 -> 可能是坡道，必须交回原版 NORTH_SOUTH 让坡道判定继续。
+        if (this.canMakeSlopes
+                && (BlockRailBase.isRailBlock(this.world, this.pos.up())
+                        || BlockRailBase.isRailBlock(this.world, this.pos.down()))) {
+            return BlockRailBase.EnumRailDirection.NORTH_SOUTH;
+        }
 
         if (axis == EnumFacing.Axis.X) {
             return BlockRailBase.EnumRailDirection.EAST_WEST;
@@ -98,8 +107,8 @@ public abstract class MixinRailPlace {
             return BlockRailBase.EnumRailDirection.NORTH_SOUTH;
         }
 
-        // 没有放置者记录（命令放置、结构生成、记录过期等）：沿用当前状态里已有的 shape，
-        // 该值来自 getStateForPlacement，通常已按朝向设好。
+        // 没有放置者记录：沿用当前状态里已有的 shape（来自 getStateForPlacement），
+        // 也就是不要覆盖它已经算好的结果。
         return dollan$currentShape();
     }
 

@@ -277,7 +277,9 @@ public class GuiEditDollanSign extends GuiScreen {
             } else {
                 tile.unlock();
             }
-            tile.setEditable(true);
+            // 用反射调用：部分服务端/客户端运行时没有 func_145913_a 这个符号，
+            // 直接写 tile.setEditable(true) 会抛 NoSuchMethodError
+            com.jhxiaochen.dollancustomized.common.interaction.ExtendedPlayer.setSignEditable(tile, true);
         }
 
         this.isClosing = false;

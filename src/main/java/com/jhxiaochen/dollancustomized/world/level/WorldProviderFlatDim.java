@@ -112,6 +112,6 @@ public class WorldProviderFlatDim extends WorldProvider {
     @Override
     @SideOnly(Side.CLIENT)
     public double getHorizon() {
-        return 0.0D;
+        return -32.0D;
     }
 }

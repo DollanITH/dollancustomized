@@ -901,8 +901,8 @@ public class DollanBlocks {
         registerCustomModel(marble_tile, EnumDyeColor.CYAN.getMetadata(), "cyan_marble_tile");
 
         // 架空线路支柱的模型注册
-        registerCustomModel(overhead_steel_diagonal, 1, "overhead_steel_diagonal");
-        registerCustomModel(overhead_steel_diagonal, 0, "overhead_steel_diagonal_1");
+        registerCustomModel(overhead_steel_diagonal, 0, "overhead_steel_diagonal");
+        registerCustomModel(overhead_steel_diagonal, 1, "overhead_steel_diagonal_1");
         registerCustomModel(overhead_steel_diagonal, 2, "overhead_steel_diagonal_2");
         registerCustomModel(overhead_steel_diagonal_support, 0, "overhead_steel_diagonal_support");
         registerCustomModel(overhead_steel_diagonal_support, 1, "overhead_steel_diagonal_support_2");

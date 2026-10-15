@@ -49,10 +49,11 @@ public class EmptySignBlock extends RailwaySignBase {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        // 牌子后面还带一根 brushed_aluminum 立柱（模型 z: 2 -> 4），碰撞箱取两者并集。
         if (state.getValue(VARIANT) == SignNone.SIGN_NONE_0) {
-            return getBoxXZ(state, 2.0 / 16.0, 10.0 / 16.0, 3.0 / 16.0);
+            return getBoxXZRange(state, 3.0 / 16.0, 13.0 / 16.0, 10.0 / 16.0, 0.0, 4.0 / 16.0);
         }
-        return getBoxXZ(state, 2.0 / 16.0, 12.0 / 16.0, 11.0 / 16.0);
+        return getBoxXZRange(state, 5.0 / 16.0, 11.0 / 16.0, 12.0 / 16.0, 0.0, 4.0 / 16.0);
     }
 
     @Override

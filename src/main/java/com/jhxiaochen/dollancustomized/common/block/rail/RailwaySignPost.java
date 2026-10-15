@@ -51,46 +51,46 @@ public class RailwaySignPost extends BlockHorizontal {
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        return state.withProperty(DOWN, canFenceConnectTo(worldIn, pos, EnumFacing.DOWN));
+        return state.withProperty(DOWN, canFenceConnectTo(worldIn, pos));
     }
 
-    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+    private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos)
     {
-        BlockPos other = pos.offset(facing);
+        BlockPos other = pos.offset(EnumFacing.DOWN);
         Block block = world.getBlockState(other).getBlock();
-        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+        return block.canBeConnectedTo(world, other, EnumFacing.DOWN.getOpposite()) || canConnectTo(world, other, EnumFacing.DOWN.getOpposite());
     }
+
+    /** 立柱在模型 x 轴上的区间（x: 7 -> 9，居中 2px 厚）。 */
+    private static final double MODEL_X_MIN = 7.0 / 16.0;
+    private static final double MODEL_X_MAX = 9.0 / 16.0;
+    /** 立柱在模型 z 轴上的区间（z: 2 -> 4，2px 厚且整体向内偏移 2px）。 */
+    private static final double MODEL_Z_MIN = 2.0 / 16.0;
+    private static final double MODEL_Z_MAX = 4.0 / 16.0;
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return getBoxXZ(state, 0.125,0.4375);
-        /*switch (state.getValue(FACING)){
-            case WEST:
-                return new AxisAlignedBB(0.875, 0, 0.4375, 1, 1, 0.5625);
-            case SOUTH:
-            default:
-                return new AxisAlignedBB(0.4375, 0, 0, 0.5625, 1, 0.125);
-            case NORTH:
-                return new AxisAlignedBB(0.4375, 0, 0.875, 0.5625, 1, 1);
-            case EAST:
-                return new AxisAlignedBB(0, 0, 0.4375, 0.125, 1, 0.5625);
-        }*/
+        return getBoxXZ(state, MODEL_X_MIN, MODEL_X_MAX, MODEL_Z_MIN, MODEL_Z_MAX);
     }
 
-    public AxisAlignedBB getBoxXZ(IBlockState state, double x, double z)
+    /**
+     * 以模型空间（facing = SOUTH，即不旋转）给出立柱在 x、z 轴上的区间，
+     * 再套用该朝向对应的 90/180/270 度旋转。区间不要求贴边，
+     * 因此可以描述向内偏移的立柱（如 z: 2 -> 4）。
+     */
+    public AxisAlignedBB getBoxXZ(IBlockState state, double x0, double x1, double z0, double z1)
     {
-        switch (state.getValue(FACING)){
-            case WEST:
-                return new AxisAlignedBB(1 - x, 0, z, 1, 1, 1 - z);
-            case SOUTH:
-            default:
-                return new AxisAlignedBB(z, 0, 0, 1 - z, 1, x);
-            case NORTH:
-                return new AxisAlignedBB(z, 0, 1 - x, 1 - z, 1, 1);
-            case EAST:
-                return new AxisAlignedBB(0, 0, z, x, 1, 1 - z);
-        }
+        return switch (state.getValue(FACING)) {
+            case EAST -> // 90 度
+                    new AxisAlignedBB(z0, 0, 1 - x1, z1, 1, 1 - x0);
+            case NORTH -> // 180 度
+                    new AxisAlignedBB(1 - x1, 0, 1 - z1, 1 - x0, 1, 1 - z0);
+            case WEST -> // 270 度
+                    new AxisAlignedBB(1 - z1, 0, x0, 1 - z0, 1, x1);
+            default -> // 0 度
+                    new AxisAlignedBB(x0, 0, z0, x1, 1, z1);
+        };
     }
 
     @Override
@@ -130,7 +130,7 @@ public class RailwaySignPost extends BlockHorizontal {
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
+        return state.getValue(FACING).getHorizontalIndex();
     }
 
     protected BlockStateContainer createBlockState() {

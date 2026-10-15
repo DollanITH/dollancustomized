@@ -99,4 +99,26 @@ public class RailwaySignBase extends BlockHorizontal {
         return getBoxXZ(state, x ,1, z);
     }
 
+    /**
+     * 以模型空间（facing = SOUTH，即不旋转）给出碰撞箱在 x、z 轴上的区间，
+     * 再套用该朝向对应的 90/180/270 度旋转。
+     * 与 {@link #getBoxXZ(IBlockState, double, double, double)} 不同，区间不要求贴边，
+     * 因此可以描述向内偏移的部分（例如牌子背后 z: 2 -> 4 的立柱）。
+     * 变换：south: x'=x, z'=z;  east: x'=z, z'=1-x;  north: x'=1-x, z'=1-z;  west: x'=1-z, z'=x
+     */
+    public AxisAlignedBB getBoxXZRange(IBlockState state, double x0, double x1, double y, double z0, double z1)
+    {
+        switch (state.getValue(FACING)){
+            case EAST: // 90 度
+                return new AxisAlignedBB(z0, 0, 1 - x1, z1, y, 1 - x0);
+            case NORTH: // 180 度
+                return new AxisAlignedBB(1 - x1, 0, 1 - z1, 1 - x0, y, 1 - z0);
+            case WEST: // 270 度
+                return new AxisAlignedBB(1 - z1, 0, x0, 1 - z0, y, x1);
+            case SOUTH:
+            default: // 0 度
+                return new AxisAlignedBB(x0, 0, z0, x1, y, z1);
+        }
+    }
+
 }

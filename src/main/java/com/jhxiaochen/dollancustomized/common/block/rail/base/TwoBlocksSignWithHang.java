@@ -150,7 +150,12 @@ public class TwoBlocksSignWithHang extends TwoBlocksSignBase {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(WALL) == EnumWallHalf.NONE ? getBoxXZ(state,2.0 / 16.0,5.0 / 16.0,12.0 / 16.0) : getBoxXZ(state,0.01 / 16.0,5.0 / 16.0,12.0 / 16.0);
+        // NONE（自立式）：牌面 x[4,12] z[0,2]，背后另有立柱 z: 2 -> 4，取并集。
+        // 上半部分的牌面与立柱同为 5px 高（立柱不再高出牌面），故并集高度取 5px。
+        // HANG_WALL（挂墙式）：贴墙安装，模型没有立柱，保持原来的薄片碰撞箱。
+        return state.getValue(WALL) == EnumWallHalf.NONE
+                ? getBoxXZRange(state, 4.0 / 16.0, 12.0 / 16.0, 5.0 / 16.0, 0.0, 4.0 / 16.0)
+                : getBoxXZ(state, 0.01 / 16.0, 5.0 / 16.0, 12.0 / 16.0);
     }
 
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)

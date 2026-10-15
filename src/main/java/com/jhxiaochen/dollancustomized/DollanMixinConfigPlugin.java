@@ -59,6 +59,9 @@ public class DollanMixinConfigPlugin implements IMixinConfigPlugin {
         if (s1.contains(".mod.cherryon.")) {
             return Loader.isModLoaded("suikecherry");
         }
+        if (s1.contains(".mod.moarsigns.")) {
+            return Loader.isModLoaded("moarsigns");
+        }
         return true;
     }
 

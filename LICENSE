@@ -1,21 +1,83 @@
-MIT License
+DollanCustomized Mod License
+DollanCustomized 模组授权条款（自定义 / Custom Terms）
 
-Copyright (c) 2025 kappa-maintainer
+Copyright (c) 2026 jhxiaochen, HChanJ1689
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+本授权条款适用于 DollanCustomized 模组（Minecraft 1.12.2 / Cleanroom）
+的全部源代码与构建产物，官方 mod_id 为 "dollancustomized"。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This license applies to all source code and build artifacts of the
+DollanCustomized mod (Minecraft 1.12.2 / Cleanroom), whose official
+mod_id is "dollancustomized".
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+————————————————————————————————————————
+条款 / TERMS
+————————————————————————————————————————
+
+1. 源码可得（Source-Available）
+   任何人可以查看、获取本模组源代码，用于学习、研究与审查。
+   Anyone may view and obtain the source code of this mod for learning,
+   research, and review purposes.
+
+2. 禁止原样使用 / 分发（No Verbatim Use or Redistribution）
+   不得以原封不动、仅重新打包、换壳或改名的形式复制、分发、发布
+   本模组的源代码或编译产物（.jar 等）。任何使用本模组代码的衍生
+   作品，都必须对源代码做出实质性的功能或逻辑修改。
+   You may not copy, distribute, or publish the source code or compiled
+   artifacts of this mod verbatim, repackaged, or rebranded. Any derived
+   work that uses this mod's code must make substantive functional or
+   logical modifications to the source code.
+
+3. 衍生作品必须开源（Copyleft on Derivatives）
+   任何基于本模组或其衍生作品必须以其源代码形式、并以与本条款
+   相同或等效的限制性条款向第三方开放，不得闭源分发或提供仅二进制
+   的衍生作品。
+   Any derivative of this mod, or any work derived from it, must be made
+   available in source form and under the same or equivalent restrictive
+   terms as this license. Closed-source distribution of derivatives is
+   prohibited.
+
+4. 禁止使用原 mod_id（Forbidden to Reuse the Original mod_id）
+   任何衍生作品必须更换 mod_id，不得继续使用官方 mod_id
+   "dollancustomized"。强烈建议同时更换根包名
+   "com.jhxiaochen.dollancustomized"，并修改 mod 名称，避免与原作者
+   的发布物混淆或被误认为官方版本。
+   Any derivative work MUST change the mod_id and MUST NOT keep the
+   official mod_id "dollancustomized". It is strongly recommended to also
+   change the root package "com.jhxiaochen.dollancustomized" and the mod
+   display name, so as not to be confused with, or mistaken for, the
+   original author's releases.
+
+5. 保留署名（Attribution）
+   任何衍生作品必须保留本版权声明、作者署名（jhxiaochen, HChanJ1689），
+   并注明其来源为本模组。
+   Any derivative work must retain this copyright notice, the author
+   credit (jhxiaochen, HChanJ1689), and indicate that it is derived from
+   this mod.
+
+6. 免责声明（Disclaimer of Warranty）
+   本模组按“原样”（AS-IS）提供，不附带任何明示或默示的担保，包括
+   但不限于适销性、特定用途适用性及不侵权担保。在任何情况下，作者
+   均不对因使用本模组而产生的任何索赔、损害或其他责任负责，无论该
+   责任是基于合同、侵权或其他原因。
+   The mod is provided "AS IS" without warranty of any kind, express or
+   implied, including but not limited to the warranties of
+   merchantability, fitness for a particular purpose, and
+   non-infringement. In no event shall the authors be liable for any
+   claim, damages, or other liability arising from the use of this mod,
+   whether in an action of contract, tort, or otherwise.
+
+————————————————————————————————————————
+说明 / NOTE
+————————————————————————————————————————
+- 本模组构建脚本（build.gradle、gradle/ 目录等）继承自
+  CleanroomModTemplate，保留其 MIT 授权，见
+  LICENSE-CleanroomModTemplate.txt。本条款仅约束 DollanCustomized
+  自有的源码与产物。
+- 本条款为作者自定义授权，非 OSI 认证的开源许可证。
+- The build scripts (build.gradle, gradle/ directory, etc.) are derived
+  from CleanroomModTemplate and remain under its MIT license, see
+  LICENSE-CleanroomModTemplate.txt. These terms apply only to the code
+  and artifacts authored for DollanCustomized itself.
+- These are custom, author-defined terms and are NOT an OSI-approved
+  open source license.

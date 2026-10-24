@@ -1,0 +1,56 @@
+DollanCustomized Mod License
+(Custom Terms)
+
+Copyright (c) 2026 jhxiaochen, HChanJ1689
+
+This license applies to all source code and build artifacts of the
+DollanCustomized mod (Minecraft 1.12.2 / Cleanroom), whose official
+mod_id is "dollancustomized".
+
+TERMS
+-----
+
+1. Source-Available
+   Anyone may view and obtain the source code of this mod for learning,
+   research, and review purposes.
+
+2. No Verbatim Use or Redistribution
+   You may not copy, distribute, or publish the source code or compiled
+   artifacts (e.g. .jar) of this mod verbatim, repackaged, or rebranded.
+   Any derived work that uses this mod's code must make substantive
+   functional or logical modifications to the source code.
+
+3. Copyleft on Derivatives
+   Any derivative of this mod, or any work derived from it, must be made
+   available in source form and under the same or equivalent restrictive
+   terms as this license. Closed-source distribution of derivatives is
+   prohibited.
+
+4. Forbidden to Reuse the Original mod_id
+   Any derivative work MUST change the mod_id and MUST NOT keep the
+   official mod_id "dollancustomized". It is strongly recommended to also
+   change the root package "com.jhxiaochen.dollancustomized" and the mod
+   display name, so as not to be confused with, or mistaken for, the
+   original author's releases.
+
+5. Attribution
+   Any derivative work must retain this copyright notice, the author
+   credit (jhxiaochen, HChanJ1689), and indicate that it is derived from
+   this mod.
+
+6. Disclaimer of Warranty
+   The mod is provided "AS IS" without warranty of any kind, express or
+   implied, including but not limited to the warranties of
+   merchantability, fitness for a particular purpose, and
+   non-infringement. In no event shall the authors be liable for any
+   claim, damages, or other liability arising from the use of this mod,
+   whether in an action of contract, tort, or otherwise.
+
+NOTE
+----
+- The build scripts (build.gradle, gradle/ directory, etc.) are derived
+  from CleanroomModTemplate and remain under its MIT license, see
+  LICENSE-CleanroomModTemplate.txt. These terms apply only to the code
+  and artifacts authored for DollanCustomized itself.
+- These are custom, author-defined terms and are NOT an OSI-approved
+  open source license.

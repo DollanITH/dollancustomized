@@ -58,7 +58,7 @@ dependencies {
     modRuntimeOnly "maven.modrinth:NvZ9ZhwE:FgbUBupA"
     modCompileOnly "maven.modrinth:7MoE34WK:a3gijsQd"
 
-    modCompileOnly("curse.maven:railcraft-51195:3853491")
+    modImplementation("curse.maven:railcraft-51195:3853491")
     compileOnly("curse.maven:renderlib-624967:6461209")
     compileOnly("curse.maven:nothirium-624960:7441674")
     modCompileOnly("curse.maven:moarsigns-79243:2649212")

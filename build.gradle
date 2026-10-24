@@ -137,6 +137,20 @@ dependencies {
     if (propertyBool('enable_junit_testing')) {
         testImplementation 'org.junit.jupiter:junit-jupiter:6.1.3'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        // Z43：测试要直接调用 `StructureComposer.compose`（真代码），
+        // 因此测试源集必须能看到 Minecraft / 主源集的类。
+        // 否则报 "程序包 net.minecraft.util.math 不存在"。
+        testImplementation sourceSets.main.output
+        testImplementation sourceSets.main.compileClasspath
+        // Z48/Z49：把 `modRuntimeOnly`（railcraft / futuremc 等前置模组）
+        // 也接进**测试运行期** classpath —— 否则纯 JUnit 里
+        // `railcraft:*` / `dollancustomized:overhead_*` 全部解析成 air，
+        // 真代码测试只能验证"几何/坐标"，验证不了"方块名/材质"。
+        //
+        // 注意：Gradle 8+ 禁止 `testRuntimeOnly configurations.modRuntimeOnly`
+        // （"Adding a Configuration as a dependency is no longer allowed"），
+        // 且 `testRuntimeOnly.extendsFrom` 在 dependencies 块里取不到该属性。
+        // 正确写法：在 configurations 层做 extendsFrom（见文件末尾的 Z49 块）。
     }
 }
 
@@ -328,3 +342,22 @@ tasks.withType(JavaCompile).configureEach {
 apply from: 'gradle/scripts/publishing.gradle'
 apply from: 'gradle/scripts/extra.gradle'
 
+
+// ---------------------------------------------------------------------------
+// Z49（**已试并回退**）：曾尝试把 `modRuntimeOnly` 接进测试运行期，让纯 JUnit
+// 也能看到 railcraft / futuremc / nyasamabuilding 的真实方块。
+//
+// 做法（`configurations.matching { it.name == 'testRuntimeOnly' }.all {
+// it.extendsFrom configurations.modRuntimeOnly }`）**技术上可行**：
+// jar 确实进了测试 classpath，Gradle 也不再报错。
+//
+// **但它不解决问题**：实测方块名仍然是 `minecraft:air`。
+// 根因是**架构性的** —— Forge 的方块注册发生在 `FMLLoader` / `@Mod`
+// 发现与注册事件里，而**纯 JUnit 没有 FML 加载器**，
+// 只跑 `Bootstrap.register()`（仅原版）。
+// **jar 在 classpath 上 ≠ mod 被加载。**
+//
+// ⇒ 该改动**已回退**（不留无效配置），并在 `_RULES.md` Z49 登记结论：
+//   **真代码 JUnit 只能用替身 palette 验证几何/坐标，
+//     方块名/材质必须靠实机 `runClient` 或 Python 侧镜像。**
+// ---------------------------------------------------------------------------

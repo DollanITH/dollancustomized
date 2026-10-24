@@ -14,7 +14,13 @@ out
 .idea
 
 # gradle
-build
+# Z53：原来是裸的 `build` —— 它匹配**任何**名为 build 的目录，
+# 包括**源码目录** `src/main/java/.../autogen/build/`，
+# 导致本工程最核心的 7 个类（`StructureComposer` / `TrackbedFootprint` /
+# `GradeLayout` / `BlockPalette` / `AutogenOptions` / `AutogenPlan` /
+# `Orientation`）**从未被 git 跟踪**。
+# 改为只忽略**根目录**的构建产物。
+/build
 .gradle
 
 # kate
@@ -24,3 +30,6 @@ build
 eclipse
 run
 /mods/
+
+/logs/
+/_handover/
